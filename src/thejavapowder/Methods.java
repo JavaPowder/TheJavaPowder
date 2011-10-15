@@ -1,9 +1,5 @@
 package thejavapowder;
 
-//import sun.plugin.javascript.navig.Array;
-
-//import java.util.ArrayList;
-
 public class Methods {
 
     Variables var = new Variables();
@@ -159,7 +155,7 @@ public class Methods {
 
     @SuppressWarnings("static-access")
     public void getReaction(byte id, byte reactId) {
-        /*switch (id) {
+        switch (id) {
             case 0:
                 var.reaction = var.Coffee.react[reactId];
                 break;
@@ -205,7 +201,7 @@ public class Methods {
             case 14:
                 var.reaction = var.Switch.react[reactId];
                 break;
-        }*/
+        }
     }
 
     @SuppressWarnings("static-access")

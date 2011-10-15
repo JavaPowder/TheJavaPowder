@@ -3,8 +3,6 @@ package thejavapowder.Elements;
 class Element {    /*
 	 * Java Powder element class
 	 * - Creates elements.
-	 * The Switch is not needed since it's in the main loop
-	 * (WIP)
 	 *
 	 *
 	 *
