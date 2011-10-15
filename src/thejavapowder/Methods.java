@@ -8,8 +8,7 @@ public class Methods {
 
     Variables var = new Variables();
     char t;
-    //ArrayList<Array> reactivesA = new ArrayList<Array>() {
-    //};
+
     /*
           var.Coffee.reactives,
           var.Wall.reactives,
