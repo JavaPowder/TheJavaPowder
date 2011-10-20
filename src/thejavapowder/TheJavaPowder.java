@@ -65,13 +65,14 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image wallPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wall.png"));
     Image waterPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/water.png"));
     Image crossingPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wire-crossing.png"));
+    Image firePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/fire.png"));
 
     Image playPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
     Image settingsPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
     Image javaPowderPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javaPowder.png"));
     Image consolePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/console.png"));
 
-    Image[] thumbnails = new Image[]{coffeePng, wallPng, methanePng, waterPng, ironPng, batteryPng, copperPng, scaPng, scbPng, screenPng, resistorPng, rechargableBatteryPng, powerDrainerPng, crossingPng, switchPng, logicGatePng};
+    Image[] thumbnails = new Image[]{coffeePng, wallPng, methanePng, waterPng, ironPng, batteryPng, copperPng, scaPng, scbPng, screenPng, resistorPng, rechargableBatteryPng, powerDrainerPng, crossingPng, switchPng, firePng, logicGatePng};
     Graphics bufferGraphics;
     Image offscreen;
     Dimension dim;
@@ -289,10 +290,20 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
         consolearea.append("Java Powder initialised." + end); // Added endline constant appending
 
-        //Elements Initialization
-        //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX))
-
-        var.Coffee.react[3] = new byte []{2,1,0,0,0,0,2};
+         /*
+         * Reactives Fields Meanings:
+	     *  0: Element it turns in
+	     *  1. Is the Reactive Destroyed ( 0 or 1 )
+	     *  2. Voltage it makes
+	     *  3. Properties changes
+	     *  4. Heat it makes
+	     *  5. Pressure it makes
+	     *  6. Elements it creates
+	     *  7. Amount of element created ( Defined in 6. )
+	     *  Others are free
+	     */
+        var.Coffee.react[3] = new byte []{2,1,0,0,0,0,2,1};
+        var.Methane.react[15] = new byte []{15,0,0,0,50,0,15,3};
     }
 
 
@@ -380,6 +391,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                             break;
                         case 14://Switch
                             bufferGraphics.setColor(new Color(var.Resistor.colour));
+                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
+                            break;
+                        case 15://Fire
+                            bufferGraphics.setColor(new Color(var.Fire.colour));
                             bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
                             break;
                         default:

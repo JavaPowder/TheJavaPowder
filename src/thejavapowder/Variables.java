@@ -71,10 +71,11 @@ public class Variables {
     static short[][] VMap = new short[Width][Height];// The Voltage type map
     static boolean[][] BMap = new boolean[Width][Height]; // The particle updated map, made for safeguarding.
     static byte[][] PMap = new byte[Width][Height];// The Particle Properties Map
-
+    //Elements Initialization
+    //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX))
     static Coffee Coffee = new Coffee((byte) 0, (byte) 50, false, 'p', "Coffee", "Crushed Coffee Beans, First Element, Reference to Java", 0x613F37, new byte[]{3});
     static Wall Wall = new Wall((byte) 0, (byte) 127, false, 's', "Wall", "Blocks Everything", 0x000000, new byte[]{});
-    static Methane Methane = new Methane((byte) 10, (byte) 5, false, 'g', "Methane", "Highly Flammable Gas", 0xDEDEDE, new byte[]{});
+    static Methane Methane = new Methane((byte) 10, (byte) 5, false, 'g', "Methane", "Highly Flammable Gas", 0xDEDEDE, new byte[]{15});
     static Water Water = new Water((byte) 0, (byte) 30, true, 'l', "Water", "Pure H2O", 0x000000, new byte[]{});
     static Iron Iron = new Iron((byte) 0, (byte) 127, true, 's', "Iron", "Conductor, Used to Activate Electrical Elements", 0x000000, new byte[]{});
     static Battery Battery = new Battery((byte) 4, (byte) 127, true, 's', "Battery", "Infinite Source of Energy", 0x000000, new byte[]{});
@@ -83,9 +84,11 @@ public class Variables {
     static SemiConductorB SemiConductorB = new SemiConductorB((byte) 0, (byte) 127, true, 's', "SemiConductorB", "Conducts only to Metal", 0x829E1C, new byte[]{});
     static Screen Screen = new Screen((byte) 0, (byte) 127, true, 's', "Screen", "Looks different Based on Voltage", 0x000000, new byte[]{});
     static Resistor Resistor = new Resistor((byte) 0, (byte) 30, true, 's', "Resistor", "Lowers the voltage", 0xEDED9D, new byte[]{});
+    //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX))
     static RechargableBattery RechargableBattery = new RechargableBattery((byte) 0, (byte) 10, true, 's', "Rechargable Battery", "Limited source of Power", 0x329E00, new byte[]{});
     static PowerDrainer PowerDrainer = new PowerDrainer((byte) 4, (byte) 127, true, 's', "Power Drainer", "Drains the electricity", 0xBABABA, new byte[]{});
     static Crossing Crossing = new Crossing((byte) 0, (byte) 127, false, 's', "Crossing", "Makes electricity jump over it", 0xE8851C, new byte[]{});
     static Switch Switch = new Switch((byte) 0, (byte) 127, false, 's', "Switch", "Conducts if turned on", 0x00ED00, new byte[]{});
+    static Fire Fire = new Fire((byte) 0, (byte) 5, false, 'g', "Fire", "Burns stuff", 0xDE2307, new byte[]{});
 
 }

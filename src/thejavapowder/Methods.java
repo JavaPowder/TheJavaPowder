@@ -38,7 +38,8 @@ public class Methods {
             var.RechargableBattery.weight,
             var.PowerDrainer.weight,
             var.Crossing.weight,
-            var.Switch.weight
+            var.Switch.weight,
+            var.Fire.weight
     };
 
      final char[] typeA = new char[]{
@@ -56,7 +57,8 @@ public class Methods {
         var.RechargableBattery.state,
         var.PowerDrainer.state,
         var.Crossing.state,
-        var.Switch.state   
+        var.Switch.state,
+        var.Fire.state
     };
 
     @SuppressWarnings("static-access")
@@ -135,6 +137,9 @@ public class Methods {
             case 14:
                 this.var.reactives = var.Switch.reactives;
                 break;
+            case 15:
+                this.var.reactives = var.Fire.reactives;
+                break;
 
         }
     }
@@ -200,6 +205,9 @@ public class Methods {
                 break;
             case 14:
                 var.reaction = var.Switch.react[reactId];
+                break;
+            case 15:
+                var.reaction = var.Fire.react[reactId];
                 break;
         }
     }
@@ -281,6 +289,9 @@ public class Methods {
                 break;
             case 14:
                 var.conductive = var.Switch.conductive;
+                break;
+            case 15:
+                var.conductive = var.Fire.conductive;
                 break;
             case -127:
                 var.conductive = false;
