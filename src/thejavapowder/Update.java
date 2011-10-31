@@ -90,9 +90,11 @@ public class Update {
                                         {
                                             var.stopReactions = true;//Stop looping
 
-                                            switch (i) {
-                                                case 0:
-                                                    meth.getReaction(var.Map[x][y], var.Map[x - 1][y - 1]);//Get the Reaction needed
+                                            if (var.Map[x][y] >= 0 && var.Map[x - 1][y - 1] >= 0)
+                                            {
+                                                meth.getReaction(var.Map[x][y], var.Map[x - 1][y - 1]);//Get the Reaction needed
+                                                if (var.reaction != null)
+                                                {
                                                     var.Map[x][y] = var.reaction[0];
 
                                                     if (var.reaction[1] == 1) {
@@ -108,134 +110,7 @@ public class Update {
                                                     {
                                                         meth.createParticle(x, y, var.reaction[6]);//Create it
                                                     }
-
-                                                    break;
-                                                case 1:
-                                                    meth.getReaction(var.Map[x][y], var.Map[x][y - 1]);//Get the Reaction needed
-                                                    var.Map[x][y] = var.reaction[0];
-
-                                                    if (var.reaction[1] == 1) {
-                                                        var.Map[x][y - 1] = -127;
-                                                    }
-
-                                                    var.VMap[x][y] += var.reaction[2];
-                                                    var.PMap[x][y] = var.reaction[3];
-                                                    var.HMap[x][y] += var.reaction[4];
-                                                    //PresMap[x][y] += var.reaction[5];
-
-                                                    if (var.reaction[6] != var.Map[x][y]) {
-                                                        meth.createParticle(x, y, var.reaction[6]);
-                                                    }
-
-                                                    break;
-                                                case 2:
-                                                    meth.getReaction(var.Map[x][y], var.Map[x + 1][y - 1]);//Get the Reaction needed
-                                                    var.Map[x][y] = var.reaction[0];
-
-                                                    if (var.reaction[1] == 1) {
-                                                        var.Map[x + 1][y - 1] = -127;
-                                                    }
-
-                                                    var.VMap[x][y] += var.reaction[2];
-                                                    var.PMap[x][y] = var.reaction[3];
-                                                    var.HMap[x][y] += var.reaction[4];
-                                                    //PresMap[x][y] += var.reaction[5];
-
-                                                    if (var.reaction[6] != var.Map[x][y]) {
-                                                        meth.createParticle(x, y, var.reaction[6]);
-                                                    }
-
-                                                    break;
-                                                case 3:
-                                                    meth.getReaction(var.Map[x][y], var.Map[x - 1][y]);//Get the Reaction needed
-                                                    var.Map[x][y] = var.reaction[0];
-
-                                                    if (var.reaction[1] == 1) {
-                                                        var.Map[x - 1][y] = -127;
-                                                    }
-
-                                                    var.VMap[x][y] += var.reaction[2];
-                                                    var.PMap[x][y] = var.reaction[3];
-                                                    var.HMap[x][y] += var.reaction[4];
-                                                    //PresMap[x][y] += var.reaction[5];
-
-                                                    if (var.reaction[6] != var.Map[x][y]) {
-                                                        meth.createParticle(x, y, var.reaction[6]);
-                                                    }
-
-                                                    break;
-                                                case 4:
-                                                    meth.getReaction(var.Map[x][y], var.Map[x + 1][y]);//Get the Reaction needed
-                                                    var.Map[x][y] = var.reaction[0];
-
-                                                    if (var.reaction[1] == 1) {
-                                                        var.Map[x + 1][y] = -127;
-                                                    }
-
-                                                    var.VMap[x][y] += var.reaction[2];
-                                                    var.PMap[x][y] = var.reaction[3];
-                                                    var.HMap[x][y] += var.reaction[4];
-                                                    //PresMap[x][y] += var.reaction[5];
-
-                                                    if (var.reaction[6] != var.Map[x][y]) {
-                                                        meth.createParticle(x, y, var.reaction[6]);
-                                                    }
-
-                                                    break;
-                                                case 5:
-                                                    meth.getReaction(var.Map[x][y], var.Map[x - 1][y + 1]);//Get the Reaction needed
-                                                    var.Map[x][y] = var.reaction[0];
-
-                                                    if (var.reaction[1] == 1) {
-                                                        var.Map[x - 1][y + 1] = -127;
-                                                    }
-
-                                                    var.VMap[x][y] += var.reaction[2];
-                                                    var.PMap[x][y] = var.reaction[3];
-                                                    var.HMap[x][y] += var.reaction[4];
-                                                    //PresMap[x][y] += var.reaction[5];
-
-                                                    if (var.reaction[6] != var.Map[x][y]) {
-                                                        meth.createParticle(x, y, var.reaction[6]);
-                                                    }
-
-                                                    break;
-                                                case 6:
-                                                    meth.getReaction(var.Map[x][y], var.Map[x][y + 1]);//Get the Reaction needed
-                                                    var.Map[x][y] = var.reaction[0];
-
-                                                    if (var.reaction[1] == 1) {
-                                                        var.Map[x][y + 1] = -127;
-                                                    }
-
-                                                    var.VMap[x][y] += var.reaction[2];
-                                                    var.PMap[x][y] = var.reaction[3];
-                                                    var.HMap[x][y] += var.reaction[4];
-                                                    //PresMap[x][y] += var.reaction[5];
-
-                                                    if (var.reaction[6] != var.Map[x][y]) {
-                                                        meth.createParticle(x, y, var.reaction[6]);
-                                                    }
-
-                                                    break;
-                                                case 7:
-                                                    meth.getReaction(var.Map[x][y], var.Map[x + 1][y + 1]);//Get the Reaction needed
-                                                    var.Map[x][y] = var.reaction[0];
-
-                                                    if (var.reaction[1] == 1) {
-                                                        var.Map[x + 1][y + 1] = -127;
-                                                    }
-
-                                                    var.VMap[x][y] += var.reaction[2];
-                                                    var.PMap[x][y] = var.reaction[3];
-                                                    var.HMap[x][y] += var.reaction[4];
-                                                    //PresMap[x][y] += var.reaction[5];
-
-                                                    if (var.reaction[6] != var.Map[x][y]) {
-                                                        meth.createParticle(x, y, var.reaction[6]);
-                                                    }
-                                                    break;
-
+                                                }
                                             }
                                         }
                                     }

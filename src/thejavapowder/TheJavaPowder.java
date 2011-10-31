@@ -303,9 +303,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 	     *  7. Amount of element created ( Defined in 6. )
 	     *  Others are free
 	     */
-        var.Coffee.react[3] = new byte []{2,1,0,0,0,0,2,1};
-        var.Methane.react[15] = new byte []{15,0,0,0,50,0,15,3};
-        var.Water.react[15] = new byte []{3,1,0,0,50,0,3,0};
+        var.Elements[0].react[3] = new byte []{2,1,0,0,0,0,2,1}; // Coffee+Water = Methane
+        var.Elements[2].react[15] = new byte []{15,0,0,0,50,0,15,3}; //Methane+Fire = Fire
+        var.Elements[3].react[15] = new byte []{3,1,0,0,50,0,3,0}; //Water+Fire = Destroyed
     }
 
 
@@ -334,73 +334,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             for (int x = 0; x < var.Width; x++) {
                 for (int y = 0; y < var.Height; y++) {
-                    switch (var.Map[x][y]) {
-                        case 0://Coffee
-                            bufferGraphics.setColor(new Color(var.Coffee.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 1://Wall
-                            bufferGraphics.setColor(new Color(var.Wall.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 2://Methane
-                            bufferGraphics.setColor(new Color(var.Methane.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 3://Water
-                            bufferGraphics.setColor(new Color(var.Water.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 4://Iron
-                            bufferGraphics.setColor(Color.darkGray);
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 5://Battery
-                            bufferGraphics.setColor(Color.green);
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 6://Copper
-                            bufferGraphics.setColor(new Color(var.Copper.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 7://Semi Conductor A
-                            bufferGraphics.setColor(new Color(var.SemiConductorA.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 8://Semi Conductor B
-                            bufferGraphics.setColor(new Color(var.SemiConductorB.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 9://Screen
-                            bufferGraphics.setColor(new Color(getVoltage(x, y), getVoltage(x, y), getVoltage(x, y)));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 10://Resistor
-                            bufferGraphics.setColor(new Color(var.Resistor.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 11://Rechargable Battery
-                            bufferGraphics.setColor(new Color(var.RechargableBattery.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 12://Power Drainer
-                            bufferGraphics.setColor(new Color(var.PowerDrainer.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 13://Crossing
-                            bufferGraphics.setColor(new Color(var.Crossing.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 14://Switch
-                            bufferGraphics.setColor(new Color(var.Resistor.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        case 15://Fire
-                            bufferGraphics.setColor(new Color(var.Fire.colour));
-                            bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
-                            break;
-                        default:
-                            break;
+                    if (var.Map[x][y] >= 0)
+                    {
+                        bufferGraphics.setColor(new Color(var.Elements[var.Map[x][y]].colour));
+                        bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
                     }
                     if (var.VMap[x][y] > 1 && var.Map[x][y] != 9 && var.Map[x][y] != 5 && var.Map[x][y] != 11 && var.Map[x][y] != 10 && var.Map[x][y] != 13 && var.Map[x][y] != 14)//If there is Voltage but it's not the Screen, Battery or R-Battery
                     {
