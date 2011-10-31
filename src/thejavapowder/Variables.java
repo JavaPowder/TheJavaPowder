@@ -56,7 +56,7 @@ public class Variables {
     static boolean leftClick = true;
     static boolean conductive = false;
 
-    static int Height = 400;
+    static int Height = 350;
     static int Width = 600;
     static byte[] reaction = new byte[16];
     static byte[] reactives = new byte[]{};
@@ -73,9 +73,9 @@ public class Variables {
     //Elements Initialization
     //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX))
     static Coffee Coffee = new Coffee((byte) 0, (byte) 50, false, 'p', "Coffee", "Crushed Coffee Beans, First Element, Reference to Java", 0x613F37, new byte[]{3}, 20);
-    static Wall Wall = new Wall((byte) 0, (byte) 127, false, 's', "Wall", "Blocks Everything", 0x000000, new byte[]{}, 20);
+    static Wall Wall = new Wall((byte) 0, (byte) 127, false, 's', "Wall", "Blocks Everything", 0x808080, new byte[]{}, 20);
     static Methane Methane = new Methane((byte) 10, (byte) 5, false, 'g', "Methane", "Highly Flammable Gas", 0xDEDEDE, new byte[]{15}, 20);
-    static Water Water = new Water((byte) 0, (byte) 30, true, 'l', "Water", "Pure H2O", 0x000000, new byte[]{15}, 20);
+    static Water Water = new Water((byte) 0, (byte) 30, true, 'l', "Water", "Pure H2O", 0x0000FF, new byte[]{15}, 20);
     static Iron Iron = new Iron((byte) 0, (byte) 127, true, 's', "Iron", "Conductor, Used to Activate Electrical Elements", 0x000000, new byte[]{}, 20);
     static Battery Battery = new Battery((byte) 4, (byte) 127, true, 's', "Battery", "Infinite Source of Energy", 0x000000, new byte[]{}, 20);
     static Copper Copper = new Copper((byte) 0, (byte) 127, false, 's', "Copper", "Standard Conductor", 0xE8851C, new byte[]{}, 20);

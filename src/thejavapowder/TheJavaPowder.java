@@ -340,7 +340,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                             bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
                             break;
                         case 1://Wall
-                            bufferGraphics.setColor(Color.gray);
+                            bufferGraphics.setColor(new Color(var.Wall.colour));
                             bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
                             break;
                         case 2://Methane
@@ -348,7 +348,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                             bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
                             break;
                         case 3://Water
-                            bufferGraphics.setColor(Color.blue);
+                            bufferGraphics.setColor(new Color(var.Water.colour));
                             bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
                             break;
                         case 4://Iron
