@@ -83,7 +83,6 @@ public class Variables {
     static SemiConductorB SemiConductorB = new SemiConductorB((byte) 0, (byte) 127, true, 's', "SemiConductorB", "Conducts only to Metal", 0x829E1C, new byte[]{}, 20);
     static Screen Screen = new Screen((byte) 0, (byte) 127, true, 's', "Screen", "Looks different Based on Voltage", 0x000000, new byte[]{}, 20);
     static Resistor Resistor = new Resistor((byte) 0, (byte) 30, true, 's', "Resistor", "Lowers the voltage", 0xEDED9D, new byte[]{}, 20);
-    //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX))
     static RechargableBattery RechargableBattery = new RechargableBattery((byte) 0, (byte) 10, true, 's', "Rechargable Battery", "Limited source of Power", 0x329E00, new byte[]{}, 20);
     static PowerDrainer PowerDrainer = new PowerDrainer((byte) 4, (byte) 127, true, 's', "Power Drainer", "Drains the electricity", 0xBABABA, new byte[]{}, 20);
     static Crossing Crossing = new Crossing((byte) 0, (byte) 127, false, 's', "Crossing", "Makes electricity jump over it", 0xE8851C, new byte[]{}, 20);
