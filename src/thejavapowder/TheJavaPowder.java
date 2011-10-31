@@ -184,6 +184,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.Map[x][y] = -127;
                 var.PMap[x][y] = 0;
                 var.VMap[x][y] = 0;
+                var.HMap[x][y] = 0;
             }
         }
         // Create the button; the icon will appear to the left of the label
@@ -304,6 +305,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 	     */
         var.Coffee.react[3] = new byte []{2,1,0,0,0,0,2,1};
         var.Methane.react[15] = new byte []{15,0,0,0,50,0,15,3};
+        var.Water.react[15] = new byte []{3,1,0,0,50,0,3,0};
     }
 
 
@@ -450,6 +452,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("ID:" + var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 20 * var.winZoom);//Draw the Hovered Element ID
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 40 * var.winZoom);//Draw the Property Level
+                bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 50 * var.winZoom);//Draw the Property Level
                 if (WaitTime > 29) {
                     PaintFPS = FPS;
                     UpdateFPS = (int) (update.TotalFPS / update.TotalFrame);
@@ -458,11 +461,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 } else {
                     WaitTime++;
                 }
-                bufferGraphics.drawString("FPS:" + PaintFPS, 10, 50 * var.winZoom);//Draw the FPS
-                bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 60 * var.winZoom);//Draw the Average FPS
-                bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 70 * var.winZoom);//Draw the Average FPS
-                bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 80 * var.winZoom);//Draw the Coordinates
-                bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 90 * var.winZoom);//Draw the Mouse Coordinates
+                bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
+                bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
+                bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Average FPS
+                bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
+                bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
             }
 
             if (var.state == 2)//If we are choosing an element

@@ -23,6 +23,25 @@ public class Methods {
           var.Switch.reactives
     */
 
+    final int[] heatA = new int[]{
+            var.Coffee.defaultTemp,
+            var.Wall.defaultTemp,
+            var.Methane.defaultTemp,
+            var.Water.defaultTemp,
+            var.Iron.defaultTemp,
+            var.Battery.defaultTemp,
+            var.Copper.defaultTemp,
+            var.SemiConductorA.defaultTemp,
+            var.SemiConductorB.defaultTemp,
+            var.Screen.defaultTemp,
+            var.Resistor.defaultTemp,
+            var.RechargableBattery.defaultTemp,
+            var.PowerDrainer.defaultTemp,
+            var.Crossing.defaultTemp,
+            var.Switch.defaultTemp,
+            var.Fire.defaultTemp
+    };
+    
     final byte[] weightA = new byte[]{
             var.Coffee.weight,
             var.Wall.weight,
@@ -150,6 +169,18 @@ public class Methods {
         if(ID != -127)
         {
         return weightA[ID];
+        }
+        else
+        {
+            return -127;
+        }
+    }
+
+    @SuppressWarnings("static-access")
+    public int getDTemp(byte ID) {
+        if(ID != -127)
+        {
+        return heatA[ID];
         }
         else
         {

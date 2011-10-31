@@ -18,7 +18,8 @@ public class Copper extends Element {    /*
                   String name,
                   String desc,
                   int col,
-                  byte[] react) {
+                  byte[] react,
+                  int dTemp) {
         super(bu,
                 we,
                 co,
@@ -26,7 +27,8 @@ public class Copper extends Element {    /*
                 name,
                 desc,
                 col,
-                react);
+                react,
+                dTemp);
     }
 
     public Copper(byte[] trans) {

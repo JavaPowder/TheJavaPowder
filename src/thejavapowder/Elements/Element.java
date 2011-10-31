@@ -14,8 +14,7 @@ class Element {    /*
     public int colour;
     public byte[] reactives;
     public final byte[][] react = new byte[16][];
-
-
+    public int defaultTemp;
     public byte[] transmitTo;
 
     //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), color(HEX))
@@ -26,7 +25,8 @@ class Element {    /*
                    String name,
                    String desc,
                    int col,
-                   byte[] react) {
+                   byte[] react,
+                   int dTemp) {
         this.conductive = co;
         this.weight = we; //will be done later
         this.state = st;
@@ -35,6 +35,7 @@ class Element {    /*
         this.burn = bu;
         this.colour = col;
         this.reactives = react;
+        this.defaultTemp = dTemp;
     }
 
     public Element(byte[] trans) {

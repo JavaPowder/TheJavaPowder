@@ -18,7 +18,7 @@ public class Battery extends Element {    /*
                    String name,
                    String desc,
                    int col,
-                   byte[] react) {
+                   byte[] react, int dTemp) {
         super(bu,
                 we,
                 co,
@@ -26,7 +26,8 @@ public class Battery extends Element {    /*
                 name,
                 desc,
                 col,
-                react);
+                react,
+                dTemp);
     }
 
     public Battery(byte[] trans) {

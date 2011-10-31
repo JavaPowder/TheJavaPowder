@@ -289,13 +289,14 @@ public class Update {
     }//End of Update
 
     public void drawPoint(int x, int y, byte id) {
-        if (var.active) {
+        if (var.active ||var.Simulating == false) {
             var.wait = 30;
             if (id != -126 && id != -125) {
                 if (var.leftClick) {
                     if (x > 1 && y > 1 && x < var.Width && y < var.Height && var.Map[x][y] == -127)//If the target tile is free
                     {
                         var.Map[x][y] = id;
+                        var.HMap[x][y] = (short)meth.getDTemp(id);
                     }
                 } else {
                     if (x > 1 && y > 1 && x < var.Width && y < var.Height && var.Map[x][y] != -127)//If the target tile is not free
@@ -823,19 +824,13 @@ public class Update {
             var.RandomNum = rand.nextInt(5);//Get a random Value
 
             if (var.RandomNum == 1 && var.Map[x + 1][y + 1] == -127) {
-                var.Map[x + 1][y + 1] = var.Map[x][y];//Occupy the tile under
-                var.BMap[x + 1][y + 1] = true;//Make sure it won't be moved again
-                var.Map[x][y] = -127;
+                moveElement(x, y, x + 1, y + 1, false);
                 return;
             } else if (var.RandomNum == 2 && var.Map[x - 1][y + 1] == -127) {
-                var.Map[x - 1][y + 1] = var.Map[x][y];//Occupy the tile under
-                var.BMap[x - 1][y + 1] = true;//Make sure it won't be moved again
-                var.Map[x][y] = -127;
+                moveElement(x, y, x - 1, y + 1, false);
                 return;
             } else {
-                var.Map[x][y + 1] = var.Map[x][y];//Occupy the tile under
-                var.BMap[x][y + 1] = true;//Make sure it won't be moved again
-                var.Map[x][y] = -127;
+                moveElement(x, y, x, y + 1, false);
                 return;
             }
 
@@ -850,17 +845,13 @@ public class Update {
                     if (var.Map[x + 1][y + 1] == -127)//If Down Right is Clear
                     {
 
-                        var.Map[x + 1][y + 1] = var.Map[x][y];//Move Down Right
-                        var.BMap[x + 1][y + 1] = true;//Make sure it won't be moved again
-                        var.Map[x][y] = -127;
+                    moveElement(x, y, x + 1, y + 1, false);
                         return;
                     } else {
                         if (var.Map[x - 1][y + 1] == -127)//If Down Left is Clear
                         {
 
-                            var.Map[x - 1][y + 1] = var.Map[x][y];//Move Down Left
-                            var.BMap[x - 1][y + 1] = true;//Make sure it won't be moved again
-                            var.Map[x][y] = -127;
+                            moveElement(x, y, x - 1, y + 1, false);
                             return;
                         }
                     }
@@ -868,16 +859,12 @@ public class Update {
                 {
                     if (var.Map[x - 1][y + 1] == -127)//If Down Left is Clear
                     {
-                        var.Map[x][y] = -127;
-                        var.Map[x - 1][y + 1] = 0;//Move Down Left
-                        var.BMap[x - 1][y + 1] = true;//Make sure it won't be moved again
+                        moveElement(x, y, x - 1, y + 1, false);
                         return;
                     } else {
                         if (var.Map[x + 1][y + 1] == -127)//If Down Right is Clear
                         {
-                            var.Map[x][y] = -127;
-                            var.Map[x + 1][y + 1] = 0;//Move Down Right
-                            var.BMap[x + 1][y + 1] = true;//Make sure it won't be moved again
+                           moveElement(x, y, x + 1, y + 1, false);
                             return;
                         }
                     }
@@ -893,22 +880,15 @@ public class Update {
                 var.RandomNum = rand.nextInt(5);//Get a random Value
 
                 if (var.RandomNum == 1 && meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y])) {
-                    var.element = var.Map[x + 1][y + 1];
-                    var.Map[x + 1][y + 1] = var.Map[x][y];//Occupy the tile under
-                    var.BMap[x + 1][y + 1] = true;//Make sure it won't be moved again
-                    var.Map[x][y] = var.element;
+                    moveElement(x, y, x + 1, y + 1, true);
+
+
                     return;
                 } else if (var.RandomNum == 2 && meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y])) {
-                    var.element = var.Map[x - 1][y + 1];
-                    var.Map[x - 1][y + 1] = var.Map[x][y];//Occupy the tile under
-                    var.BMap[x - 1][y + 1] = true;//Make sure it won't be moved again
-                    var.Map[x][y] = var.element;
+                    moveElement(x, y, x - 1, y + 1, true);
                     return;
                 } else {
-                    var.element = var.Map[x][y + 1];
-                    var.Map[x][y + 1] = var.Map[x][y];//Occupy the tile under
-                    var.BMap[x][y + 1] = true;//Make sure it won't be moved again
-                    var.Map[x][y] = var.element;
+                    moveElement(x, y, x, y + 1, true);
                     return;
                 }
 
@@ -922,18 +902,12 @@ public class Update {
 
                         if (meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y]))//If Down Right is Clear
                         {
-                            var.element = var.Map[x + 1][y + 1];
-                            var.Map[x + 1][y + 1] = var.Map[x][y];//Move Down Right
-                            var.BMap[x + 1][y + 1] = true;//Make sure it won't be moved again
-                            var.Map[x][y] = var.element;
+                            moveElement(x, y, x + 1, y + 1, true);
                             return;
                         } else {
                             if (meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y]))//If Down Left is Clear
                             {
-                                var.element = var.Map[x - 1][y + 1];
-                                var.Map[x - 1][y + 1] = var.Map[x][y];//Move Down Left
-                                var.BMap[x - 1][y + 1] = true;//Make sure it won't be moved again
-                                var.Map[x][y] = var.element;
+                                moveElement(x, y, x - 1, y + 1, true);
                                 return;
                             }
                         }
@@ -941,18 +915,12 @@ public class Update {
                     {
                         if (meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y]))//If Down Left is Clear
                         {
-                            var.element = var.Map[x - 1][y + 1];
-                            var.Map[x - 1][y + 1] = var.Map[x][y];//Move Down Left
-                            var.BMap[x - 1][y + 1] = true;//Make sure it won't be moved again
-                            var.Map[x][y] = var.element;
+                            moveElement(x, y, x - 1, y + 1, true);
                             return;
                         } else {
                             if (meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y]))//If Down Right is Clear
                             {
-                                var.element = var.Map[x + 1][y + 1];
-                                var.Map[x + 1][y + 1] = var.Map[x][y];//Move Down Right
-                                var.BMap[x + 1][y + 1] = true;//Make sure it won't be moved again
-                                var.Map[x][y] = var.element;
+                                moveElement(x, y, x + 1, y + 1, true);
                                 return;
                             }
                         }
@@ -977,22 +945,16 @@ public class Update {
 
             if (var.RandomNum == 7 && var.Map[x + 1][y + 1] == -127)// 1/8 Chances that
             {
-                var.Map[x + 1][y + 1] = var.Map[x][y];//It moves Right
-                var.BMap[x + 1][y + 1] = true;
-                var.Map[x][y] = -127;
+                moveElement(x, y, x + 1, y + 1, false);
                 return;
             } else if (var.RandomNum == 6 && var.Map[x - 1][y + 1] == -127)// 1/8 Chances that
             {
-                var.Map[x - 1][y + 1] = var.Map[x][y];//It moves Left
-                var.BMap[x - 1][y + 1] = true;
-                var.Map[x][y] = -127;
+                moveElement(x, y, x - 1, y + 1, false);
                 return;
 
             } else// 6/8 Chances that
             {
-                var.Map[x][y + 1] = var.Map[x][y];//It moves down
-                var.BMap[x][y + 1] = true;
-                var.Map[x][y] = -127;
+                moveElement(x, y, x, y + 1, false);
                 return;
             }
 
@@ -1004,9 +966,7 @@ public class Update {
 
                 if (var.RandomNum <= 2 && var.Map[x + 1][y + 1] == -127)// If it's case 1 and that the Down Right tile is free
                 {
-                    var.Map[x + 1][y + 1] = var.Map[x][y];//Move it there
-                    var.BMap[x + 1][y + 1] = true;
-                    var.Map[x][y] = -127;
+                    moveElement(x, y, x + 1, y + 1, false);
                     return;
 
                 } else if (var.RandomNum > 2 && var.RandomNum <= 4 && var.Map[x - 1][y + 1] == -127)// If it's case 2 and that the Down Left tile is free
@@ -1017,15 +977,11 @@ public class Update {
                     return;
                 } else if (var.RandomNum == 5 && var.Map[x + 1][y] == -127)// If it's case 1 and that the Right tile is free
                 {
-                    var.Map[x + 1][y] = var.Map[x][y];//Move it there
-                    var.BMap[x + 1][y] = true;
-                    var.Map[x][y] = -127;
+                   moveElement(x, y, x + 1, y, false);
                     return;
                 } else if (var.RandomNum == 6 && var.Map[x - 1][y] == -127)// If it's case 2 and that the Left tile is free
                 {
-                    var.Map[x - 1][y] = var.Map[x][y];//Move it there
-                    var.BMap[x - 1][y] = true;
-                    var.Map[x][y] = -127;
+                    moveElement(x, y, x - 1, y, false);
                     return;
                 }
             }
@@ -1038,24 +994,15 @@ public class Update {
 
             if (var.RandomNum == 7 && meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y]))// 1/8 Chances that
             {
-                var.element = var.Map[x + 1][y + 1];
-                var.Map[x + 1][y + 1] = var.Map[x][y];//It moves Right
-                var.BMap[x + 1][y + 1] = true;
-                var.Map[x][y] = var.element;
+                moveElement(x, y, x + 1, y + 1, true);
                 return;
             } else if (var.RandomNum == 6 && meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y]))// 1/8 Chances that
             {
-                var.element = var.Map[x - 1][y + 1];
-                var.Map[x - 1][y + 1] = var.Map[x][y];//It moves Left
-                var.BMap[x - 1][y + 1] = true;
-                var.Map[x][y] = var.element;
+                moveElement(x, y, x - 1, y + 1, true);
                 return;
             } else// 6/8 Chances that
             {
-                var.element = var.Map[x][y + 1];
-                var.Map[x][y + 1] = var.Map[x][y];//It moves down
-                var.BMap[x][y + 1] = true;
-                var.Map[x][y] = var.element;
+                moveElement(x, y, x, y + 1, true);
                 return;
             }
 
@@ -1067,34 +1014,22 @@ public class Update {
 
                 if (var.RandomNum <= 2 && meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y]))// If it's case 1 and that the Down Right tile is free
                 {
-                    var.element = var.Map[x + 1][y + 1];
-                    var.Map[x + 1][y + 1] = var.Map[x][y];
-                    var.BMap[x + 1][y + 1] = true;
-                    var.Map[x][y] = var.element;
+                    moveElement(x, y, x + 1, y + 1, true);
                     return;
 
                 } else if (var.RandomNum > 2 && var.RandomNum <= 4 && meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y]))// If it's case 2 and that the Down Left tile is free
                 {
-                    var.element = var.Map[x - 1][y + 1];
-                    var.Map[x - 1][y + 1] = var.Map[x][y];
-                    var.BMap[x - 1][y + 1] = true;
-                    var.Map[x][y] = var.element;
+                    moveElement(x, y, x - 1, y + 1, true);
                     return;
                 }
 
                 if (var.RandomNum == 5 && meth.getWeight(var.Map[x + 1][y]) < meth.getWeight(var.Map[x][y]))// If it's case 1 and that the Right tile is free
                 {
-                    var.element = var.Map[x + 1][y];
-                    var.Map[x + 1][y] = var.Map[x][y];
-                    var.BMap[x + 1][y] = true;
-                    var.Map[x][y] = var.element;
+                    moveElement(x, y, x + 1, y, true);
                     return;
                 } else if (var.RandomNum == 6 && meth.getWeight(var.Map[x - 1][y]) < meth.getWeight(var.Map[x][y]))// If it's case 2 and that the Left tile is free
                 {
-                    var.element = var.Map[x - 1][y];
-                    var.Map[x - 1][y] = var.Map[x][y];
-                    var.BMap[x - 1][y] = true;
-                    var.Map[x][y] = var.element;
+                    moveElement(x, y, x - 1, y, true);;
                     return;
                 }
             }
@@ -1125,8 +1060,7 @@ public class Update {
                         if (meth.getWeight(var.Map[x][y + 1]) < meth.getWeight(var.Map[x][y]))//If the tile Up is Free
                         {
                             //Make the current tile Free
-                            var.Map[x][y + 1] = var.Map[x][y];
-                            var.Map[x][y] = -127;//The the tile up Occupied
+                            moveElement(x, y, x, y + 1, true);
                             return;//End the loop
                         }
                     }
@@ -1139,8 +1073,7 @@ public class Update {
                         if (meth.getWeight(var.Map[x + 1][y]) < meth.getWeight(var.Map[x][y]))//See Case 1
                         {
 
-                            var.Map[x + 1][y] = var.Map[x][y];
-                            var.Map[x][y] = -127;
+                            moveElement(x, y, x + 1, y, true);
                             return;
                         }
                     }
@@ -1152,8 +1085,7 @@ public class Update {
                         if (meth.getWeight(var.Map[x][y - 1]) < meth.getWeight(var.Map[x][y]))//See Case 1
                         {
 
-                            var.Map[x][y - 1] = var.Map[x][y];
-                            var.Map[x][y] = -127;
+                            moveElement(x, y, x, y - 1, true);
                             return;
                         }
                     }
@@ -1165,8 +1097,7 @@ public class Update {
                         if (meth.getWeight(var.Map[x - 1][y]) < meth.getWeight(var.Map[x][y]))//See Case 1
                         {
 
-                            var.Map[x - 1][y] = var.Map[x][y];
-                            var.Map[x][y] = -127;
+                            moveElement(x, y, x - 1, y, true);
                             return;
                         }
                     }
@@ -1193,8 +1124,7 @@ public class Update {
                         if (var.Map[x][y + 1] == -127)//If the tile Up is Free
                         {
                             //Make the current tile Free
-                            var.Map[x][y + 1] = var.Map[x][y];
-                            var.Map[x][y] = -127;//The the tile up Occupied
+                            moveElement(x, y, x, y + 1, false);
                             return;//End the loop
                         }
                     }
@@ -1207,8 +1137,7 @@ public class Update {
                         if (var.Map[x + 1][y] == -127)//See Case 1
                         {
 
-                            var.Map[x + 1][y] = var.Map[x][y];
-                            var.Map[x][y] = -127;
+                            moveElement(x, y, x + 1, y, false);
                             return;
                         }
                     }
@@ -1220,8 +1149,7 @@ public class Update {
                         if (var.Map[x][y - 1] == -127)//See Case 1
                         {
 
-                            var.Map[x][y - 1] = var.Map[x][y];
-                            var.Map[x][y] = -127;
+                            moveElement(x, y, x, y - 1, false);
                             return;
                         }
                     }
@@ -1233,13 +1161,33 @@ public class Update {
                         if (var.Map[x - 1][y] == -127)//See Case 1
                         {
 
-                            var.Map[x - 1][y] = var.Map[x][y];
-                            var.Map[x][y] = -127;
+                            moveElement(x, y, x - 1, y, false);
                             return;
                         }
                     }
                 }
             }
+        }
+    }
+    public void moveElement(int x1, int y1, int x2, int y2, boolean change)
+    {
+        if(!change)//If we are exchanging the values ( Because the weight of the particle we are moving is bigger then the target )
+        {
+            var.Map[x2][y2] = var.Map[x1][y1];//Occupy the tile under
+            var.HMap[x2][y2] = var.HMap[x1][y1];
+            var.BMap[x2][y2] = true;//Make sure it won't be moved again
+            var.Map[x1][y1] = -127;
+            var.HMap[x1][y1] = 0;
+        }
+        else
+        {
+             var.element = var.Map[x2][y2];
+             var.temp = var.HMap[x2][y2];
+             var.HMap[x2][y2] = var.HMap[x1][y1];
+             var.Map[x2][y2] = var.Map[x1][y1];
+             var.BMap[x2][y2] = true;
+             var.Map[x1][y1] = var.element;
+             var.HMap[x1][y1] = var.temp;
         }
     }
 
