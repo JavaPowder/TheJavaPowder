@@ -1,6 +1,6 @@
 package thejavapowder.Elements;
 
-class Element {    /*
+public class Element {    /*
 	 * Java Powder element class
 	 * - Creates elements.
 	 *
