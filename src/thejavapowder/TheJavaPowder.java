@@ -555,13 +555,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             }
         }
 
-        if (var.state == 1) {// 504, 343, 204, 60
-
-            if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 243 / var.winZoom && var.CurrentX < 708 / var.winZoom && var.CurrentY < 303 / var.winZoom) {
-                var.state = 0;
+        if (var.state == 1) {//   504, 343, 204, 60,
+            if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 343 / var.winZoom && var.CurrentX < 204 / var.winZoom && var.CurrentY < 60 / var.winZoom) {
+                var.state = 3;
                 var.active = false;
             }
-            if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 343 / var.winZoom && var.CurrentX < 204 / var.winZoom && var.CurrentY < 60 / var.winZoom) {
+            if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 243 / var.winZoom && var.CurrentX < 708 / var.winZoom && var.CurrentY < 303 / var.winZoom) {
                 var.state = 0;
                 var.active = false;
             }
