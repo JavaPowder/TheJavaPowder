@@ -291,21 +291,21 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
         consolearea.append("Java Powder initialised." + end); // Added endline constant appending
 
-         /*
-         * Reactives Fields Meanings:
-	     *  0: Element it turns in
-	     *  1. Is the Reactive Destroyed ( 0 or 1 )
-	     *  2. Voltage it makes
-	     *  3. Properties changes
-	     *  4. Heat it makes
-	     *  5. Pressure it makes
-	     *  6. Elements it creates
-	     *  7. Amount of element created ( Defined in 6. )
-	     *  Others are free
-	     */
-        var.Elements[0].react[3] = new byte []{2,1,0,0,0,0,2,1}; // Coffee+Water = Methane
-        var.Elements[2].react[15] = new byte []{15,0,0,0,50,0,15,3}; //Methane+Fire = Fire
-        var.Elements[3].react[15] = new byte []{3,1,0,0,50,0,3,0}; //Water+Fire = Destroyed
+        /*
+           * Reactives Fields Meanings:
+           *  0: Element it turns in
+           *  1. Is the Reactive Destroyed ( 0 or 1 )
+           *  2. Voltage it makes
+           *  3. Properties changes
+           *  4. Heat it makes
+           *  5. Pressure it makes
+           *  6. Elements it creates
+           *  7. Amount of element created ( Defined in 6. )
+           *  Others are free
+           */
+        var.Elements[0].react[3] = new byte[]{2, 1, 0, 0, 0, 0, 2, 1}; // Coffee+Water = Methane
+        var.Elements[2].react[15] = new byte[]{15, 0, 0, 0, 50, 0, 15, 3}; //Methane+Fire = Fire
+        var.Elements[3].react[15] = new byte[]{3, 1, 0, 0, 50, 0, 3, 0}; //Water+Fire = Destroyed
     }
 
 
@@ -334,8 +334,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             for (int x = 0; x < var.Width; x++) {
                 for (int y = 0; y < var.Height; y++) {
-                    if (var.Map[x][y] >= 0)
-                    {
+                    if (var.Map[x][y] >= 0) {
                         bufferGraphics.setColor(new Color(var.Elements[var.Map[x][y]].colour));
                         bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
                     }
@@ -429,7 +428,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("JavaPowder Console *Alpha*", 20, var.Height / 3 * var.winZoom + 5);
             }
         } else if (var.state == 1) {
-
+            bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
+            bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
             if (bufferGraphics.drawImage(playPng, 504, 243, 204, 60, this) == false ||
                     bufferGraphics.drawImage(settingsPng, 504, 343, 204, 60, this) == false ||
                     bufferGraphics.drawImage(javaPowderPng, 404, 143, 404, 60, this) == false) {
@@ -493,12 +493,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
 
         if (var.state == 1) {//   504, 343, 204, 60,
-            if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 343 / var.winZoom && var.CurrentX < 204 / var.winZoom && var.CurrentY < 60 / var.winZoom) {
-                var.state = 3;
-                var.active = false;
-            }
             if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 243 / var.winZoom && var.CurrentX < 708 / var.winZoom && var.CurrentY < 303 / var.winZoom) {
                 var.state = 0;
+                var.active = false;
+            }
+            if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 340 / var.winZoom && var.CurrentX < 708 / var.winZoom && var.CurrentY < 400 / var.winZoom) {
+                var.state = 3;
                 var.active = false;
             }
         } else if (var.state == 2) {
@@ -588,8 +588,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     @SuppressWarnings("static-access")
     public void mouseReleased(MouseEvent e) {
         var.Drawing = false;
-
-
     }
 
     @SuppressWarnings("static-access")
@@ -662,6 +660,17 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             } else {
                 var.state = 0;
             }
+            switch (var.state) {
+                case 0:
+                    var.state = 1;
+                    break;
+                case 3:
+                    var.state = 1;
+                    break;
+                default:
+                    var.state = 0;
+                    break;
+            }
             var.antiDouble = true;
         }
         if (evt.getKeyCode() == KeyEvent.VK_SPACE && !var.antiDouble && !(var.state == 1)) {
@@ -670,9 +679,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             } else {
                 var.state = 2;
             }
+
             var.antiDouble = true;
         }
     }
+
 
     public void keyReleased(KeyEvent evt) {
     }
