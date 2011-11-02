@@ -1,5 +1,6 @@
 package thejavapowder;
 
+import javax.lang.model.util.Elements;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -385,7 +386,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             if (var.CurrentX < var.Width * var.Zoom - var.Size && var.CurrentX > 0 && var.CurrentY < var.Height * var.Zoom - var.Size && var.CurrentY > 0) {
 
-                bufferGraphics.drawString("ID:" + var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 20 * var.winZoom);//Draw the Hovered Element ID
+                if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
+                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 20 * var.winZoom);//Draw the Hovered Element ID
+                else
+                     bufferGraphics.drawString("ID: NONE", 10, 20 * var.winZoom);//Draw the Hovered Element ID
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 40 * var.winZoom);//Draw the Property Level
                 bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 50 * var.winZoom);//Draw the Property Level
@@ -397,12 +401,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 } else {
                     WaitTime++;
                 }
+            }
                 bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
                 bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
                 bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Average FPS
                 bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
                 bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
-            }
 
             if (var.state == 2)//If we are choosing an element
             {
