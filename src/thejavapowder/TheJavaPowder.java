@@ -1,6 +1,5 @@
 package thejavapowder;
 
-import javax.lang.model.util.Elements;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -388,7 +387,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
                     bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 20 * var.winZoom);//Draw the Hovered Element ID
                 else
-                     bufferGraphics.drawString("ID: NONE", 10, 20 * var.winZoom);//Draw the Hovered Element ID
+                    bufferGraphics.drawString("ID: NONE", 10, 20 * var.winZoom);//Draw the Hovered Element ID
+
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 40 * var.winZoom);//Draw the Property Level
                 bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 50 * var.winZoom);//Draw the Property Level
@@ -400,12 +400,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 } else {
                     WaitTime++;
                 }
-            }
                 bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
                 bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
                 bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Average FPS
                 bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
                 bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
+            }
 
             if (var.state == 2)//If we are choosing an element
             {
@@ -431,16 +431,19 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("JavaPowder Console *Alpha*", 20, var.Height / 3 * var.winZoom + 5);
             }
         } else if (var.state == 1) {
-            bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
-            bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
             if (bufferGraphics.drawImage(playPng, 504, 243, 204, 60, this) == false ||
                     bufferGraphics.drawImage(settingsPng, 504, 343, 204, 60, this) == false ||
                     bufferGraphics.drawImage(javaPowderPng, 404, 143, 404, 60, this) == false) {
 
                 bufferGraphics.drawString("Derp", 300, 300);
             }
-        }
+        } else if (var.state == 3) {
 
+            bufferGraphics.setColor(new Color(0x00ED00));
+            bufferGraphics.fillRect(100 * var.winZoom, 100 * var.winZoom, 80 * var.winZoom, 20 * var.winZoom);
+            bufferGraphics.setColor(new Color(0x000000));
+            bufferGraphics.drawString("Change the Window's Width", 102 * var.winZoom, 100 * var.winZoom + 20);
+        }
         g.drawImage(offscreen, 0, 0, this);
     }
 
@@ -520,86 +523,25 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     y += 80;
                 }
             }
-            /*if (var.CurrentX > 100 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 180 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 0;
-                var.state = 0;
-                var.active = false;
+        }
+        else if(var.state == 3)
+        {
+            if (var.CurrentX > 100 * var.winZoom && var.CurrentY >  100 * var.winZoom && var.CurrentX < 100 * var.winZoom + 80 * var.winZoom && var.CurrentY < 100 * var.winZoom + 20 * var.winZoom)
+            {
+            String NW = JOptionPane.showInputDialog(null,"Enter the new Screen's Width ( In pixels )");
+                try
+                {
+                    int newWidth = Integer.parseInt(NW);
+                    if(newWidth > 1500 || newWidth < 100)
+                    {
+                    }
+                    var.Width = newWidth;
+                }
+                catch(Exception blah)
+                {
+
+                }
             }
-            if (var.CurrentX > 180 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 260 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 1;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 260 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 340 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 2;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 340 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 420 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 3;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 420 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 500 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 4;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 500 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 580 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 5;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 580 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 660 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 6;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 660 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 740 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 7;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 740 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 820 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 8;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 820 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 900 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 9;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 900 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 980 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 10;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 980 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 1060 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 11;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 1060 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 1140 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
-                var.Equipped = 12;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 100 / var.winZoom && var.CurrentY > 130 / var.winZoom && var.CurrentX < 180 / var.winZoom && var.CurrentY < 210 / var.winZoom) {
-                var.Equipped = 13;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 180 / var.winZoom && var.CurrentY > 130 / var.winZoom && var.CurrentX < 260 / var.winZoom && var.CurrentY < 210 / var.winZoom) {
-                var.Equipped = 14;
-                var.state = 0;
-                var.active = false;
-            }
-            if (var.CurrentX > 260 / var.winZoom && var.CurrentY > 130 / var.winZoom && var.CurrentX < 340 / var.winZoom && var.CurrentY < 210 / var.winZoom) {
-                var.Equipped = 15;
-                var.state = 0;
-                var.active = false;
-            }*/
         }
     }
 
@@ -673,11 +615,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.ScrollY += 5;
         }
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE && !var.antiDouble && !(var.state == 2)) {
-            if (var.state == 0) {
-                var.state = 1;
-            } else {
-                var.state = 0;
-            }
             switch (var.state) {
                 case 0:
                     var.state = 1;
