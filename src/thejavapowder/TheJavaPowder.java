@@ -411,12 +411,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             {
                 for (int i = 0; i < thumbnails.length; i++) {
                     if (bufferGraphics.drawImage(thumbnails[i], (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this) == false) {
-                        bufferGraphics.drawString("Deeerp", 100, 70 * var.winZoom);//Draw the Average FPS
+                        bufferGraphics.drawString(var.Elements[i].name, (100 + i * 40 * var.winZoom) - var.iconX, 70 + var.iconY);//Draw the Element's name before the picture appears
                     }
                     //System.out.println("" + i + "X " + ((100 + i * 40 * var.winZoom) - var.iconX) + "Y " + (50 + var.iconY) + "Final X " +  (((100 + i * 40 * var.winZoom) - var.iconX) + 40 * var.winZoom) + "Final Y " +  (( 50 + var.iconY) + (40 * var.winZoom)) );
 
 
-                    if (i == 12 || i == 24 || i == 36) {
+                    if (i % 13 == 12) {
                         var.iconY += 40 * var.winZoom;
                         var.iconX += 40 * var.winZoom + i * 40 * var.winZoom;
                     }
