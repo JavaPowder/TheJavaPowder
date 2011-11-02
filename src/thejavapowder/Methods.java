@@ -37,7 +37,7 @@ public class Methods {
 
     @SuppressWarnings("static-access")
     public int getWeight(byte ID) {
-        if(ID != -127)
+        if(ID >= 0 && ID < var.NUM_ELS)
         {
             return var.Elements[ID].weight;
         }
@@ -49,7 +49,7 @@ public class Methods {
 
     @SuppressWarnings("static-access")
     public int getDTemp(byte ID) {
-        if(ID != -127)
+        if(ID >= 0 && ID < var.NUM_ELS)
         {
             return var.Elements[ID].defaultTemp;
         }
@@ -84,7 +84,7 @@ public class Methods {
 
     @SuppressWarnings("static-access")
     public char getType(int x, int y) {
-        if(var.Map[x][y] != -127)
+        if(var.Map[x][y] >= 0 && var.Map[x][y] < var.NUM_ELS)
         {
             t = var.Elements[var.Map[x][y]].state;
         }
@@ -98,8 +98,13 @@ public class Methods {
 
     @SuppressWarnings("static-access")
     public boolean GetConductive(byte id) {
-        var.conductive = var.Elements[id].conductive;
-        return var.conductive;
+        if (id >= 0 && id < var.NUM_ELS)
+        {
+            var.conductive = var.Elements[id].conductive;
+            return var.conductive;
+        }
+        var.conductive = false;
+        return false;
     }
 
 }
