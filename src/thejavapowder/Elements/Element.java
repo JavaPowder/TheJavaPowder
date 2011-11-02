@@ -17,7 +17,7 @@ public class Element {    /*
     public int defaultTemp;
     public byte[] transmitTo;
 
-    //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), color(HEX))
+    //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), color(HEX), reactives, default temp)
     public Element(byte bu,
                    byte we,
                    boolean co,

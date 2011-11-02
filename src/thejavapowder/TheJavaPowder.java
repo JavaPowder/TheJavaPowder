@@ -9,7 +9,6 @@ import java.util.Random;
 
 @SuppressWarnings("static-access")
 public class TheJavaPowder extends JFrame implements Runnable, ActionListener, ItemListener, MouseListener, MouseMotionListener, KeyListener, MouseWheelListener {
-    static final long serialVersionUID = 0; // I have no idea what this does, but it prevents a warning
     /*Main class
        * Paints, Listener for Events and loops through all the things that need to be done
        *
@@ -506,7 +505,22 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.active = false;
             }
         } else if (var.state == 2) {
-            if (var.CurrentX > 100 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 180 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
+            int x = 100, y = 50, num = 0;
+            while (num < var.NUM_ELS) {
+                if (var.CurrentX > x / var.winZoom && var.CurrentY > y / var.winZoom && var.CurrentX < (x+80) / var.winZoom && var.CurrentY < (y+80) / var.winZoom) {
+                var.Equipped = (byte)(num);
+                var.state = 0;
+                var.active = false;
+                }
+                num++;
+                x += 80;
+                if (num % 13 == 0)
+                {
+                    x = 100;
+                    y += 80;
+                }
+            }
+            /*if (var.CurrentX > 100 / var.winZoom && var.CurrentY > 50 / var.winZoom && var.CurrentX < 180 / var.winZoom && var.CurrentY < 130 / var.winZoom) {
                 var.Equipped = 0;
                 var.state = 0;
                 var.active = false;
@@ -585,7 +599,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.Equipped = 15;
                 var.state = 0;
                 var.active = false;
-            }
+            }*/
         }
     }
 
