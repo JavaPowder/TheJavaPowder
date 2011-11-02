@@ -71,7 +71,8 @@ public class Update {
                             meth.getReactives(var.Map[x][y]);
                             meth.getSurroundings(x, y);
 
-                            if (var.reactives != null) {
+                            if (var.reactives != null)
+                            {
                                 for (int o = 0; o < var.reactives.length; o++)//For the number of reactive the particle have
                                 {
                                     if (var.stopReactions)//If the particle already reacted
@@ -79,7 +80,7 @@ public class Update {
                                         this.var.stopReactions = false;
                                         break;//Stop it
                                     }
-                                    for (int i = 0; i < 8; i++)//If every space around the particle
+                                    for (int i = 0; i < 8; i++)//For every space around the particle
                                     {
 
                                         if (var.stopReactions)//If the particle already reacted
@@ -114,6 +115,15 @@ public class Update {
                                             }
                                         }
                                     }
+                                }
+                            }
+                            for (int i = 0; i < 8; i++)//For every space around the particle
+                            {
+                                if (var.surArray[i] == 15)
+                                {
+                                    var.RandomNum = rand.nextInt(100);//Get a random Value
+                                    if (var.Map[x][y] >= 0 && var.RandomNum < var.Elements[var.Map[x][y]].burn)
+                                        var.Map[x][y] = 15;
                                 }
                             }
                             if (meth.getType(x, y) == 'p')//If it's a powder

@@ -91,7 +91,7 @@ public class Variables {
         new Fire((byte) 0, (byte) 5, false, 'g', "Fire", "Burns stuff", 0xDE2307, new byte[]{}, 200),
         new Element((byte) 2, (byte) 127, false, 's', "Wood", "Burns slowly", 0xC0A040, new byte[]{}, 20),
         new Element((byte) 10, (byte) 80, false, 'l', "Petroleum", "Oil, burns", 0x404010, new byte[]{}, 20),
-        new Element((byte) 2, (byte) 15, false, 'p', "Sawdust", "Sawdust", 0xFFE0A0, new byte[]{}, 20),
+        new Element((byte) 16, (byte) 15, false, 'p', "Sawdust", "Sawdust", 0xFFE0A0, new byte[]{}, 20),
         };
         //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX), reactives, default temp)
         int NUM_ELS = 19;

@@ -303,7 +303,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
            *  Others are free
            */
         var.Elements[0].react[3] = new byte[]{2, 1, 0, 0, 0, 0, 2, 1}; // Coffee+Water = Methane
-        var.Elements[2].react[15] = new byte[]{15, 0, 0, 0, 50, 0, 15, 3}; //Methane+Fire = Fire
+        //var.Elements[2].react[15] = new byte[]{15, 0, 0, 0, 50, 0, 15, 3}; //Methane+Fire = Fire
         var.Elements[3].react[15] = new byte[]{3, 1, 0, 0, 50, 0, 3, 0}; //Water+Fire = Destroyed
     }
 
@@ -387,7 +387,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
                     bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 20 * var.winZoom);//Draw the Hovered Element ID
                 else
-                    bufferGraphics.drawString("ID: NONE", 10, 20 * var.winZoom);//Draw the Hovered Element ID
+                    bufferGraphics.drawString("ID: None", 10, 20 * var.winZoom);//Draw the Hovered Element ID
 
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 40 * var.winZoom);//Draw the Property Level
