@@ -432,16 +432,19 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("JavaPowder Console *Alpha*", 20, var.Height / 3 * var.winZoom + 5);
             }
         } else if (var.state == 1) {
-            bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
-            bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
             if (bufferGraphics.drawImage(playPng, 504, 243, 204, 60, this) == false ||
                     bufferGraphics.drawImage(settingsPng, 504, 343, 204, 60, this) == false ||
                     bufferGraphics.drawImage(javaPowderPng, 404, 143, 404, 60, this) == false) {
 
                 bufferGraphics.drawString("Derp", 300, 300);
             }
-        }
+        } else if (var.state == 3) {
 
+            bufferGraphics.setColor(new Color(0x00ED00));
+            bufferGraphics.fillRect(100 * var.winZoom, 100 * var.winZoom, 80 * var.winZoom, 20 * var.winZoom);
+            bufferGraphics.setColor(new Color(0x000000));
+            bufferGraphics.drawString("Change the Window's Width", 102 * var.winZoom, 100 * var.winZoom + 20);
+        }
         g.drawImage(offscreen, 0, 0, this);
     }
 
@@ -587,6 +590,25 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.active = false;
             }
         }
+        else if(var.state == 3)
+        {
+            if (var.CurrentX > 100 * var.winZoom && var.CurrentY >  100 * var.winZoom && var.CurrentX < 100 * var.winZoom + 80 * var.winZoom && var.CurrentY < 100 * var.winZoom + 20 * var.winZoom)
+            {
+            String NW = JOptionPane.showInputDialog(null,"Enter the new Screen's Width ( In pixels )");
+                try
+                {
+                    int newWidth = Integer.parseInt(NW);
+                    if(newWidth > 1500 || newWidth < 100)
+                    {
+                    }
+                    var.Width = newWidth;
+                }
+                catch(Exception blah)
+                {
+
+                }
+            }
+        }
     }
 
     @SuppressWarnings("static-access")
@@ -659,11 +681,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.ScrollY += 5;
         }
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE && !var.antiDouble && !(var.state == 2)) {
-            if (var.state == 0) {
-                var.state = 1;
-            } else {
-                var.state = 0;
-            }
             switch (var.state) {
                 case 0:
                     var.state = 1;
