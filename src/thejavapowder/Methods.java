@@ -30,7 +30,14 @@ public class Methods {
 
     @SuppressWarnings("static-access")
     public void getReactives(byte id) {
+        if(id != -127)
+        {
         this.var.reactives = var.Elements[id].reactives;
+        }
+        else
+        {
+          this.var.reactives = null;
+        }
         return;
     }
 
