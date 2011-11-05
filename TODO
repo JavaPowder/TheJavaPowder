@@ -1,6 +1,40 @@
+TODO File
+
+Format:
+
+<File Name> : <Line Number ( Optional )>
+<Description of the thing to do>
+
+Dev: <The Name of the Dev that's working on it
+( AKA Do not interfer with that part of the code if it's not you )>
+Priority: <How fast it must be done>
+
+
+
+
 TheJavaPowder : 526
 Finish the Settings Menu
+Dev: MasterMind555
+Priority : Medium
 
 TheJavaPowder
 Finish the Console
+Dev: <none>
+Priority: Low
 
+All
+Finishing Merging all the GUI's buttons to the main Screen
+Dev: <none>
+Priority: Medium
+
+All
+Separate the code into more classes
+Dev: <none>
+Priority: Low
+
+Update
+Make fire raise up, Possibly by making a very useful method "UpdateElement"
+that will take care of moving the particle the way it should depending on the
+state of the element, its velocity, the pressure and its weight
+Dev: <none>
+Priority: Medium
