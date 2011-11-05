@@ -49,10 +49,10 @@ public class Update {
 
         StartTime = System.currentTimeMillis();
 
-        if (TotalFrame > 30) {
-            TotalFrame = 1;
-            TotalFPS = FPS;
-        }
+        //if (TotalFrame > 30) {
+        //    TotalFrame = 1;
+        //    TotalFPS = FPS;
+        //}
 
         if (var.Simulating && var.state == 0) {
             for (int x = var.Width - 1; x > 1; x--) {

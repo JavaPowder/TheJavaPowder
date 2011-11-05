@@ -324,6 +324,15 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         TotalFrame++;
         StartTime = System.currentTimeMillis();
 
+        if (WaitTime > 29) {
+            PaintFPS = FPS;
+            UpdateFPS = (int) (update.TotalFPS / update.TotalFrame);
+            PaintAFPS = (int) (TotalFPS / TotalFrame);
+            WaitTime = 0;
+        } else {
+            WaitTime++;
+        }
+
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 
@@ -382,24 +391,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
             }
 
-            if (var.CurrentX < var.Width * var.Zoom - var.Size && var.CurrentX > 0 && var.CurrentY < var.Height * var.Zoom - var.Size && var.CurrentY > 0) {
+            if (var.CurrentX < var.Width * var.Zoom && var.CurrentX > 0 && var.CurrentY < var.Height * var.Zoom && var.CurrentY > 0) {
 
                 if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
-                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 20 * var.winZoom);//Draw the Hovered Element ID
+                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 20 * var.winZoom);//Draw the Hovered Element Name
                 else
-                    bufferGraphics.drawString("ID: None", 10, 20 * var.winZoom);//Draw the Hovered Element ID
+                    bufferGraphics.drawString("ID: None", 10, 20 * var.winZoom);//Draw the Hovered Element Name
 
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 40 * var.winZoom);//Draw the Property Level
                 bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 50 * var.winZoom);//Draw the Property Level
-                if (WaitTime > 29) {
-                    PaintFPS = FPS;
-                    UpdateFPS = (int) (update.TotalFPS / update.TotalFrame);
-                    PaintAFPS = (int) (TotalFPS / TotalFrame);
-                    WaitTime = 0;
-                } else {
-                    WaitTime++;
-                }
                 bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
                 bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
                 bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Average FPS
