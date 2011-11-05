@@ -138,7 +138,9 @@ public class Update {
                     }
                 }
             }
-            if (var.active) {
+
+        }//End of Updating maps
+        if (var.active) {
                 if (var.Drawing) {
                     create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped);
                 }
@@ -152,8 +154,6 @@ public class Update {
             }
             var.LastDrawX = var.DrawX;
             var.LastDrawY = var.DrawY;
-        }//End of Updating maps
-
 
         for (int a = 0; a < var.Width; a++) {
             for (int b = 0; b < var.Height; b++)//For each Tile of the Boolean var.Map
