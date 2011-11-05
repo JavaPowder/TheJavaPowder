@@ -1,5 +1,7 @@
 package thejavapowder.Elements;
 
+import thejavapowder.Variables;
+
 public class Element {    /*
 	 * Java Powder element class
 	 * - Creates elements.
@@ -13,7 +15,7 @@ public class Element {    /*
     public String name, description;// In favor of speed
     public int colour;
     public byte[] reactives;
-    public final byte[][] react = new byte[16][];
+    public final byte[][] react = new byte[Variables.NUM_ELS2][];
     public int defaultTemp;
     public byte[] transmitTo;
 

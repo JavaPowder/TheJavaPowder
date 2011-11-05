@@ -2,7 +2,6 @@ package thejavapowder;
 
 import java.util.Random;
 
-@SuppressWarnings("static-access")
 public class Update {
     /*Update class
       * Updates variables
@@ -29,7 +28,7 @@ public class Update {
 
 
     Random rand = new Random();
-    Variables var = new Variables();
+    Variables var = thejavapowder.TheJavaPowder.var;
     Methods meth = new Methods();
     //Booleans and stuff
 
@@ -38,7 +37,6 @@ public class Update {
 
 
 
-    @SuppressWarnings("static-access")
     public void update() {
         EndTime = System.currentTimeMillis();
 
@@ -228,7 +226,6 @@ public class Update {
         }
     }
 
-    @SuppressWarnings("static-access")
     public void drawCircle(int x, int y, byte rd, byte id) {
         int tempy = y;
         for (int i = x - rd; i <= x; i++) {
@@ -247,7 +244,6 @@ public class Update {
         }
     }
 
-    @SuppressWarnings("static-access")
     public void drawSquare(int xc, int yc, byte size, byte id) {
         for (int x = xc; x < xc + size; x++) {
             for (int y = yc; y < yc + size; y++) {
@@ -258,7 +254,6 @@ public class Update {
             drawPoint(xc, yc, id);
     }
 
-    @SuppressWarnings("static-access")
     public void draw(int x, int y, byte s, byte i) {
         if (var.Shape == 0)
             drawSquare(x - s, y - s, (byte) (s * 2), i);
@@ -266,7 +261,6 @@ public class Update {
             drawCircle(x, y, s, i);
     }
 
-    @SuppressWarnings("static-access")
     public void create_line(int x1, int y1, int x2, int y2, byte rd, byte id) // From old autorun.lua
     {
         if (x1 > x2) {
@@ -299,7 +293,6 @@ public class Update {
         }
     }
 
-    @SuppressWarnings("static-access")
     public void UpdateVoltage(int x, int y) {
         if (var.Map[x][y] == 5)//If it's a battery, give it infinite voltage
         {
@@ -487,7 +480,6 @@ public class Update {
 
     }//End of Voltage Update
 
-    @SuppressWarnings("static-access")
     public void UpdatePowder(int x, int y) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
         {
@@ -609,7 +601,6 @@ public class Update {
     }
 
 
-    @SuppressWarnings("static-access")
     public void UpdateLiquids(int x, int y) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
         {
@@ -715,7 +706,6 @@ public class Update {
     }
 
 
-    @SuppressWarnings("static-access")
     public void UpdateGasses(int x, int y) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
         {

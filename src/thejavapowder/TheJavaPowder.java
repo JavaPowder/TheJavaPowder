@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Random;
 
-@SuppressWarnings("static-access")
 public class TheJavaPowder extends JFrame implements Runnable, ActionListener, ItemListener, MouseListener, MouseMotionListener, KeyListener, MouseWheelListener {
     /*Main class
        * Paints, Listener for Events and loops through all the things that need to be done
@@ -31,7 +30,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         run();
     }
 
-    Variables var = new Variables();
+    public static Variables var = new Variables();
     Update update = new Update();
     Console console = new Console();
 
@@ -153,7 +152,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     // The maps
 
 
-    @SuppressWarnings("static-access")
     public void init() {
         //Main screen options
         this.setVisible(true);
@@ -451,7 +449,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     // Context menu check box handler
 
-    @SuppressWarnings("static-access")
     public void mouseDragged(MouseEvent e) {
 
         var.CurrentX = (e.getX() + var.ScrollX) / var.winZoom;
@@ -464,7 +461,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;
     }
 
-    @SuppressWarnings("static-access")
     public void mouseMoved(MouseEvent e) {
         var.CurrentX = (e.getX() + var.ScrollX) / var.winZoom;
         var.CurrentY = (e.getY() + var.ScrollY) / var.winZoom;
@@ -486,7 +482,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public void mouseExited(MouseEvent arg0) {
     }
 
-    @SuppressWarnings("static-access")
     public void mousePressed(MouseEvent e) {
 
         var.Drawing = true;
@@ -546,12 +541,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
     }
 
-    @SuppressWarnings("static-access")
     public void mouseReleased(MouseEvent e) {
         var.Drawing = false;
     }
 
-    @SuppressWarnings("static-access")
     public void keyPressed(KeyEvent evt) {
         if (evt.getKeyChar() == 'c' && !var.antiDouble) {
             if (var.state == 0)
@@ -647,14 +640,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public void keyTyped(KeyEvent evt) {
     }
 
-    @SuppressWarnings("static-access")
     public void mouseWheelMoved(MouseWheelEvent e) {
         var.Size -= e.getWheelRotation();
         if (var.Size < 0) var.Size = 0;
         if (var.Size > 50) var.Size = 50;
     }
 
-    @SuppressWarnings("static-access")
     public void itemStateChanged(ItemEvent e) {
         Object source = e.getItemSelectable();
         if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -690,7 +681,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     }
 
 
-    @SuppressWarnings("static-access")
     public float getVoltage(int x, int y) {
         if ((var.VMap[x][y] / 1500f < 1.0f) && (var.VMap[x][y] / 1500f > 0.0f)) {
             var.Brightness = var.VMap[x][y] / 1500f;
@@ -699,7 +689,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     }
 
 
-    @SuppressWarnings("static-access")
     public void actionPerformed(ActionEvent e) {
 
         Object source = e.getSource();
@@ -739,7 +728,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Writer writer;
     Random randomSaveName = new Random(1337);
 
-    @SuppressWarnings("static-access")
     public void SaveFile() {
         try {
             console.printtxt("Saving...");

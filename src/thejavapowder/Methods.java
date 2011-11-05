@@ -2,10 +2,9 @@ package thejavapowder;
 
 public class Methods {
 
-    Variables var = new Variables();
+    Variables var = thejavapowder.TheJavaPowder.var;
     char t;
 
-    @SuppressWarnings("static-access")
     public void createParticle(int x, int y, byte id) {
         for (int i = 0; i < var.reaction[7]; i++) {
             if (var.Map[x][y - 1] == -127) {
@@ -28,14 +27,12 @@ public class Methods {
         }
     }
 
-    @SuppressWarnings("static-access")
     public void getReactives(byte id) {
         this.var.reactives = var.Elements[id].reactives;
         return;
     }
 
 
-    @SuppressWarnings("static-access")
     public int getWeight(byte ID) {
         if(ID >= 0 && ID < var.NUM_ELS)
         {
@@ -47,7 +44,6 @@ public class Methods {
         }
     }
 
-    @SuppressWarnings("static-access")
     public int getDTemp(byte ID) {
         if(ID >= 0 && ID < var.NUM_ELS)
         {
@@ -60,13 +56,11 @@ public class Methods {
     }
 
 
-    @SuppressWarnings("static-access")
     public void getReaction(byte id, byte reactId) {
         var.reaction = var.Elements[id].react[reactId];
         return;
     }
 
-    @SuppressWarnings("static-access")
     public void getSurroundings(int x, int y) {
         if (x < var.Width - 1 && x > 0 && y < var.Height - 1 && y > 0) {
             var.surArray[0] = var.Map[x - 1][y - 1];
@@ -82,7 +76,6 @@ public class Methods {
 
     }
 
-    @SuppressWarnings("static-access")
     public char getType(int x, int y) {
         if(var.Map[x][y] >= 0 && var.Map[x][y] < var.NUM_ELS)
         {
@@ -96,7 +89,6 @@ public class Methods {
 
     }
 
-    @SuppressWarnings("static-access")
     public boolean GetConductive(byte id) {
         if (id >= 0 && id < var.NUM_ELS)
         {
