@@ -29,7 +29,6 @@ public class Methods {
 
     public void getReactives(byte id) {
         this.var.reactives = var.Elements[id].reactives;
-        return;
     }
 
 
@@ -58,7 +57,6 @@ public class Methods {
 
     public void getReaction(byte id, byte reactId) {
         var.reaction = var.Elements[id].react[reactId];
-        return;
     }
 
     public void getSurroundings(int x, int y) {

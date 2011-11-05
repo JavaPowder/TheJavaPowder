@@ -43,7 +43,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
     }
 
-    Thread t;
+    //Thread t;
 
 
     Image scaPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/a-semiconductor.png"));
@@ -51,7 +51,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image batteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/battery.png"));
     Image coffeePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/coffee.png"));
     Image copperPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/copper.png"));
-    Image creditPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
+    //Image creditPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
     Image ironPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iron.png"));
     Image logicGatePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
     Image methanePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/methane.png"));
@@ -366,7 +366,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawLine(x - size, y + size, x + size, y + size);//Draw the Cursor
             } else if (var.Shape == 1) {
                 int x = var.CursorX, y = var.CursorY, rd = var.Size * var.Zoom * var.winZoom;
-                int tempy = y, oldy = y;
+                int tempy = y, oldy;
                 for (int i = x - rd; i <= x; i++) {
                     oldy = tempy;
                     double distance = Math.sqrt(Math.pow((double) x - (double) i, (double) 2) + Math.pow((double) y - (double) tempy, (double) 2));
@@ -409,7 +409,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             if (var.state == 2)//If we are choosing an element
             {
                 for (int i = 0; i < thumbnails.length; i++) {
-                    if (bufferGraphics.drawImage(thumbnails[i], (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this) == false) {
+                    if (!bufferGraphics.drawImage(thumbnails[i], (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this)) {
                         bufferGraphics.drawString(var.Elements[i].name, (100 + i * 40 * var.winZoom) - var.iconX, 70 + var.iconY);//Draw the Element's name before the picture appears
                     }
                     //System.out.println("" + i + "X " + ((100 + i * 40 * var.winZoom) - var.iconX) + "Y " + (50 + var.iconY) + "Final X " +  (((100 + i * 40 * var.winZoom) - var.iconX) + 40 * var.winZoom) + "Final Y " +  (( 50 + var.iconY) + (40 * var.winZoom)) );
@@ -423,16 +423,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.iconY = 0;
                 var.iconX = 0;
             } else if (var.state == 5) {
-                if (bufferGraphics.drawImage(consolePng, 0, 25, var.Width * var.winZoom, var.Height / 3 * var.winZoom, this) == false) {
+                if (!bufferGraphics.drawImage(consolePng, 0, 25, var.Width * var.winZoom, var.Height / 3 * var.winZoom, this)) {
                     bufferGraphics.drawString("Derp", 300, 300);
                 }
                 bufferGraphics.setColor(new Color(0x00ED00));
                 bufferGraphics.drawString("JavaPowder Console *Alpha*", 20, var.Height / 3 * var.winZoom + 5);
             }
         } else if (var.state == 1) {
-            if (bufferGraphics.drawImage(playPng, 504, 243, 204, 60, this) == false ||
-                    bufferGraphics.drawImage(settingsPng, 504, 343, 204, 60, this) == false ||
-                    bufferGraphics.drawImage(javaPowderPng, 404, 143, 404, 60, this) == false) {
+            if (!bufferGraphics.drawImage(playPng, 504, 243, 204, 60, this) ||
+                    !bufferGraphics.drawImage(settingsPng, 504, 343, 204, 60, this) ||
+                    !bufferGraphics.drawImage(javaPowderPng, 404, 143, 404, 60, this)) {
 
                 bufferGraphics.drawString("Derp", 300, 300);
             }
@@ -681,12 +681,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     }
 
 
-    public float getVoltage(int x, int y) {
+    /*public float getVoltage(int x, int y) {
         if ((var.VMap[x][y] / 1500f < 1.0f) && (var.VMap[x][y] / 1500f > 0.0f)) {
             var.Brightness = var.VMap[x][y] / 1500f;
         }
         return var.Brightness;
-    }
+    }*/
 
 
     public void actionPerformed(ActionEvent e) {

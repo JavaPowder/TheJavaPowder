@@ -30,12 +30,6 @@ public class Update {
     Random rand = new Random();
     Variables var = thejavapowder.TheJavaPowder.var;
     Methods meth = new Methods();
-    //Booleans and stuff
-
-    Object obj;
-    //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), name, descripting, colour(HEX), react ( Array ))
-
-
 
     public void update() {
         EndTime = System.currentTimeMillis();
@@ -172,7 +166,7 @@ public class Update {
     }//End of Update
 
     public void drawPoint(int x, int y, byte id) {
-        if (var.active ||var.Simulating == false) {
+        if (var.active || !var.Simulating) {
             var.wait = 30;
             if (id != -126 && id != -125) {
                 if (var.leftClick) {
@@ -698,7 +692,7 @@ public class Update {
                     return;
                 } else if (var.RandomNum == 6 && meth.getWeight(var.Map[x - 1][y]) < meth.getWeight(var.Map[x][y]))// If it's case 2 and that the Left tile is free
                 {
-                    moveElement(x, y, x - 1, y, true);;
+                    moveElement(x, y, x - 1, y, true);
                     return;
                 }
             }

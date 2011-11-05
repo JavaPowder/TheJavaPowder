@@ -26,7 +26,7 @@ class FileSaver {
 
     boolean saveFile() {
 
-        if (filename == "") filename = "default";
+        if (filename.equals("")) filename = "default";
 
 
         try {
@@ -76,7 +76,7 @@ class FileSaver {
     }
 
     boolean readFile() {
-        if (readFileName == "") readFileName = "default";
+        if (readFileName.equals("")) readFileName = "default";
         try {
             inp = new FileInputStream(readFileName);
         } catch (FileNotFoundException e) {
