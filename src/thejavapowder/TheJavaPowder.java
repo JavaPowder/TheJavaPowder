@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Random;
 
-@SuppressWarnings("static-access")
 public class TheJavaPowder extends JFrame implements Runnable, ActionListener, ItemListener, MouseListener, MouseMotionListener, KeyListener, MouseWheelListener {
     /*Main class
        * Paints, Listener for Events and loops through all the things that need to be done
@@ -31,7 +30,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         run();
     }
 
-    Variables var = new Variables();
+    public static Variables var = new Variables();
     Update update = new Update();
     Console console = new Console();
 
@@ -44,7 +43,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
     }
 
-    Thread t;
+    //Thread t;
 
 
     Image scaPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/a-semiconductor.png"));
@@ -52,7 +51,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image batteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/battery.png"));
     Image coffeePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/coffee.png"));
     Image copperPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/copper.png"));
-    Image creditPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
+    //Image creditPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
     Image ironPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iron.png"));
     Image logicGatePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
     Image methanePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/methane.png"));
@@ -153,7 +152,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     // The maps
 
 
-    @SuppressWarnings("static-access")
     public void init() {
         //Main screen options
         this.setVisible(true);
@@ -324,6 +322,15 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         TotalFrame++;
         StartTime = System.currentTimeMillis();
 
+        if (WaitTime > 29) {
+            PaintFPS = FPS;
+            UpdateFPS = (int) (update.TotalFPS / update.TotalFrame);
+            PaintAFPS = (int) (TotalFPS / TotalFrame);
+            WaitTime = 0;
+        } else {
+            WaitTime++;
+        }
+
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 
@@ -359,7 +366,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawLine(x - size, y + size, x + size, y + size);//Draw the Cursor
             } else if (var.Shape == 1) {
                 int x = var.CursorX, y = var.CursorY, rd = var.Size * var.Zoom * var.winZoom;
-                int tempy = y, oldy = y;
+                int tempy = y, oldy;
                 for (int i = x - rd; i <= x; i++) {
                     oldy = tempy;
                     double distance = Math.sqrt(Math.pow((double) x - (double) i, (double) 2) + Math.pow((double) y - (double) tempy, (double) 2));
@@ -382,24 +389,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
             }
 
-            if (var.CurrentX < var.Width * var.Zoom - var.Size && var.CurrentX > 0 && var.CurrentY < var.Height * var.Zoom - var.Size && var.CurrentY > 0) {
+            if (var.CurrentX < var.Width * var.Zoom && var.CurrentX > 0 && var.CurrentY < var.Height * var.Zoom && var.CurrentY > 0) {
 
                 if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
-                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 20 * var.winZoom);//Draw the Hovered Element ID
+                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 20 * var.winZoom);//Draw the Hovered Element Name
                 else
-                    bufferGraphics.drawString("ID: None", 10, 20 * var.winZoom);//Draw the Hovered Element ID
+                    bufferGraphics.drawString("ID: None", 10, 20 * var.winZoom);//Draw the Hovered Element Name
 
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 40 * var.winZoom);//Draw the Property Level
                 bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 50 * var.winZoom);//Draw the Property Level
-                if (WaitTime > 29) {
-                    PaintFPS = FPS;
-                    UpdateFPS = (int) (update.TotalFPS / update.TotalFrame);
-                    PaintAFPS = (int) (TotalFPS / TotalFrame);
-                    WaitTime = 0;
-                } else {
-                    WaitTime++;
-                }
                 bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
                 bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
                 bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Average FPS
@@ -410,7 +409,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             if (var.state == 2)//If we are choosing an element
             {
                 for (int i = 0; i < thumbnails.length; i++) {
-                    if (bufferGraphics.drawImage(thumbnails[i], (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this) == false) {
+                    if (!bufferGraphics.drawImage(thumbnails[i], (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this)) {
                         bufferGraphics.drawString(var.Elements[i].name, (100 + i * 40 * var.winZoom) - var.iconX, 70 + var.iconY);//Draw the Element's name before the picture appears
                     }
                     //System.out.println("" + i + "X " + ((100 + i * 40 * var.winZoom) - var.iconX) + "Y " + (50 + var.iconY) + "Final X " +  (((100 + i * 40 * var.winZoom) - var.iconX) + 40 * var.winZoom) + "Final Y " +  (( 50 + var.iconY) + (40 * var.winZoom)) );
@@ -424,16 +423,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.iconY = 0;
                 var.iconX = 0;
             } else if (var.state == 5) {
-                if (bufferGraphics.drawImage(consolePng, 0, 25, var.Width * var.winZoom, var.Height / 3 * var.winZoom, this) == false) {
+                if (!bufferGraphics.drawImage(consolePng, 0, 25, var.Width * var.winZoom, var.Height / 3 * var.winZoom, this)) {
                     bufferGraphics.drawString("Derp", 300, 300);
                 }
                 bufferGraphics.setColor(new Color(0x00ED00));
                 bufferGraphics.drawString("JavaPowder Console *Alpha*", 20, var.Height / 3 * var.winZoom + 5);
             }
         } else if (var.state == 1) {
-            if (bufferGraphics.drawImage(playPng, 504, 243, 204, 60, this) == false ||
-                    bufferGraphics.drawImage(settingsPng, 504, 343, 204, 60, this) == false ||
-                    bufferGraphics.drawImage(javaPowderPng, 404, 143, 404, 60, this) == false) {
+            if (!bufferGraphics.drawImage(playPng, 504, 243, 204, 60, this) ||
+                    !bufferGraphics.drawImage(settingsPng, 504, 343, 204, 60, this) ||
+                    !bufferGraphics.drawImage(javaPowderPng, 404, 143, 404, 60, this)) {
 
                 bufferGraphics.drawString("Derp", 300, 300);
             }
@@ -450,7 +449,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     // Context menu check box handler
 
-    @SuppressWarnings("static-access")
     public void mouseDragged(MouseEvent e) {
 
         var.CurrentX = (e.getX() + var.ScrollX) / var.winZoom;
@@ -463,7 +461,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;
     }
 
-    @SuppressWarnings("static-access")
     public void mouseMoved(MouseEvent e) {
         var.CurrentX = (e.getX() + var.ScrollX) / var.winZoom;
         var.CurrentY = (e.getY() + var.ScrollY) / var.winZoom;
@@ -485,7 +482,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public void mouseExited(MouseEvent arg0) {
     }
 
-    @SuppressWarnings("static-access")
     public void mousePressed(MouseEvent e) {
 
         var.Drawing = true;
@@ -545,12 +541,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
     }
 
-    @SuppressWarnings("static-access")
     public void mouseReleased(MouseEvent e) {
         var.Drawing = false;
     }
 
-    @SuppressWarnings("static-access")
     public void keyPressed(KeyEvent evt) {
         if (evt.getKeyChar() == 'c' && !var.antiDouble) {
             if (var.state == 0)
@@ -646,14 +640,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public void keyTyped(KeyEvent evt) {
     }
 
-    @SuppressWarnings("static-access")
     public void mouseWheelMoved(MouseWheelEvent e) {
         var.Size -= e.getWheelRotation();
         if (var.Size < 0) var.Size = 0;
         if (var.Size > 50) var.Size = 50;
     }
 
-    @SuppressWarnings("static-access")
     public void itemStateChanged(ItemEvent e) {
         Object source = e.getItemSelectable();
         if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -689,16 +681,14 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     }
 
 
-    @SuppressWarnings("static-access")
-    public float getVoltage(int x, int y) {
+    /*public float getVoltage(int x, int y) {
         if ((var.VMap[x][y] / 1500f < 1.0f) && (var.VMap[x][y] / 1500f > 0.0f)) {
             var.Brightness = var.VMap[x][y] / 1500f;
         }
         return var.Brightness;
-    }
+    }*/
 
 
-    @SuppressWarnings("static-access")
     public void actionPerformed(ActionEvent e) {
 
         Object source = e.getSource();
@@ -738,7 +728,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Writer writer;
     Random randomSaveName = new Random(1337);
 
-    @SuppressWarnings("static-access")
     public void SaveFile() {
         try {
             console.printtxt("Saving...");

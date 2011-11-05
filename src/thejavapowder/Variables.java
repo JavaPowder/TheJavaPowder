@@ -3,47 +3,46 @@ package thejavapowder;
 import thejavapowder.Elements.*;
 
 public class Variables {
-    static byte elementNum = 15;
-    static int[] surArray = new int[8];
-    static boolean Drawing = false;
-    static boolean DebugMode = false;
-    static boolean antiDouble = false;
+    int[] surArray = new int[8];
+    boolean Drawing = false;
+    boolean DebugMode = false;
+    boolean antiDouble = false;
 
-    static int CurrentX = 100;
-    static int CurrentY = 100;
+    int CurrentX = 100;
+    int CurrentY = 100;
     /*Transformated Variables:
       * Variables that represents a long calculation used often
       */
-    static int CursorX = 100; //Where to draw the cursor
-    static int CursorY = 100;
+    int CursorX = 100; //Where to draw the cursor
+    int CursorY = 100;
 
-    static int realZoom = 2;//Zoom * winZoom
+    int realZoom = 2;//Zoom * winZoom
 
-    static int DrawX = 0;//Where to draw
-    static int DrawY = 0;
-    static int LastDrawX = 0;//Where to draw
-    static int LastDrawY = 0;
+    int DrawX = 0;//Where to draw
+    int DrawY = 0;
+    int LastDrawX = 0;//Where to draw
+    int LastDrawY = 0;
 
     //End of Transformated Variables
-    static boolean active = true; //For elements menu
-    static int wait = 30;
+    boolean active = true; //For elements menu
+    int wait = 30;
 
-    static int ScrollX = 0;
-    static int ScrollY = 0;
-    static int iconY = 0;
-    static int iconX = 0;
+    int ScrollX = 0;
+    int ScrollY = 0;
+    int iconY = 0;
+    int iconX = 0;
 
-    static byte Zoom = 1;
-    static byte Size = 10;
-    static byte Shape = 0;
-    static byte Equipped = 3;
-    static byte winZoom = 2;
-    static float Brightness = 0.0f;
+    byte Zoom = 1;
+    byte Size = 10;
+    byte Shape = 0;
+    byte Equipped = 3;
+    byte winZoom = 2;
+    float Brightness = 0.0f;
 
-    static boolean stopReactions = false;
-    static boolean Simulating = true;//Paused or not paused
-    static byte currentMode = 0; // All, Electronic Ect
-    static int state = 0;
+    boolean stopReactions = false;
+    boolean Simulating = true;//Paused or not paused
+    byte currentMode = 0; // All, Electronic Ect
+    int state = 0;
     /* The state it is it
     * 0 = Normal
     * 1 = Menu
@@ -53,26 +52,26 @@ public class Variables {
     * 5 = Console
     */
 
-    static boolean leftClick = true;
-    static boolean conductive = false;
+    boolean leftClick = true;
+    boolean conductive = false;
 
-    static int Height = 350;
-    static int Width = 600;
-    static byte[] reaction = new byte[16];
-    static byte[] reactives = new byte[]{};
+    int Height = 350;
+    int Width = 600;
+    byte[] reaction = new byte[16];
+    byte[] reactives = new byte[]{};
 
-    static byte element = 0;
-    static short temp = 0;
-    static int RandomNum = 0;
+    byte element = 0;
+    short temp = 0;
+    int RandomNum = 0;
 
-    static byte[][] Map = new byte[Width][Height];// The particle type map
-    static short[][] HMap = new short[Width][Height];// The Heat type map
-    static short[][] VMap = new short[Width][Height];// The Voltage type map
-    static boolean[][] BMap = new boolean[Width][Height]; // The particle updated map, made for safeguarding.
-    static byte[][] PMap = new byte[Width][Height];// The Particle Properties Map
+    byte[][] Map = new byte[Width][Height];// The particle type map
+    short[][] HMap = new short[Width][Height];// The Heat type map
+    short[][] VMap = new short[Width][Height];// The Voltage type map
+    boolean[][] BMap = new boolean[Width][Height]; // The particle updated map, made for safeguarding.
+    byte[][] PMap = new byte[Width][Height];// The Particle Properties Map
     //Elements Initialization
     //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX), reactives, default temp)
-    static Element Elements[] = {
+    Element Elements[] = {
         new Coffee((byte) 0, (byte) 50, false, 'p', "Coffee", "Crushed Coffee Beans, First Element, Reference to Java", 0x613F37, new byte[]{3}, 20),
         new Wall((byte) 0, (byte) 127, false, 's', "Wall", "Blocks Everything", 0x808080, new byte[]{}, 20),
         new Methane((byte) 10, (byte) 5, false, 'g', "Methane", "Highly Flammable Gas", 0xDEDEDE, new byte[]{15}, 20),
@@ -94,5 +93,6 @@ public class Variables {
         new Element((byte) 16, (byte) 15, false, 'p', "Sawdust", "Sawdust", 0xFFE0A0, new byte[]{}, 20),
         };
         //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX), reactives, default temp)
-        int NUM_ELS = 19;
+    public int NUM_ELS = 19;
+    public static int NUM_ELS2 = 19;
 }
