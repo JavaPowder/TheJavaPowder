@@ -56,6 +56,7 @@ public class Variables {
     boolean conductive = false;
 
     int Height = 350;
+    int optionsHeight = 14;
     int Width = 600;
     byte[] reaction = new byte[16];
     byte[] reactives = new byte[]{};

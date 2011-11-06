@@ -166,17 +166,17 @@ public class Update {
     }//End of Update
 
     public void drawPoint(int x, int y, byte id) {
-        if (var.active || !var.Simulating) {
+        if ((var.active || !var.Simulating) && x > 1 && y > 1 && x < var.Width && y < var.Height) {
             var.wait = 30;
             if (id != -126 && id != -125) {
                 if (var.leftClick) {
-                    if (x > 1 && y > 1 && x < var.Width && y < var.Height && var.Map[x][y] == -127)//If the target tile is free
+                    if (var.Map[x][y] == -127)//If the target tile is free
                     {
                         var.Map[x][y] = id;
                         var.HMap[x][y] = (short)meth.getDTemp(id);
                     }
                 } else {
-                    if (x > 1 && y > 1 && x < var.Width && y < var.Height && var.Map[x][y] != -127)//If the target tile is not free
+                    if (var.Map[x][y] != -127)//If the target tile is not free
                     {
                         var.Map[x][y] = -127;//Clean the Map
                         var.VMap[x][y] = 0;//Clean the VMap
@@ -185,13 +185,13 @@ public class Update {
                 }
             } else if (id == -126) {
                 if (var.leftClick) {
-                    if (x > 1 && y > 1 && x < var.Width && y < var.Height && (var.Map[x][y] == 4 || var.Map[x][y] == 6)) {
+                    if (var.Map[x][y] == 4 || var.Map[x][y] == 6) {
                         var.VMap[x][y] += 5;
                         if (var.VMap[x][y] > 1500)
                             var.VMap[x][y] = 1500;
                     }
                 } else {
-                    if (x > 1 && y > 1 && x < var.Width && y < var.Height && var.Map[x][y] != 0) {
+                    if (var.Map[x][y] != 0) {
                         var.Map[x][y] = -127;
                         var.VMap[x][y] = 0;
                         var.PMap[x][y] = 0;

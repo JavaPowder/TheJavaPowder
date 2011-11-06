@@ -93,18 +93,18 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     // The buttons
 
-    JButton ElectricityB = new JButton("Electricity");
+    //JButton ElectricityB = new JButton("Electricity");
 
-    JButton ChangePB = new JButton("Change Properties");
+    //JButton ChangePB = new JButton("Change Properties");
 
 
-    JButton Save = new JButton("Save Scene");
-    JButton Load = new JButton("Load Scene");
-    JButton ResetFPS = new JButton("Reset Average FPS");
-    JButton Reset = new JButton("Reset Scene");
+    //JButton Save = new JButton("Save Scene");
+    //JButton Load = new JButton("Load Scene");
+    //JButton ResetFPS = new JButton("Reset Average FPS");
+    //JButton Reset = new JButton("Reset Scene");
     // the labels
-    JLabel FPSCounter = new JLabel("1337");
-    JLabel AverageFPS = new JLabel("1337");
+    //JLabel FPSCounter = new JLabel("1337");
+    //JLabel AverageFPS = new JLabel("1337");
     // The console area.
     static JTextArea consolearea = new JTextArea("", 20, 40);
     JScrollPane scrollPane = new JScrollPane(consolearea);
@@ -132,7 +132,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     ButtonGroup menu2_radio_group = new ButtonGroup();
     ButtonGroup menu4_radio_group = new ButtonGroup();
 
-    FileSaver fileSaver = new FileSaver();
+    //FileSaver fileSaver = new FileSaver();
 
     final String end = System.getProperty("line.separator");
     // Endline constant
@@ -163,7 +163,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         this.addMouseMotionListener(this);
         this.addMouseWheelListener(this);
         this.addKeyListener(this);
-        this.setSize(var.Width * var.winZoom, var.Height * var.winZoom); //manually set your Frame's size
+        this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //manually set your Frame's size
 
         dim = getSize();
 
@@ -196,7 +196,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
         consolearea.setVisible(false);
 
-        panel.add(ElectricityB);
+        /*panel.add(ElectricityB);
         panel.add(ChangePB);
 
 
@@ -206,7 +206,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         panel.add(Reset);
         panel.add(FPSCounter);
         panel.add(AverageFPS);
-        panel.add(ResetFPS);
+        panel.add(ResetFPS);*/
 
         panel.add(consolearea);
         panel.add(scrollPane);
@@ -247,13 +247,13 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         frame.setJMenuBar(menubar1);
         // Adds action listeners
 
-        ElectricityB.addActionListener(this);
+        /*ElectricityB.addActionListener(this);
         ChangePB.addActionListener(this);
 
 
         Reset.addActionListener(this);
         Save.addActionListener(this);
-        Load.addActionListener(this);
+        Load.addActionListener(this);*/
 
         this.addMouseListener(this);
         this.addKeyListener(this);
@@ -360,10 +360,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 int size = var.Size * var.Zoom * var.winZoom;
                 int x = var.CursorX;
                 int y = var.CursorY;
-                bufferGraphics.drawLine(x - size, y - size, x + size, y - size);//Draw the Cursor
-                bufferGraphics.drawLine(x - size, y - size, x - size, y + size);//Draw the Cursor
-                bufferGraphics.drawLine(x + size, y - size, x + size, y + size);//Draw the Cursor
-                bufferGraphics.drawLine(x - size, y + size, x + size, y + size);//Draw the Cursor
+                bufferGraphics.drawRect(x - size, y - size, size * 2, size *2);
             } else if (var.Shape == 1) {
                 int x = var.CursorX, y = var.CursorY, rd = var.Size * var.Zoom * var.winZoom;
                 int tempy = y, oldy;
@@ -443,6 +440,22 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             bufferGraphics.setColor(new Color(0x000000));
             bufferGraphics.drawString("Change the Window's Width", 102 * var.winZoom, 100 * var.winZoom + 20);
         }
+
+        bufferGraphics.setColor(new Color(0x00007F));
+        bufferGraphics.fillRect(4*var.winZoom, (var.Height+1) * var.winZoom, 37 * var.winZoom, 10 * var.winZoom);
+        bufferGraphics.fillRect(45*var.winZoom, (var.Height+1) * var.winZoom, 54 * var.winZoom, 10 * var.winZoom);
+        bufferGraphics.fillRect(103*var.winZoom, (var.Height+1) * var.winZoom, 27 * var.winZoom, 10 * var.winZoom);
+        bufferGraphics.fillRect(134*var.winZoom, (var.Height+1) * var.winZoom, 54 * var.winZoom, 10 * var.winZoom);
+        bufferGraphics.fillRect(192*var.winZoom, (var.Height+1) * var.winZoom, 34 * var.winZoom, 10 * var.winZoom);
+        bufferGraphics.setColor(new Color(0x7F0000));
+        bufferGraphics.fillRect(230*var.winZoom, (var.Height+1) * var.winZoom, 34 * var.winZoom, 10 * var.winZoom);
+        bufferGraphics.setColor(new Color(0.5f, 0.5f, 0.5f, 0.5f));
+        bufferGraphics.drawString("Reset Scene", 5*var.winZoom, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Reset Average FPS", 46*var.winZoom, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Electricity", 104*var.winZoom, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Change Properties", 135*var.winZoom, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Save Scene", 193*var.winZoom, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Load Scene", 231*var.winZoom, (var.Height+8) * var.winZoom);
         g.drawImage(offscreen, 0, 0, this);
     }
 
@@ -484,6 +497,43 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     public void mousePressed(MouseEvent e) {
 
+        if (var.CurrentY >= var.Height+1 && var.CurrentY <= var.Height+11)
+        {
+            int xc = var.CurrentX;
+            if (xc >= 4 && xc <= 41)
+            {
+                for (int x = var.Width - 1; x > 1; x--) {
+                    for (int y = var.Height - 1; y > 1; y--)//For each Space
+                    {
+                        var.Map[x][y] = -127;
+                        var.VMap[x][y] = 0;
+                        var.PMap[x][y] = 0;
+                    }
+
+                }
+                console.printtxt("Scene Reset.");
+            }
+            else if (xc >= 45 && xc <= 99)
+            {
+                TotalFPS = 0;
+                TotalFrame = 0;
+            }
+            else if (xc >= 103 && xc <= 130)
+            {
+                var.Equipped = -126;
+            }
+            else if (xc >= 134 && xc <= 188)
+            {
+                var.Equipped = -125;
+            }
+            else if (xc >= 192 && xc <= 226)
+            {
+                SaveFile();
+            }
+            else if (xc >= 230 && xc <= 264)
+            {
+            }
+        }
         var.Drawing = true;
         if (var.state == 0) {
 
@@ -691,7 +741,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     public void actionPerformed(ActionEvent e) {
 
-        Object source = e.getSource();
+        /*Object source = e.getSource();
 
         if (source == ChangePB)
             var.Equipped = -125;
@@ -711,7 +761,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             }
             console.printtxt("Scene Reset.");
-        }
+        }*/
 
     }
 
@@ -736,19 +786,19 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             writer.write("javapowder-save\n");
             writer.write("version:" + versionID + "\n");
             writer.write("map:\n");
-            for (int y = 0; y < var.Width; y++) {
+            for (int y = 0; y < var.Height; y++) {
                 for (int x = 0; x < var.Width; x++) {
                     writer.write((int) var.Map[x][y]);
                 }
             }
             writer.write("vmap:\n");
-            for (int y = 0; y < var.Width; y++) {
+            for (int y = 0; y < var.Height; y++) {
                 for (int x = 0; x < var.Width; x++) {
                     writer.write((int) var.VMap[x][y]);
                 }
             }
             writer.write("pmap:\n");
-            for (int y = 0; y < var.Width; y++) {
+            for (int y = 0; y < var.Height; y++) {
                 for (int x = 0; x < var.Width; x++) {
                     writer.write((int) var.PMap[x][y]);
                 }
