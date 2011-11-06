@@ -140,7 +140,7 @@ public class Update {
             }
 
         }//End of Updating maps
-        if (var.active) {
+        if (var.active && var.state == 0) {
                 if (var.Drawing) {
                     create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped);
                 }

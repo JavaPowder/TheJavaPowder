@@ -15,9 +15,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        * The Element menu doesn't work properly while zoomed/scrolled
        * Fix: Maybe add var.Zoom and Scroll consideration ( Not sure... )
        *
+       * When saving the scene, two files are saved instead of one
        *
-       *
-       *
+       * You still can't load scenes
        *
        *
        */
@@ -557,9 +557,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             int x = 100, y = 50, num = 0;
             while (num < var.NUM_ELS) {
                 if (var.CurrentX > x / var.winZoom && var.CurrentY > y / var.winZoom && var.CurrentX < (x+80) / var.winZoom && var.CurrentY < (y+80) / var.winZoom) {
-                var.Equipped = (byte)(num);
-                var.state = 0;
-                var.active = false;
+                    var.Equipped = (byte)(num);
+                    var.state = 0;
+                    var.active = false;
                 }
                 num++;
                 x += 80;
