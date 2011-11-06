@@ -21,15 +21,13 @@ public class Element {    /*
     public Element(byte bu,
                    byte we,
                    boolean co,
-                   char st,
                    String name,
                    String desc,
                    int col,
                    byte[] react,
                    int dTemp) {
         this.conductive = co;
-        this.weight = we; //will be done later
-        this.state = st;
+        this.weight = we;
         this.name = name;
         this.description = desc;
         this.burn = bu;

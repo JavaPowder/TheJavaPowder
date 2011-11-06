@@ -64,13 +64,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image waterPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/water.png"));
     Image crossingPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wire-crossing.png"));
     Image firePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/fire.png"));
+    Image woodPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wood.png"));
+    Image petrolPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/petrol.png"));
+
 
     Image playPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
     Image settingsPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
     Image javaPowderPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javaPowder.png"));
     Image consolePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/console.png"));
 
-    Image[] thumbnails = new Image[]{coffeePng, wallPng, methanePng, waterPng, ironPng, batteryPng, copperPng, scaPng, scbPng, screenPng, resistorPng, rechargableBatteryPng, powerDrainerPng, crossingPng, switchPng, firePng, logicGatePng};
+    Image[] thumbnails = new Image[]{coffeePng, wallPng, methanePng, waterPng, ironPng, batteryPng, copperPng, scaPng, scbPng, screenPng, resistorPng, rechargableBatteryPng, powerDrainerPng, crossingPng, switchPng, firePng, woodPng, petrolPng, logicGatePng};
     Graphics bufferGraphics;
     Image offscreen;
     Dimension dim;
