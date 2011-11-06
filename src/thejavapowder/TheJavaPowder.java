@@ -337,8 +337,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 
+        bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
+        bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
+
         // The Colouring loop
-        if (var.state == 0 || var.state == 2 || var.state == 5) {
+        if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
 
 
             for (int x = 0; x < var.Width; x++) {
@@ -354,6 +357,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     }
                 }
             }
+
 
 
             //bufferGraphics.fillRect((var.CurrentX - var.ScrollX / 2)* var.winZoom, (var.CurrentY - var.ScrollY / 2) * var.winZoom, (var.Size * var.Zoom) * var.winZoom, (var.Size * var.Zoom) * var.winZoom);//Draw the Cursor
@@ -402,8 +406,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
                 bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
                 bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Average FPS
-                bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
-                bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
+
             }
 
             if (var.state == 2)//If we are choosing an element
@@ -436,12 +439,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
                 bufferGraphics.drawString("Derp", 300, 300);
             }
-        } else if (var.state == 3) {
+        } else if (var.state == 3) {//The settings menu
 
-            bufferGraphics.setColor(new Color(0x00ED00));
-            bufferGraphics.fillRect(100 * var.winZoom, 100 * var.winZoom, 80 * var.winZoom, 20 * var.winZoom);
+            bufferGraphics.setColor(new Color(0x00AA00));
+            bufferGraphics.fillRect(100, 100, 160, 20);
             bufferGraphics.setColor(new Color(0x000000));
-            bufferGraphics.drawString("Change the Window's Width", 102 * var.winZoom, 100 * var.winZoom + 20);
+            bufferGraphics.drawString("Change the Window's Width", 102 , 120);
         }
 
         bufferGraphics.setColor(new Color(0x00007F));
@@ -545,9 +548,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             } else if (e.getModifiersEx() == InputEvent.BUTTON3_DOWN_MASK) {
                 var.leftClick = false;
             }
+
         }
 
-        if (var.state == 1) {//   504, 343, 204, 60,
+        if (var.state == 1) {
             if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 243 / var.winZoom && var.CurrentX < 708 / var.winZoom && var.CurrentY < 303 / var.winZoom) {
                 var.state = 0;
                 var.active = false;
@@ -575,20 +579,27 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
         else if(var.state == 3)
         {
-            if (var.CurrentX > 100 * var.winZoom && var.CurrentY >  100 * var.winZoom && var.CurrentX < 100 * var.winZoom + 80 * var.winZoom && var.CurrentY < 100 * var.winZoom + 20 * var.winZoom)
+            if (var.CurrentX > 100 / var.winZoom && var.CurrentY >  100 / var.winZoom && var.CurrentX < 260 / var.winZoom && var.CurrentY < 120 / var.winZoom && !var.antiDouble)
             {
-            String NW = JOptionPane.showInputDialog(null,"Enter the new Screen's Width ( In pixels )");
+                var.antiDouble = true;
+                String NW = JOptionPane.showInputDialog(null,"Enter the new Screen's Width ( In pixels )");
                 try
                 {
                     int newWidth = Integer.parseInt(NW);
-                    if(newWidth > 1500 || newWidth < 100)
+                    if(newWidth < 1500 || newWidth > 100)
                     {
+                        var.Width = newWidth;
+ ;
                     }
-                    var.Width = newWidth;
+                    else
+                    {
+                        javax.swing.JOptionPane.showMessageDialog(null,"The Number is incorrect");
+                    }
+
                 }
                 catch(Exception blah)
                 {
-
+                    javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
                 }
             }
         }
@@ -599,90 +610,93 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     }
 
     public void keyPressed(KeyEvent evt) {
-        if (evt.getKeyChar() == 'c' && !var.antiDouble) {
-            if (var.state == 0)
-                var.state = 5;
-            else if (var.state == 5)
-                var.state = 0;
-            var.antiDouble = true;
-        }
-        if (evt.getKeyChar() == 'n') {
-            nyan();
-        }
-        if (evt.getKeyChar() == 'p' && !var.antiDouble) {
-            console.printtxt("P was pressed!");
-            console.printtxt("Pausing / Unpausing");
-            var.Simulating = !var.Simulating;
-            var.antiDouble = true;
-        }
-        if (evt.getKeyChar() == 's' && !var.antiDouble) {
-            if (var.Shape == 0)
-                var.Shape = 1;
-            else
-                var.Shape = 0;
-            var.antiDouble = true;
-        }
-        if (evt.getKeyChar() == 'x' && var.Zoom > 1 && !var.antiDouble) {
-            var.realZoom = var.Zoom * var.winZoom;
-
-            console.printtxt("X was pressed!");
-            console.printtxt("Zooming out!");
-            console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
-            var.antiDouble = true;
-            if (var.Zoom == 2) {
-                var.Zoom--;
-                var.ScrollX = 0;
-                var.ScrollY = 0;
-            } else {
-                var.Zoom--;
-                var.ScrollX *= 2;
-                var.ScrollY *= 2;
-            }
-
-        }
-        if (evt.getKeyChar() == 'z' && !var.antiDouble) {
-            var.realZoom = var.Zoom * var.winZoom;
-
-            console.printtxt("Z was pressed!");
-            console.printtxt("Zooming in");
-            console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
-            var.Zoom++;
-            var.ScrollX /= 2;
-            var.ScrollY /= 2;
-            var.antiDouble = true;
-        }
-        if (var.Zoom > 1) {
-            if (evt.getKeyCode() == KeyEvent.VK_LEFT && var.ScrollX > 0)
-                var.ScrollX -= 5;
-            if (evt.getKeyCode() == KeyEvent.VK_RIGHT && var.ScrollX < (var.Width - (var.Width / var.Zoom)) * var.Zoom)
-                var.ScrollX += 5;
-            if (evt.getKeyCode() == KeyEvent.VK_UP && var.ScrollY > 0)
-                var.ScrollY -= 5;
-            if (evt.getKeyCode() == KeyEvent.VK_DOWN && var.ScrollY < (var.Height - (var.Height / var.Zoom)) * var.Zoom)
-                var.ScrollY += 5;
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE && !var.antiDouble && !(var.state == 2)) {
-            switch (var.state) {
-                case 0:
-                    var.state = 1;
-                    break;
-                case 3:
-                    var.state = 1;
-                    break;
-                default:
+        if(!var.antiDouble)
+        {
+            if (evt.getKeyChar() == 'c') {
+                if (var.state == 0)
+                    var.state = 5;
+                else if (var.state == 5)
                     var.state = 0;
-                    break;
+                var.antiDouble = true;
             }
-            var.antiDouble = true;
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE && !var.antiDouble && !(var.state == 1)) {
-            if (var.state == 2) {
-                var.state = 0;
-            } else {
-                var.state = 2;
+            if (evt.getKeyChar() == 'n') {
+                nyan();
             }
+            if (evt.getKeyChar() == 'p' &&) {
+                console.printtxt("P was pressed!");
+                console.printtxt("Pausing / Unpausing");
+                var.Simulating = !var.Simulating;
+                var.antiDouble = true;
+            }
+            if (evt.getKeyChar() == 's') {
+                if (var.Shape == 0)
+                    var.Shape = 1;
+                else
+                    var.Shape = 0;
+                var.antiDouble = true;
+            }
+            if (evt.getKeyChar() == 'x' && var.Zoom > 1) {
+                var.realZoom = var.Zoom * var.winZoom;
 
-            var.antiDouble = true;
+                console.printtxt("X was pressed!");
+                console.printtxt("Zooming out!");
+                console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
+                var.antiDouble = true;
+                if (var.Zoom == 2) {
+                    var.Zoom--;
+                    var.ScrollX = 0;
+                    var.ScrollY = 0;
+                } else {
+                    var.Zoom--;
+                    var.ScrollX *= 2;
+                    var.ScrollY *= 2;
+                }
+
+            }
+            if (evt.getKeyChar() == 'z') {
+                var.realZoom = var.Zoom * var.winZoom;
+
+                console.printtxt("Z was pressed!");
+                console.printtxt("Zooming in");
+                console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
+                var.Zoom++;
+                var.ScrollX /= 2;
+                var.ScrollY /= 2;
+                var.antiDouble = true;
+            }
+            if (var.Zoom > 1) {
+                if (evt.getKeyCode() == KeyEvent.VK_LEFT && var.ScrollX > 0)
+                    var.ScrollX -= 5;
+                if (evt.getKeyCode() == KeyEvent.VK_RIGHT && var.ScrollX < (var.Width - (var.Width / var.Zoom)) * var.Zoom)
+                    var.ScrollX += 5;
+                if (evt.getKeyCode() == KeyEvent.VK_UP && var.ScrollY > 0)
+                    var.ScrollY -= 5;
+                if (evt.getKeyCode() == KeyEvent.VK_DOWN && var.ScrollY < (var.Height - (var.Height / var.Zoom)) * var.Zoom)
+                    var.ScrollY += 5;
+            }
+            if (evt.getKeyCode() == KeyEvent.VK_ESCAPE && !(var.state == 2)) {
+                switch (var.state) {
+                    case 0:
+                        var.state = 1;
+                        break;
+                    case 3:
+                        var.state = 1;
+                        break;
+                    default:
+                        var.state = 0;
+                        break;
+                }
+                var.antiDouble = true;
+            }
+            if (evt.getKeyCode() == KeyEvent.VK_SPACE && !(var.state == 1)) {
+                if (var.state == 2) {
+                    var.state = 0;
+                } else {
+                    var.state = 2;
+                }
+
+                var.antiDouble = true;
+            }
         }
     }
 

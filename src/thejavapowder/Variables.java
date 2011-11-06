@@ -94,6 +94,6 @@ public class Variables {
         new Powder((byte) 16, (byte) 15, false, "Sawdust", "Sawdust", 0xFFE0A0, new byte[]{}, 20),
         };
         //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX), reactives, default temp)
-    public int NUM_ELS = 19;
-    public static int NUM_ELS2 = 19;
+    public final int NUM_ELS = 19;
+    public final static int NUM_ELS2 = 19;
 }
