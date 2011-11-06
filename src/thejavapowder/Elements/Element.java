@@ -13,7 +13,7 @@ public class Element {    /*
     public String name, description;// In favor of speed
     public int colour;
     public byte[] reactives;
-    public final byte[][] react = new byte[16][];
+    public final byte[][] react = new byte[30][];
     public int defaultTemp;
     public byte[] transmitTo;
 
