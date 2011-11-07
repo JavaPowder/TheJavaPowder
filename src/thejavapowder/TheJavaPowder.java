@@ -94,51 +94,14 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     byte versionID = 6;
 
-    // The buttons
-
-    //JButton ElectricityB = new JButton("Electricity");
-
-    //JButton ChangePB = new JButton("Change Properties");
-
-
-    //JButton Save = new JButton("Save Scene");
-    //JButton Load = new JButton("Load Scene");
-    //JButton ResetFPS = new JButton("Reset Average FPS");
-    //JButton Reset = new JButton("Reset Scene");
-    // the labels
-    //JLabel FPSCounter = new JLabel("1337");
-    //JLabel AverageFPS = new JLabel("1337");
     // The console area.
     static JTextArea consolearea = new JTextArea("", 20, 40);
     JScrollPane scrollPane = new JScrollPane(consolearea);
 
-    // Menubar!
-    JMenuBar menubar1 = new JMenuBar();
-
-    JMenuItem menuItem1 = new JMenuItem("About");
-    JMenuItem menuItem2 = new JMenuItem("Forums");
-
-    JCheckBoxMenuItem cbMenuItem2 = new JCheckBoxMenuItem("var.DebugMode");
-    JCheckBoxMenuItem cbMenuItem1 = new JCheckBoxMenuItem("Paused");
-
-    JMenu menu1 = new JMenu("Options");
-    JMenu menu2 = new JMenu("Help");
-    JMenu menu3 = new JMenu("Modes");
-    JMenu menu4 = new JMenu("Views");
-
-    JRadioButtonMenuItem mode1 = new JRadioButtonMenuItem("Default");
-    JRadioButtonMenuItem mode2 = new JRadioButtonMenuItem("Electronic");
-
-    JRadioButtonMenuItem display1 = new JRadioButtonMenuItem("Default");
-    JRadioButtonMenuItem display2 = new JRadioButtonMenuItem("Electronic");
-
-    ButtonGroup menu2_radio_group = new ButtonGroup();
-    ButtonGroup menu4_radio_group = new ButtonGroup();
-
     //FileSaver fileSaver = new FileSaver();
 
-    final String end = System.getProperty("line.separator");
     // Endline constant
+    final String end = System.getProperty("line.separator");
 
 
     // a type value reminder, not all are gonna be variables you know
@@ -151,8 +114,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        *
        *
        */
-
-    // The maps
 
 
     public void init() {
@@ -187,107 +148,13 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.HMap[x][y] = 0;
             }
         }
-        // Create the button; the icon will appear to the left of the label
-        // Creates the GUI
-        JFrame frame = new JFrame("Java Powder");
-        JPanel panel = new JPanel();
-
-        frame.setResizable(false);
-        frame.setSize(500, 500);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         consolearea.setVisible(false);
-
-        /*panel.add(ElectricityB);
-        panel.add(ChangePB);
-
-
-        panel.add(Save);
-        panel.add(Load);
-
-        panel.add(Reset);
-        panel.add(FPSCounter);
-        panel.add(AverageFPS);
-        panel.add(ResetFPS);*/
-
-        panel.add(consolearea);
-        panel.add(scrollPane);
-        consolearea.setEditable(false);
-        consolearea.setLineWrap(true);
-
-        // ContextMenu added in 0.2
-
-
-        menubar1.add(menu1);
-        menubar1.add(menu2);
-        menubar1.add(menu3);
-        menubar1.add(menu4);
-
-        menu3.add(mode1);
-        menu3.add(mode2);
-
-        menu2_radio_group.add(mode1);
-        menu2_radio_group.add(mode2);
-
-        menu4_radio_group.add(display1);
-        menu4_radio_group.add(display2);
-
-        cbMenuItem1.setMnemonic(KeyEvent.VK_P);
-        menu1.add(cbMenuItem1);
-
-        cbMenuItem2.setMnemonic(KeyEvent.VK_D);
-        menu1.add(cbMenuItem2);
-
-        menu2.add(menuItem1);
-        menu2.add(menuItem2);
-
-        menu4.add(display1);
-        menu4.add(display2);
-
         consolearea.setFont(new Font("Courier New", Font.BOLD, 10));
-
-        frame.setJMenuBar(menubar1);
-        // Adds action listeners
-
-        /*ElectricityB.addActionListener(this);
-        ChangePB.addActionListener(this);
-
-
-        Reset.addActionListener(this);
-        Save.addActionListener(this);
-        Load.addActionListener(this);*/
 
         this.addMouseListener(this);
         this.addKeyListener(this);
         addMouseMotionListener(this);
-        frame.add(panel);
-        // for context menu
-
-        cbMenuItem1.addItemListener(this);
-        cbMenuItem2.addItemListener(this);
-        mode1.addItemListener(this);
-        mode2.addItemListener(this);
-        menuItem1.addActionListener(this);
-        menuItem1.addActionListener(this);
-        display1.addActionListener(this);
-        display2.addActionListener(this);
-
-        menu4_radio_group.add(mode2);
-        menu4_radio_group.add(mode1);
-
-        menubar1.add(menu1);
-        menubar1.add(menu2);
-        menubar1.add(menu3);
-
-        menu1.add(cbMenuItem1);
-        menu1.add(cbMenuItem2);
-
-        menu2.add(menuItem1);
-        menu2.add(menuItem2);
-
-        menu3.add(mode1);
-        menu3.add(mode2);
 
         consolearea.append("Java Powder initialised." + end); // Added endline constant appending
 
@@ -697,6 +564,19 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
                 var.antiDouble = true;
             }
+            if (evt.getKeyChar() == 'd')
+            {
+                var.DebugMode = !var.DebugMode;
+                var.antiDouble = true;
+            }
+            if (evt.getKeyChar() == 'm')
+            {
+                if (var.currentMode == 0)
+                    var.currentMode = 1;
+                else
+                    var.currentMode = 0;
+                var.antiDouble = true;
+            }
         }
     }
 
@@ -714,72 +594,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     }
 
     public void itemStateChanged(ItemEvent e) {
-        Object source = e.getItemSelectable();
-        if (e.getStateChange() == ItemEvent.SELECTED) {
-            if (source == cbMenuItem1) {
-                var.Simulating = false;
-                console.printtxt("Pausing.");
-            } else if (source == cbMenuItem2) {
-                console.printtxt("var.DebugMode On");
-                var.DebugMode = true;
-                consolearea.setVisible(true);
-            } else if (source == mode1) {
-                console.printtxt("Current mode: 0");
-                var.currentMode = 0;
-            } else if (source == mode2) {
-                console.printtxt("Current mode: 1");
-                var.currentMode = 1;
-            } else if (source == display1) {
-                System.exit(0);
-            }
-        }
-        if (e.getStateChange() == ItemEvent.DESELECTED) {
-            if (source == cbMenuItem1) {
-                console.printtxt("Unpausing.");
-                var.Simulating = true;
-            } else if (source == cbMenuItem2) {
-                console.printtxt("var.DebugMode Off");
-                var.DebugMode = false;
-                consolearea.setVisible(false);
-            }
-        }
-
-
     }
 
-
-    /*public float getVoltage(int x, int y) {
-        if ((var.VMap[x][y] / 1500f < 1.0f) && (var.VMap[x][y] / 1500f > 0.0f)) {
-            var.Brightness = var.VMap[x][y] / 1500f;
-        }
-        return var.Brightness;
-    }*/
-
-
     public void actionPerformed(ActionEvent e) {
-
-        /*Object source = e.getSource();
-
-        if (source == ChangePB)
-            var.Equipped = -125;
-        else if (source == ElectricityB)
-            var.Equipped = -126;
-        else if (source == ResetFPS) {
-            TotalFPS = 0;
-            TotalFrame = 0;
-        } else if (source == Reset) {
-            for (int x = var.Width - 1; x > 1; x--) {
-                for (int y = var.Height - 1; y > 1; y--)//For each Space
-                {
-                    var.Map[x][y] = -127;
-                    var.VMap[x][y] = 0;
-                    var.PMap[x][y] = 0;
-                }
-
-            }
-            console.printtxt("Scene Reset.");
-        }*/
-
     }
 
 
