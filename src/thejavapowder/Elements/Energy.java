@@ -7,7 +7,7 @@ public class Energy extends Element{
         this.state = 'e';
     }
 
-    public Energy(byte[] trans) {
-        super(trans);
-    }
+    //public Energy(byte[] trans) {
+    //    super(trans);
+    //}
 }

@@ -489,13 +489,10 @@ public class Update {
 
             if (var.RandomNum == 1 && var.Map[x + 1][y + 1] == -127) {
                 moveElement(x, y, x + 1, y + 1, false);
-                return;
             } else if (var.RandomNum == 2 && var.Map[x - 1][y + 1] == -127) {
                 moveElement(x, y, x - 1, y + 1, false);
-                return;
             } else {
                 moveElement(x, y, x, y + 1, false);
-                return;
             }
 
 
@@ -545,15 +542,10 @@ public class Update {
 
                 if (var.RandomNum == 1 && meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y])) {
                     moveElement(x, y, x + 1, y + 1, true);
-
-
-                    return;
                 } else if (var.RandomNum == 2 && meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y])) {
                     moveElement(x, y, x - 1, y + 1, true);
-                    return;
                 } else {
                     moveElement(x, y, x, y + 1, true);
-                    return;
                 }
 
 
@@ -567,12 +559,10 @@ public class Update {
                         if (meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y]))//If Down Right is Clear
                         {
                             moveElement(x, y, x + 1, y + 1, true);
-                            return;
                         } else {
                             if (meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y]))//If Down Left is Clear
                             {
                                 moveElement(x, y, x - 1, y + 1, true);
-                                return;
                             }
                         }
                     } else//Random Value Case Two
@@ -580,12 +570,10 @@ public class Update {
                         if (meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y]))//If Down Left is Clear
                         {
                             moveElement(x, y, x - 1, y + 1, true);
-                            return;
                         } else {
                             if (meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y]))//If Down Right is Clear
                             {
                                 moveElement(x, y, x + 1, y + 1, true);
-                                return;
                             }
                         }
                     }
@@ -658,15 +646,12 @@ public class Update {
             if (var.RandomNum == 7 && meth.getWeight(var.Map[x + 1][y + 1]) < meth.getWeight(var.Map[x][y]))// 1/8 Chances that
             {
                 moveElement(x, y, x + 1, y + 1, true);
-                return;
             } else if (var.RandomNum == 6 && meth.getWeight(var.Map[x - 1][y + 1]) < meth.getWeight(var.Map[x][y]))// 1/8 Chances that
             {
                 moveElement(x, y, x - 1, y + 1, true);
-                return;
             } else// 6/8 Chances that
             {
                 moveElement(x, y, x, y + 1, true);
-                return;
             }
 
 

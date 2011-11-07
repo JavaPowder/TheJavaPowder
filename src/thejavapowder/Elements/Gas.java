@@ -6,7 +6,7 @@ public class Gas extends Element {
         this.state = 'g';
     }
 
-    public Gas(byte[] trans) {
-        super(trans);
-    }
+    //public Gas(byte[] trans) {
+    //    super(trans);
+    //}
 }

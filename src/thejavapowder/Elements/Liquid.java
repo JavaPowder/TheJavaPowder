@@ -7,7 +7,7 @@ public class Liquid extends Element {
         this.state = 'l';
     }
 
-    public Liquid(byte[] trans) {
-        super(trans);
-    }
+    //public Liquid(byte[] trans) {
+    //    super(trans);
+    //}
 }

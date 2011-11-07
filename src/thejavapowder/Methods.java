@@ -30,7 +30,7 @@ public class Methods {
     public void getReactives(byte ID) {
         if(ID >= 0 && ID < var.NUM_ELS)
         {
-        this.var.reactives = var.Elements[ID].reactives;
+            this.var.reactives = var.Elements[ID].reactives;
         }
 
     }

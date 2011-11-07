@@ -37,7 +37,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public void run() {
         init();
 
-        while (true) {
+        while (!quit) {
             update.update();
             repaint();
         }
@@ -53,7 +53,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image copperPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/copper.png"));
     //Image creditPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
     Image ironPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iron.png"));
-    Image logicGatePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
+    //Image logicGatePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
     Image methanePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/methane.png"));
     Image nonePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/none.png"));
     Image powerDrainerPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/power-drainer.png"));
@@ -95,9 +95,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     byte versionID = 6;
 
+    boolean quit = false;
+
     // The console area.
     static JTextArea consolearea = new JTextArea("", 20, 40);
-    JScrollPane scrollPane = new JScrollPane(consolearea);
+    //JScrollPane scrollPane = new JScrollPane(consolearea);
 
     //FileSaver fileSaver = new FileSaver();
 
@@ -207,6 +209,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
         bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
         bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
+        bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
+        bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
+        bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Update FPS
 
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
@@ -270,11 +275,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 40 * var.winZoom);//Draw the Property Level
-                bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 50 * var.winZoom);//Draw the Property Level
-                bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
-                bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
-                bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Average FPS
-
+                bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 50 * var.winZoom);//Draw the Temperature
             }
 
             if (var.state == 2)//If we are choosing an element
@@ -460,7 +461,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     if(newWidth < 1500 || newWidth > 100)
                     {
                         var.Width = newWidth;
- ;
                     }
                     else
                     {
@@ -723,7 +723,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
               default: console.printtxt("Nothing has returned"); break;
           } */
 
-    public /*byte*/ void loadFile(String name) {
+    //public /*byte*/ void loadFile(String name) {
         /*
 
             FileInputStream read;
@@ -741,7 +741,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             }
             }*/
-    }
+    //}
 
     /*			___________
        ===	 == /		   \

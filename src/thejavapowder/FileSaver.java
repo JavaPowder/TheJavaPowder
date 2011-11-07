@@ -1,11 +1,11 @@
 package thejavapowder;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+//import java.io.FileInputStream;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
 
-class FileSaver {
+//class FileSaver {
     /*The FileSaver class
       *Methods: boolean saveFile(), boolean readFile()
       *Fields that must be set before methods called:
@@ -14,7 +14,7 @@ class FileSaver {
       *sizex - for both
       *sizey - for both
       */
-    FileOutputStream outp;
+    /*FileOutputStream outp;
     FileInputStream inp;
 
     int sizex, sizey;
@@ -112,7 +112,7 @@ class FileSaver {
 
         return true;
     }
-}
+}*/
 		
 	
 		

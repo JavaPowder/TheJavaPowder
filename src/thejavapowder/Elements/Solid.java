@@ -7,7 +7,7 @@ public class Solid extends Element {
 
     }
 
-    public Solid(byte[] trans) {
-        super(trans);
-    }
+    //public Solid(byte[] trans) {
+    //    super(trans);
+    //}
 }

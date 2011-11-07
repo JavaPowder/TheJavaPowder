@@ -15,7 +15,7 @@ public class Element {    /*
     public byte[] reactives;
     public final byte[][] react = new byte[30][];
     public int defaultTemp;
-    public byte[] transmitTo;
+    //public byte[] transmitTo;
 
     //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), color(HEX), reactives, default temp)
     public Element(byte bu,
@@ -36,9 +36,9 @@ public class Element {    /*
         this.defaultTemp = dTemp;
     }
 
-    public Element(byte[] trans) {
-        this.transmitTo = trans;
-    }
+    //public Element(byte[] trans) {
+    //    this.transmitTo = trans;
+    //}
     /*
         switch state
         {

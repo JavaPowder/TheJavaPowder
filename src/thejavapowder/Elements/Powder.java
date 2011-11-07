@@ -7,7 +7,7 @@ public class Powder extends Element {
         this.state = 'p';
     }
 
-    public Powder(byte[] trans) {
-        super(trans);
-    }
+    //public Powder(byte[] trans) {
+    //    super(trans);
+    //}
 }
