@@ -622,7 +622,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             if (evt.getKeyChar() == 'n') {
                 nyan();
             }
-            if (evt.getKeyChar() == 'p' &&) {
+            if (evt.getKeyChar() == 'p') {
                 console.printtxt("P was pressed!");
                 console.printtxt("Pausing / Unpausing");
                 var.Simulating = !var.Simulating;
