@@ -13,7 +13,7 @@ public class Element {    /*
     public String name, description;// In favor of speed
     public int colour;
     public byte[] reactives;
-    public final byte[][] react = new byte[30][];
+    public final byte[][] react = new byte[thejavapowder.TheJavaPowder.var.NUM_ELS][];
     public int defaultTemp;
     public byte[] transmitTo;
 
@@ -21,13 +21,15 @@ public class Element {    /*
     public Element(byte bu,
                    byte we,
                    boolean co,
+                   char st,
                    String name,
                    String desc,
                    int col,
                    byte[] react,
                    int dTemp) {
         this.conductive = co;
-        this.weight = we;
+        this.weight = we; //will be done later
+        this.state = st;
         this.name = name;
         this.description = desc;
         this.burn = bu;
