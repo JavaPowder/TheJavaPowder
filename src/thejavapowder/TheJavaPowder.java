@@ -55,6 +55,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image ironPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iron.png"));
     Image logicGatePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
     Image methanePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/methane.png"));
+    Image nonePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/none.png"));
     Image powerDrainerPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/power-drainer.png"));
     Image rechargableBatteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/rechargable-battery.png"));
     Image resistorPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/resistor.png"));
@@ -73,7 +74,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image javaPowderPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javaPowder.png"));
     Image consolePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/console.png"));
 
-    Image[] thumbnails = new Image[]{coffeePng, wallPng, methanePng, waterPng, ironPng, batteryPng, copperPng, scaPng, scbPng, screenPng, resistorPng, rechargableBatteryPng, powerDrainerPng, crossingPng, switchPng, firePng, woodPng, petrolPng, logicGatePng};
+    Image[] thumbnails = new Image[]{coffeePng, wallPng, methanePng, waterPng, ironPng, batteryPng, copperPng, scaPng, scbPng, screenPng, resistorPng, rechargableBatteryPng, powerDrainerPng, crossingPng, switchPng, firePng, woodPng, petrolPng};
     Graphics bufferGraphics;
     Image offscreen;
     Dimension dim;
@@ -278,9 +279,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             if (var.state == 2)//If we are choosing an element
             {
-                for (int i = 0; i < thumbnails.length; i++) {
-                    if (!bufferGraphics.drawImage(thumbnails[i], (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this)) {
-                        bufferGraphics.drawString(var.Elements[i].name, (100 + i * 40 * var.winZoom) - var.iconX, 70 + var.iconY);//Draw the Element's name before the picture appears
+                bufferGraphics.setColor(new Color(0x777777));
+                for (int i = 0; i < var.Elements.length; i++) {
+                    if ( i >= thumbnails.length || !bufferGraphics.drawImage(thumbnails[i], (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this)) {
+                        bufferGraphics.drawImage(nonePng, (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this);
+                        bufferGraphics.drawString(var.Elements[i].name, (105 + i * 40 * var.winZoom) - var.iconX, 70 + var.iconY);//Draw the Element's name before the picture appears
                     }
                     //System.out.println("" + i + "X " + ((100 + i * 40 * var.winZoom) - var.iconX) + "Y " + (50 + var.iconY) + "Final X " +  (((100 + i * 40 * var.winZoom) - var.iconX) + 40 * var.winZoom) + "Final Y " +  (( 50 + var.iconY) + (40 * var.winZoom)) );
 
@@ -292,6 +295,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
                 var.iconY = 0;
                 var.iconX = 0;
+                bufferGraphics.setColor(new Color(0.5f, 0.5f, 0.5f, 0.5f));
             } else if (var.state == 5) {
                 if (!bufferGraphics.drawImage(consolePng, 0, 25, var.Width * var.winZoom, var.Height / 3 * var.winZoom, this)) {
                     bufferGraphics.drawString("Derp", 300, 300);
