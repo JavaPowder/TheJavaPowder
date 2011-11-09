@@ -6,6 +6,8 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Random;
 
+import static thejavapowder.FileSaver.savePref;
+
 public class TheJavaPowder extends JFrame implements Runnable, ActionListener, ItemListener, MouseListener, MouseMotionListener, KeyListener, MouseWheelListener {
     /*Main class
        * Paints, Listener for Events and loops through all the things that need to be done
@@ -121,11 +123,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     public void init() {
         //Main screen options
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                savePref();
+                System.exit(0);
+            }
+        });
+
         this.setVisible(true);
         this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setBackground(Color.black);
-
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         this.addMouseWheelListener(this);

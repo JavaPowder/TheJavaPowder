@@ -55,9 +55,9 @@ public class Variables {
     boolean leftClick = true;
     boolean conductive = false;
 
-    int Height = 350;
+    static int Height = 350;
     int optionsHeight = 14;
-    int Width = 600;
+    static int Width = 600;
     byte[] reaction = new byte[16];
     byte[] reactives = new byte[]{};
 

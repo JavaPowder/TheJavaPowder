@@ -1,11 +1,64 @@
 package thejavapowder;
 
-//import java.io.FileInputStream;
-//import java.io.FileNotFoundException;
-//import java.io.FileOutputStream;
-//import java.io.IOException;
 
-//class FileSaver {
+import org.w3c.dom.Attr;
+
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+
+class FileSaver {
+
+    public static void savePref()
+    {
+        Variables var = new Variables();
+
+        try {
+
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+
+		Document doc = (Document) docBuilder.newDocument();
+		Element rootElement = doc.createElement("settings");
+		doc.appendChild(rootElement);
+
+		Element width = doc.createElement("width");
+		width.appendChild(doc.createTextNode("" + var.Width));;
+
+		Element height = doc.createElement("height");
+		height.appendChild(doc.createTextNode("" + var.Height));
+
+            rootElement.appendChild(width);
+            rootElement.appendChild(height);
+
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File("jpsettings.xml"));
+
+		transformer.transform(source, result);
+
+	  } catch (ParserConfigurationException pce) {
+		pce.printStackTrace();
+	  } catch (TransformerException tfe) {
+		tfe.printStackTrace();
+	  }
+
+
+    }
+
     /*The FileSaver class
       *Methods: boolean saveFile(), boolean readFile()
       *Fields that must be set before methods called:
@@ -111,8 +164,8 @@ package thejavapowder;
                 data[i][j] = (byte) (databuffer2[(j * sizex) + i] - 127);
 
         return true;
-    }
-}*/
+    }*/
+}
 		
 	
 		
