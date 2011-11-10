@@ -5,16 +5,38 @@ Format:
 <File Name> : <Line Number ( Optional )>
 <Description of the thing to do>
 
-Dev: <The Name of the Dev that's working on it
-( AKA Do not interfer with that part of the code if it's not you )>
-Priority: <How fast it must be done>
+Dev: <The Name of the Dev(s) that's working on it>
+Priority: <How fast it must be done> <Can other devs help>
 
 
 
+
+
+TheJavaPowder
+Make the menu and settings menu appear in the middle of the screen for any size of screen
+Dev: <none>
+Priority: High
+
+Update
+Make fire raise up, Possibly by making a very useful method "UpdateElement"
+that will take care of moving the particle the way it should depending on the
+state of the element, its velocity, the pressure and its weight
+Dev: <none>
+Priority: Medium
+
+FileSave
+Make scene saving
+Dev: <MasterMind555> <Yes>
+Priority: Medium
+
+Update
+Make heat transfer and behave correctly
+Dev: <none>
+Priority: Medium
 
 TheJavaPowder : 526
 Finish the Settings Menu
-Dev: MasterMind555
+Dev: <MasterMind555> <Yes>
 Priority : Medium
 
 TheJavaPowder
@@ -27,19 +49,7 @@ Separate the code into more classes
 Dev: <none>
 Priority: Low
 
-Update
-Make fire raise up, Possibly by making a very useful method "UpdateElement"
-that will take care of moving the particle the way it should depending on the
-state of the element, its velocity, the pressure and its weight
+TheJavaPowder
+Make fancier buttons
 Dev: <none>
-Priority: Medium
-
-FileSave
-Make scene saving
-Dev: <none>
-Priority: Medium
-
-Update
-Make heat transfer and behave correctly
-Dev: <none>
-Priority: Medium
+Priority: Low
