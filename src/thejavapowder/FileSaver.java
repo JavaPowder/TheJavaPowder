@@ -30,22 +30,26 @@ class FileSaver {
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
 
-		Document doc = docBuilder.newDocument();
-		Element rootElement = doc.createElement("settings");
-		doc.appendChild(rootElement);
+		Document settings = docBuilder.newDocument();
+		Element rootElement = settings.createElement("settings");
+		settings.appendChild(rootElement);
 
-		Element width = doc.createElement("width");
-		width.appendChild(doc.createTextNode("" + var.Width));
+		Element width = settings.createElement("width");
+		width.appendChild(settings.createTextNode("" + var.Width));
 
-		Element height = doc.createElement("height");
-		height.appendChild(doc.createTextNode("" + var.Height));
+		Element height = settings.createElement("height");
+		height.appendChild(settings.createTextNode("" + var.Height));
+
+        Element zoom = settings.createElement("zoom");
+		zoom.appendChild(settings.createTextNode("" + var.winZoom));
 
             rootElement.appendChild(width);
             rootElement.appendChild(height);
+            rootElement.appendChild(zoom);
 
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
-		DOMSource source = new DOMSource(doc);
+		DOMSource source = new DOMSource(settings);
 		StreamResult result = new StreamResult(new File("jpsettings.xml"));
 
 		transformer.transform(source, result);
@@ -77,6 +81,7 @@ class FileSaver {
             if (setN.getNodeType() == Node.ELEMENT_NODE) {
              var.Width = Integer.parseInt(getTagValue("width", eElement));
              var.Height = Integer.parseInt(getTagValue("height", eElement));
+             var.winZoom = (byte)Integer.parseInt(getTagValue("zoom", eElement));
              }
 
             } catch (IOException e) {

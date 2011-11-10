@@ -16,10 +16,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        * The Element menu doesn't work properly while zoomed/scrolled
        * Fix: Maybe add var.Zoom and Scroll consideration ( Not sure... )
        *
-       * When saving the scene, two files are saved instead of one
-       *
-       * You still can't load scenes
-       *
+       * The Setting Menu's Button shows 2 popups instead of 1
        *
        */
 
@@ -325,6 +322,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             bufferGraphics.fillRect(100, 100, 160, 20);
             bufferGraphics.setColor(new Color(0x000000));
             bufferGraphics.drawString("Change the Window's Width", 102 , 120);
+
+            bufferGraphics.setColor(new Color(0x00AA00));
+            bufferGraphics.fillRect(100, 140, 160, 20);
+            bufferGraphics.setColor(new Color(0x000000));
+            bufferGraphics.drawString("Change the Window's Height", 102 , 160);
+
+            bufferGraphics.setColor(new Color(0x00AA00));
+            bufferGraphics.fillRect(100, 180, 160, 20);
+            bufferGraphics.setColor(new Color(0x000000));
+            bufferGraphics.drawString("Change the Window's Zoom", 102 , 200);
         }
 
         bufferGraphics.setColor(new Color(0x00007F));
@@ -469,6 +476,50 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     if(newWidth < 1500 || newWidth > 100)
                     {
                         var.Width = newWidth;
+                    }
+                    else
+                    {
+                        javax.swing.JOptionPane.showMessageDialog(null,"The Number is incorrect");
+                    }
+
+                }
+                catch(Exception blah)
+                {
+                    javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
+                }
+            }
+            if (var.CurrentX > 100 / var.winZoom && var.CurrentY >  140 / var.winZoom && var.CurrentX < 260 / var.winZoom && var.CurrentY < 160 / var.winZoom && !var.antiDouble)
+            {
+                var.antiDouble = true;
+                String NH = JOptionPane.showInputDialog(null,"Enter the new Screen's Height ( In pixels )");
+                try
+                {
+                    int newHeight = Integer.parseInt(NH);
+                    if(newHeight < 1500 || newHeight > 100)
+                    {
+                        var.Height = newHeight;
+                    }
+                    else
+                    {
+                        javax.swing.JOptionPane.showMessageDialog(null,"The Number is incorrect");
+                    }
+
+                }
+                catch(Exception blah)
+                {
+                    javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
+                }
+            }
+            if (var.CurrentX > 100 / var.winZoom && var.CurrentY >  180 / var.winZoom && var.CurrentX < 260 / var.winZoom && var.CurrentY < 200 / var.winZoom && !var.antiDouble)
+            {
+                var.antiDouble = true;
+                String NZ = JOptionPane.showInputDialog(null,"Enter the new Screen's Zoom ( Normally 1 to 5");
+                try
+                {
+                    int newZoom = Integer.parseInt(NZ);
+                    if(newZoom < 1 || newZoom > 20)
+                    {
+                        var.winZoom = (byte)newZoom;
                     }
                     else
                     {
