@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
 
 
 class FileSaver {
-    Variables var = new Variables();
+    Variables var = thejavapowder.TheJavaPowder.var;
     public void savePref()
     {
 
@@ -30,12 +30,12 @@ class FileSaver {
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
 
-		Document doc = (Document) docBuilder.newDocument();
+		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement("settings");
 		doc.appendChild(rootElement);
 
 		Element width = doc.createElement("width");
-		width.appendChild(doc.createTextNode("" + var.Width));;
+		width.appendChild(doc.createTextNode("" + var.Width));
 
 		Element height = doc.createElement("height");
 		height.appendChild(doc.createTextNode("" + var.Height));
@@ -65,10 +65,8 @@ class FileSaver {
         try {
             File fXmlFile = new File("jpsettings.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = null;
-            dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = null;
-            doc = dBuilder.parse(fXmlFile);
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
             doc.getDocumentElement().normalize();
 
             NodeList set = doc.getElementsByTagName("settings");
@@ -92,7 +90,7 @@ class FileSaver {
     private static String getTagValue(String sTag, Element eElement) {
 	NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
 
-        Node nValue = (Node) nlList.item(0);
+        Node nValue = nlList.item(0);
 
 	return nValue.getNodeValue();
   }

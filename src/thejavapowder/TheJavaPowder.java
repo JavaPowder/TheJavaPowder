@@ -36,15 +36,15 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Console console = new Console();
     FileSaver saver = new FileSaver();
     public void run() {
-                this.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
                 saver.savePref();
                 System.exit(0);
             }
         });
 
-            saver.loadPref();
-            init();
+        saver.loadPref();
+        init();
 
         while (!quit) {
             update.update();
