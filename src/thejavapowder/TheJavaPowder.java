@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Random;
 
-import static thejavapowder.FileSaver.savePref;
 
 public class TheJavaPowder extends JFrame implements Runnable, ActionListener, ItemListener, MouseListener, MouseMotionListener, KeyListener, MouseWheelListener {
     /*Main class
@@ -35,9 +34,17 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public static Variables var = new Variables();
     Update update = new Update();
     Console console = new Console();
-
+    FileSaver saver = new FileSaver();
     public void run() {
-        init();
+                this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                saver.savePref();
+                System.exit(0);
+            }
+        });
+
+            saver.loadPref();
+            init();
 
         while (!quit) {
             update.update();
@@ -123,12 +130,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     public void init() {
         //Main screen options
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent we) {
-                savePref();
-                System.exit(0);
-            }
-        });
+
 
         this.setVisible(true);
         this.setResizable(false);
@@ -186,7 +188,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     }
 
 
-    // Get type function
 
 
     @Override

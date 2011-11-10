@@ -1,9 +1,10 @@
 package thejavapowder;
 
 
-import org.w3c.dom.Attr;
+import org.w3c.dom.*;
 
 import java.io.File;
+import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,15 +15,14 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 
 class FileSaver {
-
-    public static void savePref()
+    Variables var = new Variables();
+    public void savePref()
     {
-        Variables var = new Variables();
+
 
         try {
 
@@ -58,6 +58,44 @@ class FileSaver {
 
 
     }
+
+    public void loadPref()
+    {
+      //if(){
+        try {
+            File fXmlFile = new File("jpsettings.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = null;
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = null;
+            doc = dBuilder.parse(fXmlFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList set = doc.getElementsByTagName("settings");
+		    Node setN = set.item(0);
+
+            Element eElement = (Element) setN;
+            Node nNode = set.item(0);
+            if (setN.getNodeType() == Node.ELEMENT_NODE) {
+             var.Width = Integer.parseInt(getTagValue("width", eElement));
+             var.Height = Integer.parseInt(getTagValue("height", eElement));
+             }
+
+            } catch (IOException e) {
+            } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        }
+
+      //}
+    }
+
+    private static String getTagValue(String sTag, Element eElement) {
+	NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
+
+        Node nValue = (Node) nlList.item(0);
+
+	return nValue.getNodeValue();
+  }
 
     /*The FileSaver class
       *Methods: boolean saveFile(), boolean readFile()
