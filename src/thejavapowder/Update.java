@@ -109,15 +109,6 @@ public class Update {
                                     }
                                 }
                             }
-                            for (int i = 0; i < 8; i++)//For every space around the particle
-                            {
-                                if (var.surArray[i] == 15)
-                                {
-                                    var.RandomNum = rand.nextInt(100);//Get a random Value
-                                    if (var.Map[x][y] >= 0 && var.RandomNum < var.Elements[var.Map[x][y]].burn)
-                                        var.Map[x][y] = 15;
-                                }
-                            }
                             UpdateElement(x,y);
                         }
                     }
@@ -139,16 +130,7 @@ public class Update {
             }
             var.LastDrawX = var.DrawX;
             var.LastDrawY = var.DrawY;
-
-        for (int a = 0; a < var.Width; a++) {
-            for (int b = 0; b < var.Height; b++)//For each Tile of the Boolean var.Map
-            {
-                var.BMap[a][b] = false;//Make it false so particles can move next turn
-            }
-        }
-
-
-    }//End of Update
+    }
 
     public void UpdateVoltage(int x, int y) {
         if (var.Map[x][y] == 5)//If it's a battery, give it infinite voltage
@@ -351,6 +333,19 @@ public class Update {
             var.Map[x][y] = -127;//Destroy it
             return;
         }
+        for (int i = 0; i < 8; i++)//For every space around the particle
+        {
+            if (var.surArray[i] == 15)
+            {
+                var.RandomNum = rand.nextInt(100);//Get a random Value
+                if (var.Map[x][y] >= 0 && var.RandomNum < var.Elements[var.Map[x][y]].burn)
+                {
+                    var.Map[x][y] = 15;
+                    var.HMap[x][y] += 50;
+                }
+            }
+        }
+
         char type = var.Elements[var.Map[x][y]].state;
         double[] chances = {0,0,0,0,0,0,0,0};
         int i, j = 0;
@@ -381,10 +376,8 @@ public class Update {
                 chances[i] = .125;
             }
         }
-        double randnum;
-        double total;
-        boolean moved = false;
-        boolean triedmove;
+        double randnum, total;
+        boolean moved = false, triedmove;
         i = 0;
         while (i < 5 && !moved)
         {
@@ -403,8 +396,7 @@ public class Update {
             }
             i++;
         }
-        i = 0;
-        j = 0;
+        i = j = 0;
         while (i < 5 && !moved)
         {
             randnum = rand.nextDouble();
@@ -453,7 +445,6 @@ public class Update {
         {
             var.Map[x2][y2] = var.Map[x1][y1];//Occupy the tile under
             var.HMap[x2][y2] = var.HMap[x1][y1];
-            var.BMap[x2][y2] = true;//Make sure it won't be moved again
             var.Map[x1][y1] = -127;
             var.HMap[x1][y1] = 0;
         }
@@ -463,7 +454,6 @@ public class Update {
              var.temp = var.HMap[x2][y2];
              var.HMap[x2][y2] = var.HMap[x1][y1];
              var.Map[x2][y2] = var.Map[x1][y1];
-             var.BMap[x2][y2] = true;
              var.Map[x1][y1] = var.element;
              var.HMap[x1][y1] = var.temp;
         }

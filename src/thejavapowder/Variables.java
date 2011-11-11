@@ -68,7 +68,6 @@ public class Variables {
     byte[][] Map = new byte[Width][Height];// The particle type map
     short[][] HMap = new short[Width][Height];// The Heat type map
     short[][] VMap = new short[Width][Height];// The Voltage type map
-    boolean[][] BMap = new boolean[Width][Height]; // The particle updated map, made for safeguarding.
     byte[][] PMap = new byte[Width][Height];// The Particle Properties Map
     //Elements Initialization
     //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX), reactives, default temp)
