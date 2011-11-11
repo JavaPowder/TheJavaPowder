@@ -21,7 +21,7 @@ Update
 Make fire raise up, Possibly by making a very useful method "UpdateElement"
 that will take care of moving the particle the way it should depending on the
 state of the element, its velocity, the pressure and its weight
-Dev: <none>
+Dev: <Jacob> <Yes>
 Priority: Medium
 
 FileSave

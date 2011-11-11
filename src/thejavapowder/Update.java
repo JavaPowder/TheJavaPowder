@@ -118,7 +118,8 @@ public class Update {
                                         var.Map[x][y] = 15;
                                 }
                             }
-                            if (meth.getType(x, y) == 'p')//If it's a powder
+                            UpdateElement(x,y);
+                            /*if (meth.getType(x, y) == 'p')//If it's a powder
                             {
                                 UpdatePowder(x, y);
                             }//End of powders
@@ -133,7 +134,7 @@ public class Update {
                             if (meth.getType(x, y) == 'g')//If it's a gas
                             {
                                 UpdateGasses(x, y);
-                            }//End of gases
+                            }//End of gases*/
                         }
                     }
                 }
@@ -473,6 +474,93 @@ public class Update {
 
 
     }//End of Voltage Update
+
+    public boolean canMove(byte p1, byte p2, boolean weight)
+    {
+        if (weight)
+            return p2 == -127 || var.Elements[p1].weight > var.Elements[p2].weight;
+        else
+            return p2 == -127;
+    }
+
+    public void UpdateElement(int x, int y) {
+        if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
+        {
+            var.Map[x][y] = -127;//Destroy it
+            return;
+        }
+        char type = var.Elements[var.Map[x][y]].state;
+        double[] chances = {0,0,0,0,0,0,0,0};
+        int i = 0, j = 0;
+        if (type == 'p')
+        {
+            chances[3] = .2;
+            chances[4] = .6;
+            chances[5] = .2;
+        }
+        else if (type == 'l')
+        {
+            chances[3] = .125;
+            chances[4] = .75;
+            chances[5] = .125;
+            if (!canMove(var.Map[x][y],var.Map[x][y+1],false))
+            {
+                chances[2] = (double)1/6;
+                chances[3] = (double)1/3;
+                chances[4] = 0;
+                chances[5] = (double)1/3;
+                chances[6] = (double)1/6;
+            }
+        }
+        else if (type == 'g')
+        {
+            for (i = 0; i < 8; i++)
+            {
+                chances[i] = .125;
+            }
+        }
+        double randnum;
+        double total;
+        boolean moved = false;
+        boolean triedmove;
+        i = 0;
+        while (i < 5 && !moved)
+        {
+            randnum = rand.nextDouble();
+            triedmove = false;
+            total = 0;
+            while(j < 8 && !triedmove)
+            {
+                total += chances[j];
+                if (total > randnum)
+                {
+                    triedmove = true;
+                    moved = tryMove(x,y,j,false);
+                }
+                j++;
+            }
+            i++;
+        }
+        i = 0;
+        j = 0;
+        while (i < 5 && !moved)
+        {
+            randnum = rand.nextDouble();
+            triedmove = false;
+            total = 0;
+            while(j < 8 && !triedmove)
+            {
+                total += chances[j];
+                if (total > randnum)
+                {
+                    triedmove = true;
+                    moved = tryMove(x,y,j,true);
+                }
+                j++;
+            }
+            i++;
+        }
+    }
 
     public void UpdatePowder(int x, int y) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
@@ -816,6 +904,30 @@ public class Update {
             }
         }
     }
+
+    public boolean tryMove(int x1, int y1, int i, boolean change)
+    {
+        int x2 = x1, y2 = y1-1, j = 0;
+        while (j < 8 && j <= i)
+        {
+            if (i == j && canMove(var.Map[x1][y1],var.Map[x2][y2],change))
+            {
+                moveElement(x1,y1,x2,y2,change);
+                return true;
+            }
+            if (j == 0)
+                x2++;
+            if (j == 3 || j == 4)
+                x2--;
+            if (j == 1 || j == 2)
+                y2++;
+            if (j == 5 || j == 6)
+                y2--;
+            j++;
+        }
+        return false;
+    }
+
     public void moveElement(int x1, int y1, int x2, int y2, boolean change)
     {
         if(!change)//If we are exchanging the values ( Because the weight of the particle we are moving is bigger then the target )
