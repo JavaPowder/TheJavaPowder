@@ -344,6 +344,24 @@ public class Update {
                     var.HMap[x][y] += 50;
                 }
             }
+            if (var.surArray[i] != -127)
+            {
+                int x2 = x, y2 = y;
+                if (i == 0 || i == 1 || i == 2)
+                    y2--;
+                if (i == 2 || i == 3 || i == 4)
+                    x2++;
+                if (i == 4 || i == 5 || i == 6)
+                    y2++;
+                if (i == 6 || i == 7 || i == 0)
+                    x2--;
+                if (var.Map[x][y] != -127 && var.Map[x2][y2] != -127)
+                {
+                    float heatTransfer = (var.HMap[x][y] - var.HMap[x2][y2])/5;
+                    var.HMap[x][y] -= heatTransfer;
+                    var.HMap[x2][y2] += heatTransfer;
+                }
+            }
         }
 
         char type = var.Elements[var.Map[x][y]].state;
@@ -451,11 +469,11 @@ public class Update {
         else
         {
              var.element = var.Map[x2][y2];
-             var.temp = var.HMap[x2][y2];
+             float temp = var.HMap[x2][y2];
              var.HMap[x2][y2] = var.HMap[x1][y1];
              var.Map[x2][y2] = var.Map[x1][y1];
              var.Map[x1][y1] = var.element;
-             var.HMap[x1][y1] = var.temp;
+             var.HMap[x1][y1] = temp;
         }
     }
 
