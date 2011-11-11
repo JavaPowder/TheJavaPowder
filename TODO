@@ -10,28 +10,14 @@ Priority: <How fast it must be done> <Can other devs help>
 
 
 
-
-
-TheJavaPowder
-Make the menu and settings menu appear in the middle of the screen for any size of screen
-Dev: <none>
-Priority: High
-
 Update
-Make fire raise up, Possibly by making a very useful method "UpdateElement"
-that will take care of moving the particle the way it should depending on the
-state of the element, its velocity, the pressure and its weight
+Add in particle velocity and pressure to the method Update Element, and also make fire raise up
 Dev: <Jacob> <Yes>
 Priority: Medium
 
 FileSave
 Make scene saving
 Dev: <MasterMind555> <Yes>
-Priority: Medium
-
-Update
-Make heat transfer and behave correctly
-Dev: <none>
 Priority: Medium
 
 TheJavaPowder : 526

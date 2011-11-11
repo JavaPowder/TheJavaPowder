@@ -319,19 +319,19 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         } else if (var.state == 3) {//The settings menu
 
             bufferGraphics.setColor(new Color(0x00AA00));
-            bufferGraphics.fillRect(100, 100, 160, 20);
+            bufferGraphics.fillRect((var.Width/2-80)*var.winZoom, (var.Height/2-40)*var.winZoom, 160, 20);
             bufferGraphics.setColor(new Color(0x000000));
-            bufferGraphics.drawString("Change the Window's Width", 102 , 120);
+            bufferGraphics.drawString("Change the Window's Width", (var.Width/2-78)*var.winZoom, 12+(var.Height/2-40)*var.winZoom);
 
             bufferGraphics.setColor(new Color(0x00AA00));
-            bufferGraphics.fillRect(100, 140, 160, 20);
+            bufferGraphics.fillRect((var.Width/2-80)*var.winZoom, (var.Height/2)*var.winZoom, 160, 20);
             bufferGraphics.setColor(new Color(0x000000));
-            bufferGraphics.drawString("Change the Window's Height", 102 , 160);
+            bufferGraphics.drawString("Change the Window's Height", (var.Width/2-78)*var.winZoom, 12+(var.Height/2)*var.winZoom);
 
             bufferGraphics.setColor(new Color(0x00AA00));
-            bufferGraphics.fillRect(100, 180, 160, 20);
+            bufferGraphics.fillRect((var.Width/2-80)*var.winZoom, (var.Height/2+40)*var.winZoom, 160, 20);
             bufferGraphics.setColor(new Color(0x000000));
-            bufferGraphics.drawString("Change the Window's Zoom", 102 , 200);
+            bufferGraphics.drawString("Change the Window's Zoom", (var.Width/2-78)*var.winZoom, 12+(var.Height/2+40)*var.winZoom);
         }
 
         bufferGraphics.setColor(new Color(0x00007F));
@@ -466,7 +466,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
         else if(var.state == 3)
         {
-            if (var.CurrentX > 100 / var.winZoom && var.CurrentY >  100 / var.winZoom && var.CurrentX < 260 / var.winZoom && var.CurrentY < 120 / var.winZoom && !var.antiDouble)
+            //bufferGraphics.fillRect(var.Width/2-80, var.Height/2-40, 160, 20);
+            if (var.CurrentX >= var.Width/2-80 && var.CurrentY >=  var.Height/2-40 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2-20 && !var.antiDouble)
             {
                 var.antiDouble = true;
                 String NW = JOptionPane.showInputDialog(null,"Enter the new Screen's Width ( In pixels )");
@@ -489,7 +490,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
                 }
             }
-            if (var.CurrentX > 100 / var.winZoom && var.CurrentY >  140 / var.winZoom && var.CurrentX < 260 / var.winZoom && var.CurrentY < 160 / var.winZoom && !var.antiDouble)
+            if (var.CurrentX >= var.Width/2-80 && var.CurrentY >=  var.Height/2 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2+20 && !var.antiDouble)
             {
                 var.antiDouble = true;
                 String NH = JOptionPane.showInputDialog(null,"Enter the new Screen's Height ( In pixels )");
@@ -512,7 +513,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
                 }
             }
-            if (var.CurrentX > 100 / var.winZoom && var.CurrentY >  180 / var.winZoom && var.CurrentX < 260 / var.winZoom && var.CurrentY < 200 / var.winZoom && !var.antiDouble)
+            if (var.CurrentX >= var.Width/2-80 && var.CurrentY >= var.Height/2+40 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2+60 && !var.antiDouble)
             {
                 var.antiDouble = true;
                 String NZ = JOptionPane.showInputDialog(null,"Enter the new Screen's Zoom ( Normally 1 to 5");
