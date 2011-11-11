@@ -212,11 +212,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-        bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 90 * var.winZoom);//Draw the Coordinates
-        bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 100 * var.winZoom);//Draw the Mouse Coordinates
-        bufferGraphics.drawString("FPS:" + PaintFPS, 10, 60 * var.winZoom);//Draw the FPS
-        bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 70 * var.winZoom);//Draw the Average FPS
-        bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 80 * var.winZoom);//Draw the Update FPS
+        bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
+        bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
+        bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
+        bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Coordinates
+        bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Coordinates
 
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
@@ -274,22 +274,22 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             if (var.CurrentX < var.Width * var.Zoom && var.CurrentX > 0 && var.CurrentY < var.Height * var.Zoom && var.CurrentY > 0) {
 
                 if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
-                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 20 * var.winZoom);//Draw the Hovered Element Name
+                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 30 + 5 * var.winZoom);//Draw the Hovered Element Name
                 else
-                    bufferGraphics.drawString("ID: None", 10, 20 * var.winZoom);//Draw the Hovered Element Name
+                    bufferGraphics.drawString("ID: None", 10, 30 + 5 * var.winZoom);//Draw the Hovered Element Name
 
-                bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 * var.winZoom);//Draw the Hovered Voltage
-                bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 40 * var.winZoom);//Draw the Property Level
-                bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 50 * var.winZoom);//Draw the Temperature
+                bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 + 15 * var.winZoom);//Draw the Hovered Voltage
+                bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 + 25 * var.winZoom);//Draw the Property Level
+                bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 30 + 35 * var.winZoom);//Draw the Temperature
             }
 
             if (var.state == 2)//If we are choosing an element
             {
                 bufferGraphics.setColor(new Color(0x777777));
                 for (int i = 0; i < var.Elements.length; i++) {
-                    if ( i >= thumbnails.length || !bufferGraphics.drawImage(thumbnails[i], (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this)) {
-                        bufferGraphics.drawImage(nonePng, (100 + i * 40 * var.winZoom) - var.iconX, 50 + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this);
-                        bufferGraphics.drawString(var.Elements[i].name, (105 + i * 40 * var.winZoom) - var.iconX, 70 + var.iconY);//Draw the Element's name before the picture appears
+                    if ( i >= thumbnails.length || !bufferGraphics.drawImage(thumbnails[i], (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 25 * var.winZoom + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this)) {
+                        bufferGraphics.drawImage(nonePng, (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 25 * var.winZoom + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this);
+                        bufferGraphics.drawString(var.Elements[i].name, (52 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 35 * var.winZoom + var.iconY);//Draw the Element's name before the picture appears
                     }
                     //System.out.println("" + i + "X " + ((100 + i * 40 * var.winZoom) - var.iconX) + "Y " + (50 + var.iconY) + "Final X " +  (((100 + i * 40 * var.winZoom) - var.iconX) + 40 * var.winZoom) + "Final Y " +  (( 50 + var.iconY) + (40 * var.winZoom)) );
 
@@ -335,20 +335,20 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
 
         bufferGraphics.setColor(new Color(0x00007F));
-        bufferGraphics.fillRect(4*var.winZoom, (var.Height+1) * var.winZoom, 37 * var.winZoom, 10 * var.winZoom);
-        bufferGraphics.fillRect(45*var.winZoom, (var.Height+1) * var.winZoom, 54 * var.winZoom, 10 * var.winZoom);
-        bufferGraphics.fillRect(103*var.winZoom, (var.Height+1) * var.winZoom, 27 * var.winZoom, 10 * var.winZoom);
-        bufferGraphics.fillRect(134*var.winZoom, (var.Height+1) * var.winZoom, 54 * var.winZoom, 10 * var.winZoom);
-        bufferGraphics.fillRect(192*var.winZoom, (var.Height+1) * var.winZoom, 34 * var.winZoom, 10 * var.winZoom);
+        bufferGraphics.fillRect(4*2, (var.Height+1) * var.winZoom, 37 * 2, 10 * var.winZoom);
+        bufferGraphics.fillRect(45*2, (var.Height+1) * var.winZoom, 54 * 2, 10 * var.winZoom);
+        bufferGraphics.fillRect(103*2, (var.Height+1) * var.winZoom, 27 * 2, 10 * var.winZoom);
+        bufferGraphics.fillRect(134*2, (var.Height+1) * var.winZoom, 54 * 2, 10 * var.winZoom);
+        bufferGraphics.fillRect(192*2, (var.Height+1) * var.winZoom, 34 * 2, 10 * var.winZoom);
         bufferGraphics.setColor(new Color(0x7F0000));
-        bufferGraphics.fillRect(230*var.winZoom, (var.Height+1) * var.winZoom, 34 * var.winZoom, 10 * var.winZoom);
+        bufferGraphics.fillRect(230*2, (var.Height+1) * var.winZoom, 34 * 2, 10 * var.winZoom);
         bufferGraphics.setColor(new Color(0.5f, 0.5f, 0.5f, 0.5f));
-        bufferGraphics.drawString("Reset Scene", 5*var.winZoom, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Reset Average FPS", 46*var.winZoom, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Electricity", 104*var.winZoom, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Change Properties", 135*var.winZoom, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Save Scene", 193*var.winZoom, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Load Scene", 231*var.winZoom, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Reset Scene", 5*2, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Reset Average FPS", 46*2, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Electricity", 104*2, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Change Properties", 135*2, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Save Scene", 193*2, (var.Height+8) * var.winZoom);
+        bufferGraphics.drawString("Load Scene", 231*2, (var.Height+8) * var.winZoom);
         g.drawImage(offscreen, 0, 0, this);
     }
 
@@ -393,7 +393,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         if (var.CurrentY >= var.Height+1 && var.CurrentY <= var.Height+11)
         {
             int xc = var.CurrentX;
-            if (xc >= 4 && xc <= 41)
+            if (xc >= 8/var.winZoom && xc <= 82/var.winZoom)
             {
                 for (int x = var.Width - 1; x > 1; x--) {
                     for (int y = var.Height - 1; y > 1; y--)//For each Space
@@ -406,24 +406,24 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
                 console.printtxt("Scene Reset.");
             }
-            else if (xc >= 45 && xc <= 99)
+            else if (xc >= 90/var.winZoom && xc <= 198/var.winZoom)
             {
                 TotalFPS = 0;
                 TotalFrame = 0;
             }
-            else if (xc >= 103 && xc <= 130)
+            else if (xc >= 206/var.winZoom && xc <= 260/var.winZoom)
             {
                 var.Equipped = -126;
             }
-            else if (xc >= 134 && xc <= 188)
+            else if (xc >= 268/var.winZoom && xc <= 376/var.winZoom)
             {
                 var.Equipped = -125;
             }
-            else if (xc >= 192 && xc <= 226)
+            else if (xc >= 384/var.winZoom && xc <= 452/var.winZoom)
             {
                 SaveFile();
             }
-            else if (xc >= 230 && xc <= 264)
+            else if (xc >= 460/var.winZoom && xc <= 528/var.winZoom)
             {
             }
         }
@@ -448,19 +448,19 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.active = false;
             }
         } else if (var.state == 2) {
-            int x = 100, y = 50, num = 0;
+            int x = 50 * var.winZoom, y = 25 * var.winZoom, num = 0;
             while (num < var.NUM_ELS) {
-                if (var.CurrentX > x / var.winZoom && var.CurrentY > y / var.winZoom && var.CurrentX < (x+80) / var.winZoom && var.CurrentY < (y+80) / var.winZoom) {
+                if (var.CurrentX > x / var.winZoom && var.CurrentY > y / var.winZoom && var.CurrentX < x / var.winZoom + 40 && var.CurrentY < y / var.winZoom + 40) {
                     var.Equipped = (byte)(num);
                     var.state = 0;
                     var.active = false;
                 }
                 num++;
-                x += 80;
+                x += 40 * var.winZoom;
                 if (num % 13 == 0)
                 {
-                    x = 100;
-                    y += 80;
+                    x = 50 * var.winZoom;
+                    y += 40 * var.winZoom;
                 }
             }
         }
@@ -473,9 +473,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 try
                 {
                     int newWidth = Integer.parseInt(NW);
-                    if(newWidth < 1500 || newWidth > 100)
+                    if(newWidth > 100 && newWidth < 1500)
                     {
                         var.Width = newWidth;
+                        this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
                     }
                     else
                     {
@@ -495,9 +496,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 try
                 {
                     int newHeight = Integer.parseInt(NH);
-                    if(newHeight < 1500 || newHeight > 100)
+                    if(newHeight > 100 && newHeight < 1500)
                     {
                         var.Height = newHeight;
+                        this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
                     }
                     else
                     {
@@ -520,6 +522,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     if(newZoom >= 1 && newZoom <= 20)
                     {
                         var.winZoom = (byte)newZoom;
+                        this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
                     }
                     else
                     {
