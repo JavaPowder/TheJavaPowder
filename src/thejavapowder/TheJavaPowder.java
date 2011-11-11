@@ -473,7 +473,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 try
                 {
                     int newWidth = Integer.parseInt(NW);
-                    if(newWidth > 100 && newWidth < 1500)
+                    if(newWidth >= 100 && newWidth <= 1500)
                     {
                         var.Width = newWidth;
                         this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
@@ -496,7 +496,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 try
                 {
                     int newHeight = Integer.parseInt(NH);
-                    if(newHeight > 100 && newHeight < 1500)
+                    if(newHeight >= 100 && newHeight <= 1500)
                     {
                         var.Height = newHeight;
                         this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
