@@ -517,7 +517,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 try
                 {
                     int newZoom = Integer.parseInt(NZ);
-                    if(newZoom < 1 || newZoom > 20)
+                    if(newZoom >= 1 && newZoom <= 20)
                     {
                         var.winZoom = (byte)newZoom;
                     }
@@ -563,6 +563,13 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     var.Shape = 1;
                 else
                     var.Shape = 0;
+                var.antiDouble = true;
+            }
+            if (evt.getKeyChar() == 'o') {
+                if (var.state == 0)
+                    var.state = 3;
+                else
+                    var.state = 0;
                 var.antiDouble = true;
             }
             if (evt.getKeyChar() == 'x' && var.Zoom > 1) {

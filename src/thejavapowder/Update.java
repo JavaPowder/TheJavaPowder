@@ -491,7 +491,7 @@ public class Update {
         }
         char type = var.Elements[var.Map[x][y]].state;
         double[] chances = {0,0,0,0,0,0,0,0};
-        int i = 0, j = 0;
+        int i, j = 0;
         if (type == 'p')
         {
             chances[3] = .2;
@@ -562,7 +562,7 @@ public class Update {
         }
     }
 
-    public void UpdatePowder(int x, int y) {
+    /*public void UpdatePowder(int x, int y) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
         {
             var.Map[x][y] = -127;//Destroy it
@@ -903,7 +903,7 @@ public class Update {
                 }
             }
         }
-    }
+    }*/
 
     public boolean tryMove(int x1, int y1, int i, boolean change)
     {
