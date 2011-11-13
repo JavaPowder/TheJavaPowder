@@ -209,6 +209,15 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             WaitTime++;
         }
 
+        var.CurrentX = (var.MouseX + var.ScrollX) / var.winZoom;
+        var.CurrentY = (var.MouseY + var.ScrollY) / var.winZoom;
+
+        var.CursorX = (var.CurrentX - (var.ScrollX / var.winZoom)) * var.winZoom;
+        var.CursorY = (var.CurrentY - (var.ScrollY / var.winZoom)) * var.winZoom;
+
+        var.DrawX = (var.CurrentX + (var.ScrollX / 2)) / var.Zoom;//var.CurrentX / var.Zoom;
+        var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;//var.CurrentY / var.Zoom;
+
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 
@@ -356,26 +365,13 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     // Context menu check box handler
 
     public void mouseDragged(MouseEvent e) {
-
-        var.CurrentX = (e.getX() + var.ScrollX) / var.winZoom;
-        var.CurrentY = (e.getY() + var.ScrollY) / var.winZoom;
-
-        var.CursorX = (var.CurrentX - var.ScrollX / 2) * var.winZoom;
-        var.CursorY = (var.CurrentY - var.ScrollY / 2) * var.winZoom;
-
-        var.DrawX = (var.CurrentX + (var.ScrollX / 2)) / var.Zoom;
-        var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;
+        var.MouseX = e.getX();
+        var.MouseY = e.getY();
     }
 
     public void mouseMoved(MouseEvent e) {
-        var.CurrentX = (e.getX() + var.ScrollX) / var.winZoom;
-        var.CurrentY = (e.getY() + var.ScrollY) / var.winZoom;
-
-        var.CursorX = (var.CurrentX - var.ScrollX / 2) * var.winZoom;
-        var.CursorY = (var.CurrentY - var.ScrollY / 2) * var.winZoom;
-
-        var.DrawX = (var.CurrentX + (var.ScrollX / 2)) / var.Zoom;
-        var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;
+        var.MouseX = e.getX();
+        var.MouseY = e.getY();
     }
 
 
@@ -466,7 +462,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
         else if(var.state == 3)
         {
-            //bufferGraphics.fillRect(var.Width/2-80, var.Height/2-40, 160, 20);
             if (var.CurrentX >= var.Width/2-80 && var.CurrentY >=  var.Height/2-40 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2-20 && !var.antiDouble)
             {
                 var.antiDouble = true;
@@ -583,16 +578,13 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 console.printtxt("Zooming out!");
                 console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
                 var.antiDouble = true;
+                var.ScrollX = var.ScrollX/var.Zoom*(var.Zoom-1);
+                var.ScrollY = var.ScrollY/var.Zoom*(var.Zoom-1);
                 if (var.Zoom == 2) {
-                    var.Zoom--;
                     var.ScrollX = 0;
                     var.ScrollY = 0;
-                } else {
-                    var.Zoom--;
-                    var.ScrollX *= 2;
-                    var.ScrollY *= 2;
                 }
-
+                var.Zoom--;
             }
             if (evt.getKeyChar() == 'z') {
                 var.realZoom = var.Zoom * var.winZoom;
@@ -600,9 +592,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 console.printtxt("Z was pressed!");
                 console.printtxt("Zooming in");
                 console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
+                var.ScrollX = var.CurrentX;
+                var.ScrollY = var.CurrentY;
                 var.Zoom++;
-                var.ScrollX /= 2;
-                var.ScrollY /= 2;
                 var.antiDouble = true;
             }
             if (var.Zoom > 1) {
