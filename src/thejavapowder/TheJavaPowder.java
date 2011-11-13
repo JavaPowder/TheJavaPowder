@@ -572,29 +572,28 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.antiDouble = true;
             }
             if (evt.getKeyChar() == 'x' && var.Zoom > 1) {
-                var.realZoom = var.Zoom * var.winZoom;
-
                 console.printtxt("X was pressed!");
                 console.printtxt("Zooming out!");
                 console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
                 var.antiDouble = true;
                 var.ScrollX = var.ScrollX/var.Zoom*(var.Zoom-1);
                 var.ScrollY = var.ScrollY/var.Zoom*(var.Zoom-1);
-                if (var.Zoom == 2) {
+                var.Zoom--;
+                var.realZoom = var.Zoom * var.winZoom - 1;
+                if (var.Zoom == 1) {
                     var.ScrollX = 0;
                     var.ScrollY = 0;
+                    var.realZoom = var.Zoom * var.winZoom;
                 }
-                var.Zoom--;
             }
-            if (evt.getKeyChar() == 'z') {
-                var.realZoom = var.Zoom * var.winZoom;
-
+            if (evt.getKeyChar() == 'z' && var.Zoom < 127) {
                 console.printtxt("Z was pressed!");
                 console.printtxt("Zooming in");
                 console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
                 var.ScrollX = var.CurrentX;
                 var.ScrollY = var.CurrentY;
                 var.Zoom++;
+                var.realZoom = var.Zoom * var.winZoom - 1;
                 var.antiDouble = true;
             }
             if (var.Zoom > 1) {
