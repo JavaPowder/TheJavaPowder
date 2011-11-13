@@ -1,6 +1,7 @@
 package thejavapowder;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -341,6 +342,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             bufferGraphics.fillRect((var.Width/2-80)*var.winZoom, (var.Height/2+40)*var.winZoom, 160, 20);
             bufferGraphics.setColor(new Color(0x000000));
             bufferGraphics.drawString("Change the Window's Zoom", (var.Width/2-78)*var.winZoom, 12+(var.Height/2+40)*var.winZoom);
+
+            bufferGraphics.setColor(new Color(0x00AA00));
+            bufferGraphics.fillRect((var.Width/2-80)*var.winZoom, (var.Height/2+80)*var.winZoom, 160, 20);
+            bufferGraphics.setColor(new Color(0x000000));
+            bufferGraphics.drawString("Switch the background colour", (var.Width/2-78)*var.winZoom, 12+(var.Height/2+80)*var.winZoom);
         }
 
         bufferGraphics.setColor(new Color(0x00007F));
@@ -531,6 +537,21 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
                 }
             }
+            if (var.CurrentX >= var.Width/2-80 && var.CurrentY >= var.Height/2+80 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2+100 && !var.antiDouble)
+            {
+                int blah1 = 0xfefefe;
+                var.antiDouble = true;
+                String NBGC = JOptionPane.showInputDialog(null,"Enter the new Screen's background colour ( Hex )");
+                try
+                {
+                    //int newBG = Integer.parseInt(NBGC);
+                    this.setBackground(new Color(blah1));
+                }
+                catch(Exception blah)
+                {
+                    javax.swing.JOptionPane.showMessageDialog(null,"Not a Hex Value ( 0xFFFFFF)");
+                }
+            }
         }
     }
 
@@ -704,8 +725,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
                 console.printtxt("Write ended successfully");
             }
-        } catch (IOException excepti) {
-            console.printtxt("I/O Exception!" + excepti.getMessage());
+        } catch (IOException exception) {
+            console.printtxt("I/O Exception!" + exception.getMessage());
         } finally {
             try {
                 writer.close();

@@ -1,5 +1,6 @@
 package thejavapowder;
 
+import java.util.Map;
 import java.util.Random;
 
 public class Update {
@@ -109,7 +110,10 @@ public class Update {
                                     }
                                 }
                             }
-                            UpdateElement(x,y);
+                            if(var.Map[x][y] != -127)
+                            {
+                                UpdateElement(x,y);
+                            }
                         }
                     }
                 }
@@ -363,74 +367,76 @@ public class Update {
                 }
             }
         }
-
-        char type = var.Elements[var.Map[x][y]].state;
-        double[] chances = {0,0,0,0,0,0,0,0};
-        int i, j = 0;
-        if (type == 'p')
+        if(var.Map[x][y] != -127)
         {
-            chances[3] = .2;
-            chances[4] = .6;
-            chances[5] = .2;
-        }
-        else if (type == 'l')
-        {
-            chances[3] = .125;
-            chances[4] = .75;
-            chances[5] = .125;
-            if (!canMove(var.Map[x][y],var.Map[x][y+1],false))
+            char type = var.Elements[var.Map[x][y]].state;
+            double[] chances = {0,0,0,0,0,0,0,0};
+            int i, j = 0;
+            if (type == 'p')
             {
-                chances[2] = (double)1/6;
-                chances[3] = (double)1/3;
-                chances[4] = 0;
-                chances[5] = (double)1/3;
-                chances[6] = (double)1/6;
+                chances[3] = .2;
+                chances[4] = .6;
+                chances[5] = .2;
             }
-        }
-        else if (type == 'g')
-        {
-            for (i = 0; i < 8; i++)
+            else if (type == 'l')
             {
-                chances[i] = .125;
-            }
-        }
-        double randnum, total;
-        boolean moved = false, triedmove;
-        i = 0;
-        while (i < 5 && !moved)
-        {
-            randnum = rand.nextDouble();
-            triedmove = false;
-            total = 0;
-            while(j < 8 && !triedmove)
-            {
-                total += chances[j];
-                if (total > randnum)
+                chances[3] = .125;
+                chances[4] = .75;
+                chances[5] = .125;
+                if (!canMove(var.Map[x][y],var.Map[x][y+1],false))
                 {
-                    triedmove = true;
-                    moved = tryMove(x,y,j,false);
+                    chances[2] = (double)1/6;
+                    chances[3] = (double)1/3;
+                    chances[4] = 0;
+                    chances[5] = (double)1/3;
+                    chances[6] = (double)1/6;
                 }
-                j++;
             }
-            i++;
-        }
-        i = j = 0;
-        while (i < 5 && !moved)
-        {
-            randnum = rand.nextDouble();
-            triedmove = false;
-            total = 0;
-            while(j < 8 && !triedmove)
+            else if (type == 'g')
             {
-                total += chances[j];
-                if (total > randnum)
+                for (i = 0; i < 8; i++)
                 {
-                    triedmove = true;
-                    moved = tryMove(x,y,j,true);
+                    chances[i] = .125;
                 }
-                j++;
             }
-            i++;
+            double randnum, total;
+            boolean moved = false, triedmove;
+            i = 0;
+            while (i < 5 && !moved)
+            {
+                randnum = rand.nextDouble();
+                triedmove = false;
+                total = 0;
+                while(j < 8 && !triedmove)
+                {
+                    total += chances[j];
+                    if (total > randnum)
+                    {
+                        triedmove = true;
+                        moved = tryMove(x,y,j,false);
+                    }
+                    j++;
+                }
+                i++;
+            }
+            i = j = 0;
+            while (i < 5 && !moved)
+            {
+                randnum = rand.nextDouble();
+                triedmove = false;
+                total = 0;
+                while(j < 8 && !triedmove)
+                {
+                    total += chances[j];
+                    if (total > randnum)
+                    {
+                        triedmove = true;
+                        moved = tryMove(x,y,j,true);
+                    }
+                    j++;
+                }
+                i++;
+            }
         }
     }
 
