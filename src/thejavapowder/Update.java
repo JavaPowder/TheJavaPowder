@@ -113,6 +113,7 @@ public class Update {
                             if(var.Map[x][y] != -127)
                             {
                                 UpdateElement(x,y);
+                                CheckStateChanges(x,y);
                             }
                         }
                     }
@@ -483,4 +484,8 @@ public class Update {
         }
     }
 
+    public void CheckStateChanges(int x, int y)
+    {
+
+    }
 }
