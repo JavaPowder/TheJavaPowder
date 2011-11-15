@@ -14,41 +14,39 @@ public class Element {    /*
     public int colour;
     public byte[] reactives;
     public final byte[][] react = new byte[30][];
+    public final byte[][][] heatChanges = new byte[30][][];
+    /*
+    First depth : Element it would change in
+    Second depth : Key Temperature to change
+    Third depth : 1 or 2, Must be under (1) or over (2) the Key Temp to change
+     */
     public int defaultTemp;
     //public byte[] transmitTo;
 
-    //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), color(HEX), reactives, default temp)
-    public Element(byte bu,
-                   byte we,
-                   boolean co,
-                   String name,
-                   String desc,
-                   int col,
-                   byte[] react,
-                   int dTemp) {
-        this.conductive = co;
-        this.weight = we;
-        this.name = name;
-        this.description = desc;
-        this.burn = bu;
-        this.colour = col;
-        this.reactives = react;
-        this.defaultTemp = dTemp;
+    public Element(
+            byte bu,
+            byte we,
+            boolean co,
+            String name,
+            String desc,
+            int col,
+            byte[] react,
+            int dTemp)
+    {
+            this.conductive = co;
+            this.weight = we;
+            this.name = name;
+            this.description = desc;
+            this.burn = bu;
+            this.colour = col;
+            this.reactives = react;
+            this.defaultTemp = dTemp;
     }
 
     //public Element(byte[] trans) {
     //    this.transmitTo = trans;
     //}
-    /*
-        switch state
-        {
-            case "g": doGasLoop(); break;
-            case "l": doLiqLoop(); break;
-            case "p": doPowLoop(); break;
-            case "s": doSolLoop(); break;
-            default: Console.printtxt("State missing! Aborting"); break;
-        }
-    */
+
 
 
 }
