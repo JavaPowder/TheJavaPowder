@@ -20,9 +20,9 @@ Make scene saving
 Dev: <MasterMind555> <Yes>
 Priority: Medium
 
-TheJavaPowder : 526
-Finish the Settings Menu
-Dev: <MasterMind555> <Yes>
+Update
+Make the Pressure layer
+Dev: <none>
 Priority : Medium
 
 TheJavaPowder
@@ -37,5 +37,10 @@ Priority: Low
 
 TheJavaPowder
 Make fancier buttons
+Dev: <none>
+Priority: Low
+
+TheJavaPowder
+Add a Menu for Offline Documentation on elements and commands
 Dev: <none>
 Priority: Low
