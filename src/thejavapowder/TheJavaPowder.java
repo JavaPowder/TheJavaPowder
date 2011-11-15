@@ -30,9 +30,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     }
 
     public static Variables var = new Variables();
-    Update update = new Update();
-    Console console = new Console();
-    FileSaver saver = new FileSaver();
+    public static Update update = new Update();
+    public static Console console = new Console();
+    public static FileSaver saver = new FileSaver();
+
     public void run() {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
@@ -53,56 +54,68 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     //Thread t;
 
 
-    Image scaPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/a-semiconductor.png"));
-    Image scbPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/b-semiconductor.png"));
-    Image batteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/battery.png"));
-    Image coffeePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/coffee.png"));
-    Image copperPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/copper.png"));
-    //Image creditPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
-    Image ironPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iron.png"));
-    //Image logicGatePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
-    Image methanePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/methane.png"));
-    Image nonePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/none.png"));
-    Image powerDrainerPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/power-drainer.png"));
+    Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/a-semiconductor.png"));
+    Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/b-semiconductor.png"));
+    Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/battery.png"));
+    Image coffeePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/coffee.png"));
+    Image copperPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/copper.png"));
+    //Image creditPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
+    Image ironPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iron.png"));
+    //Image logicGatePng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
+    Image methanePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/methane.png"));
+    Image nonePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/none.png"));
+    Image powerDrainerPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/power-drainer.png"));
     Image rechargableBatteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/rechargable-battery.png"));
-    Image resistorPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/resistor.png"));
-    Image screenPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/screen.png"));
-    Image switchPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/switch.png"));
-    Image wallPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wall.png"));
-    Image waterPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/water.png"));
-    Image crossingPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wire-crossing.png"));
-    Image firePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/fire.png"));
-    Image woodPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wood.png"));
-    Image petrolPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/petrol.png"));
+    Image resistorPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/resistor.png"));
+    Image screenPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/screen.png"));
+    Image switchPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/switch.png"));
+    Image wallPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wall.png"));
+    Image waterPng              = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/water.png"));
+    Image crossingPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wire-crossing.png"));
+    Image firePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/fire.png"));
+    Image woodPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wood.png"));
+    Image petrolPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/petrol.png"));
 
+    Image playPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
+    Image settingsPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
+    Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javaPowder.png"));
+    Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/console.png"));
 
-    Image playPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
-    Image settingsPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
-    Image javaPowderPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javaPowder.png"));
-    Image consolePng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/console.png"));
+    Image[] thumbnails = new Image[]{
+            coffeePng,
+            wallPng,
+            methanePng,
+            waterPng,
+            ironPng,
+            batteryPng,
+            copperPng,
+            scaPng,
+            scbPng,
+            screenPng,
+            resistorPng,
+            rechargableBatteryPng,
+            powerDrainerPng,
+            crossingPng,
+            switchPng,
+            firePng,
+            woodPng,
+            petrolPng};
 
-    Image[] thumbnails = new Image[]{coffeePng, wallPng, methanePng, waterPng, ironPng, batteryPng, copperPng, scaPng, scbPng, screenPng, resistorPng, rechargableBatteryPng, powerDrainerPng, crossingPng, switchPng, firePng, woodPng, petrolPng};
     Graphics bufferGraphics;
     Image offscreen;
     Dimension dim;
 
-    int PaintFPS = 0;
-    int UpdateFPS = 0;
-    int PaintAFPS = 0;
-
-    long StartTime = 0;
-    long EndTime = 0;
-    long TotalFPS = 0;
-    int TotalFrame = 0;
-
-    int WaitTime = 0;
-
     byte FPS;
-    float Time = 1000;
-
-    byte versionID = 6;
-
-    boolean quit = false;
+    int PaintFPS    = 0;
+    int UpdateFPS   = 0;
+    int PaintAFPS   = 0;
+    int WaitTime    = 0;
+    int TotalFrame  = 0;
+    long StartTime  = 0;
+    long EndTime    = 0;
+    long TotalFPS   = 0;
+    float Time      = 1000;
+    boolean quit    = false;
 
     // The console area.
     static JTextArea consolearea = new JTextArea("", 20, 40);
@@ -414,7 +427,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             }
             else if (xc >= 384/var.winZoom && xc <= 452/var.winZoom)
             {
-                SaveFile();
+                FileSaver.SaveFile();
             }
             else if (xc >= 460/var.winZoom && xc <= 528/var.winZoom)
             {
@@ -676,49 +689,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public void actionPerformed(ActionEvent e) {
     }
 
-    // File read and save code below
-    File file;
-    Writer writer;
-    Random randomSaveName = new Random(1337);
 
-    public void SaveFile() {
-        try {
-            console.printtxt("Saving...");
-            file = new File("" + randomSaveName.nextInt() + ".jps");
-            writer = new BufferedWriter(new FileWriter(file));
-            writer.write("javapowder-save\n");
-            writer.write("version:" + versionID + "\n");
-            writer.write("map:\n");
-            for (int y = 0; y < var.Height; y++) {
-                for (int x = 0; x < var.Width; x++) {
-                    writer.write((int) var.Map[x][y]);
-                }
-            }
-            writer.write("vmap:\n");
-            for (int y = 0; y < var.Height; y++) {
-                for (int x = 0; x < var.Width; x++) {
-                    writer.write((int) var.VMap[x][y]);
-                }
-            }
-            writer.write("pmap:\n");
-            for (int y = 0; y < var.Height; y++) {
-                for (int x = 0; x < var.Width; x++) {
-                    writer.write((int) var.PMap[x][y]);
-                }
-
-                console.printtxt("Write ended successfully");
-            }
-        } catch (IOException exception) {
-            console.printtxt("I/O Exception!" + exception.getMessage());
-        } finally {
-            try {
-                writer.close();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-            console.printtxt("Write operation ended.");
-        }
 
         /* // Old saving code
                 if(filename != "")
@@ -778,6 +749,13 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
                 return 2;*/
     }
+
+    public void LoadFile()
+    {
+
+    }
+
+
     /*	// Call save code
           byte asdasdasd = saveFile(Name);
           switch asdasdasd

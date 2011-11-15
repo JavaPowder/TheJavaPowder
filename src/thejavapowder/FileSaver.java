@@ -3,8 +3,8 @@ package thejavapowder;
 
 import org.w3c.dom.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.Random;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,6 +20,7 @@ import org.xml.sax.SAXException;
 
 class FileSaver {
     Variables var = thejavapowder.TheJavaPowder.var;
+    Console console = thejavapowder.TheJavaPowder.console;
     public void savePref()
     {
 
@@ -108,7 +109,8 @@ class FileSaver {
       *sizex - for both
       *sizey - for both
       */
-    /*FileOutputStream outp;
+
+    FileOutputStream outp;
     FileInputStream inp;
 
     int sizex, sizey;
@@ -116,58 +118,51 @@ class FileSaver {
     String filename, readFileName;
     byte[] databuffer2;
     byte[][] data;
-    byte[] versionH = new byte[]{0x65, 0x66, 0x67};
 
-    boolean saveFile() {
+    // File read and save code below
+    File file;
+    Writer writer;
+    Random randomSaveName = new Random(1337);
 
-        if (filename.equals("")) filename = "default";
-
-
+        public void SaveFile() {
         try {
-            outp = new FileOutputStream(filename);
-        } catch (FileNotFoundException e2) {
-            e2.printStackTrace();
-        }
-
-
-        data = new byte[sizex][sizey];
-
-        // Transfers data into databuffer and clears data.
-
-        try {
-
-            outp.write(versionH);
-            for (int y1 = 0; y1 < sizey; y1++)
-                for (int x1 = 0; x1 < sizex; x1++) {
-                    outp.write(data[x1][y1] + 127);
+            console.printtxt("Saving...");
+            file = new File("" + randomSaveName.nextInt() + ".jps");
+            writer = new BufferedWriter(new FileWriter(file));
+            writer.write("javapowder-save\n");
+           // writer.write("version:" + var.versionID + "\n");
+            writer.write("map:\n");
+            for (int y = 0; y < var.Height; y++) {
+                for (int x = 0; x < var.Width; x++) {
+                    writer.write((int) var.Map[x][y]);
+                }
+            }
+            writer.write("vmap:\n");
+            for (int y = 0; y < var.Height; y++) {
+                for (int x = 0; x < var.Width; x++) {
+                    writer.write((int) var.VMap[x][y]);
+                }
+            }
+            writer.write("pmap:\n");
+            for (int y = 0; y < var.Height; y++) {
+                for (int x = 0; x < var.Width; x++) {
+                    writer.write((int) var.PMap[x][y]);
                 }
 
-        } catch (IOException e1) {
-            System.exit(0);
-            try {
-                outp.flush();
-            } catch (IOException e) {
-
-                e.printStackTrace();
+                console.printtxt("Write ended successfully");
             }
-            try {
-                outp.close();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-            return false;
+        } catch (IOException exception) {
+            console.printtxt("I/O Exception!" + exception.getMessage());
         } finally {
             try {
-
-                outp.close();
+                writer.close();
             } catch (IOException e) {
 
                 e.printStackTrace();
             }
+            console.printtxt("Write operation ended.");
         }
-        return true;
-    }
+
 
     boolean readFile() {
         if (readFileName.equals("")) readFileName = "default";
