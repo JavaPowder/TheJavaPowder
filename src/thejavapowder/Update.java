@@ -1,6 +1,5 @@
 package thejavapowder;
 
-import java.util.Map;
 import java.util.Random;
 
 public class Update {
@@ -42,11 +41,6 @@ public class Update {
 
         StartTime = System.currentTimeMillis();
 
-        //if (TotalFrame > 30) {
-        //    TotalFrame = 1;
-        //    TotalFPS = FPS;
-        //}
-
         if (var.Simulating && var.state == 0) {
             for (int x = var.Width - 1; x > 1; x--) {
                 for (int y = var.Height - 1; y > 1; y--)//For each Space
@@ -66,7 +60,7 @@ public class Update {
 
                             if (var.reactives != null)
                             {
-                                for (int o = 0; o < var.reactives.length; o++)//For the number of reactive the particle have
+                                for (int o = 0; o < var.reactives.length; o++)//For the number of reactives the particle has
                                 {
                                     if (var.stopReactions)//If the particle already reacted
                                     {
@@ -119,7 +113,6 @@ public class Update {
                     }
                 }
             }
-
         }//End of Updating maps
         if (var.active && var.state == 0) {
                 if (var.Drawing) {
@@ -320,8 +313,6 @@ public class Update {
                 }
             }
         }
-
-
     }//End of Voltage Update
 
     public boolean canMove(byte p1, byte p2, boolean weight)
@@ -468,18 +459,18 @@ public class Update {
     {
         if(!change)//If we are exchanging the values ( Because the weight of the particle we are moving is bigger then the target )
         {
-            var.Map[x2][y2] = var.Map[x1][y1];//Occupy the tile under
+            var.Map[x2][y2] = var.Map[x1][y1];
             var.HMap[x2][y2] = var.HMap[x1][y1];
             var.Map[x1][y1] = -127;
             var.HMap[x1][y1] = 0;
         }
         else
         {
-             var.element = var.Map[x2][y2];
+             byte element = var.Map[x2][y2];
              float temp = var.HMap[x2][y2];
              var.HMap[x2][y2] = var.HMap[x1][y1];
              var.Map[x2][y2] = var.Map[x1][y1];
-             var.Map[x1][y1] = var.element;
+             var.Map[x1][y1] = element;
              var.HMap[x1][y1] = temp;
         }
     }

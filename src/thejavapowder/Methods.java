@@ -3,7 +3,6 @@ package thejavapowder;
 public class Methods {
 
     Variables var = thejavapowder.TheJavaPowder.var;
-    char t;
 
     public void createParticle(int x, int y, byte id) {
         for (int i = 0; i < var.reaction[7]; i++) {
@@ -35,30 +34,6 @@ public class Methods {
 
     }
 
-
-    public int getWeight(byte ID) {
-        if(ID >= 0 && ID < var.NUM_ELS)
-        {
-            return var.Elements[ID].weight;
-        }
-        else
-        {
-            return -127;
-        }
-    }
-
-    public int getDTemp(byte ID) {
-        if(ID >= 0 && ID < var.NUM_ELS)
-        {
-            return var.Elements[ID].defaultTemp;
-        }
-        else
-        {
-            return -127;
-        }
-    }
-
-
     public void getReaction(byte id, byte reactId) {
         var.reaction = var.Elements[id].react[reactId];
     }
@@ -75,19 +50,6 @@ public class Methods {
             var.surArray[6] = var.Map[x][y + 1];
             var.surArray[7] = var.Map[x + 1][y + 1];
         }
-
-    }
-
-    public char getType(int x, int y) {
-        if(var.Map[x][y] >= 0 && var.Map[x][y] < var.NUM_ELS)
-        {
-            t = var.Elements[var.Map[x][y]].state;
-        }
-        else
-        {
-            t = 's';
-        }
-        return t;
 
     }
 

@@ -15,8 +15,8 @@ public class Variables {
     boolean conductive    = false;
 
     /*Transformated Variables:
-      * Variables that represents a long calculation used often
-      */
+     * Variables that represents a long calculation used often
+     */
     int CursorX     = 100; //Where to draw the cursor
     int CursorY     = 100;
     int MouseX      = 100;
@@ -28,7 +28,16 @@ public class Variables {
     int LastDrawY   = 0;
     //End of Transformated Variables
 
+    /* The state it is it
+     * 0 = Normal
+     * 1 = Menu
+     * 2 = Element Menu
+     * 3 = Settings
+     * 4 = Documentation
+     * 5 = Console
+     */
     int state           = 0;
+
     int RandomNum       = 0;
     int Height          = 1500;
     int optionsHeight   = 14;
@@ -40,29 +49,13 @@ public class Variables {
     int ScrollY         = 0;
     int iconY           = 0;
     int iconX           = 0;
-    short temp          = 0;
     byte Zoom           = 1;
     byte Size           = 10;
     byte Shape          = 0;
     byte Equipped       = 3;
     byte winZoom        = 2;
-    byte element        = 0;
-    byte currentMode    = 0; // All, Electronic Ect
+    byte currentMode    = 0; // 0 = reactive mode, 1 = electronic mode
     float Brightness    = 0.0f;
-
-
-    /* The state it is it
-    * 0 = Normal
-    * 1 = Menu
-    * 2 = Element Menu
-    * 3 = Settings
-    * 4 = Documentation
-    * 5 = Console
-    */
-
-
-
-
 
     int[]      surArray  = new int[8];
     byte[]     reaction  = new byte[16];
@@ -71,10 +64,6 @@ public class Variables {
     float[][]  HMap      = new float[Width][Height];// The Heat type map
     short[][]  VMap      = new short[Width][Height];// The Voltage type map
     byte [][]  PMap      = new byte [Width][Height];// The Particle Properties Map
-
-
-
-    public final int NUM_ELS = 19;
 
     //Elements Initialization
     //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX), reactives, default temp)
@@ -100,4 +89,6 @@ public class Variables {
         new Powder( (byte) 16, (byte) 15,  false, "Sawdust",            "Sawdust",                                          0xFFE0A0, new byte[]{},   20),
         };
         //Order of creation: new Element(amount-of-burn,weight,conductive(boolean),state("g","p","s","l"), Name, Description, colour(HEX), reactives, default temp)
+
+        public final int NUM_ELS = 19;
 }

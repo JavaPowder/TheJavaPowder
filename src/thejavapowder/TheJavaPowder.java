@@ -127,9 +127,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
 
     public void init() {
-        //Main screen options
-
-
         this.setVisible(true);
         this.setResizable(false);
         this.setBackground(Color.black);
@@ -149,7 +146,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         offscreen = createImage(dim.width, dim.height);
 
         bufferGraphics = offscreen.getGraphics();
-        // Initialises empty var.Map
+        // Initialises empty particle maps
         for (int x = 0; x < var.Width; x++) {
             for (int y = 0; y < var.Height; y++) {
                 var.Map[x][y] = -127;
@@ -216,8 +213,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.CursorX = (var.CurrentX - (var.ScrollX / var.winZoom)) * var.winZoom;
         var.CursorY = (var.CurrentY - (var.ScrollY / var.winZoom)) * var.winZoom;
 
-        var.DrawX = (var.CurrentX + (var.ScrollX / 2)) / var.Zoom;//var.CurrentX / var.Zoom;
-        var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;//var.CurrentY / var.Zoom;
+        var.DrawX = (var.CurrentX + (var.ScrollX / 2)) / var.Zoom;
+        var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;
 
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
@@ -225,8 +222,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
         bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
         bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
-        bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Coordinates
-        bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Coordinates
+        bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Mouse X Coordinate
+        bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Y Coordinate
 
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
@@ -248,7 +245,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
 
 
-            //bufferGraphics.fillRect((var.CurrentX - var.ScrollX / 2)* var.winZoom, (var.CurrentY - var.ScrollY / 2) * var.winZoom, (var.Size * var.Zoom) * var.winZoom, (var.Size * var.Zoom) * var.winZoom);//Draw the Cursor
             bufferGraphics.setColor(new Color(0.5f, 0.5f, 0.5f, 0.5f));
 
             if (var.Shape == 0) {
@@ -301,8 +297,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                         bufferGraphics.drawImage(nonePng, (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 25 * var.winZoom + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this);
                         bufferGraphics.drawString(var.Elements[i].name, (52 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 35 * var.winZoom + var.iconY);//Draw the Element's name before the picture appears
                     }
-                    //System.out.println("" + i + "X " + ((100 + i * 40 * var.winZoom) - var.iconX) + "Y " + (50 + var.iconY) + "Final X " +  (((100 + i * 40 * var.winZoom) - var.iconX) + 40 * var.winZoom) + "Final Y " +  (( 50 + var.iconY) + (40 * var.winZoom)) );
-
 
                     if (i % 13 == 12) {
                         var.iconY += 40 * var.winZoom;
@@ -366,9 +360,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         bufferGraphics.drawString("Load Scene", 231*2, (var.Height+8) * var.winZoom);
         g.drawImage(offscreen, 0, 0, this);
     }
-
-
-    // Context menu check box handler
 
     public void mouseDragged(MouseEvent e) {
         var.MouseX = e.getX();
@@ -684,14 +675,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     public void actionPerformed(ActionEvent e) {
     }
-
-
-    /*
-          0 1 2
-          3 X 4
-          5 6 7
-          (X = location of particle)
-      */
 
     // File read and save code below
     File file;
