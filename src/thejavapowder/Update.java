@@ -114,20 +114,20 @@ public class Update {
                 }
             }
         }//End of Updating maps
-        if (var.active && var.state == 0) {
-                if (var.Drawing) {
-                    draw.create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped);
+        if (var.active && var.state == 0) {//If drawing is active and we are in the game screen
+                if (var.Drawing) {//If it should be drawing
+                    draw.create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped);//Draw
                 }
             } else {
-                if (var.wait < 1) {
-                    var.active = true;
-                    var.wait = 30;
-                } else {
-                    var.wait--;
+                if (var.wait < 1) {//If the wait time to draw is over
+                    var.active = true;//Activate the drawing
+                    var.wait = 30;//Reset the timer
+                } else {//If it can't draw and the timer is not up
+                    var.wait--;//Make the timer progress
                 }
             }
-            var.LastDrawX = var.DrawX;
-            var.LastDrawY = var.DrawY;
+            var.LastDrawX = var.DrawX;//Update the drawing points
+            var.LastDrawY = var.DrawY;//Update the drawing points
     }
 
     public void UpdateVoltage(int x, int y) {
@@ -140,9 +140,9 @@ public class Update {
         {
             if (var.Map[x][y] == 4)//Iron
             {
-                for (int xc = -1; xc <= 1; xc++)
-                    for (int yc = -1; yc <= 1; yc++)
-                        if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
+                for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
+                    for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
+                        if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0))//Forthe 4 spots directly touching it
                         {
                             if (meth.GetConductive(var.Map[x+xc][y+yc]))//If the surrounding particle is conductive
                             {
@@ -160,17 +160,24 @@ public class Update {
                                 if (var.Map[x+xc][y+yc] == 13)//If it's crossing
                                 {
                                     if (meth.GetConductive(var.Map[x][y+yc*2])) {
+
                                         var.VMap[x][y] -= 3;
                                         var.VMap[x+xc*2][y+yc*2] = var.VMap[x][y];
+
                                     } else if (var.VMap[x+xc*2][y+yc*2] == 13) {
+
                                         if (meth.GetConductive(var.Map[x+xc*3][y+yc*3])) {
                                             var.VMap[x][y] -= 3;
                                             var.VMap[x+xc*3][y+yc*3] = var.VMap[x][y];
+
                                         } else if (var.VMap[x+xc*3][y+yc*3] == 13) {
+
                                             if (meth.GetConductive(var.Map[x+xc*4][y+yc*4])) {
                                                 var.VMap[x][y] -= 3;
                                                 var.VMap[x+xc*4][y+yc*4] = var.VMap[x][y];
+
                                             } else if (var.VMap[x+xc*4][y+yc*4] == 13) {
+
                                                 if (meth.GetConductive(var.Map[x+xc*5][y+yc*5])) {
                                                     var.VMap[x][y] -= 3;
                                                     var.VMap[x+xc*5][y+yc*5] = var.VMap[x][y];
@@ -183,8 +190,8 @@ public class Update {
                         }
             } else if (var.Map[x][y] == 5)//Battery
             {
-                for (int xc = -1; xc <= 1; xc++)
-                    for (int yc = -1; yc <= 1; yc++)
+                for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
+                    for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
                         {
                             if (meth.GetConductive(var.Map[x+xc][y+yc])) {
@@ -193,8 +200,8 @@ public class Update {
                         }
             } else if (var.Map[x][y] == 6)//Copper
             {
-                for (int xc = -1; xc <= 1; xc++)
-                    for (int yc = -1; yc <= 1; yc++)
+                for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
+                    for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
                         {
                             if (meth.GetConductive(var.Map[x+xc][y+yc])) {
@@ -211,8 +218,8 @@ public class Update {
                         }
             } else if (var.Map[x][y] == 7)//Semi Conductor A
             {
-                for (int xc = -1; xc <= 1; xc++)
-                    for (int yc = -1; yc <= 1; yc++)
+                for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
+                    for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
                         {
                             if (var.Map[x+xc][y+yc] == 8 || var.Map[x+xc][y+yc] == 7) {
@@ -224,8 +231,8 @@ public class Update {
                         }
             } else if (var.Map[x][y] == 8)//Semi Conductor B
             {
-                for (int xc = -1; xc <= 1; xc++)
-                    for (int yc = -1; yc <= 1; yc++)
+                for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
+                    for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
                         {
                             if (var.Map[x+xc][y+yc] == 4 || var.Map[x+xc][y+yc] == 6 || var.Map[x+xc][y+yc] == 8) {
@@ -269,8 +276,8 @@ public class Update {
 
             } else if (var.Map[x][y] == 10)//Resistor
             {
-                for (int xc = -1; xc <= 1; xc++)
-                    for (int yc = -1; yc <= 1; yc++)
+                for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
+                    for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
                         {
                             if (meth.GetConductive(var.Map[x+xc][y+yc])) {
@@ -285,8 +292,8 @@ public class Update {
             } else if (var.Map[x][y] == 12)//Power Drainer
             {
                 var.VMap[x][y] = 0;
-                for (int xc = -1; xc <= 1; xc++)
-                    for (int yc = -1; yc <= 1; yc++)
+                for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
+                    for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
                         {
                             if (var.Map[x+xc][y+yc] == 4 || var.Map[x+xc][y+yc] == 6) {
@@ -298,8 +305,8 @@ public class Update {
             } else if (var.Map[x][y] == 14)//Switch
             {
                 if (var.PMap[x][y] > 25) {
-                    for (int xc = -1; xc <= 1; xc++)
-                        for (int yc = -1; yc <= 1; yc++)
+                    for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
+                        for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                             if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
                             {
                                 if (meth.GetConductive(var.Map[x+xc][y+yc])) {
@@ -459,18 +466,18 @@ public class Update {
     {
         if(!change)//If we are exchanging the values ( Because the weight of the particle we are moving is bigger then the target )
         {
-            var.Map[x2][y2] = var.Map[x1][y1];
+            var.Map [x2][y2] = var.Map[x1][y1];
             var.HMap[x2][y2] = var.HMap[x1][y1];
-            var.Map[x1][y1] = -127;
+            var.Map [x1][y1] = -127;
             var.HMap[x1][y1] = 0;
         }
         else
         {
-             byte element = var.Map[x2][y2];
-             float temp = var.HMap[x2][y2];
+             byte element     = var.Map [x2][y2];
+             float temp       = var.HMap[x2][y2];
              var.HMap[x2][y2] = var.HMap[x1][y1];
-             var.Map[x2][y2] = var.Map[x1][y1];
-             var.Map[x1][y1] = element;
+             var.Map [x2][y2] = var.Map [x1][y1];
+             var.Map [x1][y1] = element;
              var.HMap[x1][y1] = temp;
         }
     }
