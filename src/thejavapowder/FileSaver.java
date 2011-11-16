@@ -4,6 +4,7 @@ package thejavapowder;
 import org.w3c.dom.*;
 
 import java.io.*;
+import java.util.Map;
 import java.util.Random;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,14 +14,20 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import org.w3c.dom.Attr;
 import org.xml.sax.SAXException;
 
 
 class FileSaver {
-    Variables var = thejavapowder.TheJavaPowder.var;
-    Console console = thejavapowder.TheJavaPowder.console;
+    static Variables var = thejavapowder.TheJavaPowder.var;
+    static Console console = thejavapowder.TheJavaPowder.console;
+
+
     public void savePref()
     {
 
@@ -110,33 +117,46 @@ class FileSaver {
       *sizey - for both
       */
 
-    FileOutputStream outp;
-    FileInputStream inp;
 
-    int sizex, sizey;
 
-    String filename, readFileName;
-    byte[] databuffer2;
-    byte[][] data;
+
+
+
 
     // File read and save code below
-    File file;
-    Writer writer;
-    Random randomSaveName = new Random(1337);
+        static FileOutputStream outp;
+        static FileInputStream inp;
+        static Random randomSaveName = new Random(1337);
+        static File file;
+        static Writer writer;
+        static String readFileName;
+        static byte[] databuffer2;
+        static byte[][] data;
+        static int sizex, sizey;
 
-        public void SaveFile() {
+        public static void SaveFile(String fileName) {
         try {
             console.printtxt("Saving...");
-            file = new File("" + randomSaveName.nextInt() + ".jps");
+            /*
+            if(fileName.equals(""))
+            {
+                file = new File("" + randomSaveName.nextInt() + ".jps");
+            }
+            else
+            {*/
+                file = new File("" + fileName + ".jps");
+            //}
+
             writer = new BufferedWriter(new FileWriter(file));
             writer.write("javapowder-save\n");
            // writer.write("version:" + var.versionID + "\n");
             writer.write("map:\n");
-            for (int y = 0; y < var.Height; y++) {
-                for (int x = 0; x < var.Width; x++) {
+            for (int x = 0; x < var.Height; x++) {
+                for (int y = 0; y < var.Width; y++) {
                     writer.write((int) var.Map[x][y]);
                 }
             }
+            /*
             writer.write("vmap:\n");
             for (int y = 0; y < var.Height; y++) {
                 for (int x = 0; x < var.Width; x++) {
@@ -147,37 +167,91 @@ class FileSaver {
             for (int y = 0; y < var.Height; y++) {
                 for (int x = 0; x < var.Width; x++) {
                     writer.write((int) var.PMap[x][y]);
-                }
+                    }
+            }*/
 
                 console.printtxt("Write ended successfully");
-            }
+
         } catch (IOException exception) {
             console.printtxt("I/O Exception!" + exception.getMessage());
         } finally {
             try {
-                writer.close();
+                if(writer != null)
+                {
+                    writer.close();
+                }
             } catch (IOException e) {
 
                 e.printStackTrace();
             }
             console.printtxt("Write operation ended.");
         }
+        }
 
 
-    boolean readFile() {
-        if (readFileName.equals("")) readFileName = "default";
+    public static void LoadFile(String fileName) {
+        if (fileName.equals(""))
+        {
+            readFileName = "default";
+        }
+        else
+        {
+            readFileName = fileName;
+        }
+
+        File save = new File(readFileName + ".jps");
+
         try {
-            inp = new FileInputStream(readFileName);
+	  File file = new File("bob.jps");
+	  FileInputStream fis = null;
+	  BufferedInputStream bis = null;
+	  DataInputStream dis = null;
+
+
+	      fis = new FileInputStream(file);
+
+	      bis = new BufferedInputStream(fis);
+	      dis = new DataInputStream(bis);
+
+          int leX = 0;
+          int leY = 0;
+          int leMaxX = var.Width;
+          int leMaxY = var.Height;
+          String mode = "Standing by";
+	      while (dis.available() != 0) {
+	        if(!dis.readLine().equals("map:"))
+              {
+                  mode = "Reading Map";
+                  continue;
+              }
+            if(!dis.readLine().equals("vmap:"))
+              {
+                  mode = "Reading VMap";
+                  continue;
+              }
+
+
+              if(mode.equals("Reading Map"))
+              {
+                  var.Map[leX][leY] = (byte)Integer.parseInt(dis.readLine());
+                  leX++;
+                  if(leX > leMaxX)
+                  {
+                      leX = 0;
+                      leY++;
+                  }
+              }
+	      }
         } catch (FileNotFoundException e) {
 
             e.printStackTrace();
         } // Creates the input
-        try {
-            databuffer2 = new byte[inp.available() - 3];
-        } catch (IOException e) {
+        catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
 
-            e.printStackTrace();
-        } // Temporarily holds the file data
+        /*
+        // Temporarily holds the file data
         data = new byte[sizex][sizey]; // The finished save data
 
         try {
@@ -199,8 +273,8 @@ class FileSaver {
             for (int j = 0; j < sizey; j++)
                 data[i][j] = (byte) (databuffer2[(j * sizex) + i] - 127);
 
-        return true;
-    }*/
+        return true;*/
+    }
 }
 		
 	

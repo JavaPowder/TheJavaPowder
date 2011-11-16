@@ -427,10 +427,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             }
             else if (xc >= 384/var.winZoom && xc <= 452/var.winZoom)
             {
-                FileSaver.SaveFile();
+                FileSaver.SaveFile(JOptionPane.showInputDialog(null,"Enter a Save Name"));
             }
             else if (xc >= 460/var.winZoom && xc <= 528/var.winZoom)
             {
+                FileSaver.LoadFile(JOptionPane.showInputDialog(null,"Enter the Name of a Save to Open"));
             }
         }
         var.Drawing = true;
@@ -748,7 +749,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
 
                 return 2;*/
-    }
+    //}
 
     public void LoadFile()
     {
