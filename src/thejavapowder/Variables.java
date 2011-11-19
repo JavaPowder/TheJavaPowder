@@ -53,6 +53,7 @@ public class Variables {
     byte Size           = 10;
     byte Shape          = 0;
     byte Equipped       = 3;
+    byte overEl         = -1;
     byte winZoom        = 2;
     byte currentMode    = 0; // 0 = reactive mode, 1 = electronic mode
     float Brightness    = 0.0f;

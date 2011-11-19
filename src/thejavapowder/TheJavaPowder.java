@@ -310,6 +310,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                         bufferGraphics.drawImage(nonePng, (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 25 * var.winZoom + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this);
                         bufferGraphics.drawString(var.Elements[i].name, (52 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 35 * var.winZoom + var.iconY);//Draw the Element's name before the picture appears
                     }
+                    if (var.overEl == i)
+                    {
+                        bufferGraphics.drawString(var.Elements[i].description, 52 * var.winZoom, 125 * var.winZoom);//Draw the Element's description
+                    }
 
                     if (i % 13 == 12) {
                         var.iconY += 40 * var.winZoom;
@@ -382,6 +386,22 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public void mouseMoved(MouseEvent e) {
         var.MouseX = e.getX();
         var.MouseY = e.getY();
+        if (var.state == 2)
+        {
+            int x = 50 * var.winZoom, y = 25 * var.winZoom, num = 0;
+            while (num < var.NUM_ELS) {
+                if (var.MouseX > x && var.MouseY > y && var.MouseX < x + (40*var.winZoom) && var.MouseY < y + (40*var.winZoom)) {
+                    var.overEl = (byte)(num);
+                }
+                num++;
+                x += 40 * var.winZoom;
+                if (num % 13 == 0)
+                {
+                    x = 50 * var.winZoom;
+                    y += 40 * var.winZoom;
+                }
+            }
+        }
     }
 
 
@@ -457,7 +477,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         } else if (var.state == 2) {
             int x = 50 * var.winZoom, y = 25 * var.winZoom, num = 0;
             while (num < var.NUM_ELS) {
-                if (var.CurrentX > x / var.winZoom && var.CurrentY > y / var.winZoom && var.CurrentX < x / var.winZoom + 40 && var.CurrentY < y / var.winZoom + 40) {
+                if (var.MouseX > x && var.MouseY > y && var.MouseX < x + (40*var.winZoom) && var.MouseY < y + (40*var.winZoom)) {
                     var.Equipped = (byte)(num);
                     var.state = 0;
                     var.active = false;
