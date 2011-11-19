@@ -223,17 +223,18 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.CurrentX = (var.MouseX + var.ScrollX) / var.winZoom;
         var.CurrentY = (var.MouseY + var.ScrollY) / var.winZoom;
 
-        var.DrawX = (var.CurrentX + (var.ScrollX / 2)) / var.Zoom;
-        var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;
+        var.DrawX = (var.MouseX + (var.ScrollX * var.winZoom)) / var.realZoom;
+        var.DrawY = (var.MouseY + (var.ScrollY * var.winZoom)) / var.realZoom;
 
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-        bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
+        bufferGraphics.drawString("ScrollX:" + var.ScrollX, 10, 30 + 45 * var.winZoom);//Draw the FPS//bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
         bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
         bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
         bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Mouse X Coordinate
         bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Y Coordinate
+        bufferGraphics.drawString("Zoom:" + var.Zoom, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
 
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
@@ -242,8 +243,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             for (int x = 0; x < var.Width; x++) {
                 for (int y = 0; y < var.Height; y++) {
                     if (var.Map[x][y] >= 0) {
+                        int size = var.realZoom-1;//The - 1 makes the pixes looked zoomed in
+                        if (var.Zoom == 1)
+                            size++;
                         bufferGraphics.setColor(new Color(var.Elements[var.Map[x][y]].colour));
-                        bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.realZoom, var.realZoom);
+                        bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, size, size);
                     }
                     if (var.VMap[x][y] > 1 && var.Map[x][y] != 9 && var.Map[x][y] != 5 && var.Map[x][y] != 11 && var.Map[x][y] != 10 && var.Map[x][y] != 13 && var.Map[x][y] != 14)//If there is Voltage but it's not the Screen, Battery or R-Battery
                     {
@@ -546,6 +550,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     if(newZoom >= 1 && newZoom <= 20)
                     {
                         var.winZoom = (byte)newZoom;
+                        var.realZoom = var.Zoom * var.winZoom;
                         this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
                     }
                     else
@@ -622,11 +627,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.ScrollX = var.ScrollX/var.Zoom*(var.Zoom-1);
                 var.ScrollY = var.ScrollY/var.Zoom*(var.Zoom-1);
                 var.Zoom--;
-                var.realZoom = var.Zoom * var.winZoom - 1;
+                var.realZoom = var.Zoom * var.winZoom;
                 if (var.Zoom == 1) {
                     var.ScrollX = 0;
                     var.ScrollY = 0;
-                    var.realZoom = var.Zoom * var.winZoom;
                 }
             }
             if (evt.getKeyChar() == 'z' && var.Zoom < 127) {
@@ -636,7 +640,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.ScrollX = var.CurrentX;
                 var.ScrollY = var.CurrentY;
                 var.Zoom++;
-                var.realZoom = var.Zoom * var.winZoom - 1;
+                var.realZoom = var.Zoom * var.winZoom;
                 var.antiDouble = true;
             }
             if (var.Zoom > 1) {
