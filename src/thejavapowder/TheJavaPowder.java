@@ -243,16 +243,15 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 for (int y = 0; y < var.Height; y++) {
                     if (var.Map[x][y] >= 0) {
                         int size = var.realZoom-1;//The - 1 makes the pixes looked zoomed in
-                        if (var.Zoom == 1) size++;
+                        if (var.Zoom == 1)
+                            size++;
                         bufferGraphics.setColor(new Color(var.Elements[var.Map[x][y]].colour));
                         bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, size, size);
                     }
                     if (var.VMap[x][y] > 1 && var.Map[x][y] != 9 && var.Map[x][y] != 5 && var.Map[x][y] != 11 && var.Map[x][y] != 10 && var.Map[x][y] != 13 && var.Map[x][y] != 14)//If there is Voltage but it's not the Screen, Battery or R-Battery
                     {
-                        int size = var.realZoom-1;//The - 1 makes the pixes looked zoomed in
-                        if (var.Zoom == 1) size++;
                         bufferGraphics.setColor(new Color(1f, 0f, 0f, var.VMap[x][y] / 1500f));//Make it Red depending on the Voltage
-                        bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, size, size);//Draw
+                        bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, var.Zoom * var.winZoom, var.Zoom * var.winZoom);//Draw
                     }
                 }
             }
@@ -262,12 +261,12 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             bufferGraphics.setColor(new Color(0.5f, 0.5f, 0.5f, 0.5f));
 
             if (var.Shape == 0) {
-                int size = var.Size * var.realZoom;
+                int size = var.Size * var.Zoom * var.winZoom;
                 int x = var.MouseX;
                 int y = var.MouseY;
                 bufferGraphics.drawRect(x - size, y - size, size * 2, size *2);
             } else if (var.Shape == 1) {
-                int x = var.MouseX, y = var.MouseY, rd = var.Size * var.realZoom;
+                int x = var.MouseX, y = var.MouseY, rd = var.Size * var.Zoom * var.winZoom;
                 int tempy = y, oldy;
                 for (int i = x - rd; i <= x; i++) {
                     oldy = tempy;
@@ -291,7 +290,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
             }
 
-            if ((var.MouseX / var.winZoom) < var.Width && var.MouseX > 0 && (var.MouseY / var.winZoom) < var.Height && var.MouseY > 0) {
+            if (var.MouseX < var.Width && var.MouseX > 0 && var.MouseY < var.Height && var.MouseY > 0) {
 
                 if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
                     bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 30 + 5 * var.winZoom);//Draw the Hovered Element Name
@@ -650,22 +649,14 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.antiDouble = true;
             }
             if (var.Zoom > 1) {
-                if (evt.getKeyCode() == KeyEvent.VK_LEFT)
+                if (evt.getKeyCode() == KeyEvent.VK_LEFT && var.ScrollX > 0)
                     var.ScrollX -= 5;
-                if (evt.getKeyCode() == KeyEvent.VK_RIGHT)
+                if (evt.getKeyCode() == KeyEvent.VK_RIGHT && var.ScrollX < (var.Width - (var.Width / var.Zoom)) * var.Zoom)
                     var.ScrollX += 5;
-                if (evt.getKeyCode() == KeyEvent.VK_UP)
+                if (evt.getKeyCode() == KeyEvent.VK_UP && var.ScrollY > 0)
                     var.ScrollY -= 5;
-                if (evt.getKeyCode() == KeyEvent.VK_DOWN)
+                if (evt.getKeyCode() == KeyEvent.VK_DOWN && var.ScrollY < (var.Height - (var.Height / var.Zoom)) * var.Zoom)
                     var.ScrollY += 5;
-                if (var.ScrollX < 0)
-                    var.ScrollX = 5;
-                if (var.ScrollX > var.Width* var.Zoom - var.Width)
-                    var.ScrollX = var.Width* var.Zoom - var.Width;
-                if (var.ScrollY < 0)
-                    var.ScrollY = 0;
-                if (var.ScrollY > var.Height* var.Zoom - var.Height)
-                    var.ScrollY = var.Height* var.Zoom - var.Height;
             }
             if (evt.getKeyCode() == KeyEvent.VK_ESCAPE && !(var.state == 2)) {
                 switch (var.state) {
