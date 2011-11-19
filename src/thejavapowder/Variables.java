@@ -61,7 +61,7 @@ public class Variables {
     byte[]     reactives = new byte[]{};
     byte [][]  Map       = new byte [Width][Height];// The particle type map
     float[][]  HMap      = new float[Width][Height];// The Heat type map
-    short[][]  VMap      = new short[Width][Height];// The Voltage type map
+    int[][]  VMap      = new int[Width][Height];// The Voltage type map
     byte [][]  PMap      = new byte [Width][Height];// The Particle Properties Map
 
     //Elements Initialization
