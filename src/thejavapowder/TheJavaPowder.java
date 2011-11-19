@@ -229,12 +229,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-        bufferGraphics.drawString("ScrollX:" + var.ScrollX, 10, 30 + 45 * var.winZoom);//Draw the FPS//bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
+        bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
         bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
         bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
         bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Mouse X Coordinate
         bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Y Coordinate
-        bufferGraphics.drawString("Zoom:" + var.Zoom, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
 
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
