@@ -430,28 +430,34 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     }
 
                 }
+                var.active = false;
                 console.printtxt("Scene Reset.");
             }
             else if (xc >= 90 && xc <= 198)
             {
                 TotalFPS = 0;
                 TotalFrame = 0;
+                var.active = false;
             }
             else if (xc >= 206 && xc <= 260)
             {
                 var.Equipped = -126;
+                var.active = false;
             }
             else if (xc >= 268 && xc <= 376)
             {
                 var.Equipped = -125;
+                var.active = false;
             }
             else if (xc >= 384 && xc <= 452)
             {
                 FileSaver.SaveFile(JOptionPane.showInputDialog(null,"Enter a Save Name"));
+                var.active = false;
             }
             else if (xc >= 460 && xc <= 528)
             {
                 FileSaver.LoadFile(JOptionPane.showInputDialog(null,"Enter the Name of a Save to Open"));
+                var.active = false;
             }
         }
         var.Drawing = true;

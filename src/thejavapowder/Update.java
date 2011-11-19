@@ -130,7 +130,7 @@ public class Update {
             var.LastDrawY = var.DrawY;//Update the drawing points
     }
 
-    public void UpdateVoltage(int x, int y) {
+    public void UpdateVoltage(final int x, final int y) {
         if (var.Map[x][y] == 5)//If it's a battery, give it infinite voltage
         {
             var.VMap[x][y] = 1000;
@@ -205,14 +205,14 @@ public class Update {
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
                         {
                             if (meth.GetConductive(var.Map[x+xc][y+yc])) {
-                                if (var.Map[x+xc][y+yc] != 11) {
+                                if (var.VMap[x][y] > 29) {
+                                        var.VMap[x][y] -= 30;
+                                        var.VMap[x+xc][y+yc] += 30;
+                                } else if (var.Map[x+xc][y+yc] != 11) {
                                     if (var.VMap[x+xc][y+yc] < var.VMap[x][y]) {
                                         var.VMap[x][y] -= 1;
                                         var.VMap[x+xc][y+yc] = var.VMap[x][y];
                                     }
-                                } else if (var.VMap[x][y] > 29) {
-                                    var.VMap[x][y] -= 30;
-                                    var.VMap[x+xc][y+yc] += 30;
                                 }
                             }
                         }
@@ -262,7 +262,7 @@ public class Update {
                             if (var.VMap[x][y + 1] < var.PMap[x][y] * 5)//If the Target have less then 50 Volts
                             {
                                 var.VMap[x][y] -= var.PMap[x][y] * 10;
-                                var.VMap[x][y + 1] = (short) (var.PMap[x][y] * 10);
+                                var.VMap[x][y + 1] = (int) (var.PMap[x][y] * 10);
                             }
 
                         } else {
@@ -284,7 +284,7 @@ public class Update {
                                 if (var.VMap[x+xc][y+yc] < var.VMap[x][y]) {
                                     if (var.VMap[x][y] >= (var.PMap[x][y] * 10)) {
                                         var.VMap[x][y] -= (var.PMap[x][y] * 10);
-                                        var.VMap[x+xc][y+yc] = (short) (var.PMap[x][y] * 10);
+                                        var.VMap[x+xc][y+yc] = (int) (var.PMap[x][y] * 10);
                                     }
                                 }
                             }
@@ -322,7 +322,7 @@ public class Update {
         }
     }//End of Voltage Update
 
-    public boolean canMove(byte p1, byte p2, boolean weight)
+    public boolean canMove(final byte p1, final byte p2, final boolean weight)
     {
         if (weight)
             return p2 == -127 || var.Elements[p1].weight > var.Elements[p2].weight;
@@ -330,7 +330,7 @@ public class Update {
             return p2 == -127;
     }
 
-    public void UpdateElement(int x, int y) {
+    public void UpdateElement(final int x, final int y) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
         {
             var.Map[x][y] = -127;//Destroy it
@@ -360,7 +360,7 @@ public class Update {
                     x2--;
                 if (var.Map[x][y] != -127 && var.Map[x2][y2] != -127)
                 {
-                    float heatTransfer = (var.HMap[x][y] - var.HMap[x2][y2])/5;
+                    final float heatTransfer = (var.HMap[x][y] - var.HMap[x2][y2])/5;
                     var.HMap[x][y] -= heatTransfer;
                     var.HMap[x2][y2] += heatTransfer;
                 }
@@ -368,39 +368,45 @@ public class Update {
         }
         if(var.Map[x][y] != -127)
         {
-            char type = var.Elements[var.Map[x][y]].state;
-            double[] chances = {0,0,0,0,0,0,0,0};
+            final char type = var.Elements[var.Map[x][y]].state;
+            double[] chances = {0,0,0,0,0,0,0,0};//An array of the possibilities of moving
             int i, j = 0;
-            if (type == 'p')
+
+            switch(type)//Depending on the type of the element
             {
-                chances[3] = .2;
-                chances[4] = .6;
-                chances[5] = .2;
+                case 'p'://Powder
+                    chances[3] = .2;
+                    chances[4] = .6;
+                    chances[5] = .2;
+                    break;
+
+                case 'l'://Liquids
+                    chances[3] = .125;
+                    chances[4] = .75;
+                    chances[5] = .125;
+                    if (!canMove(var.Map[x][y],var.Map[x][y+1],false))
+                    {
+                        chances[2] = (double)1/6;
+                        chances[3] = (double)1/3;
+                        chances[4] = 0;
+                        chances[5] = (double)1/3;
+                        chances[6] = (double)1/6;
+                    }
+                    break;
+
+                case 'g'://Gas
+                    for (i = 0; i < 8; i++)
+                    {
+                        chances[i] = .125;
+                    }
+                    break;
             }
-            else if (type == 'l')
-            {
-                chances[3] = .125;
-                chances[4] = .75;
-                chances[5] = .125;
-                if (!canMove(var.Map[x][y],var.Map[x][y+1],false))
-                {
-                    chances[2] = (double)1/6;
-                    chances[3] = (double)1/3;
-                    chances[4] = 0;
-                    chances[5] = (double)1/3;
-                    chances[6] = (double)1/6;
-                }
-            }
-            else if (type == 'g')
-            {
-                for (i = 0; i < 8; i++)
-                {
-                    chances[i] = .125;
-                }
-            }
+
             double randnum, total;
             boolean moved = false, triedmove;
+
             i = 0;
+
             while (i < 5 && !moved)
             {
                 randnum = rand.nextDouble();
@@ -439,7 +445,8 @@ public class Update {
         }
     }
 
-    public boolean tryMove(int x1, int y1, int i, boolean change)
+
+    public boolean tryMove(final int x1, final int y1, final int i, final boolean change)
     {
         int x2 = x1, y2 = y1-1, j = 0;
         while (j < 8 && j <= i)
@@ -462,27 +469,27 @@ public class Update {
         return false;
     }
 
-    public void moveElement(int x1, int y1, int x2, int y2, boolean change)
+    public void moveElement(final int x1, final int y1, final int x2, final int y2, final boolean change)
     {
-        if(!change)//If we are exchanging the values ( Because the weight of the particle we are moving is bigger then the target )
+        if(change)//If we are exchanging the values ( Because the weight of the particle we are moving is bigger then the target )
+        {
+             final byte element = var.Map [x2][y2];
+             final float temp   = var.HMap[x2][y2];
+             var.HMap[x2][y2]   = var.HMap[x1][y1];
+             var.Map [x2][y2]   = var.Map [x1][y1];
+             var.Map [x1][y1]   = element;
+             var.HMap[x1][y1]   = temp;
+        }
+        else
         {
             var.Map [x2][y2] = var.Map[x1][y1];
             var.HMap[x2][y2] = var.HMap[x1][y1];
             var.Map [x1][y1] = -127;
             var.HMap[x1][y1] = 0;
         }
-        else
-        {
-             byte element     = var.Map [x2][y2];
-             float temp       = var.HMap[x2][y2];
-             var.HMap[x2][y2] = var.HMap[x1][y1];
-             var.Map [x2][y2] = var.Map [x1][y1];
-             var.Map [x1][y1] = element;
-             var.HMap[x1][y1] = temp;
-        }
     }
 
-    public void CheckStateChanges(int x, int y)
+    public void CheckStateChanges(final int x, final int y)
     {
 
     }

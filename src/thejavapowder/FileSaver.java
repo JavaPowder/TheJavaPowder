@@ -217,31 +217,9 @@ class FileSaver {
           int leY = 0;
           int leMaxX = var.Width;
           int leMaxY = var.Height;
-          String mode = "Standing by";
-	      while (dis.available() != 0) {
-	        if(!dis.readLine().equals("map:"))
-              {
-                  mode = "Reading Map";
-                  continue;
-              }
-            if(!dis.readLine().equals("vmap:"))
-              {
-                  mode = "Reading VMap";
-                  continue;
-              }
 
 
-              if(mode.equals("Reading Map"))
-              {
-                  var.Map[leX][leY] = (byte)Integer.parseInt(dis.readLine());
-                  leX++;
-                  if(leX > leMaxX)
-                  {
-                      leX = 0;
-                      leY++;
-                  }
-              }
-	      }
+            System.out.println(fis.read());
         } catch (FileNotFoundException e) {
 
             e.printStackTrace();
