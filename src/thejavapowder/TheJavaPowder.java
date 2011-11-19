@@ -223,9 +223,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.CurrentX = (var.MouseX + var.ScrollX) / var.winZoom;
         var.CurrentY = (var.MouseY + var.ScrollY) / var.winZoom;
 
-        var.CursorX = (var.CurrentX - (var.ScrollX / var.winZoom)) * var.winZoom;
-        var.CursorY = (var.CurrentY - (var.ScrollY / var.winZoom)) * var.winZoom;
-
         var.DrawX = (var.CurrentX + (var.ScrollX / 2)) / var.Zoom;
         var.DrawY = (var.CurrentY + (var.ScrollY / 2)) / var.Zoom;
 
@@ -262,11 +259,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             if (var.Shape == 0) {
                 int size = var.Size * var.Zoom * var.winZoom;
-                int x = var.CursorX;
-                int y = var.CursorY;
+                int x = var.MouseX;
+                int y = var.MouseY;
                 bufferGraphics.drawRect(x - size, y - size, size * 2, size *2);
             } else if (var.Shape == 1) {
-                int x = var.CursorX, y = var.CursorY, rd = var.Size * var.Zoom * var.winZoom;
+                int x = var.MouseX, y = var.MouseY, rd = var.Size * var.Zoom * var.winZoom;
                 int tempy = y, oldy;
                 for (int i = x - rd; i <= x; i++) {
                     oldy = tempy;

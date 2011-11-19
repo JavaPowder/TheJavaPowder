@@ -17,8 +17,6 @@ public class Variables {
     /*Transformated Variables:
      * Variables that represents a long calculation used often
      */
-    int CursorX     = 100; //Where to draw the cursor
-    int CursorY     = 100;
     int MouseX      = 100;
     int MouseY      = 100;
     int realZoom    = 2;//Zoom * winZoom
