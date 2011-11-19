@@ -290,7 +290,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
             }
 
-            if (var.CurrentX < var.Width * var.Zoom && var.CurrentX > 0 && var.CurrentY < var.Height * var.Zoom && var.CurrentY > 0) {
+            if (var.MouseX < var.Width && var.MouseX > 0 && var.MouseY < var.Height && var.MouseY > 0) {
 
                 if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
                     bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 30 + 5 * var.winZoom);//Draw the Hovered Element Name
@@ -416,10 +416,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     public void mousePressed(MouseEvent e) {
 
-        if (var.CurrentY >= var.Height+1 && var.CurrentY <= var.Height+11)
+        if (var.MouseY >= (var.Height+1)*var.winZoom && var.MouseY <= (var.Height+11)*var.winZoom)
         {
-            int xc = var.CurrentX;
-            if (xc >= 8/var.winZoom && xc <= 82/var.winZoom)
+            int xc = var.MouseX;
+            if (xc >= 8 && xc <= 82)
             {
                 for (int x = var.Width - 1; x > 1; x--) {
                     for (int y = var.Height - 1; y > 1; y--)//For each Space
@@ -432,24 +432,24 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
                 console.printtxt("Scene Reset.");
             }
-            else if (xc >= 90/var.winZoom && xc <= 198/var.winZoom)
+            else if (xc >= 90 && xc <= 198)
             {
                 TotalFPS = 0;
                 TotalFrame = 0;
             }
-            else if (xc >= 206/var.winZoom && xc <= 260/var.winZoom)
+            else if (xc >= 206 && xc <= 260)
             {
                 var.Equipped = -126;
             }
-            else if (xc >= 268/var.winZoom && xc <= 376/var.winZoom)
+            else if (xc >= 268 && xc <= 376)
             {
                 var.Equipped = -125;
             }
-            else if (xc >= 384/var.winZoom && xc <= 452/var.winZoom)
+            else if (xc >= 384 && xc <= 452)
             {
                 FileSaver.SaveFile(JOptionPane.showInputDialog(null,"Enter a Save Name"));
             }
-            else if (xc >= 460/var.winZoom && xc <= 528/var.winZoom)
+            else if (xc >= 460 && xc <= 528)
             {
                 FileSaver.LoadFile(JOptionPane.showInputDialog(null,"Enter the Name of a Save to Open"));
             }
@@ -466,11 +466,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
 
         if (var.state == 1) {
-            if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 243 / var.winZoom && var.CurrentX < 708 / var.winZoom && var.CurrentY < 303 / var.winZoom) {
+            if (var.MouseX > 504 && var.MouseY > 243 && var.MouseX < 708 && var.MouseY < 303) {
                 var.state = 0;
                 var.active = false;
             }
-            if (var.CurrentX > 504 / var.winZoom && var.CurrentY > 340 / var.winZoom && var.CurrentX < 708 / var.winZoom && var.CurrentY < 400 / var.winZoom) {
+            if (var.MouseX > 504 && var.MouseY > 340 && var.MouseX < 708 && var.MouseY < 400) {
                 var.state = 3;
                 var.active = false;
             }
@@ -493,7 +493,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
         else if(var.state == 3)
         {
-            if (var.CurrentX >= var.Width/2-80 && var.CurrentY >=  var.Height/2-40 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2-20 && !var.antiDouble)
+            if (var.MouseX >= (var.Width/2-80)*var.winZoom && var.MouseY >=  (var.Height/2-40)*var.winZoom && var.MouseX < (var.Width/2+100)*var.winZoom && var.MouseY < (var.Height/2-20)*var.winZoom && !var.antiDouble)
             {
                 var.antiDouble = true;
                 String NW = JOptionPane.showInputDialog(null,"Enter the new Screen's Width ( In pixels )");
@@ -516,7 +516,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
                 }
             }
-            if (var.CurrentX >= var.Width/2-80 && var.CurrentY >=  var.Height/2 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2+20 && !var.antiDouble)
+            if (var.MouseX >= (var.Width/2-80)*var.winZoom && var.MouseY >=  (var.Height/2)*var.winZoom && var.MouseX < (var.Width/2+100)*var.winZoom && var.MouseY < (var.Height/2+20)*var.winZoom && !var.antiDouble)
             {
                 var.antiDouble = true;
                 String NH = JOptionPane.showInputDialog(null,"Enter the new Screen's Height ( In pixels )");
@@ -539,7 +539,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
                 }
             }
-            if (var.CurrentX >= var.Width/2-80 && var.CurrentY >= var.Height/2+40 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2+60 && !var.antiDouble)
+            if (var.MouseX >= (var.Width/2-80)*var.winZoom && var.MouseY >= (var.Height/2+40)*var.winZoom && var.MouseX < (var.Width/2+100)*var.winZoom && var.MouseY < (var.Height/2+60)*var.winZoom && !var.antiDouble)
             {
                 var.antiDouble = true;
                 String NZ = JOptionPane.showInputDialog(null,"Enter the new Screen's Zoom ( Normally 1 to 5");
@@ -562,7 +562,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     javax.swing.JOptionPane.showMessageDialog(null,"Not a Number");
                 }
             }
-            if (var.CurrentX >= var.Width/2-80 && var.CurrentY >= var.Height/2+80 && var.CurrentX < var.Width/2+100 && var.CurrentY < var.Height/2+100 && !var.antiDouble)
+            if (var.MouseX >= (var.Width/2-80)*var.winZoom && var.MouseY >= (var.Height/2+80)*var.winZoom && var.MouseX < (var.Width/2+100)*var.winZoom && var.MouseY < (var.Height/2+100)*var.winZoom && !var.antiDouble)
             {
                 int blah1 = 0xfefefe;
                 var.antiDouble = true;
