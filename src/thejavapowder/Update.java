@@ -262,7 +262,7 @@ public class Update {
                             if (var.VMap[x][y + 1] < var.PMap[x][y] * 5)//If the Target have less then 50 Volts
                             {
                                 var.VMap[x][y] -= var.PMap[x][y] * 10;
-                                var.VMap[x][y + 1] = (int) (var.PMap[x][y] * 10);
+                                var.VMap[x][y + 1] = (var.PMap[x][y] * 10);
                             }
 
                         } else {
@@ -284,7 +284,7 @@ public class Update {
                                 if (var.VMap[x+xc][y+yc] < var.VMap[x][y]) {
                                     if (var.VMap[x][y] >= (var.PMap[x][y] * 10)) {
                                         var.VMap[x][y] -= (var.PMap[x][y] * 10);
-                                        var.VMap[x+xc][y+yc] = (int) (var.PMap[x][y] * 10);
+                                        var.VMap[x+xc][y+yc] = (var.PMap[x][y] * 10);
                                     }
                                 }
                             }

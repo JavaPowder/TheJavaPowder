@@ -4,7 +4,6 @@ package thejavapowder;
 import org.w3c.dom.*;
 
 import java.io.*;
-import java.util.Map;
 import java.util.Random;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

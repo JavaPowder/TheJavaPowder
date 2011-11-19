@@ -1,11 +1,8 @@
 package thejavapowder;
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.util.Random;
 
 
 public class TheJavaPowder extends JFrame implements Runnable, ActionListener, ItemListener, MouseListener, MouseMotionListener, KeyListener, MouseWheelListener {
@@ -724,103 +721,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     public void actionPerformed(ActionEvent e) {
     }
-
-
-
-        /* // Old saving code
-                if(filename != "")
-                    file = new File(filename);
-                else return 0;
-                fos = new FileOutputStream(file);
-                dos = new DataOutputStream(fos);
-                // dataoutput stream has functions: writeInt, writeChars, writeByte
-                // Data will be written like this:
-                //0 3 6		  		|  ^->|
-                //1 4 7			 	|  |  |
-                //2 5 8	 etc	 	V->|  V
-                dos.writeChars("*");
-                for(int x = 0; x < var.Width; x++)
-                {
-                    for(int y = 0; y < var.Width; y++)
-                    {
-                        fos.write(var.Map[x][y]);
-
-                    }
-                }
-                dos.writeChars("*");
-                for(int x = 0; x < var.Width; x++)
-                {
-                    for(int y = 0; y < var.Width; y++)
-                    {
-                        fos.write(var.VMap[x][y]);
-
-                    }
-                }
-                dos.writeChars("*");
-                for(int x = 0; x < var.Width; x++)
-                {
-                    for(int y = 0; y < var.Width; y++)
-                    {
-                        fos.write(var.PMap[x][y]);
-
-
-                    }
-                }
-                dos.writeChars("*");
-            }
-                catch (IOException Exc)
-            {
-                console.printtxt(Exc.getMessage());
-                return 1;
-            }
-            finally
-            {
-                try {
-                    fos.close();
-                    dos.close();
-                } catch (IOException e) {
-                    //
-                    e.printStackTrace();
-                }
-
-                return 2;*/
-    //}
-
-    public void LoadFile()
-    {
-
-    }
-
-
-    /*	// Call save code
-          byte asdasdasd = saveFile(Name);
-          switch asdasdasd
-          {
-              case 0: console.printtxt("Save file name not inserted"); break;
-              case 1: console.printtxt("I/O Exception!"); break;
-              case 2: console.printtxt("Save file correctly saved"); break;
-              default: console.printtxt("Nothing has returned"); break;
-          } */
-
-    //public /*byte*/ void loadFile(String name) {
-        /*
-
-            FileInputStream read;
-            InputStreamReader reader;
-            for(int a = 0; a < var.Width * var.Height * 2; a += 2)
-            {
-            try {
-                read = new FileInputStream(name);
-                reader = new InputStreamReader(read);
-                // It needs to split the file by byte and then read the array. Please learn File IO by streamreaders.
-                // something
-                File
-                var.Map[a][] =
-                var.VMap[++a][] =
-
-            }
-            }*/
-    //}
 
     /*			___________
        ===	 == /		   \
