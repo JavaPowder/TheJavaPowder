@@ -39,7 +39,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             }
         });
 
-        saver.loadPref();
         init();
 
         while (!quit) {
@@ -137,6 +136,15 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
 
     public void init() {
+        var.Width = saver.getPref()[0];
+        var.Height = saver.getPref()[1];
+        var.winZoom = (byte)saver.getPref()[2];
+
+        var.Map = new byte[var.Width][var.Height];
+        var.HMap = new float[var.Width][var.Height];
+        var.VMap = new int[var.Width][var.Height];
+        var.PMap = new byte[var.Width][var.Height];
+
         this.setVisible(true);
         this.setResizable(false);
         this.setBackground(Color.black);
@@ -430,6 +438,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 }
                 var.active = false;
                 console.printtxt("Scene Reset.");
+                var.active = false;
             }
             else if (xc >= 90 && xc <= 198)
             {

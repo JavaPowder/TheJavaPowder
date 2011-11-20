@@ -35,11 +35,10 @@ public class Variables {
      * 5 = Console
      */
     int state           = 0;
-
     int RandomNum       = 0;
-    int Height          = 1500;
+    int Height          = 400;
     int optionsHeight   = 14;
-    int Width           = 1500;
+    int Width           = 400;
     int wait            = 30;
     int CurrentX        = 100;
     int CurrentY        = 100;
@@ -61,7 +60,7 @@ public class Variables {
     byte[]     reactives = new byte[]{};
     byte [][]  Map       = new byte [Width][Height];// The particle type map
     float[][]  HMap      = new float[Width][Height];// The Heat type map
-    int[][]  VMap      = new int[Width][Height];// The Voltage type map
+    int[][]    VMap      = new int[Width][Height];// The Voltage type map
     byte [][]  PMap      = new byte [Width][Height];// The Particle Properties Map
 
     //Elements Initialization

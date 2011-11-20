@@ -70,9 +70,9 @@ class FileSaver {
 
     }
 
-    public void loadPref()
+    public int[] getPref()
     {
-      //if(){
+        int[] setting = new int[3];
         try {
             File fXmlFile = new File("jpsettings.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -86,18 +86,18 @@ class FileSaver {
             Element eElement = (Element) setN;
             Node nNode = set.item(0);
             if (setN.getNodeType() == Node.ELEMENT_NODE) {
-             var.Width = Integer.parseInt(getTagValue("width", eElement));
-             var.Height = Integer.parseInt(getTagValue("height", eElement));
-             var.winZoom = (byte)Integer.parseInt(getTagValue("zoom", eElement));
+
+             setting[0] = Integer.parseInt(getTagValue("width", eElement));
+             setting[1] = Integer.parseInt(getTagValue("height", eElement));
+             setting[2] = Integer.parseInt(getTagValue("zoom", eElement));
+
              }
 
-            } catch (IOException e) {
-            } catch (ParserConfigurationException e) {
-        } catch (SAXException e) {
-        }
-
-      //}
+            } catch (Exception e) {
+            }
+        return setting;
     }
+
 
     private static String getTagValue(String sTag, Element eElement) {
 	NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
