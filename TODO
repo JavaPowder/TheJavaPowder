@@ -29,6 +29,12 @@ Fix known bugs
 Dev: <all>
 Priority: Medium
 
+TheJavaPowder
+Make the menu centered and element icons fit even with winZoom
+Make the pointed tile properties text fit nicely even with low/high screen size
+Dev: <all>
+Priority: Medium
+
 Update
 Make the Pressure layer
 Dev: <none>
