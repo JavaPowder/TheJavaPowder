@@ -11,8 +11,14 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        *
        * Known Bugs to fix:
        *
-       * The Element menu doesn't work properly while zoomed/scrolled
-       * Fix: Maybe add var.Zoom and Scroll consideration ( Not sure... )
+       * The properties sometimes aren't showed when zoomed
+       * Fix: Unknown
+       *
+       * Crossing doesn't work
+       * Fix: Unknown
+       *
+       * Screen doesn't work properly
+       * Fix: Unknown
        *
        * The Setting Menu's Button shows 2 popups instead of 1
        *
@@ -234,15 +240,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         if (bufferGraphics == null) return;
         bufferGraphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-        bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
-        bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
-        bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
-        bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Mouse X Coordinate
-        bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Y Coordinate
+
 
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
 
+	    bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
+        bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
+        bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
+        bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Mouse X Coordinate
+        bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Y Coordinate
 
             for (int x = 0; x < var.Width; x++) {
                 for (int y = 0; y < var.Height; y++) {
