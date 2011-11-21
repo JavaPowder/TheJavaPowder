@@ -1,6 +1,5 @@
 package thejavapowder;
 
-import java.util.Map;
 import java.util.Random;
 
 public class Update {
@@ -31,7 +30,7 @@ public class Update {
     Random rand = new Random();
     Variables var = thejavapowder.TheJavaPowder.var;
     Methods meth = new Methods();
-	Draw draw = new Draw();
+	draw draw = new draw();
 
     public void update() {
         EndTime = System.currentTimeMillis();

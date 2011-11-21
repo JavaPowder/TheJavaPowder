@@ -2,9 +2,9 @@ package thejavapowder;
 
 public class draw
 {
-    static Variables var = thejavapowder.TheJavaPowder.var;
+    Variables var = thejavapowder.TheJavaPowder.var;
 
-    public static void drawPoint(int x, int y, byte id) {
+    public void drawPoint(int x, int y, byte id) {
         if ((var.active || !var.Simulating) && x > 1 && y > 1 && x < var.Width && y < var.Height) {
             var.wait = 30;
             if (id != -126 && id != -125) {
@@ -59,7 +59,7 @@ public class draw
         }
     }
 
-    public static void drawCircle(int x, int y, byte rd, byte id) {
+    public void drawCircle(int x, int y, byte rd, byte id) {
         int tempy = y;
         for (int i = x - rd; i <= x; i++) {
             double distance = Math.sqrt(Math.pow((double) x - (double) i, (double) 2) + Math.pow((double) y - (double) tempy, (double) 2));
@@ -77,7 +77,7 @@ public class draw
         }
     }
 
-    public static void drawSquare(int xc, int yc, byte size, byte id) {
+    public void drawSquare(int xc, int yc, byte size, byte id) {
         for (int x = xc; x < xc + size; x++) {
             for (int y = yc; y < yc + size; y++) {
                 drawPoint(x, y, id);
@@ -87,14 +87,14 @@ public class draw
             drawPoint(xc, yc, id);
     }
 
-    public static void drawstuff(int x, int y, byte s, byte i) {
+    public void drawstuff(int x, int y, byte s, byte i) {
         if (var.Shape == 0)
             drawSquare(x - s, y - s, (byte) (s * 2), i);
         else
             drawCircle(x, y, s, i);
     }
 
-    public static void create_line(int x1, int y1, int x2, int y2, byte rd, byte id) // From old autorun.lua
+    public void create_line(int x1, int y1, int x2, int y2, byte rd, byte id) // From old autorun.lua
     {
         if (x1 > x2) {
             int xc2 = x1;
