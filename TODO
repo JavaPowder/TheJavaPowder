@@ -20,23 +20,37 @@ Make scene saving
 Dev: <MasterMind555> <Yes>
 Priority: Medium
 
+Update/TheJavaPowder
+Fix known bugs
+Dev: <all>
+Priority: Medium
+
 Update
 Make the Pressure layer
 Dev: <none>
 Priority : Medium
 
 All
+Update : 409 - 445
+Update : 447 - 468
 Documenting the code more
 Dev: <all>
 Priority: Medium
-Lines to document :
-Update : 409 - 445
-Update : 447 - 468
+
+None
+Find new bugs and report them
+Dev: <none>
+Priority: Low
 
 TheJavaPowder
 Finish the Console
 Dev: <none>
 Priority: Low
+
+TheJavaPowder
+Make an Dev mode with console output and a FPS test ( May require finished console )
+Dev: <none>
+Priority : Low
 
 All
 Separate the code into more classes
