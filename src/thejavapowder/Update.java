@@ -116,7 +116,7 @@ public class Update {
         }//End of Updating maps
         if (var.active && var.state == 0) {//If drawing is active and we are in the game screen
                 if (var.Drawing) {//If it should be drawing
-                    draw.create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped);//Draw
+                    Draw.create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped);//Draw
                 }
             } else {
                 if (var.wait < 1) {//If the wait time to draw is over

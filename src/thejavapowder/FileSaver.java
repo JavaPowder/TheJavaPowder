@@ -69,7 +69,22 @@ class FileSaver {
 
 
     }
-
+	public boolean hasPref()
+	{
+		boolean haspref = false;
+		        try {
+					File fXmlFile = new File("jpsettings.xml");
+					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+					Document doc = dBuilder.parse(fXmlFile);
+					haspref = true;
+		        }
+		        catch(Exception e)
+		        {
+			       haspref = false;
+		        }
+		return haspref;
+	}
     public int[] getPref()
     {
         int[] setting = new int[3];
@@ -136,15 +151,9 @@ class FileSaver {
         public static void SaveFile(String fileName) {
         try {
             console.printtxt("Saving...");
-            /*
-            if(fileName.equals(""))
-            {
-                file = new File("" + randomSaveName.nextInt() + ".jps");
-            }
-            else
-            {*/
-                file = new File("" + fileName + ".jps");
-            //}
+
+            file = new File("" + fileName + ".jps");
+
 
             writer = new BufferedWriter(new FileWriter(file));
             writer.write("javapowder-save\n");

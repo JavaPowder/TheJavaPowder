@@ -80,7 +80,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     Image playPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
     Image settingsPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
-    Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javaPowder.png"));
+    Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javapowder.png"));
     Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/console.png"));
 
     Image[] thumbnails = new Image[]{
@@ -140,12 +140,17 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        *
        */
 
-
     public void init() {
-        var.Width = saver.getPref()[0];
-        var.Height = saver.getPref()[1];
-        var.winZoom = (byte)saver.getPref()[2];
-
+	    if(saver.hasPref())
+	    {
+			var.Width = saver.getPref()[0];
+			var.Height = saver.getPref()[1];
+			var.winZoom = (byte)saver.getPref()[2];
+	    }
+	    else
+	    {
+		    saver.savePref();
+	    }
         var.Map = new byte[var.Width][var.Height];
         var.HMap = new float[var.Width][var.Height];
         var.VMap = new int[var.Width][var.Height];
