@@ -55,6 +55,7 @@ public class Methods {
 
     public boolean canMove(final byte p1, final byte p2, final boolean weight)
     {
+
         if (weight)
             return p2 == -127 || var.Elements[p1].weight > var.Elements[p2].weight;
         else

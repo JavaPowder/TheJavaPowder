@@ -250,11 +250,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
 
-	    bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
-        bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
-        bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
-        bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Mouse X Coordinate
-        bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Y Coordinate
+
 
             for (int x = 0; x < var.Width; x++) {
                 for (int y = 0; y < var.Height; y++) {
@@ -310,6 +306,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             if ((var.MouseX / var.winZoom) < var.Width && var.MouseX > 0 && (var.MouseY / var.winZoom) < var.Height && var.MouseY > 0) {
 
+	            bufferGraphics.setColor(Color.WHITE);
+
                 if (var.Map[var.DrawX][var.DrawY] != -127)
                     bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.DrawX][var.DrawY]].name, 10, 30 + 5 * var.winZoom);//Draw the Hovered Element Name
                 else
@@ -318,6 +316,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.DrawX][var.DrawY], 10, 30 + 15 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.DrawX ][var.DrawY], 10, 30 + 25 * var.winZoom);//Draw the Property Level
                 bufferGraphics.drawString("Temperature:" + var.HMap[var.DrawX][var.DrawY] + " C", 10, 30 + 35 * var.winZoom);//Draw the Temperature
+				bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
+				bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
+				bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
+				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Mouse X Coordinate
+				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Y Coordinate
             }
 
             if (var.state == 2)//If we are choosing an element

@@ -1,5 +1,6 @@
 package thejavapowder;
 
+import java.util.Map;
 import java.util.Random;
 
 public class Update {
@@ -420,23 +421,26 @@ public class Update {
                 i++;
             }
             i = j = 0;
-            while (i < 5 && !moved)
-            {
-                randnum = rand.nextDouble();
-                triedmove = false;
-                total = 0;
-                while(j < 8 && !triedmove)
-                {
-                    total += chances[j];
-                    if (total > randnum)
-                    {
-                        triedmove = true;
-                        moved = meth.tryMove(x,y,j,true);
-                    }
-                    j++;
-                }
-                i++;
-            }
+	        if(var.Map[x][y] ! = -127)
+	        {
+				while (i < 5 && !moved)
+				{
+					randnum = rand.nextDouble();
+					triedmove = false;
+					total = 0;
+					while(j < 8 && !triedmove)
+					{
+						total += chances[j];
+						if (total > randnum)
+						{
+							triedmove = true;
+							moved = meth.tryMove(x,y,j,true);
+						}
+						j++;
+					}
+					i++;
+				}
+	        }
         }
     }
 
