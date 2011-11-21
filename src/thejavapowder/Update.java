@@ -143,49 +143,31 @@ public class Update {
             {
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
-                        if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0))//Forthe 4 spots directly touching it
+                        if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0))//For the 4 spots directly touching it
                         {
-                            if (meth.GetConductive(var.Map[x+xc][y+yc]))//If the surrounding particle is conductive
+                            if (meth.GetConductive(var.Map[x+xc][y+yc]) || var.Map[x+xc][y+yc] == 13)//If the surrounding particle is conductive
                             {
-                                if (var.Map[x+xc][y+yc] != 11 || var.Map[x+xc][y+yc] != 13)//If it's not a rechargable battery or crossing
+                                if (var.Map[x+xc][y+yc] != 11 && var.Map[x+xc][y+yc] != 13)//If it's not a rechargable battery or crossing
                                 {
                                     if (var.VMap[x+xc][y+yc] < var.VMap[x][y]) {
                                         var.VMap[x][y] -= 3;
                                         var.VMap[x+xc][y+yc] = var.VMap[x][y];
                                     }
                                 }
-                                if (var.Map[x+xc][y+yc] == 11) {
+                                else if (var.Map[x+xc][y+yc] == 11) {
                                     var.VMap[x][y] -= 20;
                                     var.VMap[x+xc][y+yc] += 20;
                                 }
-                                if (var.Map[x+xc][y+yc] == 13)//If it's crossing
+                                else if (var.Map[x+xc][y+yc] == 13)//If it's crossing
                                 {
-                                    if (meth.GetConductive(var.Map[x][y+yc*2])) {
-
-                                        var.VMap[x][y] -= 3;
-                                        var.VMap[x+xc*2][y+yc*2] = var.VMap[x][y];
-
-                                    } else if (var.VMap[x+xc*2][y+yc*2] == 13) {
-
-                                        if (meth.GetConductive(var.Map[x+xc*3][y+yc*3])) {
-                                            var.VMap[x][y] -= 3;
-                                            var.VMap[x+xc*3][y+yc*3] = var.VMap[x][y];
-
-                                        } else if (var.VMap[x+xc*3][y+yc*3] == 13) {
-
-                                            if (meth.GetConductive(var.Map[x+xc*4][y+yc*4])) {
-                                                var.VMap[x][y] -= 3;
-                                                var.VMap[x+xc*4][y+yc*4] = var.VMap[x][y];
-
-                                            } else if (var.VMap[x+xc*4][y+yc*4] == 13) {
-
-                                                if (meth.GetConductive(var.Map[x+xc*5][y+yc*5])) {
-                                                    var.VMap[x][y] -= 3;
-                                                    var.VMap[x+xc*5][y+yc*5] = var.VMap[x][y];
-                                                }
-                                            }
-                                        }
-                                    }
+									for (int i = 2; i < 5; i++)
+									{
+										if (meth.GetConductive(var.Map[x+xc*i][y+yc*i]))
+										{
+											var.VMap[x][y] -= 3;
+                                        	var.VMap[x+xc*i][y+yc*i] = var.VMap[x][y];
+										}
+									}
                                 }
                             }
                         }
