@@ -9,6 +9,10 @@ Dev: <The Name of the Dev(s) that's working on it>
 Priority: <How fast it must be done> <Can other devs help>
 
 
+All
+Add an toggle switch for every calculations ( Reactive engine, electricity )
+Dev: <none>
+Priority: High
 
 Update
 Add in particle velocity and pressure to the method Update Element, and also make fire raise up
