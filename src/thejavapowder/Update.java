@@ -421,7 +421,7 @@ public class Update {
                 i++;
             }
             i = j = 0;
-	        if(var.Map[x][y] ! = -127)
+	        if(var.Map[x][y] != -127)
 	        {
 				while (i < 5 && !moved)
 				{
