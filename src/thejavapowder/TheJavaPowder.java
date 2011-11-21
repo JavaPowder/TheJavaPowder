@@ -11,7 +11,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        *
        * Known Bugs to fix:
        *
-       * The properties sometimes aren't showed when zoomed
+       * When there's alot of particles, it doesn't draw smoothly
        * Fix: Unknown
        *
        * Crossing doesn't work
@@ -305,14 +305,14 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
             if ((var.MouseX / var.winZoom) < var.Width && var.MouseX > 0 && (var.MouseY / var.winZoom) < var.Height && var.MouseY > 0) {
 
-                if (var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] != -127)
-                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom]].name, 10, 30 + 5 * var.winZoom);//Draw the Hovered Element Name
+                if (var.Map[var.DrawX][var.DrawY] != -127)
+                    bufferGraphics.drawString("ID:" + var.Elements[var.Map[var.DrawX][var.DrawY]].name, 10, 30 + 5 * var.winZoom);//Draw the Hovered Element Name
                 else
                     bufferGraphics.drawString("ID: None", 10, 30 + 5 * var.winZoom);//Draw the Hovered Element Name
 
-                bufferGraphics.drawString("Voltage:" + var.VMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 + 15 * var.winZoom);//Draw the Hovered Voltage
-                bufferGraphics.drawString("Property:" + var.PMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom], 10, 30 + 25 * var.winZoom);//Draw the Property Level
-                bufferGraphics.drawString("Temperature:" + var.HMap[var.CurrentX / var.Zoom][var.CurrentY / var.Zoom] + " C", 10, 30 + 35 * var.winZoom);//Draw the Temperature
+                bufferGraphics.drawString("Voltage:" + var.VMap[var.DrawX][var.DrawY], 10, 30 + 15 * var.winZoom);//Draw the Hovered Voltage
+                bufferGraphics.drawString("Property:" + var.PMap[var.DrawX ][var.DrawY], 10, 30 + 25 * var.winZoom);//Draw the Property Level
+                bufferGraphics.drawString("Temperature:" + var.HMap[var.DrawX][var.DrawY] + " C", 10, 30 + 35 * var.winZoom);//Draw the Temperature
             }
 
             if (var.state == 2)//If we are choosing an element
@@ -474,9 +474,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.active = false;
             }
         }
-        var.Drawing = true;
-        if (var.state == 0) {
-
+        else if (var.state == 0) {
+	        var.Drawing = true;
             if (e.getModifiersEx() == InputEvent.BUTTON1_DOWN_MASK) {
                 var.leftClick = true;
             } else if (e.getModifiersEx() == InputEvent.BUTTON3_DOWN_MASK) {
