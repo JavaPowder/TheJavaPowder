@@ -14,8 +14,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        * When there's alot of particles, it doesn't draw smoothly
        * Fix: Unknown
        *
-       * Crossing doesn't work
-       * Fix: Unknown
+       * There's no cursor when you scroll down to 1 pixel
+       * Fix: Draw an cursor when at lowest brush
        *
        * Screen doesn't work properly
        * Fix: Unknown
