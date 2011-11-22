@@ -143,9 +143,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     public void init() {
 	    if(saver.hasPref())
 	    {
-			var.Width = saver.getPref()[0];
-			var.Height = saver.getPref()[1];
-			var.winZoom = (byte)saver.getPref()[2];
+			int[] settings = saver.getPref();
+			var.Width = settings[0];
+			var.Height = settings[1];
+			var.winZoom = (byte)settings[2];
 	    }
 	    else
 	    {
