@@ -55,13 +55,14 @@ public class Variables {
     byte currentMode    = 0; // 0 = reactive mode, 1 = electronic mode
     float Brightness    = 0.0f;
 
-    int[]      surArray  = new int[8];
-    byte[]     reaction  = new byte[16];
-    byte[]     reactives = new byte[]{};
-    byte [][]  Map       = new byte [Width][Height];// The particle type map
-    float[][]  HMap      = new float[Width][Height];// The Heat type map
-    int[][]    VMap      = new int[Width][Height];// The Voltage type map
-    byte [][]  PMap      = new byte [Width][Height];// The Particle Properties Map
+    int[]     surArray  = new int[8];
+    byte[]    reaction  = new byte[16];
+    byte[]    reactives = new byte[]{};
+    byte[][]  Map       = new byte [Width][Height];// The Particle type map
+    float[][] HMap      = new float[Width][Height];// The Heat type map
+    int[][]   VMap      = new int[Width][Height];  // The Voltage type map
+    byte[][]  PMap      = new byte [Width][Height];// The Particle Properties Map
+	float[][] PrMap     = new float [Width/4][Height/4];// The Pressure Map
 
     //Elements Initialization
     //Order of creation: new Element(amount-of-burn,weight,conductive(boolean), Name, Description, colour(HEX), reactives, default temp)

@@ -14,9 +14,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        * When there's alot of particles, it doesn't draw smoothly
        * Fix: Unknown
        *
-       * Crossing doesn't work
-       * Fix: Unknown
-       *
        * Screen doesn't work properly
        * Fix: Unknown
        *
@@ -156,6 +153,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.HMap = new float[var.Width][var.Height];
         var.VMap = new int[var.Width][var.Height];
         var.PMap = new byte[var.Width][var.Height];
+		var.PrMap = new float [var.Width/4][var.Height/4];
 
         this.setVisible(true);
         this.setResizable(false);
@@ -185,6 +183,10 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.HMap[x][y] = 0;
             }
         }
+		for (int x = 0; x < var.Width/4; x++)
+            for (int y = 0; y < var.Height/4; y++) {
+				var.PrMap[x][y] = 0;
+            }
 
         consolearea.setVisible(false);
         consolearea.setFont(new Font("Courier New", Font.BOLD, 10));
@@ -317,11 +319,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("Voltage:" + var.VMap[var.DrawX][var.DrawY], 10, 30 + 15 * var.winZoom);//Draw the Hovered Voltage
                 bufferGraphics.drawString("Property:" + var.PMap[var.DrawX ][var.DrawY], 10, 30 + 25 * var.winZoom);//Draw the Property Level
                 bufferGraphics.drawString("Temperature:" + var.HMap[var.DrawX][var.DrawY] + " C", 10, 30 + 35 * var.winZoom);//Draw the Temperature
-				bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 45 * var.winZoom);//Draw the FPS
-				bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 55 * var.winZoom);//Draw the Average FPS
-				bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 65 * var.winZoom);//Draw the Update FPS
-				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 75 * var.winZoom);//Draw the Mouse X Coordinate
-				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 85 * var.winZoom);//Draw the Mouse Y Coordinate
+				if (var.DrawX < var.Width-4 && var.DrawX >= 0 && var.DrawY < var.Height-4 && var.DrawY >= 0)
+					if (var.PrMap[var.DrawX/4][var.DrawY/4] > .01)
+						bufferGraphics.drawString("Pressure:" + var.PrMap[var.DrawX/4][var.DrawY/4], 10, 30 + 45 * var.winZoom);//Draw the Pressure
+					else
+					    bufferGraphics.drawString("Pressure:" + 0, 10, 30 + 45 * var.winZoom);//Draw the Pressure
+				bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 55 * var.winZoom);//Draw the FPS
+				bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 65 * var.winZoom);//Draw the Average FPS
+				bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 75 * var.winZoom);//Draw the Update FPS
+				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 85 * var.winZoom);//Draw the Mouse X Coordinate
+				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
             }
 
             if (var.state == 2)//If we are choosing an element

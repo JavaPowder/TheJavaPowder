@@ -102,6 +102,7 @@ public class Methods {
                 var.HMap[x2][y2] = var.HMap[x1][y1];
                 var.Map [x1][y1] = -127;
                 var.HMap[x1][y1] = 0;
+				//var.PrMap[x1/4][y1/4] += .1;
             }
         }
 
@@ -114,6 +115,11 @@ public class Methods {
         var.conductive = false;
         return false;
     }
+
+	public boolean validSpace(int x, int y)
+	{
+		return (x < var.Width/4 && x >= 0 && y < var.Height/4 && y >= 0);
+	}
 
 }
 

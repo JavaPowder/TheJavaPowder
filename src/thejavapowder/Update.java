@@ -43,6 +43,7 @@ public class Update {
         StartTime = System.currentTimeMillis();
 
         if (var.Simulating && var.state == 0) {
+			//UpdateAir();
             for (int x = var.Width - 1; x > 1; x--) {
                 for (int y = var.Height - 1; y > 1; y--)//For each Space
                 {
@@ -130,6 +131,36 @@ public class Update {
             var.LastDrawX = var.DrawX;//Update the drawing points
             var.LastDrawY = var.DrawY;//Update the drawing points
     }
+
+	public void UpdateAir()
+	{
+		for (int x = 0; x < var.Width/4; x++)
+            for (int y = 0; y < var.Height/4; y++)//For each Space
+            {
+				if (var.PrMap[x][y] < .0000001)
+					var.PrMap[x][y] = 0;
+				else
+				{
+					for (int i = 0; i < 4; i++)//For every space around the particle
+					{
+						int x2 = x, y2 = y;
+						if (i == 0)
+							y2--;
+						if (i == 1)
+							x2++;
+						if (i == 2)
+							y2++;
+						if (i == 3)
+							x2--;
+						if (meth.validSpace(x,y) && meth.validSpace(x2,y2)) {
+							float airTransfer = (var.PrMap[x][y] - var.PrMap[x2][y2])/5;
+							var.PrMap[x][y] -= airTransfer;
+							var.PrMap[x2][y2] += airTransfer;
+						}
+					}
+				}
+			}
+	}
 
     public void UpdateVoltage(final int x, final int y) {
         if (var.Map[x][y] == 5)//If it's a battery, give it infinite voltage
