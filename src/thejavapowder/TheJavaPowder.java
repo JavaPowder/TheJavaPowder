@@ -157,6 +157,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.VMap = new int[var.Width][var.Height];
         var.PMap = new byte[var.Width][var.Height];
 		var.PrMap = new float [var.Width/4][var.Height/4];
+		var.VxMap = new float [var.Width/4][var.Height/4];
+		var.VyMap = new float [var.Width/4][var.Height/4];
+		var.OldPrMap = new float [var.Width/4][var.Height/4];
+		var.OldVxMap = new float [var.Width/4][var.Height/4];
+		var.OldVyMap = new float [var.Width/4][var.Height/4];
 
         this.setVisible(true);
         this.setResizable(false);
@@ -189,6 +194,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 		for (int x = 0; x < var.Width/4; x++)
             for (int y = 0; y < var.Height/4; y++) {
 				var.PrMap[x][y] = 0;
+				var.VxMap[x][y] = 0;
+				var.VyMap[x][y] = 0;
+				var.OldPrMap[x][y] = 0;
+				var.OldVxMap[x][y] = 0;
+				var.OldVyMap[x][y] = 0;
             }
 
         consolearea.setVisible(false);
@@ -323,7 +333,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("Property:" + var.PMap[var.DrawX ][var.DrawY], 10, 30 + 25 * var.winZoom);//Draw the Property Level
                 bufferGraphics.drawString("Temperature:" + var.HMap[var.DrawX][var.DrawY] + " C", 10, 30 + 35 * var.winZoom);//Draw the Temperature
 				if (var.DrawX < var.Width-4 && var.DrawX >= 0 && var.DrawY < var.Height-4 && var.DrawY >= 0)
-					if (var.PrMap[var.DrawX/4][var.DrawY/4] > .01)
+					if (var.PrMap[var.DrawX/4][var.DrawY/4] > .01 || var.PrMap[var.DrawX/4][var.DrawY/4] < -.01)
 						bufferGraphics.drawString("Pressure:" + var.PrMap[var.DrawX/4][var.DrawY/4], 10, 30 + 45 * var.winZoom);//Draw the Pressure
 					else
 					    bufferGraphics.drawString("Pressure:" + 0, 10, 30 + 45 * var.winZoom);//Draw the Pressure

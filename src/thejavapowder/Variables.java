@@ -63,6 +63,12 @@ public class Variables {
     int[][]   VMap      = new int[Width][Height];  // The Voltage type map
     byte[][]  PMap      = new byte [Width][Height];// The Particle Properties Map
 	float[][] PrMap     = new float [Width/4][Height/4];// The Pressure Map
+	float[][] VxMap     = new float [Width/4][Height/4];// The X Velocity Map
+	float[][] VyMap     = new float [Width/4][Height/4];// The Y Velocity Map
+	float[][] OldPrMap     = new float [Width/4][Height/4];// The Old Pressure Map
+	float[][] OldVxMap     = new float [Width/4][Height/4];// The Old X Velocity Map
+	float[][] OldVyMap     = new float [Width/4][Height/4];// The Old Y Velocity Map
+
 
     //Elements Initialization
     //Order of creation: new Element(amount-of-burn,weight,conductive(boolean), Name, Description, colour(HEX), reactives, default temp)
