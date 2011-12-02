@@ -73,6 +73,10 @@ public class Update {
 								{
 									UpdateVoltage(x, y);
 								}
+								if(var.heat)
+								{
+									UpdateHeat(x, y);
+								}
 	                        }
 	                    }
 
@@ -346,14 +350,9 @@ public class Update {
     }//End of Voltage Update
 
 
-
-    private void UpdateElement(final int x, final int y) {
-        if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
-        {
-            var.Map[x][y] = -127;//Destroy it
-            return;
-        }
-        for (int i = 0; i < 8; i++)//For every space around the particle
+	private void UpdateHeat(int x, int y)
+	{
+		for (int i = 0; i < 8; i++)//For every space around the particle
         {
             if (var.surArray[i] == 15)
             {
@@ -383,6 +382,14 @@ public class Update {
                 }
             }
         }
+	}
+    private void UpdateElement(final int x, final int y) {
+        if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
+        {
+            var.Map[x][y] = -127;//Destroy it
+            return;
+        }
+
         if(var.Map[x][y] != -127)
         {
             final char type = var.Elements[var.Map[x][y]].state;

@@ -102,7 +102,10 @@ public class Methods {
                 var.HMap[x2][y2] = var.HMap[x1][y1];
                 var.Map [x1][y1] = -127;
                 var.HMap[x1][y1] = 0;
-				var.PrMap[x1/4][y1/4] += .1;
+	            if(var.pressure)
+	            {
+					var.PrMap[x1/4][y1/4] += .1;
+	            }
             }
         }
 
