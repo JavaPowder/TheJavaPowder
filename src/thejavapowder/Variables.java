@@ -55,19 +55,20 @@ public class Variables {
     byte currentMode    = 0; // 0 = reactive mode, 1 = electronic mode
     float Brightness    = 0.0f;
 
-    int[]     surArray  = new int[8];
-    byte[]    reaction  = new byte[16];
-    byte[]    reactives = new byte[]{};
-    byte[][]  Map       = new byte [Width][Height];// The Particle type map
-    float[][] HMap      = new float[Width][Height];// The Heat type map
-    int[][]   VMap      = new int[Width][Height];  // The Voltage type map
-    byte[][]  PMap      = new byte [Width][Height];// The Particle Properties Map
+    int[]     surArray  = new int   [8];
+    byte[]    reaction  = new byte  [16];
+    byte[]    reactives = new byte  []{};
+    byte[][]  Map       = new byte  [Width][Height];// The Particle type map
+    float[][] HMap      = new float [Width][Height];// The Heat type map
+    int[][]   VMap      = new int   [Width][Height];  // The Voltage type map
+    byte[][]  PMap      = new byte  [Width][Height];// The Particle Properties Map
 	float[][] PrMap     = new float [Width/4][Height/4];// The Pressure Map
 	float[][] VxMap     = new float [Width/4][Height/4];// The X Velocity Map
 	float[][] VyMap     = new float [Width/4][Height/4];// The Y Velocity Map
-	float[][] OldPrMap     = new float [Width/4][Height/4];// The Old Pressure Map
-	float[][] OldVxMap     = new float [Width/4][Height/4];// The Old X Velocity Map
-	float[][] OldVyMap     = new float [Width/4][Height/4];// The Old Y Velocity Map
+	float[][] OldPrMap  = new float [Width/4][Height/4];// The Old Pressure Map
+	float[][] OldVxMap  = new float [Width/4][Height/4];// The Old X Velocity Map
+	float[][] OldVyMap  = new float [Width/4][Height/4];// The Old Y Velocity Map
+
 
 
     //Elements Initialization

@@ -44,12 +44,22 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 System.exit(0);
             }
         });
-
+	    long before;
+	    long after;
         init();
-
+	    before = System.currentTimeMillis();
         while (!quit) {
+
+
             update.update();
-            repaint();
+	        after = System.currentTimeMillis();
+
+	        if(after - before > 40)
+	        {
+                repaint();
+
+		        before = System.currentTimeMillis();
+	        }
         }
     }
 
@@ -152,13 +162,13 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 	    {
 		    saver.savePref();
 	    }
-        var.Map = new byte[var.Width][var.Height];
-        var.HMap = new float[var.Width][var.Height];
-        var.VMap = new int[var.Width][var.Height];
-        var.PMap = new byte[var.Width][var.Height];
-		var.PrMap = new float [var.Width/4][var.Height/4];
-		var.VxMap = new float [var.Width/4][var.Height/4];
-		var.VyMap = new float [var.Width/4][var.Height/4];
+        var.Map      = new byte  [var.Width]  [var.Height];
+        var.HMap     = new float [var.Width]  [var.Height];
+        var.VMap     = new int   [var.Width]  [var.Height];
+        var.PMap     = new byte  [var.Width]  [var.Height];
+		var.PrMap    = new float [var.Width/4][var.Height/4];
+		var.VxMap    = new float [var.Width/4][var.Height/4];
+		var.VyMap    = new float [var.Width/4][var.Height/4];
 		var.OldPrMap = new float [var.Width/4][var.Height/4];
 		var.OldVxMap = new float [var.Width/4][var.Height/4];
 		var.OldVyMap = new float [var.Width/4][var.Height/4];
