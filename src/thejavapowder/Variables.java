@@ -6,13 +6,21 @@ public class Variables {
 
 
     boolean Drawing       = false;
-    boolean DebugMode     = false;
     boolean antiDouble    = false;
     boolean active        = true; //For elements menu
     boolean stopReactions = false;
     boolean Simulating    = true;//Paused or not paused
     boolean leftClick     = true;
     boolean conductive    = false;
+
+
+	boolean electricity   = false;
+	boolean heat          = false;
+	boolean pressure      = false;
+	boolean debug         = false;
+	boolean reactions     = true;
+	boolean physics       = true;
+	boolean stateChanges  = true;
 
     /*Transformated Variables:
      * Variables that represents a long calculation used often

@@ -743,7 +743,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             }
             if (evt.getKeyChar() == 'd')
             {
-                var.DebugMode = !var.DebugMode;
+                var.debug = !var.debug;
                 var.antiDouble = true;
             }
             if (evt.getKeyChar() == 'm')

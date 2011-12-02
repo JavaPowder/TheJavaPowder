@@ -1,5 +1,6 @@
 package thejavapowder;
 
+import java.util.Map;
 import java.util.Random;
 
 public class Update {
@@ -42,21 +43,82 @@ public class Update {
 
         StartTime = System.currentTimeMillis();
 
-        if (var.Simulating && var.state == 0) {
-			UpdateAir();
+        if (var.Simulating) {
             for (int x = var.Width - 1; x > 1; x--) {
                 for (int y = var.Height - 1; y > 1; y--)//For each Space
                 {
                     if (var.Map[x][y] != -127) {
 
-                        if (var.currentMode == 1 && meth.GetConductive(var.Map[x][y]))//If in electronic mode
+	                    if (var.reactions)//Reactive Engine
                         {
-                            UpdateVoltage(x, y);
+	                        UpdateReactions(x, y);
                         }
+	                    if(var.Map[x][y] != -127)
+	                    {
+		                    if(var.physics)
+							{
+								UpdateElement(x,y);
+							}
+							if(var.Map[x][y] != -127)
+							{
+								if(var.pressure)
+								{
+									UpdateAir();
+								}
+								if(var.stateChanges)
+								{
+									CheckStateChanges(x,y);
+								}
+								if (var.electricity)
+								{
+									UpdateVoltage(x, y);
+								}
+	                        }
+	                    }
 
+                    }
+                }
+            }
+        }//End of Updating maps
+        if (var.active && var.state == 0) {//If drawing is active and we are in the game screen
+                if (var.Drawing) {//If it should be drawing
+                    draw.create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped);//Draw
+                }
+            } else {
+                if (var.wait < 1) {//If the wait time to draw is over
+                    var.active = true;//Activate the drawing
+                    var.wait = 30;//Reset the timer
+                } else {//If it can't draw and the timer is not up
+                    var.wait--;//Make the timer progress
+                }
+            }
+            var.LastDrawX = var.DrawX;//Update the drawing points
+            var.LastDrawY = var.DrawY;//Update the drawing points
+    }
 
-                        if (var.currentMode == 0)//Reactive Engine
-                        {
+	private void UpdateAir()
+	{
+		for (int x = 0; x < var.Width/4; x++)
+            for (int y = 0; y < var.Height/4; y++)//For each Space
+            {
+				if (var.PrMap[x][y] < .0000001)
+					var.PrMap[x][y] = 0;
+				else
+				{
+					float airChange = 0;
+					for (int i = -1; i <= 1; i++)//For every space around the particle
+						for (int j = -1; j <= 1; j++)
+							if (meth.validAirSpace(x+i,y+j))
+								airChange -= (var.PrMap[x][y] - var.PrMap[x+i][y+j])/5;
+					var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f);
+				}
+			}
+		System.arraycopy(var.OldPrMap,0,var.PrMap,0,var.PrMap.length);
+	}
+
+	private void UpdateReactions(int x, int y)
+	{
+
                             meth.getReactives(var.Map[x][y]);
                             meth.getSurroundings(x, y);
 
@@ -106,53 +168,10 @@ public class Update {
                                     }
                                 }
                             }
-                            if(var.Map[x][y] != -127)
-                            {
-                                UpdateElement(x,y);
-                                CheckStateChanges(x,y);
-                            }
-                        }
-                    }
-                }
-            }
-        }//End of Updating maps
-        if (var.active && var.state == 0) {//If drawing is active and we are in the game screen
-                if (var.Drawing) {//If it should be drawing
-                    draw.create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped);//Draw
-                }
-            } else {
-                if (var.wait < 1) {//If the wait time to draw is over
-                    var.active = true;//Activate the drawing
-                    var.wait = 30;//Reset the timer
-                } else {//If it can't draw and the timer is not up
-                    var.wait--;//Make the timer progress
-                }
-            }
-            var.LastDrawX = var.DrawX;//Update the drawing points
-            var.LastDrawY = var.DrawY;//Update the drawing points
-    }
 
-	public void UpdateAir()
-	{
-		for (int x = 0; x < var.Width/4; x++)
-            for (int y = 0; y < var.Height/4; y++)//For each Space
-            {
-				if (var.PrMap[x][y] < .0000001)
-					var.PrMap[x][y] = 0;
-				else
-				{
-					float airChange = 0;
-					for (int i = -1; i <= 1; i++)//For every space around the particle
-						for (int j = -1; j <= 1; j++)
-							if (meth.validAirSpace(x+i,y+j))
-								airChange -= (var.PrMap[x][y] - var.PrMap[x+i][y+j])/5;
-					var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f);
-				}
-			}
-		System.arraycopy(var.OldPrMap,0,var.PrMap,0,var.PrMap.length);
+
 	}
-
-    public void UpdateVoltage(final int x, final int y) {
+    private void UpdateVoltage(final int x, final int y) {
         if (var.Map[x][y] == 5)//If it's a battery, give it infinite voltage
         {
             var.VMap[x][y] = 1000;
@@ -328,7 +347,7 @@ public class Update {
 
 
 
-    public void UpdateElement(final int x, final int y) {
+    private void UpdateElement(final int x, final int y) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
         {
             var.Map[x][y] = -127;//Destroy it
@@ -448,7 +467,7 @@ public class Update {
 
 
 
-    public void CheckStateChanges(final int x, final int y)
+    private void CheckStateChanges(final int x, final int y)
     {
 
     }
