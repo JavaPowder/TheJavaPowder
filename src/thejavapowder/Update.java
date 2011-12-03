@@ -73,7 +73,7 @@ public class Update {
 								{
 									UpdateVoltage(x, y);
 								}
-								if(var.heat)
+								if(var.burn || var.heat)
 								{
 									UpdateHeat(x, y);
 								}
@@ -122,59 +122,53 @@ public class Update {
 
 	private void UpdateReactions(int x, int y)
 	{
+		meth.getReactives(var.Map[x][y]);
+		meth.getSurroundings(x, y);
+		if (var.reactives != null)
+		{
+			for (int o = 0; o < var.reactives.length; o++)//For the number of reactives the particle has
+			{
+				if (var.stopReactions)//If the particle already reacted
+				{
+					this.var.stopReactions = false;
+					break;//Stop it
+				}
+				for (int i = 0; i < 8; i++)//For every space around the particle
+				{
+					if (var.stopReactions)//If the particle already reacted
+					{
+						break;//Stop it
+					}
+					if (var.surArray[i] == var.reactives[o])//If the tested space is one of the var.reactives
+					{
+						var.stopReactions = true;//Stop looping
 
-                            meth.getReactives(var.Map[x][y]);
-                            meth.getSurroundings(x, y);
+						if (var.Map[x][y] >= 0 && var.Map[x - 1][y - 1] >= 0)
+						{
+							meth.getReaction(var.Map[x][y], var.Map[x - 1][y - 1]);//Get the Reaction needed
+							if (var.reaction != null)
+							{
+								var.Map[x][y] = var.reaction[0];
 
-                            if (var.reactives != null)
-                            {
-                                for (int o = 0; o < var.reactives.length; o++)//For the number of reactives the particle has
-                                {
-                                    if (var.stopReactions)//If the particle already reacted
-                                    {
-                                        this.var.stopReactions = false;
-                                        break;//Stop it
-                                    }
-                                    for (int i = 0; i < 8; i++)//For every space around the particle
-                                    {
+								if (var.reaction[1] == 1)
+									var.Map[x - 1][y - 1] = -127;
 
-                                        if (var.stopReactions)//If the particle already reacted
-                                        {
-                                            break;//Stop it
-                                        }
-                                        if (var.surArray[i] == var.reactives[o])//If the tested space is one of the var.reactives
-                                        {
-                                            var.stopReactions = true;//Stop looping
+								var.VMap[x][y] += var.reaction[2];
+								var.PMap[x][y] = var.reaction[3];
+								var.HMap[x][y] += var.reaction[4];
+								if (meth.validAirSpace(x/4,y/4))
+									var.PrMap[x/4][y/4] += var.reaction[5];
 
-                                            if (var.Map[x][y] >= 0 && var.Map[x - 1][y - 1] >= 0)
-                                            {
-                                                meth.getReaction(var.Map[x][y], var.Map[x - 1][y - 1]);//Get the Reaction needed
-                                                if (var.reaction != null)
-                                                {
-                                                    var.Map[x][y] = var.reaction[0];
-
-                                                    if (var.reaction[1] == 1) {
-                                                        var.Map[x - 1][y - 1] = -127;
-                                                    }
-
-                                                    var.VMap[x][y] += var.reaction[2];
-                                                    var.PMap[x][y] = var.reaction[3];
-                                                    var.HMap[x][y] += var.reaction[4];
-                                                    //PresMap[x][y] += var.reaction[5];
-
-                                                    if (var.reaction[6] != var.Map[x][y])//If you're not creating what the particle is
-                                                    {
-                                                        meth.createParticle(x, y, var.reaction[6]);//Create it
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-
+								if (var.reaction[6] != var.Map[x][y])//If you're not creating what the particle is
+									meth.createParticle(x, y, var.reaction[6]);//Create it
+							}
+						}
+					}
+				}
+			}
+		}
 	}
+
     private void UpdateVoltage(final int x, final int y) {
         if (var.Map[x][y] == 5)//If it's a battery, give it infinite voltage
         {
@@ -349,7 +343,6 @@ public class Update {
         }
     }//End of Voltage Update
 
-
 	private void UpdateHeat(int x, int y)
 	{
 		int i, j, num = 0;
@@ -358,7 +351,7 @@ public class Update {
 			{
 				if (i != 0 || j != 0)
 				{
-					if (var.surArray[num] == 15)
+					if (var.burn && var.surArray[num] == 15)
 					{
 						var.RandomNum = rand.nextInt(100);//Get a random Value
 						if (var.Map[x][y] >= 0 && var.RandomNum < var.Elements[var.Map[x][y]].burn)
@@ -367,7 +360,7 @@ public class Update {
 							var.HMap[x][y] += 50;
 						}
 					}
-					if (var.Map[x][y] != -127 && var.Map[x+i][y+j] != -127)
+					if (var.heat && var.Map[x][y] != -127 && var.Map[x+i][y+j] != -127)
 					{
 						final float heatTransfer = (var.HMap[x][y] - var.HMap[x+i][y+j])/5;
 						var.HMap[x][y] -= heatTransfer;
@@ -469,10 +462,8 @@ public class Update {
         }
     }
 
+	private void CheckStateChanges(final int x, final int y)
+	{
 
-
-    private void CheckStateChanges(final int x, final int y)
-    {
-
-    }
+	}
 }

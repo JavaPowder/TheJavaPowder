@@ -16,6 +16,7 @@ public class Variables {
 
 	boolean electricity   = false;
 	boolean heat          = false;
+	boolean burn 		  = true;
 	boolean pressure      = false;
 	boolean debug         = false;
 	boolean reactions     = true;
@@ -80,12 +81,13 @@ public class Variables {
 
 
     //Elements Initialization
-    //Order of creation: new Element(amount-of-burn,weight,conductive(boolean), Name, Description, colour(HEX), reactives, default temp)
+    //Order of creation:
+    // new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)
     Element Elements[] = {
-        new Powder( (byte) 0,  (byte) 50,  false, "Coffee",             "First Element, Reference to Java",                 0x613F37, new byte[]{3},  20),
+        new Powder( (byte) 0,  (byte) 20,  false, "Coffee",             "First Element, Reference to Java",                 0x613F37, new byte[]{3},  20),
         new Solid(  (byte) 0,  (byte) 127, false, "Wall",               "Blocks Everything",                                0x808080, new byte[]{},   20),
         new Gas(    (byte) 10, (byte) 5,   false, "Methane",            "Highly Flammable Gas",                             0xDEDEDE, new byte[]{15}, 20),
-        new Liquid( (byte) 0,  (byte) 30,  true,  "Water",              "Pure H2O",                                         0x0000FF, new byte[]{15}, 20),
+        new Liquid( (byte) 0,  (byte) 60,  true,  "Water",              "Pure H2O",                                         0x0000FF, new byte[]{15}, 20),
         new Solid(  (byte) 0,  (byte) 127, true,  "Iron",               "Conductor, Used to Activate Electrical Elements",  0x404040, new byte[]{},   20),
         new Solid(  (byte) 4,  (byte) 127, true,  "Battery",            "Infinite Source of Energy",                        0x00FF00, new byte[]{},   20),
         new Solid(  (byte) 0,  (byte) 127, false, "Copper",             "Standard Conductor",                               0xE8851C, new byte[]{},   20),
@@ -93,16 +95,16 @@ public class Variables {
         new Solid(  (byte) 0,  (byte) 127, true,  "SemiConductorB",     "Conducts only to Metal",                           0x829E1C, new byte[]{},   20),
         new Solid(  (byte) 0,  (byte) 127, true,  "Screen",             "Looks different Based on Voltage",                 0x000000, new byte[]{},   20),
         new Solid(  (byte) 0,  (byte) 127, true,  "Resistor",           "Lowers the voltage",                               0xEDED9D, new byte[]{},   20),
-        new Solid(  (byte) 0,  (byte) 10,  true,  "Rechargable Battery","Limited source of Power",                          0x329E00, new byte[]{},   20),
+        new Solid(  (byte) 0,  (byte) 127, true,  "Rechargable Battery","Limited source of Power",                          0x329E00, new byte[]{},   20),
         new Solid(  (byte) 4,  (byte) 127, true,  "Power Drainer",      "Drains the electricity",                           0xBABABA, new byte[]{},   20),
         new Solid(  (byte) 0,  (byte) 127, false, "Crossing",           "Makes electricity jump over it",      				0xE8851C, new byte[]{},   20),
         new Solid(  (byte) 0,  (byte) 127, false, "Switch",             "Conducts if turned on",              				0x00ED00, new byte[]{},   20),
         new Gas(    (byte) 0,  (byte) 5,   false, "Fire",               "Burns stuff",                                      0xDE2307, new byte[]{},   200),
         new Solid(  (byte) 2,  (byte) 127, false, "Wood",               "Burns slowly",                                     0xC0A040, new byte[]{},   20),
-        new Liquid( (byte) 10, (byte) 80,  false, "Petroleum",          "Oil, burns",                                       0x404010, new byte[]{},   20),
+        new Liquid( (byte) 10, (byte) 50,  false, "Petroleum",          "Oil, burns",                                       0x404010, new byte[]{},   20),
         new Powder( (byte) 16, (byte) 15,  false, "Sawdust",            "Sawdust",                                          0xFFE0A0, new byte[]{},   20),
         };
-        //Order of creation: new Element(amount-of-burn,weight,conductive(boolean), Name, Description, colour(HEX), reactives, default temp)
+	// new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)
 
         public final int NUM_ELS = 19;
 }
