@@ -64,9 +64,9 @@ public class Methods {
 
     public boolean tryMove(final int x, final int y, final int i, final boolean change)
         {
-            int j, k, num = 0;
-			for (k = -1; k < 2; k++)
-				for (j = -1; j < 2; j++)
+            int j, k, num = 7;
+			for (k = 1; k > -2; k--)
+				for (j = 1; j > -2; j--)
 				{
 					if (j != 0 || k != 0)
 					{
@@ -75,7 +75,9 @@ public class Methods {
 							moveElement(x,y,x+j,y+k,change);
 							return true;
 						}
-						num++;
+						if (i == num)
+							return false;
+						num--;
 					}
 				}
             return false;
