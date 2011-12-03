@@ -383,9 +383,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("JavaPowder Console *Alpha*", 20, var.Height / 3 * var.winZoom + 5);
             }
         } else if (var.state == 1) {
-            if (!bufferGraphics.drawImage(playPng, 504, 243, 204, 60, this) ||
-                    !bufferGraphics.drawImage(settingsPng, 504, 343, 204, 60, this) ||
-                    !bufferGraphics.drawImage(javaPowderPng, 404, 143, 404, 60, this)) {
+            if (!bufferGraphics.drawImage(playPng, 252*var.winZoom, 121*var.winZoom, 102*var.winZoom, 30*var.winZoom, this) ||
+                    !bufferGraphics.drawImage(settingsPng, 252*var.winZoom, 171*var.winZoom, 102*var.winZoom, 30*var.winZoom, this) ||
+                    !bufferGraphics.drawImage(javaPowderPng, 202*var.winZoom, 71*var.winZoom, 202*var.winZoom, 30*var.winZoom, this)) {
 
                 bufferGraphics.drawString("Derp", 300, 300);
             }
@@ -524,11 +524,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         }
 
         if (var.state == 1) {
-            if (var.MouseX > 504 && var.MouseY > 243 && var.MouseX < 708 && var.MouseY < 303) {
+            if (var.MouseX > 252*var.winZoom && var.MouseY > 121*var.winZoom && var.MouseX < 354*var.winZoom && var.MouseY < 151*var.winZoom) {
                 var.state = 0;
                 var.active = false;
             }
-            if (var.MouseX > 504 && var.MouseY > 340 && var.MouseX < 708 && var.MouseY < 400) {
+            if (var.MouseX > 252*var.winZoom && var.MouseY > 170*var.winZoom && var.MouseX < 354*var.winZoom && var.MouseY < 200*var.winZoom) {
                 var.state = 3;
                 var.active = false;
             }
