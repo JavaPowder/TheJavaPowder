@@ -352,37 +352,32 @@ public class Update {
 
 	private void UpdateHeat(int x, int y)
 	{
-		for (int i = 0; i < 8; i++)//For every space around the particle
-        {
-            if (var.surArray[i] == 15)
-            {
-                var.RandomNum = rand.nextInt(100);//Get a random Value
-                if (var.Map[x][y] >= 0 && var.RandomNum < var.Elements[var.Map[x][y]].burn)
-                {
-                    var.Map[x][y] = 15;
-                    var.HMap[x][y] += 50;
-                }
-            }
-            if (var.surArray[i] != -127)
-            {
-                int x2 = x, y2 = y;
-                if (i == 0 || i == 1 || i == 2)
-                    y2--;
-                if (i == 2 || i == 3 || i == 4)
-                    x2++;
-                if (i == 4 || i == 5 || i == 6)
-                    y2++;
-                if (i == 6 || i == 7 || i == 0)
-                    x2--;
-                if (var.Map[x][y] != -127 && var.Map[x2][y2] != -127)
-                {
-                    final float heatTransfer = (var.HMap[x][y] - var.HMap[x2][y2])/5;
-                    var.HMap[x][y] -= heatTransfer;
-                    var.HMap[x2][y2] += heatTransfer;
-                }
-            }
-        }
+		int i, j, num = 0;
+		for (j = -1; j < 2; j++)
+			for (i = -1; i < 2; i++)
+			{
+				if (i != 0 || j != 0)
+				{
+					if (var.surArray[num] == 15)
+					{
+						var.RandomNum = rand.nextInt(100);//Get a random Value
+						if (var.Map[x][y] >= 0 && var.RandomNum < var.Elements[var.Map[x][y]].burn)
+						{
+							var.Map[x][y] = 15;
+							var.HMap[x][y] += 50;
+						}
+					}
+					if (var.Map[x][y] != -127 && var.Map[x+i][y+j] != -127)
+					{
+						final float heatTransfer = (var.HMap[x][y] - var.HMap[x+i][y+j])/5;
+						var.HMap[x][y] -= heatTransfer;
+						var.HMap[x+i][y+j] += heatTransfer;
+					}
+					num++;
+				}
+			}
 	}
+
     private void UpdateElement(final int x, final int y) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
         {
@@ -394,27 +389,30 @@ public class Update {
         {
             final char type = var.Elements[var.Map[x][y]].state;
             double[] chances = {0,0,0,0,0,0,0,0};//An array of the possibilities of moving
+			/* 0 1 2
+			   3   4
+			   5 6 7 */
             int i, j = 0;
 
             switch(type)//Depending on the type of the element
             {
                 case 'p'://Powder
-                    chances[3] = .2;
-                    chances[4] = .6;
                     chances[5] = .2;
+                    chances[6] = .6;
+                    chances[7] = .2;
                     break;
 
                 case 'l'://Liquids
-                    chances[3] = .125;
-                    chances[4] = .75;
                     chances[5] = .125;
+                    chances[6] = .75;
+                    chances[7] = .125;
                     if (!meth.canMove(var.Map[x][y],var.Map[x][y+1],false))
                     {
-                        chances[2] = (double)1/6;
-                        chances[3] = (double)1/3;
-                        chances[4] = 0;
+                        chances[3] = (double)1/6;
                         chances[5] = (double)1/3;
-                        chances[6] = (double)1/6;
+                        chances[6] = 0;
+                        chances[7] = (double)1/3;
+                        chances[4] = (double)1/6;
                     }
                     break;
 
@@ -428,8 +426,7 @@ public class Update {
 
             double randnum, total;
             boolean moved = false, triedmove;
-
-            i = 0;
+			i = 0;
 
             while (i < 5 && !moved)
             {

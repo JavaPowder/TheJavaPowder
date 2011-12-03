@@ -62,26 +62,22 @@ public class Methods {
             return p2 == -127;
     }
 
-    public boolean tryMove(final int x1, final int y1, final int i, final boolean change)
+    public boolean tryMove(final int x, final int y, final int i, final boolean change)
         {
-            int x2 = x1, y2 = y1-1, j = 0;
-            while (j < 8 && j <= i)
-            {
-                if (i == j && canMove(var.Map[x1][y1],var.Map[x2][y2],change))
-                {
-                    moveElement(x1,y1,x2,y2,change);
-                    return true;
-                }
-                if (j == 0)
-                    x2++;
-                if (j == 3 || j == 4)
-                    x2--;
-                if (j == 1 || j == 2)
-                    y2++;
-                if (j == 5 || j == 6)
-                    y2--;
-                j++;
-            }
+            int j, k, num = 0;
+			for (k = -1; k < 2; k++)
+				for (j = -1; j < 2; j++)
+				{
+					if (j != 0 || k != 0)
+					{
+						if (i == num && canMove(var.Map[x][y],var.Map[x+j][y+k],change))
+						{
+							moveElement(x,y,x+j,y+k,change);
+							return true;
+						}
+						num++;
+					}
+				}
             return false;
         }
 
