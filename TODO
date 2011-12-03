@@ -10,12 +10,6 @@ Priority: <How fast it must be done> <Can other devs help>
 
 
 
-
-All
-Add an toggle switch for every calculations ( Reactive engine, electricity )
-Dev: <none>
-Priority: High
-
 Update
 Add in particle velocity and pressure to the method Update Element, and also make fire raise up
 Dev: <Jacob> <Yes>
@@ -36,11 +30,6 @@ Make the menu centered and element icons fit even with winZoom
 Make the pointed tile properties text fit nicely even with low/high screen size
 Dev: <all>
 Priority: Medium
-
-Update
-Make the Pressure layer
-Dev: <none>
-Priority : Medium
 
 All
 Update : 409 - 445
