@@ -102,22 +102,22 @@ public class Update {
 
 	private void UpdateAir()
 	{
-		for (int x = 0; x < var.Width/4; x++)
-            for (int y = 0; y < var.Height/4; y++)//For each Space
+		for (int x = 0; x < var.Width/4; x++) //For every space on the pressure map
+            for (int y = 0; y < var.Height/4; y++)
             {
-				if (var.PrMap[x][y] < .0000001)
-					var.PrMap[x][y] = 0;
+				if (var.PrMap[x][y] < .0000001) //If the pressure is really small
+					var.PrMap[x][y] = 0;        //Make it 0
 				else
 				{
 					float airChange = 0;
-					for (int i = -1; i <= 1; i++)//For every space around the particle
+					for (int i = -1; i <= 1; i++) //For every pressure space around this spot
 						for (int j = -1; j <= 1; j++)
-							if (meth.validAirSpace(x+i,y+j))
-								airChange -= (var.PrMap[x][y] - var.PrMap[x+i][y+j])/5;
-					var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f);
+							if (meth.validAirSpace(x+i,y+j)) //If it's a valid spot
+								airChange -= (var.PrMap[x][y] - var.PrMap[x+i][y+j])/5; //calculate how much air to transfer to this spot
+					var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f); //Tranfer it
 				}
 			}
-		System.arraycopy(var.OldPrMap,0,var.PrMap,0,var.PrMap.length);
+		System.arraycopy(var.OldPrMap,0,var.PrMap,0,var.PrMap.length); //Copy the new pressure array into the real pressure array
 	}
 
 	private void UpdateReactions(int x, int y)
@@ -346,25 +346,27 @@ public class Update {
 	private void UpdateHeat(int x, int y)
 	{
 		int i, j, num = 0;
-		for (j = -1; j < 2; j++)
+		if (var.Map[x][y] < 0)
+			return;
+		for (j = -1; j < 2; j++) //Loop through each spot around the particle
 			for (i = -1; i < 2; i++)
 			{
-				if (i != 0 || j != 0)
+				if (i != 0 || j != 0) //If it's not the center space
 				{
-					if (var.burn && var.surArray[num] == 15)
+					if (var.burn && var.surArray[num] == 15) //If burning is active and this space has fire in it
 					{
-						var.RandomNum = rand.nextInt(100);//Get a random Value
-						if (var.Map[x][y] >= 0 && var.RandomNum < var.Elements[var.Map[x][y]].burn)
+						var.RandomNum = rand.nextInt(100); //Get a random value
+						if (var.RandomNum < var.Elements[var.Map[x][y]].burn) //If that random value was less than the burn value of the element
 						{
-							var.Map[x][y] = 15;
-							var.HMap[x][y] += 50;
+							var.Map[x][y] = 15; //Change this particle to fire
+							var.HMap[x][y] += 50; //Increase the heat
 						}
 					}
-					if (var.heat && var.Map[x][y] != -127 && var.Map[x+i][y+j] != -127)
+					if (var.heat && var.Map[x+i][y+j] != -127) //If heat conduction is on and the space around the particle is not empty
 					{
-						final float heatTransfer = (var.HMap[x][y] - var.HMap[x+i][y+j])/5;
-						var.HMap[x][y] -= heatTransfer;
-						var.HMap[x+i][y+j] += heatTransfer;
+						final float heatTransfer = (var.HMap[x][y] - var.HMap[x+i][y+j])/5; //Calculate how much heat to transfer
+						var.HMap[x][y] -= heatTransfer;     //Transfer heat
+						var.HMap[x+i][y+j] += heatTransfer; //Transfer heat
 					}
 					num++;
 				}
@@ -390,20 +392,20 @@ public class Update {
             switch(type)//Depending on the type of the element
             {
                 case 'p'://Powder
-                    chances[5] = .2;
-                    chances[6] = .6;
+                    chances[5] = .2; //20% chance of going diagonally down left or right
+                    chances[6] = .6; //60% chance of going straight down
                     chances[7] = .2;
                     break;
 
                 case 'l'://Liquids
-                    chances[5] = .125;
-                    chances[6] = .75;
+                    chances[5] = .125; //1/8 chance of moving diagonally down left or right
+                    chances[6] = .75;  //3/4 chance of going straight down
                     chances[7] = .125;
-                    if (!meth.canMove(var.Map[x][y],var.Map[x][y+1],false))
+                    if (!meth.canMove(var.Map[x][y],var.Map[x][y+1],false)) //But if there is a particle below it
                     {
-                        chances[3] = (double)1/6;
-                        chances[5] = (double)1/3;
-                        chances[6] = 0;
+                        chances[3] = (double)1/6; //1/6 chance of moving left or right to either side
+                        chances[5] = (double)1/3; //1/3 chance of moving diagonally down right or left
+                        chances[6] = 0;           //0% chance of going down (it's blocked)
                         chances[7] = (double)1/3;
                         chances[4] = (double)1/6;
                     }
@@ -412,7 +414,7 @@ public class Update {
                 case 'g'://Gas
                     for (i = 0; i < 8; i++)
                     {
-                        chances[i] = .125;
+                        chances[i] = .125; //A random chance of moving in any direction
                     }
                     break;
             }
@@ -421,46 +423,43 @@ public class Update {
             boolean moved = false, triedmove;
 			i = 0;
 
-            while (i < 5 && !moved)
+            while (i < 5 && !moved) //Only try to move five times, it might not be possible
             {
-                randnum = rand.nextDouble();
+                randnum = rand.nextDouble(); //Pick a number between 0 and 1 to decide which spot to move to
                 triedmove = false;
                 total = 0;
-                while(j < 8 && !triedmove)
+                while(j < 8 && !triedmove)   //Loop through each spot
                 {
-                    total += chances[j];
-                    if (total > randnum)
+                    total += chances[j];     //As it loops through the spots, it adds up the chances of moving to each spot
+                    if (total > randnum)     //If this spot was chosen
                     {
-                        triedmove = true;
-                        moved = meth.tryMove(x,y,j,false);
+                        triedmove = true;    //Stop looping through each spot
+                        moved = meth.tryMove(x,y,j,false); //Try to move
                     }
                     j++;
                 }
                 i++;
             }
             i = j = 0;
-	        if(var.Map[x][y] != -127)
-	        {
-				while (i < 5 && !moved)
+	        while (i < 5 && !moved) //If it still haven't moved, try to move it onto other particles with less weight
+			{                       //It is the exact same code as above
+				randnum = rand.nextDouble();
+				triedmove = false;
+				total = 0;
+				while(j < 8 && !triedmove)
 				{
-					randnum = rand.nextDouble();
-					triedmove = false;
-					total = 0;
-					while(j < 8 && !triedmove)
+					total += chances[j];
+					if (total > randnum)
 					{
-						total += chances[j];
-						if (total > randnum)
-						{
-							triedmove = true;
-							moved = meth.tryMove(x,y,j,true);
-						}
-						j++;
+						triedmove = true;
+						moved = meth.tryMove(x,y,j,true); //Move by moving onto particles with less weight
 					}
-					i++;
+					j++;
 				}
-	        }
-        }
-    }
+				i++;
+			}
+		}
+	}
 
 	private void CheckStateChanges(final int x, final int y)
 	{
