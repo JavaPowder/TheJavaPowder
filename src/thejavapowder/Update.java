@@ -391,6 +391,8 @@ public class Update {
             var.Map[x][y] = -127;//Destroy it
             return;
         }
+	    if(var.Map[x][y] != -127)
+	    {
 	    final char type = var.Elements[var.Map[x][y]].state;
         if(var.Map[x][y] != -127 && type != 's')
         {
@@ -471,6 +473,7 @@ public class Update {
 				i++;
 			}
 		}
+	    }
 	}
 
 	private void CheckStateChanges(final int x, final int y)
