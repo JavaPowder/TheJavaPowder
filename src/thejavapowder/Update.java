@@ -1,5 +1,6 @@
 package thejavapowder;
 
+import java.text.BreakIterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -123,9 +124,9 @@ public class Update {
 	private void UpdateReactions(int x, int y)
 	{
 		meth.getReactives(var.Map[x][y]);
-		meth.getSurroundings(x, y);
 		if (var.reactives != null)
 		{
+			meth.getSurroundings(x, y);
 			for (int o = 0; o < var.reactives.length; o++)//For the number of reactives the particle has
 			{
 				if (var.stopReactions)//If the particle already reacted
@@ -174,11 +175,11 @@ public class Update {
         {
             var.VMap[x][y] = 1000;
         }
-
         if (var.VMap[x][y] > 1)//If there's Voltage
         {
-            if (var.Map[x][y] == 4)//Iron
+            switch (var.Map[x][y])
             {
+	            case 4://Iron
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0))//For the 4 spots directly touching it
@@ -209,8 +210,10 @@ public class Update {
                                 }
                             }
                         }
-            } else if (var.Map[x][y] == 5)//Battery
-            {
+            
+	        break; 
+	        case 5://Battery
+            
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -219,8 +222,9 @@ public class Update {
                                 var.VMap[x+xc][y+yc] = var.VMap[x][y];
                             }
                         }
-            } else if (var.Map[x][y] == 6)//Copper
-            {
+            break;
+	            case 6://Copper
+            
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -237,8 +241,9 @@ public class Update {
                                 }
                             }
                         }
-            } else if (var.Map[x][y] == 7)//Semi Conductor A
-            {
+            break;
+	            case 7://Semi Conductor A
+            
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -250,8 +255,9 @@ public class Update {
                                 }
                             }
                         }
-            } else if (var.Map[x][y] == 8)//Semi Conductor B
-            {
+            break;
+	            case 8://Semi Conductor B
+            
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -263,16 +269,18 @@ public class Update {
                                 }
                             }
                         }
-            } else if (var.Map[x][y] == 9)//Screen
-            {
+            break;
+	            case 9://Screen
+            
                 if (var.VMap[x][y] >= 50) {
                     var.VMap[x][y] -= 50;
                 } else {
                     var.VMap[x][y] = 0;
                 }
 
-            } else if (var.Map[x][y] == 11)//Rechargable Battery
-            {
+            break;
+	            case 11://Rechargable Battery
+            
                 if (var.VMap[x][y] > 5000) {
                     var.VMap[x][y] = 5000;
                 }
@@ -295,8 +303,9 @@ public class Update {
                     }
                 }
 
-            } else if (var.Map[x][y] == 10)//Resistor
-            {
+            break;
+	            case 10://Resistor
+            
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -310,8 +319,9 @@ public class Update {
                                 }
                             }
                         }
-            } else if (var.Map[x][y] == 12)//Power Drainer
-            {
+            break;
+	            case 12://Power Drainer
+            
                 var.VMap[x][y] = 0;
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
@@ -323,8 +333,9 @@ public class Update {
                                 }
                             }
                         }
-            } else if (var.Map[x][y] == 14)//Switch
-            {
+            break;
+	            case 14://Switch
+            
                 if (var.PMap[x][y] > 25) {
                     for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                         for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
@@ -338,7 +349,8 @@ public class Update {
                                 }
                             }
 
-                }
+                    }
+		            break;
             }
         }
     }//End of Voltage Update
@@ -379,10 +391,10 @@ public class Update {
             var.Map[x][y] = -127;//Destroy it
             return;
         }
-
-        if(var.Map[x][y] != -127)
+	    final char type = var.Elements[var.Map[x][y]].state;
+        if(var.Map[x][y] != -127 && type != 's')
         {
-            final char type = var.Elements[var.Map[x][y]].state;
+            
             double[] chances = {0,0,0,0,0,0,0,0};//An array of the possibilities of moving
 			/* 0 1 2
 			   3   4
