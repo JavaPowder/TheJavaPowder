@@ -129,6 +129,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     float Time      = 1000;
     boolean quit    = false;
 
+	int iconNum = 1;
+	int borders = 0;
     // The console area.
     static JTextArea consolearea = new JTextArea("", 20, 40);
     //JScrollPane scrollPane = new JScrollPane(consolearea);
@@ -211,6 +213,14 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 				var.OldVyMap[x][y] = 0;
             }
 
+	    for(int i = 0; i < 50; i++)//For an good amount of times
+	    {
+		    if( i * (40 * var.winZoom) - 40 > var.Width)//If the total length is over the screen
+		    {
+				iconNum = i - 1;//Set the maximum amount of icons
+			    borders = (var.Width - 40 * iconNum) / 2;//Calculate the free borders
+		    }
+	    }
         consolearea.setVisible(false);
         consolearea.setFont(new Font("Courier New", Font.BOLD, 10));
 
@@ -358,8 +368,16 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
             {
                 bufferGraphics.setColor(new Color(0x777777));
                 for (int i = 0; i < var.Elements.length; i++) {
-                    if ( i >= thumbnails.length || !bufferGraphics.drawImage(thumbnails[i], (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 25 * var.winZoom + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this)) {
-                        bufferGraphics.drawImage(nonePng, (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 25 * var.winZoom + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this);
+	                if ( i >= thumbnails.length ||
+		                !bufferGraphics.drawImage(
+				         thumbnails[i],//The next icon
+				        (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX,
+				         25 * var.winZoom + var.iconY,
+				         40 * var.winZoom,
+				         40 * var.winZoom, this)) {
+
+
+	                    bufferGraphics.drawImage(nonePng, (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 25 * var.winZoom + var.iconY, 40 * var.winZoom, 40 * var.winZoom, this);
                         bufferGraphics.drawString(var.Elements[i].name, (52 * var.winZoom + i * 40 * var.winZoom) - var.iconX, 35 * var.winZoom + var.iconY);//Draw the Element's name before the picture appears
                     }
                     if (var.overEl == i)
