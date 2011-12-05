@@ -10,6 +10,7 @@ public class Variables {
     boolean active        = true; //For elements menu
     boolean stopReactions = false;
     boolean Simulating    = true;//Paused or not paused
+	boolean tempSimulating= false;//Paused or not paused
     boolean leftClick     = true;
     boolean conductive    = false;
 

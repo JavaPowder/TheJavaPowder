@@ -44,7 +44,7 @@ public class Update {
 
         StartTime = System.currentTimeMillis();
 
-        if (var.Simulating) {
+        if ((var.Simulating || var.tempSimulating) && var.state == 0) {
             for (int x = var.Width - 1; x > 1; x--) {
                 for (int y = var.Height - 1; y > 1; y--)//For each Space
                 {
@@ -97,8 +97,9 @@ public class Update {
                     var.wait--;//Make the timer progress
                 }
             }
-            var.LastDrawX = var.DrawX;//Update the drawing points
-            var.LastDrawY = var.DrawY;//Update the drawing points
+		var.LastDrawX = var.DrawX;//Update the drawing points
+		var.LastDrawY = var.DrawY;//Update the drawing points
+		var.tempSimulating = false;
     }
 
 	private void UpdateAir()

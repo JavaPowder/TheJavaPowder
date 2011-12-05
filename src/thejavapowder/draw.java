@@ -5,7 +5,7 @@ public class draw
     Variables var = thejavapowder.TheJavaPowder.var;
 
     public void drawPoint(int x, int y, byte id) {
-        if ((var.active || !var.Simulating) && x > 1 && y > 1 && x < var.Width && y < var.Height) {
+        if ((var.active || !(var.Simulating || var.tempSimulating)) && x > 1 && y > 1 && x < var.Width && y < var.Height) {
             var.wait = 30;
             if (id != -126 && id != -125) {
                 if (var.leftClick) {

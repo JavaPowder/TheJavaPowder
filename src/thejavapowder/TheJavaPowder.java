@@ -680,6 +680,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.Simulating = !var.Simulating;
                 var.antiDouble = true;
             }
+			if (evt.getKeyChar() == 'f') {
+				var.tempSimulating = !var.tempSimulating;
+				var.Simulating = false;
+				var.antiDouble = true;
+            }
             if (evt.getKeyChar() == 's') {
                 if (var.Shape == 0)
                     var.Shape = 1;
