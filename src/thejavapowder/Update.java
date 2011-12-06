@@ -35,14 +35,6 @@ public class Update {
 	draw draw = new draw();
 
     public void update() {
-        EndTime = System.currentTimeMillis();
-
-        Time = EndTime - StartTime;
-        FPS = (byte) (1000 / Time);
-        TotalFPS += FPS;
-        TotalFrame++;
-
-        StartTime = System.currentTimeMillis();
 
         if ((var.Simulating || var.tempSimulating) && var.state == 0) {
             for (int x = var.Width - 1; x > 1; x--) {

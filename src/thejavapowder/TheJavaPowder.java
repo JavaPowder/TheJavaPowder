@@ -44,22 +44,34 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 System.exit(0);
             }
         });
+	    
 	    long before;
 	    long after;
+		
+	    long start;
+	    
         init();
-	    before = System.currentTimeMillis();
+	    before = System.nanoTime();
+	    
+	    
         while (!quit) {
-
-
-            update.update();
-	        after = System.currentTimeMillis();
-
-	        if(after - before > 40)
+	        start = System.nanoTime();
+	        
+	        update.update();
+	        
+	        after = System.nanoTime();
+	        
+	        if(after - before > 40000000)
 	        {
-                repaint();
+		        repaint();
 
-		        before = System.currentTimeMillis();
+		        before = System.nanoTime();
 	        }
+	        if(System.nanoTime()-start != 0)
+	            PaintFPS = (int)(1000000000/(System.nanoTime()-start));
+	        else
+		        PaintFPS = 1337;
+
         }
     }
 
@@ -119,8 +131,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 
     byte FPS;
     int PaintFPS    = 0;
-    int UpdateFPS   = 0;
-    int PaintAFPS   = 0;
     int WaitTime    = 0;
     int TotalFrame  = 0;
     long StartTime  = 0;
@@ -255,22 +265,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.antiDouble = false;
         var.Brightness = 0;
 
-        EndTime = System.currentTimeMillis();
-        Time = EndTime - StartTime;
-        FPS = (byte) (1000 / Time);
-        TotalFPS += FPS;
 
-        TotalFrame++;
-        StartTime = System.currentTimeMillis();
-
-        if (WaitTime > 29) {
-            PaintFPS = FPS;
-            UpdateFPS = (int) (update.TotalFPS / update.TotalFrame);
-            PaintAFPS = (int) (TotalFPS / TotalFrame);
-            WaitTime = 0;
-        } else {
-            WaitTime++;
-        }
 
         var.CurrentX = (var.MouseX + var.ScrollX) / var.winZoom;
         var.CurrentY = (var.MouseY + var.ScrollY) / var.winZoom;
@@ -358,8 +353,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 					else
 					    bufferGraphics.drawString("Pressure:" + 0, 10, 30 + 45 * var.winZoom);//Draw the Pressure
 				bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 55 * var.winZoom);//Draw the FPS
-				bufferGraphics.drawString("Average FPS:" + PaintAFPS, 10, 30 + 65 * var.winZoom);//Draw the Average FPS
-				bufferGraphics.drawString("Update FPS:" + UpdateFPS, 10, 30 + 75 * var.winZoom);//Draw the Update FPS
 				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 85 * var.winZoom);//Draw the Mouse X Coordinate
 				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
             }
