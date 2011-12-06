@@ -22,6 +22,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        *
        * The Setting Menu's Button shows 2 popups instead of 1
        *
+       * You can't set the background color
+       *
        */
 
     public static void main(String[] args) {
@@ -129,14 +131,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image offscreen;
     Dimension dim;
 
-    byte FPS;
     int PaintFPS    = 0;
-    int WaitTime    = 0;
     int TotalFrame  = 0;
-    long StartTime  = 0;
-    long EndTime    = 0;
     long TotalFPS   = 0;
-    float Time      = 1000;
     boolean quit    = false;
 
 	int iconNum = 1;
@@ -353,8 +350,8 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 					else
 					    bufferGraphics.drawString("Pressure:" + 0, 10, 30 + 45 * var.winZoom);//Draw the Pressure
 				bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 55 * var.winZoom);//Draw the FPS
-				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 85 * var.winZoom);//Draw the Mouse X Coordinate
-				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
+				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 65 * var.winZoom);//Draw the Mouse X Coordinate
+				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 75 * var.winZoom);//Draw the Mouse Y Coordinate
             }
 
             if (var.state == 2)//If we are choosing an element
@@ -573,6 +570,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     {
                         var.Width = newWidth;
                         this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
+						dim = getSize();
+						offscreen = createImage(dim.width, dim.height);
+						bufferGraphics = offscreen.getGraphics();
                     }
                     else
                     {
@@ -596,6 +596,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     {
                         var.Height = newHeight;
                         this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
+						dim = getSize();
+						offscreen = createImage(dim.width, dim.height);
+						bufferGraphics = offscreen.getGraphics();
                     }
                     else
                     {
@@ -620,6 +623,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                         var.winZoom = (byte)newZoom;
                         var.realZoom = var.Zoom * var.winZoom;
                         this.setSize(var.Width * var.winZoom, (var.Height + var.optionsHeight) * var.winZoom); //update the frame's size
+						dim = getSize();
+						offscreen = createImage(dim.width, dim.height);
+						bufferGraphics = offscreen.getGraphics();
                     }
                     else
                     {
