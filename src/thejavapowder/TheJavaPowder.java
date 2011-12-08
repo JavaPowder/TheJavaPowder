@@ -11,7 +11,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
        *
        * Known Bugs to fix:
        *
-       * When there's alot of particles, it doesn't draw smoothly
+       * When on pause, it doesn't draw smoothly
        * Fix: Unknown
        *
        * There's no cursor when you scroll down to 1 pixel
