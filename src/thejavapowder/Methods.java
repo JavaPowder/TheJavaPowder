@@ -25,6 +25,20 @@ public class Methods {
             }
         }
     }
+	
+	public void createElement(int x, int y, byte id)
+	{
+		var.Map[x][y] = id;
+		var.HMap[x][y] = (short)var.Elements[id].defaultTemp;
+	}
+	
+	public void clearTile(int x, int y)
+	{
+		var.Map[x][y] = -127;//Clean the Map
+		var.VMap[x][y] = 0;//Clean the VMap
+		var.PMap[x][y] = 0;//Clean the PMap
+	}
+		
 
     public void getReactives(byte ID) {
         if(ID >= 0 && ID < var.NUM_ELS)
