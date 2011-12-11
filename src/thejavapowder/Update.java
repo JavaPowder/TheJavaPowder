@@ -54,10 +54,6 @@ public class Update {
 							}
 							if(var.Map[x][y] != -127)
 							{
-								if(var.pressure)
-								{
-									UpdateAir();
-								}
 								if(var.stateChanges)
 								{
 									CheckStateChanges(x,y);
@@ -76,6 +72,10 @@ public class Update {
                     }
                 }
             }
+			if(var.pressure)
+			{
+				UpdateAir();
+			}
         }//End of Updating maps
         if (var.active && var.state == 0) {//If drawing is active and we are in the game screen
                 if (var.Drawing) {//If it should be drawing
