@@ -116,7 +116,8 @@ public class Methods {
                 var.HMap[x1][y1] = 0;
 	            if(var.pressure) //Just a test to see if pressure works
 	            {
-					var.PrMap[x1/4][y1/4] += .1;
+					var.VxMap[x1/4][y1/4] += (x2-x1)/20.0;
+					var.VyMap[x1/4][y1/4] += (y2-y1)/20.0;
 	            }
             }
         }

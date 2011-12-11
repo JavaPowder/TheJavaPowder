@@ -345,13 +345,14 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 bufferGraphics.drawString("Property:" + var.PMap[var.DrawX ][var.DrawY], 10, 30 + 25 * var.winZoom);//Draw the Property Level
                 bufferGraphics.drawString("Temperature:" + var.HMap[var.DrawX][var.DrawY] + " C", 10, 30 + 35 * var.winZoom);//Draw the Temperature
 				if (var.DrawX < var.Width-4 && var.DrawX >= 0 && var.DrawY < var.Height-4 && var.DrawY >= 0)
-					if (var.PrMap[var.DrawX/4][var.DrawY/4] > .01 || var.PrMap[var.DrawX/4][var.DrawY/4] < -.01)
-						bufferGraphics.drawString("Pressure:" + var.PrMap[var.DrawX/4][var.DrawY/4], 10, 30 + 45 * var.winZoom);//Draw the Pressure
-					else
-					    bufferGraphics.drawString("Pressure:" + 0, 10, 30 + 45 * var.winZoom);//Draw the Pressure
-				bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 55 * var.winZoom);//Draw the FPS
-				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 65 * var.winZoom);//Draw the Mouse X Coordinate
-				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 75 * var.winZoom);//Draw the Mouse Y Coordinate
+					bufferGraphics.drawString("Pressure:" + var.PrMap[var.DrawX/4][var.DrawY/4], 10, 30 + 45 * var.winZoom);//Draw the Pressure
+				if (var.DrawX < var.Width-4 && var.DrawX >= 0 && var.DrawY < var.Height-4 && var.DrawY >= 0)
+					bufferGraphics.drawString("X Velocity:" + var.VxMap[var.DrawX/4][var.DrawY/4], 10, 30 + 55 * var.winZoom);//Draw the Pressure
+				if (var.DrawX < var.Width-4 && var.DrawX >= 0 && var.DrawY < var.Height-4 && var.DrawY >= 0)
+					bufferGraphics.drawString("Y Velocity:" + var.VyMap[var.DrawX/4][var.DrawY/4], 10, 30 + 65 * var.winZoom);//Draw the Pressure
+				bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 75 * var.winZoom);//Draw the FPS
+				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 85 * var.winZoom);//Draw the Mouse X Coordinate
+				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
             }
 
             if (var.state == 2)//If we are choosing an element
