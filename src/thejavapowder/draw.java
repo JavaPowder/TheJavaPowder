@@ -3,7 +3,8 @@ package thejavapowder;
 public class draw
 {
     Variables var = thejavapowder.TheJavaPowder.var;
-
+	Methods meth = new Methods();
+	
     public void drawPoint(int x, int y, byte id) {
         if ((var.active || !(var.Simulating || var.tempSimulating)) && x > 1 && y > 1 && x < var.Width && y < var.Height) {
             var.wait = 30;
@@ -11,15 +12,12 @@ public class draw
                 if (var.leftClick) {
                     if (var.Map[x][y] == -127)//If the target tile is free
                     {
-                        var.Map[x][y] = id;
-                        var.HMap[x][y] = (short)var.Elements[id].defaultTemp;
+						meth.createElement(x, y, id);	
                     }
                 } else {
                     if (var.Map[x][y] != -127)//If the target tile is not free
                     {
-                        var.Map[x][y] = -127;//Clean the Map
-                        var.VMap[x][y] = 0;//Clean the VMap
-                        var.PMap[x][y] = 0;//Clean the PMap
+						meth.clearTile(x, y);
                     }
                 }
             } else if (id == -126) {
@@ -31,9 +29,7 @@ public class draw
                     }
                 } else {
                     if (var.Map[x][y] != 0) {
-                        var.Map[x][y] = -127;
-                        var.VMap[x][y] = 0;
-                        var.PMap[x][y] = 0;
+						meth.clearTile(x, y);
                     }
                 }
             } else {
