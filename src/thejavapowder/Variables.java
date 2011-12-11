@@ -18,7 +18,7 @@ public class Variables {
 	boolean electricity   = false;
 	boolean heat          = false;
 	boolean burn 		  = true;
-	boolean pressure      = true;
+	boolean pressure      = false;
 	boolean debug         = false;
 	boolean reactions     = true;
 	boolean physics       = true;
