@@ -69,7 +69,6 @@ public class Methods {
 
     public boolean canMove(final byte p1, final byte p2, final boolean weight)
     {
-
         if (weight)
             return p2 == -127 || var.Elements[p1].weight > var.Elements[p2].weight; //Move onto empty spaces or spaces where the element has less weight
         else
@@ -84,9 +83,11 @@ public class Methods {
 				{
 					if (j != 0 || k != 0) //If it's not the center space
 					{
-						if (i == num && canMove(var.Map[x][y],var.Map[x+j][y+k],change)) //If it's the space you were trying to move to and you can move there
+						int x2 = x+j+(int)var.VxMap[x/4][y/4];
+						int y2 = y+k+(int)var.VyMap[x/4][y/4];
+						if (x2 > 0 && x2 < var.Width && y2 > 0 && y2 < var.Height && i == num && canMove(var.Map[x][y],var.Map[x2][y2],change)) //If it's the space you were trying to move to and you can move there
 						{
-							moveElement(x,y,x+j,y+k,change); //Move the particle
+							moveElement(x,y,x2,y2,change); //Move the particle
 							return true; //return that it moved
 						}
 						if (i == num) //If it's the space you were trying to move to but you didn't move
@@ -114,9 +115,14 @@ public class Methods {
                 var.HMap[x2][y2] = var.HMap[x1][y1];
                 var.Map [x1][y1] = -127;
                 var.HMap[x1][y1] = 0;
-	            if(var.pressure) //Just a test to see if pressure works
+	            if(var.pressure && validAirSpace(x1/4,y1/4)) //Just a test to see if pressure works
 	            {
-					var.PrMap[x1/4][y1/4] += .1;
+					int xchange = x2-x1;
+					xchange = Math.min(1,Math.max(-1,xchange));
+					int ychange = y2-y1;
+					ychange = Math.min(1,Math.max(-1,ychange));
+					var.VxMap[x1/4][y1/4] += xchange/50.0;
+					var.VyMap[x1/4][y1/4] += ychange/50.0;
 	            }
             }
         }

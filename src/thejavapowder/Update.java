@@ -1,7 +1,5 @@
 package thejavapowder;
 
-import java.text.BreakIterator;
-import java.util.Map;
 import java.util.Random;
 
 public class Update {
@@ -18,16 +16,6 @@ public class Update {
       *
       *
       */
-
-    long StartTime = 0;
-    long EndTime = 0;
-    long TotalFPS = 0;
-    int TotalFrame = 0;
-
-
-    byte FPS;
-    float Time = 1000;
-
 
     Random rand = new Random();
     Variables var = thejavapowder.TheJavaPowder.var;
@@ -54,10 +42,6 @@ public class Update {
 							}
 							if(var.Map[x][y] != -127)
 							{
-								if(var.pressure)
-								{
-									UpdateAir();
-								}
 								if(var.stateChanges)
 								{
 									CheckStateChanges(x,y);
@@ -76,6 +60,10 @@ public class Update {
                     }
                 }
             }
+			if(var.pressure)
+			{
+				UpdateAir();
+			}
         }//End of Updating maps
         if (var.active && var.state == 0) {//If drawing is active and we are in the game screen
                 if (var.Drawing) {//If it should be drawing
@@ -96,22 +84,54 @@ public class Update {
 
 	private void UpdateAir()
 	{
+		for (int x = 1; x < var.Width/4; x++) //For every space on the pressure map
+			for (int y = 1; y < var.Height/4; y++)
+			{
+				float airchange = var.VxMap[x-1][y] - var.VxMap[x][y]; // Calculate how much x and y velocity to transfer
+				airchange -= var.VyMap[x][y-1] - var.VyMap[x][y];
+				var.PrMap[x][y] *= .9999; // Reduce pressure a little
+				var.PrMap[x][y] += airchange*.3;  // Transfer velocity to pressure
+			}
+		for (int x = 0; x < var.Width/4-1; x++) //For every space on the velocity maps
+			for (int y = 0; y < var.Height/4-1; y++)
+			{
+				float airchangex = var.PrMap[x][y] - var.PrMap[x+1][y];  // Calculate how much pressure to transfer
+				float airchangey = var.PrMap[x][y] - var.PrMap[x][y+1];
+				var.VxMap[x][y] *= .999; // Reduce velocity a little
+				var.VyMap[x][y] *= .999;
+				var.VxMap[x][y] += airchangex*.4; // Transfer pressure to velocity
+				var.VyMap[x][y] += airchangey*.4;
+			}
 		for (int x = 0; x < var.Width/4; x++) //For every space on the pressure map
-            for (int y = 0; y < var.Height/4; y++)
-            {
-				if (var.PrMap[x][y] < .0000001) //If the pressure is really small
+			for (int y = 0; y < var.Height/4; y++)
+			{
+				if (Math.abs(var.PrMap[x][y]) < .0000001) //If the pressure is really small
 					var.PrMap[x][y] = 0;        //Make it 0
-				else
+				if (Math.abs(var.VxMap[x][y]) < .0000001) //If the x velocity is really small
+					var.VxMap[x][y] = 0;        //Make it 0
+				if (Math.abs(var.VyMap[x][y]) < .0000001) //If the y velocity is really small
+					var.VyMap[x][y] = 0;        //Make it 0
+				if (var.PrMap[x][y] != 0 || var.VxMap[x][y] != 0 || var.VyMap[x][y] != 0)
 				{
 					float airChange = 0;
+					float airChangeX = 0;
+					float airChangeY = 0;
 					for (int i = -1; i <= 1; i++) //For every pressure space around this spot
 						for (int j = -1; j <= 1; j++)
 							if (meth.validAirSpace(x+i,y+j)) //If it's a valid spot
+							{
 								airChange -= (var.PrMap[x][y] - var.PrMap[x+i][y+j])/5; //calculate how much air to transfer to this spot
+								airChangeX -= (var.VxMap[x][y] - var.VxMap[x+i][y+j])/5*.7; //calculate how much x velocity to transfer to this spot
+								airChangeY -= (var.VyMap[x][y] - var.VyMap[x+i][y+j])/5*.7; //calculate how much y velocity to transfer to this spot
+							}
 					var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f); //Tranfer it
+					var.OldVxMap[x][y] = airChangeX + (var.VxMap[x][y]*.99f);
+					var.OldVyMap[x][y] = airChangeY + (var.VyMap[x][y]*.99f);
 				}
 			}
 		System.arraycopy(var.OldPrMap,0,var.PrMap,0,var.PrMap.length); //Copy the new pressure array into the real pressure array
+		System.arraycopy(var.OldVxMap,0,var.VxMap,0,var.VxMap.length); //Copy the new x velocity array into the real x velocity array
+		System.arraycopy(var.OldVyMap,0,var.VyMap,0,var.VyMap.length); //Copy the new y velocity array into the real y velocity array
 	}
 
 	private void UpdateReactions(int x, int y)
@@ -423,6 +443,11 @@ public class Update {
                     {
                         chances[i] = .125; //A random chance of moving in any direction
                     }
+					if (var.Map[x][y] == 15)
+					{
+						var.PrMap[x/4][y/4] += .01;
+						var.VyMap[x/4][y/4] -= .01;
+					}
                     break;
             }
 
