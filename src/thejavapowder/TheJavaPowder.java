@@ -46,23 +46,15 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 System.exit(0);
             }
         });
-	    
 	    long before;
 	    long after;
-		
 	    long start;
-	    
         init();
 	    before = System.nanoTime();
-	    
-	    
         while (!quit) {
 	        start = System.nanoTime();
-	        
 	        update.update();
-	        
 	        after = System.nanoTime();
-	        
 	        if(after - before > 40000000)
 	        {
 		        repaint();

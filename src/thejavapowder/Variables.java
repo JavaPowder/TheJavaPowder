@@ -2,8 +2,11 @@ package thejavapowder;
 
 import thejavapowder.Elements.*;
 
+import java.awt.*;
+
 public class Variables {
 
+	Graphics bufferGraphics;
 
     boolean Drawing       = false;
     boolean antiDouble    = false;

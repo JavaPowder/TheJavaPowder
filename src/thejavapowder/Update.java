@@ -203,10 +203,10 @@ public class Update {
                                 }
                             }
                         }
-            
-	        break; 
+
+	        break;
 	        case 5://Battery
-            
+
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -217,7 +217,7 @@ public class Update {
                         }
             break;
 	            case 6://Copper
-            
+
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -236,7 +236,7 @@ public class Update {
                         }
             break;
 	            case 7://Semi Conductor A
-            
+
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -250,7 +250,7 @@ public class Update {
                         }
             break;
 	            case 8://Semi Conductor B
-            
+
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -264,7 +264,7 @@ public class Update {
                         }
             break;
 	            case 9://Screen
-            
+
                 if (var.VMap[x][y] >= 50) {
                     var.VMap[x][y] -= 50;
                 } else {
@@ -273,7 +273,7 @@ public class Update {
 
             break;
 	            case 11://Rechargable Battery
-            
+
                 if (var.VMap[x][y] > 5000) {
                     var.VMap[x][y] = 5000;
                 }
@@ -298,7 +298,7 @@ public class Update {
 
             break;
 	            case 10://Resistor
-            
+
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
                         if ((xc!=0 || yc!=0) && !(xc!=0 && yc!=0)) // For the 4 spots directly touching it
@@ -314,7 +314,7 @@ public class Update {
                         }
             break;
 	            case 12://Power Drainer
-            
+
                 var.VMap[x][y] = 0;
                 for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                     for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
@@ -328,7 +328,7 @@ public class Update {
                         }
             break;
 	            case 14://Switch
-            
+
                 if (var.PMap[x][y] > 25) {
                     for (int xc = -1; xc <= 1; xc++)//For 3 tiles on the X axis
                         for (int yc = -1; yc <= 1; yc++)//For 3 tiles on the Y axis
@@ -389,7 +389,7 @@ public class Update {
 	    final char type = var.Elements[var.Map[x][y]].state;
         if(var.Map[x][y] != -127 && type != 's')
         {
-            
+
             double[] chances = {0,0,0,0,0,0,0,0};//An array of the possibilities of moving
 			/* 0 1 2
 			   3   4

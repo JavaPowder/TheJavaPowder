@@ -31,7 +31,7 @@ public class Methods {
 		var.Map[x][y] = id;
 		var.HMap[x][y] = (short)var.Elements[id].defaultTemp;
 	}
-	
+
 	public void clearTile(int x, int y)
 	{
 		var.Map[x][y] = -127;//Clean the Map
