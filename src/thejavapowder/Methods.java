@@ -104,7 +104,7 @@ public class Methods {
             {
                  final byte element = var.Map [x2][y2];
                  final float temp   = var.HMap[x2][y2];
-	             final int life     = var.LMap[x2][y2];
+	             final byte life     = var.LMap[x2][y2];
                  var.HMap[x2][y2]   = var.HMap[x1][y1];
                  var.Map [x2][y2]   = var.Map [x1][y1];
 	             var.LMap [x2][y2]   = var.LMap [x1][y1];
@@ -116,7 +116,7 @@ public class Methods {
             {
                 var.Map [x2][y2] = var.Map[x1][y1];
                 var.HMap[x2][y2] = var.HMap[x1][y1];
-	            var.HMap[x2][y2] = var.LMap[x1][y1];
+	            var.LMap[x2][y2] = var.LMap[x1][y1];
                 var.Map [x1][y1] = -127;
                 var.HMap[x1][y1] = 0;
 	            var.LMap[x1][y1] = 0;

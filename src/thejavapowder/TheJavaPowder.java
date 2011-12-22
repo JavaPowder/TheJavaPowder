@@ -167,6 +167,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         var.HMap     = new float [var.Width]  [var.Height];
         var.VMap     = new int   [var.Width]  [var.Height];
         var.PMap     = new byte  [var.Width]  [var.Height];
+	    var.LMap      = new byte  [var.Width]  [var.Height];
 		var.PrMap    = new float [var.Width/4][var.Height/4];
 		var.VxMap    = new float [var.Width/4][var.Height/4];
 		var.VyMap    = new float [var.Width/4][var.Height/4];
@@ -200,6 +201,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 var.PMap[x][y] = 0;
                 var.VMap[x][y] = 0;
                 var.HMap[x][y] = 0;
+	            var.LMap[x][y] = 0;
             }
         }
 		for (int x = 0; x < var.Width/4; x++)

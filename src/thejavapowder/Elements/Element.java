@@ -15,6 +15,7 @@ public class Element {    /*
     public byte[] reactives;
     public final byte[][] react = new byte[30][];
     public final byte[][][] heatChanges = new byte[30][][];
+	public byte defaultLife;
     /*
     First depth : Element it would change in
     Second depth : Key Temperature to change
@@ -31,7 +32,8 @@ public class Element {    /*
             String desc,
             int col,
             byte[] react,
-            int dTemp)
+            int dTemp,
+            byte dLife)
     {
             this.conductive = co;
             this.weight = we;
@@ -41,12 +43,12 @@ public class Element {    /*
             this.colour = col;
             this.reactives = react;
             this.defaultTemp = dTemp;
+	        this.defaultLife = dLife;
     }
 
     //public Element(byte[] trans) {
     //    this.transmitTo = trans;
     //}
-
 
 
 }
