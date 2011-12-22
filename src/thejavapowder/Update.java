@@ -42,6 +42,12 @@ public class Update {
 							}
 							if(var.Map[x][y] != -127)
 							{
+								if(var.life)
+								{										
+								UpdateLife(x, y);
+								}
+							if(var.Map[x][y] != -127)
+							{	
 								if(var.stateChanges)
 								{
 									CheckStateChanges(x,y);
@@ -54,6 +60,7 @@ public class Update {
 								{
 									UpdateHeat(x, y);
 								}
+							}								
 	                        }
 	                    }
 
@@ -368,17 +375,23 @@ public class Update {
         }
     }//End of Voltage Update
 
+	private void UpdateLife(int x, int y)
+	{
+	}
+	
 	private void UpdateHeat(int x, int y)
 	{
 		int i, j, num = 0;
-		if (var.Map[x][y] < 0)
+		if (var.Map[x][y] < 0 )
 			return;
+		if(var.burn)
+		{
 		for (j = -1; j < 2; j++) //Loop through each spot around the particle
 			for (i = -1; i < 2; i++)
 			{
 				if (i != 0 || j != 0) //If it's not the center space
 				{
-					if (var.burn && var.surArray[num] == 15) //If burning is active and this space has fire in it
+					if (var.surArray[num] == 15) //If burning is active and this space has fire in it
 					{
 						var.RandomNum = rand.nextInt(100); //Get a random value
 						if (var.RandomNum < var.Elements[var.Map[x][y]].burn) //If that random value was less than the burn value of the element
@@ -396,6 +409,13 @@ public class Update {
 					num++;
 				}
 			}
+		}
+		if(var.Map[x][y] == 15)
+		{
+			var.HMap[x][y]--;
+			if(var.HMap[x][y] < 100)
+				meth.clearTile(x, y);
+		}
 	}
 
     private void UpdateElement(final int x, final int y) {

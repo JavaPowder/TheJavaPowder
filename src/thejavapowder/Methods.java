@@ -85,7 +85,13 @@ public class Methods {
 					{
 						int x2 = x+j+(int)var.VxMap[x/4][y/4];
 						int y2 = y+k+(int)var.VyMap[x/4][y/4];
-						if (x2 > 0 && x2 < var.Width && y2 > 0 && y2 < var.Height && i == num && canMove(var.Map[x][y],var.Map[x2][y2],change)) //If it's the space you were trying to move to and you can move there
+
+						if (i == num &&
+							x2 < var.Width &&
+							y2 > 0 &&
+							y2 < var.Height &&
+							x2 > 0&&
+							canMove(var.Map[x][y],var.Map[x2][y2],change)) //If it's the space you were trying to move to and you can move there
 						{
 							moveElement(x,y,x2,y2,change); //Move the particle
 							return true; //return that it moved

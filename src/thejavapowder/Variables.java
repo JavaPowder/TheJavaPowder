@@ -26,6 +26,7 @@ public class Variables {
 	boolean reactions     = true;
 	boolean physics       = true;
 	boolean stateChanges  = true;
+	boolean life          = true;
 
     /*Transformated Variables:
      * Variables that represents a long calculation used often
