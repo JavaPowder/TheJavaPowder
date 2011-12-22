@@ -11,7 +11,7 @@ Priority: <How fast it must be done> <Can other devs help>
 
 
 Update
-Add in particle velocity and pressure to the method Update Element, and also make fire raise up
+Fix particle velocity and pressure to the method Update Element
 Dev: <Jacob> <Yes>
 Priority: Medium
 
@@ -35,6 +35,11 @@ All
 Documenting the code more
 Dev: <all>
 Priority: Medium
+
+All
+Optimize the Performances
+Dev: <all>
+Priority: Low ( For later )
 
 None
 Find new bugs and report them
