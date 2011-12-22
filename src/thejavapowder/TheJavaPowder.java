@@ -242,7 +242,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
            *  Others are free
            */
         var.Elements[0].react[3] = new byte[]{2, 1, 0, 0, 0, 0, 2, 1}; // Coffee+Water = Methane
-        //var.Elements[2].react[15] = new byte[]{15, 0, 0, 0, 50, 0, 15, 3}; //Methane+Fire = Fire
         var.Elements[3].react[15] = new byte[]{3, 1, 0, 0, 50, 0, 3, 0}; //Water+Fire = Destroyed
     }
 

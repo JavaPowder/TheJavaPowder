@@ -75,6 +75,7 @@ public class Variables {
     float[][] HMap        = new float [Width][Height];// The Heat type map
     int[][]   VMap        = new int   [Width][Height];  // The Voltage type map
     byte[][]  PMap        = new byte  [Width][Height];// The Particle Properties Map
+	int[][]  LMap         = new int  [Width][Height];// The Particle Life Map
 	float[][] PrMap       = new float [Width/4][Height/4];// The Pressure Map
 	float[][] VxMap       = new float [Width/4][Height/4];// The X Velocity Map
 	float[][] VyMap       = new float [Width/4][Height/4];// The Y Velocity Map
