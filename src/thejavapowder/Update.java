@@ -397,7 +397,7 @@ public class Update {
 						if (var.RandomNum < var.Elements[var.Map[x][y]].burn) //If that random value was less than the burn value of the element
 						{
 							var.Map[x][y] = 15; //Change this particle to fire
-							var.HMap[x][y] += 50; //Increase the heat
+							var.HMap[x][y] += 100; //Increase the heat
 						}
 					}
 					if (var.heat && var.Map[x+i][y+j] != -127) //If heat conduction is on and the space around the particle is not empty
