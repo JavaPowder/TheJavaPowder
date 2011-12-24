@@ -393,11 +393,11 @@ public class Update {
 				{
 					if (var.surArray[num] == 15) //If burning is active and this space has fire in it
 					{
-						var.RandomNum = rand.nextInt(100); //Get a random value
+						var.RandomNum = rand.nextInt(50); //Get a random value
 						if (var.RandomNum < var.Elements[var.Map[x][y]].burn) //If that random value was less than the burn value of the element
 						{
 							var.Map[x][y] = 15; //Change this particle to fire
-							var.HMap[x][y] += 100; //Increase the heat
+							var.HMap[x][y] += var.Elements[var.Map[x][y]].burn * 25; //Increase the heat
 						}
 					}
 					if (var.heat && var.Map[x+i][y+j] != -127) //If heat conduction is on and the space around the particle is not empty

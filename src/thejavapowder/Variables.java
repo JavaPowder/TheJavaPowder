@@ -19,7 +19,7 @@ public class Variables {
 
 
 	boolean electricity   = false;
-	boolean heat          = false;
+	boolean heat          = true;
 	boolean burn 		  = true;
 	boolean pressure      = true;
 	boolean debug         = false;
@@ -52,7 +52,7 @@ public class Variables {
     int RandomNum       = 0;
     int Height          = 400;
     int optionsHeight   = 14;
-    int Width           = 400;
+    int Width           = 600;
     int wait            = 30;
     int CurrentX        = 100;
     int CurrentY        = 100;
@@ -105,9 +105,9 @@ public class Variables {
         new Solid(  (byte) 4,  (byte) 127, true,  "Power Drainer",      "Drains the electricity",                           0xBABABA, new byte[]{},   20, (byte)1),
         new Solid(  (byte) 0,  (byte) 127, false, "Crossing",           "Makes electricity jump over it",      				0xE8851C, new byte[]{},   20, (byte)1),
         new Solid(  (byte) 0,  (byte) 127, false, "Switch",             "Conducts if turned on",              				0x00ED00, new byte[]{},   20, (byte)1),
-        new Gas(    (byte) 0,  (byte) 5,   false, "Fire",               "Burns stuff",                                      0xDE2307, new byte[]{},   300,(byte)255),
+        new Gas(    (byte) 0,  (byte) 5,   false, "Fire",               "Burns stuff",                                      0xDE2307, new byte[]{},   500,(byte)255),
         new Solid(  (byte) 2,  (byte) 127, false, "Wood",               "Burns slowly",                                     0xC0A040, new byte[]{},   20, (byte)1),
-        new Liquid( (byte) 10, (byte) 50,  false, "Petroleum",          "Oil, burns",                                       0x404010, new byte[]{},   20, (byte)1),
+        new Liquid( (byte) 30, (byte) 50,  false, "Petroleum",          "Oil, burns",                                       0x404010, new byte[]{},   20, (byte)1),
         new Powder( (byte) 16, (byte) 15,  false, "Sawdust",            "Sawdust",                                          0xFFE0A0, new byte[]{},   20, (byte)1),
         };
 	// new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)

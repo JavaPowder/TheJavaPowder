@@ -94,7 +94,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image woodPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wood.png"));
     Image petrolPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/petrol.png"));
 
-    Image playPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
+    Image playPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.svg"));
     Image settingsPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
     Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javapowder.png"));
     Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/console.png"));
