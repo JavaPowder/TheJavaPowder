@@ -79,9 +79,9 @@ public class Update {
             } else {
                 if (var.wait < 1) {//If the wait time to draw is over
                     var.active = true;//Activate the drawing
-                    var.wait = 30;//Reset the timer
+                    var.wait = 40;//Reset the timer
                 } else {//If it can't draw and the timer is not up
-                    var.wait--;//Make the timer progress
+                    var.wait -= 1;//Make the timer progress
                 }
             }
 		var.LastDrawX = var.DrawX;//Update the drawing points

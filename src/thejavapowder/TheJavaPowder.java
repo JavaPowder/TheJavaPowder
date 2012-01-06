@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class TheJavaPowder extends JFrame implements Runnable, ActionListener, ItemListener, MouseListener, MouseMotionListener, KeyListener, MouseWheelListener {
+public class TheJavaPowder extends JFrame implements Runnable, MouseListener, MouseMotionListener, KeyListener, MouseWheelListener {
     /*Main class
        * Paints, Listener for Events and loops through all the things that need to be done
        *
@@ -62,9 +62,9 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 		        before = System.nanoTime();
 	        }
 	        if(System.nanoTime()-start != 0)
-	            PaintFPS = (int)(1000000000/(System.nanoTime()-start));
+	            var.PaintFPS = (int)(1000000000/(System.nanoTime()-start));
 	        else
-		        PaintFPS = 1337;
+		        var.PaintFPS = 1337;
 
         }
     }
@@ -123,7 +123,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
     Image offscreen;
     Dimension dim;
 
-    int PaintFPS    = 0;
     int TotalFrame  = 0;
     long TotalFPS   = 0;
     boolean quit    = false;
@@ -343,7 +342,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
 					bufferGraphics.drawString("X Velocity:" + var.VxMap[var.DrawX/4][var.DrawY/4], 10, 30 + 55 * var.winZoom);//Draw the Pressure
 				if (var.DrawX < var.Width-4 && var.DrawX >= 0 && var.DrawY < var.Height-4 && var.DrawY >= 0)
 					bufferGraphics.drawString("Y Velocity:" + var.VyMap[var.DrawX/4][var.DrawY/4], 10, 30 + 65 * var.winZoom);//Draw the Pressure
-				bufferGraphics.drawString("FPS:" + PaintFPS, 10, 30 + 75 * var.winZoom);//Draw the FPS
+				bufferGraphics.drawString("FPS:" + var.PaintFPS, 10, 30 + 75 * var.winZoom);//Draw the FPS
 				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 85 * var.winZoom);//Draw the Mouse X Coordinate
 				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
             }
@@ -484,35 +483,34 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                     }
 
                 }
-                var.active = false;
                 console.printtxt("Scene Reset.");
-                var.active = false;
+                var.Drawing = false; var.active = false;
             }
             else if (xc >= 90 && xc <= 198)
             {
                 TotalFPS = 0;
                 TotalFrame = 0;
-                var.active = false;
+                var.Drawing = false; var.active = false;
             }
             else if (xc >= 206 && xc <= 260)
             {
                 var.Equipped = -126;
-                var.active = false;
+                var.Drawing = false; var.active = false;
             }
             else if (xc >= 268 && xc <= 376)
             {
                 var.Equipped = -125;
-                var.active = false;
+                var.Drawing = false; var.active = false;
             }
             else if (xc >= 384 && xc <= 452)
             {
                 FileSaver.SaveFile(JOptionPane.showInputDialog(null,"Enter a Save Name"));
-                var.active = false;
+                var.Drawing = false; var.active = false;
             }
             else if (xc >= 460 && xc <= 528)
             {
                 FileSaver.LoadFile(JOptionPane.showInputDialog(null,"Enter the Name of a Save to Open"));
-                var.active = false;
+                var.Drawing = false; var.active = false;
             }
         }
         else if (var.state == 0) {
@@ -528,11 +526,11 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         if (var.state == 1) {
             if (var.MouseX > 252*var.winZoom && var.MouseY > 121*var.winZoom && var.MouseX < 354*var.winZoom && var.MouseY < 151*var.winZoom) {
                 var.state = 0;
-                var.active = false;
+                var.Drawing = false; var.active = false;
             }
             if (var.MouseX > 252*var.winZoom && var.MouseY > 170*var.winZoom && var.MouseX < 354*var.winZoom && var.MouseY < 200*var.winZoom) {
                 var.state = 3;
-                var.active = false;
+                var.Drawing = false; var.active = false;
             }
         } else if (var.state == 2) {
             int x = 50 * var.winZoom, y = 25 * var.winZoom, num = 0;
@@ -540,7 +538,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
                 if (var.MouseX > x && var.MouseY > y && var.MouseX < x + (40*var.winZoom) && var.MouseY < y + (40*var.winZoom)) {
                     var.Equipped = (byte)(num);
                     var.state = 0;
-                    var.active = false;
+                    var.Drawing = false; var.active = false;
                 }
                 num++;
                 x += 40 * var.winZoom;
@@ -786,12 +784,6 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
         if (var.Size > 50) var.Size = 50;
     }
 
-    public void itemStateChanged(ItemEvent e) {
-    }
-
-    public void actionPerformed(ActionEvent e) {
-    }
-
     /*			___________
        ===	 == /		   \
      = === ==� ==|  . .	   |
@@ -801,7 +793,7 @@ public class TheJavaPowder extends JFrame implements Runnable, ActionListener, I
      = === === == \________\_____/
      =	 ===   �� ��	  ��  ��
      */
-    public void nyan() {
+    private void nyan() {
         String[] nyan = new String[10];
         nyan[0] = "			   ___________";
         nyan[1] = "  ===	 ==  /		   \\";

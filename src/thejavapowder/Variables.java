@@ -21,7 +21,7 @@ public class Variables {
 	boolean electricity   = false;
 	boolean heat          = true;
 	boolean burn 		  = true;
-	boolean pressure      = true;
+	boolean pressure      = false;
 	boolean debug         = false;
 	boolean reactions     = true;
 	boolean physics       = true;
@@ -38,6 +38,7 @@ public class Variables {
     int DrawY       = 0;
     int LastDrawX   = 0;//Where to draw
     int LastDrawY   = 0;
+	int PaintFPS    = 0;
     //End of Transformated Variables
 
     /* The state it is it
