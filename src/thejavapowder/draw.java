@@ -8,45 +8,59 @@ public class draw
     public void drawPoint(int x, int y, byte id) {
         if ((var.active || !(var.Simulating || var.tempSimulating)) && x > 1 && y > 1 && x < var.Width && y < var.Height) {
             var.wait = 30;
-            if (id != -126 && id != -125) {
-                if (var.leftClick) {
-                    if (var.Map[x][y] == -127)//If the target tile is free
-                    {
-						meth.createElement(x, y, id);	
-                    }
-                } else {
-                    if (var.Map[x][y] != -127)//If the target tile is not free
-                    {
-						meth.clearTile(x, y);
-                    }
-                }
-            } else if (id == -126) {
-                if (var.leftClick) {
-                    if (var.Map[x][y] == 4 || var.Map[x][y] == 6) {
-                        var.VMap[x][y] += 5;
-                        if (var.VMap[x][y] > 1500)
-                            var.VMap[x][y] = 1500;
-                    }
-                } else {
-                    if (var.Map[x][y] != 0) {
-						meth.clearTile(x, y);
-                    }
-                }
-            } else {
-                if (var.leftClick) {
-                    if (var.PMap[x][y] < 50) {
-                        if (var.Map[x][y] == 11 || var.Map[x][y] == 10 || var.Map[x][y] == 14) {
-                            var.PMap[x][y] += 1;
-                        }
-                    }
-                } else {
-                    if (var.PMap[x][y] > 1) {
-                        if (var.Map[x][y] == 11 || var.Map[x][y] == 10 || var.Map[x][y] == 14) {
-                            var.PMap[x][y] -= 1;
-                        }
-                    }
-                }
-            }
+	        if(var.leftClick)
+	        {
+		        switch(id)
+		        {
+			        case -126:
+					        if (var.Map[x][y] == 4 || var.Map[x][y] == 6) {
+						        var.VMap[x][y] += 5;
+						        if (var.VMap[x][y] > 1500)
+							        var.VMap[x][y] = 1500;
+					        }
+
+				        break;
+			        case -125:
+					        if (var.PMap[x][y] < 50) {
+						        if (var.Map[x][y] == 11 || var.Map[x][y] == 10 || var.Map[x][y] == 14) {
+							        var.PMap[x][y] += 1;
+						        }
+					        }
+				        break;
+
+			        default:
+					        if (var.Map[x][y] == -127)//If the target tile is free
+					        {
+						        meth.createElement(x, y, id);
+					        }
+				        break;
+		        }
+	        }
+	        else
+	        {
+		        switch(id)
+		        {
+			        case -126:
+					        if (var.Map[x][y] != 0) {
+						        meth.clearTile(x, y);
+					        }
+				        break;
+			        case -125:
+					        if (var.PMap[x][y] > 1) {
+						        if (var.Map[x][y] == 11 || var.Map[x][y] == 10 || var.Map[x][y] == 14) {
+							        var.PMap[x][y] -= 1;
+						        }
+					        }
+				        break;
+
+			        default:
+					        if (var.Map[x][y] != -127)//If the target tile is not free
+					        {
+						        meth.clearTile(x, y);
+					        }
+				        break;
+		        }
+	        }
         } else {
             var.wait--;
             if (var.wait < 1) {
