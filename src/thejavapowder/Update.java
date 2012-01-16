@@ -463,7 +463,7 @@ public class Update {
                     {
                         chances[i] = .125; //A random chance of moving in any direction
                     }
-					if (var.Map[x][y] == 15)
+					if (var.pressure && var.Map[x][y] == 15)
 					{
 						var.PrMap[x/4][y/4] += .01;
 						var.VyMap[x/4][y/4] -= .01;

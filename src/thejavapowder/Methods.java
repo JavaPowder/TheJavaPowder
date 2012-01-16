@@ -83,8 +83,8 @@ public class Methods {
 				{
 					if (j != 0 || k != 0) //If it's not the center space
 					{
-						int x2 = x+j+(int)var.VxMap[x/4][y/4];
-						int y2 = y+k+(int)var.VyMap[x/4][y/4];
+						int x2 = x+j+(int)(var.VxMap[x/4][y/4]*Math.random());
+						int y2 = y+k+(int)(var.VyMap[x/4][y/4]*Math.random());
 
 						if (i == num &&
 							x2 < var.Width &&
