@@ -69,35 +69,41 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
         }
     }
 
-    //Thread t;
 
 
-    Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/a-semiconductor.png"));
-    Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/b-semiconductor.png"));
-    Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/battery.png"));
-    Image coffeePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/coffee.png"));
-    Image copperPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/copper.png"));
-    //Image creditPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
-    Image ironPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iron.png"));
+    Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/a-semiconductor.png"));
+    Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/b-semiconductor.png"));
+    Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/battery.png"));
+    Image coffeePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/coffee.png"));
+    Image copperPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/copper.png"));
+    Image ironPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/iron.png"));
     //Image logicGatePng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
-    Image methanePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/methane.png"));
-    Image nonePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/none.png"));
-    Image powerDrainerPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/power-drainer.png"));
-    Image rechargableBatteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/rechargable-battery.png"));
-    Image resistorPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/resistor.png"));
-    Image screenPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/screen.png"));
-    Image switchPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/switch.png"));
-    Image wallPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wall.png"));
-    Image waterPng              = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/water.png"));
-    Image crossingPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wire-crossing.png"));
-    Image firePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/fire.png"));
-    Image woodPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/wood.png"));
-    Image petrolPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/petrol.png"));
+    Image methanePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/methane.png"));
+    Image nonePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/none.png"));
+    Image powerDrainerPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/power-drainer.png"));
+    Image rechargableBatteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/rechargable-battery.png"));
+    Image resistorPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/resistor.png"));
+    Image screenPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/screen.png"));
+    Image switchPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/switch.png"));
+    Image wallPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wall.png"));
+    Image waterPng              = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/water.png"));
+    Image crossingPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wire-crossing.png"));
+    Image firePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/fire.png"));
+    Image woodPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wood.png"));
+    Image petrolPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/petrol.png"));
 
-    Image playPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.svg"));
+	//Image creditPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
+    //Image playPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
     Image settingsPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
     Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javapowder.png"));
-    Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/console.png"));
+    Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/console.png"));
+	Image edit_heightPng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_height.png"));
+	Image edit_widthPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_width.png"));
+	Image elem_electricPng      = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_electric.png"));
+	Image elem_setpropPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_setprop.png"));
+	Image file_loadPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));
+	Image file_savePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));//Temporary
+	Image braincleptPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/Brainclept.png"));
 
     Image[] thumbnails = new Image[]{
             coffeePng,
@@ -119,6 +125,22 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             woodPng,
             petrolPng};
 
+	ImageTemplate[] images = new ImageTemplate[]{
+			new ImageTemplate(elem_electricPng, 103 * 2, (var.Height - 20) * var.winZoom, 27 * 2, 30 * var.winZoom ),
+			new ImageTemplate(elem_setpropPng, 134 * 2, (var.Height - 20) * var.winZoom, 54 * 2, 30 * var.winZoom ),
+			new ImageTemplate(file_loadPng, 192 * 2, (var.Height - 20) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+			new ImageTemplate(file_savePng, 230 * 2, (var.Height - 20) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+	};
+	ImageTemplate[] imagesMenu = new ImageTemplate[]{
+			new ImageTemplate(javaPowderPng, 202 * var.winZoom, 21 * var.winZoom, 202 * var.winZoom, 171 * var.winZoom ),
+			new ImageTemplate(settingsPng, 252 * var.winZoom, 211 * var.winZoom, 102 * var.winZoom, 50 * var.winZoom ),
+			new ImageTemplate(braincleptPng, 252 * var.winZoom, 301 * var.winZoom, 101 * var.winZoom, 85 * var.winZoom ),
+	};
+
+	/*
+
+
+	 */
     Graphics bufferGraphics;
     Image offscreen;
     Dimension dim;
@@ -151,6 +173,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
        */
 
     public void init() {
+	    this.setIconImage(javaPowderPng);
 	    if(saver.hasPref())
 	    {
 			int[] settings = saver.getPref();
@@ -269,7 +292,15 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
-
+	        bufferGraphics.setColor(new Color(0x00007F));
+	        bufferGraphics.fillRect(4 * 2, (var.Height + 1) * var.winZoom, 37 * 2, 10 * var.winZoom);
+	        bufferGraphics.fillRect(45 * 2, (var.Height + 1) * var.winZoom, 54 * 2, 10 * var.winZoom);
+	        for(int i = 0; i < images.length; i++)
+	        {
+		        bufferGraphics.drawImage(images[i].image, images[i].x, images[i].y, images[i].Width, images[i].Height, this);
+	        }
+	        bufferGraphics.drawString("Reset Scene", 5*2, (var.Height+8) * var.winZoom);
+	        bufferGraphics.drawString("Reset Average FPS", 46*2, (var.Height+8) * var.winZoom);
 
 
             for (int x = 0; x < var.Width; x++) {
@@ -384,12 +415,12 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
                 bufferGraphics.drawString("JavaPowder Console *Alpha*", 20, var.Height / 3 * var.winZoom + 5);
             }
         } else if (var.state == 1) {
-            if (!bufferGraphics.drawImage(playPng, 252*var.winZoom, 121*var.winZoom, 102*var.winZoom, 30*var.winZoom, this) ||
-                    !bufferGraphics.drawImage(settingsPng, 252*var.winZoom, 171*var.winZoom, 102*var.winZoom, 30*var.winZoom, this) ||
-                    !bufferGraphics.drawImage(javaPowderPng, 202*var.winZoom, 71*var.winZoom, 202*var.winZoom, 30*var.winZoom, this)) {
 
-                bufferGraphics.drawString("Derp", 300, 300);
-            }
+	        for(int i = 0; i < imagesMenu.length; i++)
+	        {
+		        bufferGraphics.drawImage(imagesMenu[i].image, imagesMenu[i].x, imagesMenu[i].y, imagesMenu[i].Width, imagesMenu[i].Height, this);
+	        }
+
         } else if (var.state == 3) {//The settings menu
 
             bufferGraphics.setColor(new Color(0x00AA00));
@@ -413,21 +444,6 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             bufferGraphics.drawString("Switch the background colour", (var.Width/2-78)*var.winZoom, 12+(var.Height/2+80)*var.winZoom);
         }
 
-        bufferGraphics.setColor(new Color(0x00007F));
-        bufferGraphics.fillRect(4*2, (var.Height+1) * var.winZoom, 37 * 2, 10 * var.winZoom);
-        bufferGraphics.fillRect(45*2, (var.Height+1) * var.winZoom, 54 * 2, 10 * var.winZoom);
-        bufferGraphics.fillRect(103*2, (var.Height+1) * var.winZoom, 27 * 2, 10 * var.winZoom);
-        bufferGraphics.fillRect(134*2, (var.Height+1) * var.winZoom, 54 * 2, 10 * var.winZoom);
-        bufferGraphics.fillRect(192*2, (var.Height+1) * var.winZoom, 34 * 2, 10 * var.winZoom);
-        bufferGraphics.setColor(new Color(0x7F0000));
-        bufferGraphics.fillRect(230*2, (var.Height+1) * var.winZoom, 34 * 2, 10 * var.winZoom);
-        bufferGraphics.setColor(new Color(0.5f, 0.5f, 0.5f, 0.5f));
-        bufferGraphics.drawString("Reset Scene", 5*2, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Reset Average FPS", 46*2, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Electricity", 104*2, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Change Properties", 135*2, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Save Scene", 193*2, (var.Height+8) * var.winZoom);
-        bufferGraphics.drawString("Load Scene", 231*2, (var.Height+8) * var.winZoom);
         g.drawImage(offscreen, 0, 0, this);
     }
 
@@ -469,7 +485,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 
     public void mousePressed(MouseEvent e) {
 
-        if (var.MouseY >= (var.Height+1)*var.winZoom && var.MouseY <= (var.Height+11)*var.winZoom)
+        if (var.MouseY >= (var.Height-20)*var.winZoom && var.MouseY <= (var.Height+11)*var.winZoom)
         {
             int xc = var.MouseX;
             if (xc >= 8 && xc <= 82)
@@ -492,26 +508,27 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
                 TotalFrame = 0;
                 var.Drawing = false; var.active = false;
             }
-            else if (xc >= 206 && xc <= 260)
+            else if (xc >= images[0].x && xc <= images[0].x + images[0].Width)
             {
                 var.Equipped = -126;
                 var.Drawing = false; var.active = false;
             }
-            else if (xc >= 268 && xc <= 376)
+            else if (xc >= images[1].x && xc <= images[1].x + images[1].Width)
             {
                 var.Equipped = -125;
                 var.Drawing = false; var.active = false;
             }
-            else if (xc >= 384 && xc <= 452)
+            else if (xc >= images[2].x && xc <= images[2].x + images[2].Width)
+            {
+	            FileSaver.LoadFile(JOptionPane.showInputDialog(null,"Enter the Name of a Save to Open"));
+	            var.Drawing = false; var.active = false;
+            }
+            else if (xc >= images[3].x && xc <= images[3].x + images[3].Width)
             {
                 FileSaver.SaveFile(JOptionPane.showInputDialog(null,"Enter a Save Name"));
                 var.Drawing = false; var.active = false;
             }
-            else if (xc >= 460 && xc <= 528)
-            {
-                FileSaver.LoadFile(JOptionPane.showInputDialog(null,"Enter the Name of a Save to Open"));
-                var.Drawing = false; var.active = false;
-            }
+
         }
         else if (var.state == 0) {
 	        var.Drawing = true;
