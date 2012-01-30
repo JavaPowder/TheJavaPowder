@@ -541,11 +541,11 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
         }
 
         if (var.state == 1) {
-            if (var.MouseX > 252*var.winZoom && var.MouseY > 121*var.winZoom && var.MouseX < 354*var.winZoom && var.MouseY < 151*var.winZoom) {
+            if (var.MouseX > imagesMenu[0].x && var.MouseY > imagesMenu[0].y && var.MouseX < imagesMenu[0].x + imagesMenu[0].Width && var.MouseY < imagesMenu[0].y + imagesMenu[0].Height) {
                 var.state = 0;
                 var.Drawing = false; var.active = false;
             }
-            if (var.MouseX > 252*var.winZoom && var.MouseY > 170*var.winZoom && var.MouseX < 354*var.winZoom && var.MouseY < 200*var.winZoom) {
+            if (var.MouseX > imagesMenu[1].x && var.MouseY > imagesMenu[1].y && var.MouseX < imagesMenu[1].x + imagesMenu[1].Width && var.MouseY < imagesMenu[1].y + imagesMenu[1].Height) {
                 var.state = 3;
                 var.Drawing = false; var.active = false;
             }
