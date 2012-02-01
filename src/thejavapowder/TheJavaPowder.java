@@ -126,10 +126,10 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             petrolPng};
 
 	ImageTemplate[] images = new ImageTemplate[]{
-			new ImageTemplate(elem_electricPng, 103 * var.winZoom, (var.Height - 20)  * var.winZoom , 27 * 2, 30 * var.winZoom ),
-			new ImageTemplate(elem_setpropPng, 134 * var.winZoom, (var.Height - 20) * var.winZoom, 54 * 2, 30 * var.winZoom ),
-			new ImageTemplate(file_loadPng, 192 * var.winZoom, (var.Height - 20) * var.winZoom, 34 * 2, 30 * var.winZoom ),
-			new ImageTemplate(file_savePng, 230 * var.winZoom, (var.Height - 20) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+			new ImageTemplate(elem_electricPng, 103 * var.winZoom, (var.Height)  * var.winZoom , 27 * 2, 30 * var.winZoom ),
+			new ImageTemplate(elem_setpropPng, 134 * var.winZoom, (var.Height) * var.winZoom, 54 * 2, 30 * var.winZoom ),
+			new ImageTemplate(file_loadPng, 192 * var.winZoom, (var.Height) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+			new ImageTemplate(file_savePng, 230 * var.winZoom, (var.Height) * var.winZoom, 34 * 2, 30 * var.winZoom ),
 	};
 	ImageTemplate[] imagesMenu = new ImageTemplate[]{
 			new ImageTemplate(javaPowderPng, 202 * var.winZoom, 21 * var.winZoom, 202 * var.winZoom, 171 * var.winZoom ),

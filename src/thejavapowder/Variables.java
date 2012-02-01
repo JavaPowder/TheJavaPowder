@@ -53,7 +53,7 @@ public class Variables {
     int state           = 0;
     int RandomNum       = 0;
     int Height          = saver.getPref()[1];
-    int optionsHeight   = 40;
+    int optionsHeight   = 30;
     int Width           = saver.getPref()[0];
     int wait            = 30;
     int CurrentX        = 100;
