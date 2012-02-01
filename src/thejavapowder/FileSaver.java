@@ -26,11 +26,11 @@ class FileSaver {
     static Variables var = thejavapowder.TheJavaPowder.var;
     static Console console = thejavapowder.TheJavaPowder.console;
 
+	boolean loaded = false;
+	int[] pref = new int[3];
 
     public void savePref()
     {
-
-
         try {
 
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -85,9 +85,17 @@ class FileSaver {
 		        }
 		return haspref;
 	}
+
     public int[] getPref()
     {
-        int[] setting = new int[3];
+	    if(!hasPref())
+	    {
+		    savePref();
+	    }
+	    if(loaded)
+	    {
+		    return pref;
+	    }
         try {
             File fXmlFile = new File("jpsettings.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -102,15 +110,15 @@ class FileSaver {
             Node nNode = set.item(0);
             if (setN.getNodeType() == Node.ELEMENT_NODE) {
 
-             setting[0] = Integer.parseInt(getTagValue("width", eElement));
-             setting[1] = Integer.parseInt(getTagValue("height", eElement));
-             setting[2] = Integer.parseInt(getTagValue("zoom", eElement));
-
+             pref[0] = Integer.parseInt(getTagValue("width", eElement));
+             pref[1] = Integer.parseInt(getTagValue("height", eElement));
+             pref[2] = Integer.parseInt(getTagValue("zoom", eElement));
+	         loaded = true;
              }
 
             } catch (Exception e) {
             }
-        return setting;
+	    return pref;
     }
 
 
@@ -198,7 +206,7 @@ class FileSaver {
 
 
     public static void LoadFile(String fileName) {
-        if (fileName.equals(""))
+        if (fileName.equals("") || fileName == null)
         {
             readFileName = "default";
         }

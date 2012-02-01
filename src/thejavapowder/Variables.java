@@ -7,6 +7,7 @@ import java.awt.*;
 public class Variables {
 
 	Graphics bufferGraphics;
+	FileSaver saver = new FileSaver();
 
     boolean Drawing       = false;
     boolean antiDouble    = false;
@@ -51,9 +52,9 @@ public class Variables {
      */
     int state           = 0;
     int RandomNum       = 0;
-    int Height          = 400;
-    int optionsHeight   = 14;
-    int Width           = 600;
+    int Height          = saver.getPref()[1];
+    int optionsHeight   = 40;
+    int Width           = saver.getPref()[0];
     int wait            = 30;
     int CurrentX        = 100;
     int CurrentY        = 100;
@@ -66,7 +67,7 @@ public class Variables {
     byte Shape          = 0;
     byte Equipped       = 3;
     byte overEl         = -1;
-    byte winZoom        = 2;
+    byte winZoom        = (byte)saver.getPref()[2];
     byte currentMode    = 0; // 0 = reactive mode, 1 = electronic mode
     float Brightness    = 0.0f;
 

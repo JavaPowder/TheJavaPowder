@@ -42,7 +42,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
     public void run() {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
-                saver.savePref();
+                //saver.savePref();
                 System.exit(0);
             }
         });
@@ -101,9 +101,9 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 	Image edit_widthPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_width.png"));
 	Image elem_electricPng      = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_electric.png"));
 	Image elem_setpropPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_setprop.png"));
-	Image file_loadPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));
-	Image file_savePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));//Temporary
-	Image braincleptPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/Brainclept.png"));
+	Image file_loadPng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));
+	Image file_savePng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_save.png"));
+	Image braincleptPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/Brainclept.png"));
 
     Image[] thumbnails = new Image[]{
             coffeePng,
@@ -126,10 +126,10 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             petrolPng};
 
 	ImageTemplate[] images = new ImageTemplate[]{
-			new ImageTemplate(elem_electricPng, 103 * 2, (var.Height - 20) * var.winZoom, 27 * 2, 30 * var.winZoom ),
-			new ImageTemplate(elem_setpropPng, 134 * 2, (var.Height - 20) * var.winZoom, 54 * 2, 30 * var.winZoom ),
-			new ImageTemplate(file_loadPng, 192 * 2, (var.Height - 20) * var.winZoom, 34 * 2, 30 * var.winZoom ),
-			new ImageTemplate(file_savePng, 230 * 2, (var.Height - 20) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+			new ImageTemplate(elem_electricPng, 103 * var.winZoom, (var.Height - 20)  * var.winZoom , 27 * 2, 30 * var.winZoom ),
+			new ImageTemplate(elem_setpropPng, 134 * var.winZoom, (var.Height - 20) * var.winZoom, 54 * 2, 30 * var.winZoom ),
+			new ImageTemplate(file_loadPng, 192 * var.winZoom, (var.Height - 20) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+			new ImageTemplate(file_savePng, 230 * var.winZoom, (var.Height - 20) * var.winZoom, 34 * 2, 30 * var.winZoom ),
 	};
 	ImageTemplate[] imagesMenu = new ImageTemplate[]{
 			new ImageTemplate(javaPowderPng, 202 * var.winZoom, 21 * var.winZoom, 202 * var.winZoom, 171 * var.winZoom ),
@@ -174,17 +174,6 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 
     public void init() {
 	    this.setIconImage(javaPowderPng);
-	    if(saver.hasPref())
-	    {
-			int[] settings = saver.getPref();
-			var.Width = settings[0];
-			var.Height = settings[1];
-			var.winZoom = (byte)settings[2];
-	    }
-	    else
-	    {
-		    saver.savePref();
-	    }
         var.Map      = new byte  [var.Width]  [var.Height];
         var.HMap     = new float [var.Width]  [var.Height];
         var.VMap     = new int   [var.Width]  [var.Height];
@@ -271,7 +260,6 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 
 
 
-
     @Override
     public void paint(Graphics g) {
         var.antiDouble = false;
@@ -292,9 +280,11 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 
         // The Colouring loop
         if (var.state == 0 || var.state == 2 || var.state == 5) {//The game, the element menu or the console
+
 	        bufferGraphics.setColor(new Color(0x00007F));
 	        bufferGraphics.fillRect(4 * 2, (var.Height + 1) * var.winZoom, 37 * 2, 10 * var.winZoom);
 	        bufferGraphics.fillRect(45 * 2, (var.Height + 1) * var.winZoom, 54 * 2, 10 * var.winZoom);
+
 	        for(int i = 0; i < images.length; i++)
 	        {
 		        bufferGraphics.drawImage(images[i].image, images[i].x, images[i].y, images[i].Width, images[i].Height, this);
