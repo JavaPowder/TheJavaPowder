@@ -769,10 +769,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             }
             if (evt.getKeyChar() == 'm')
             {
-                if (var.currentMode == 0)
-                    var.currentMode = 1;
-                else
-                    var.currentMode = 0;
+				var.electricity = !var.electricity;
                 var.antiDouble = true;
             }
         }

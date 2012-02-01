@@ -8,7 +8,19 @@ MasterMind555
 Boxmein
 Jacob1
 
+Controls:
+Z to Zoom in
+X to Zoom out
+Keyboard Arrows to scroll when Zoomed
+S to change the Shape of the Cursor
+F to simulate only one Frame
+P to Pause/Resume
+O to go to the Settings Menu
+Esc to go to the Main Menu
+Space to go to the Element Menu
+M to toggle the Electronic mode
+D to toggle the debug mode
 Copyright © 2011-2012 JavaPowder
 
-You may only use this source code if you give FULL CREDITS to the developpers and/or Brainclept™ for this code.
+You may only use this source code if you give FULL CREDITS to the developpers and/or Brainclept(Trademark) for this code.
 By submitting a pull request, you allow the developper to take FULL OWNERSHIP of the submitted code, and concent to get nothing from it.

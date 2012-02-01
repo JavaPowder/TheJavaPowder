@@ -68,7 +68,6 @@ public class Variables {
     byte Equipped       = 3;
     byte overEl         = -1;
     byte winZoom        = (byte)saver.getPref()[2];
-    byte currentMode    = 0; // 0 = reactive mode, 1 = electronic mode
     float Brightness    = 0.0f;
 
     int[]     surArray    = new int   [8];
