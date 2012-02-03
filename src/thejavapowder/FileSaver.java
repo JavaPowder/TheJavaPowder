@@ -91,6 +91,9 @@ class FileSaver {
 	    if(!hasPref())
 	    {
 		    savePref();
+		    var.Width = 600;
+		    var.Height = 400;
+		    var.winZoom = 2;
 	    }
 	    if(loaded)
 	    {
