@@ -52,9 +52,9 @@ public class Variables {
      */
     int state           = 0;
     int RandomNum       = 0;
-    int Height          = saver.getPref()[1];
+    int Height          = 400;
     int optionsHeight   = 30;
-    int Width           = saver.getPref()[0];
+    int Width           = 600;
     int wait            = 30;
     int CurrentX        = 100;
     int CurrentY        = 100;
@@ -67,7 +67,7 @@ public class Variables {
     byte Shape          = 0;
     byte Equipped       = 3;
     byte overEl         = -1;
-    byte winZoom        = (byte)saver.getPref()[2];
+    byte winZoom        = 2;
     float Brightness    = 0.0f;
 
     int[]     surArray    = new int   [8];
@@ -77,7 +77,7 @@ public class Variables {
     float[][] HMap        = new float [Width][Height];// The Heat type map
     int[][]   VMap        = new int   [Width][Height];  // The Voltage type map
     byte[][]  PMap        = new byte  [Width][Height];// The Particle Properties Map
-	byte[][]  LMap         = new byte  [Width][Height];// The Particle Life Map
+	byte[][]  LMap        = new byte  [Width][Height];// The Particle Life Map
 	float[][] PrMap       = new float [Width/4][Height/4];// The Pressure Map
 	float[][] VxMap       = new float [Width/4][Height/4];// The X Velocity Map
 	float[][] VyMap       = new float [Width/4][Height/4];// The Y Velocity Map
@@ -114,4 +114,49 @@ public class Variables {
 	// new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)
 
         public final int NUM_ELS = 19;
+	Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/a-semiconductor.png"));
+	Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/b-semiconductor.png"));
+	Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/battery.png"));
+	Image coffeePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/coffee.png"));
+	Image copperPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/copper.png"));
+	Image ironPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/iron.png"));
+	//Image logicGatePng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
+	Image methanePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/methane.png"));
+	Image nonePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/none.png"));
+	Image powerDrainerPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/power-drainer.png"));
+	Image rechargableBatteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/rechargable-battery.png"));
+	Image resistorPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/resistor.png"));
+	Image screenPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/screen.png"));
+	Image switchPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/switch.png"));
+	Image wallPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wall.png"));
+	Image waterPng              = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/water.png"));
+	Image crossingPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wire-crossing.png"));
+	Image firePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/fire.png"));
+	Image woodPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wood.png"));
+	Image petrolPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/petrol.png"));
+
+	//Image creditPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
+	//Image playPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
+	Image settingsPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
+	Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javapowder.png"));
+	Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/console.png"));
+	Image edit_heightPng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_height.png"));
+	Image edit_widthPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_width.png"));
+	Image elem_electricPng      = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_electric.png"));
+	Image elem_setpropPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_setprop.png"));
+	Image file_loadPng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));
+	Image file_savePng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_save.png"));
+	Image braincleptPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/Brainclept.png"));
+	
+	ImageTemplate[] images = new ImageTemplate[]{
+			new ImageTemplate(elem_electricPng, 103 * winZoom, (Height)  * winZoom , 27 * 2, 30 * winZoom ),
+			new ImageTemplate(elem_setpropPng, 134 * winZoom, (Height) * winZoom, 54 * 2, 30 * winZoom ),
+			new ImageTemplate(file_loadPng, 192 * winZoom, (Height) * winZoom, 34 * 2, 30 * winZoom ),
+			new ImageTemplate(file_savePng, 230 * winZoom, (Height) * winZoom, 34 * 2, 30 * winZoom ),
+	};
+	ImageTemplate[] imagesMenu = new ImageTemplate[]{
+			new ImageTemplate(javaPowderPng, 202 * winZoom, 21 * winZoom, 202 * winZoom, 171 * winZoom ),
+			new ImageTemplate(settingsPng, 252 * winZoom, 211 * winZoom, 102 * winZoom, 50 * winZoom ),
+			new ImageTemplate(braincleptPng, 252 * winZoom, 301 * winZoom, 101 * winZoom, 85 * winZoom ),
+	};
 }

@@ -153,5 +153,75 @@ public class Methods {
 		return (x < var.Width/4 && x >= 0 && y < var.Height/4 && y >= 0);
 	}
 
+	public void resetItems()
+	{
+		int iconNum = 1;
+		int borders = 0;
+
+		var.images = new ImageTemplate[]{
+				new ImageTemplate(var.elem_electricPng, 103 * var.winZoom, (var.Height)  * var.winZoom , 27 * 2, 30 * var.winZoom ),
+				new ImageTemplate(var.elem_setpropPng, 134 * var.winZoom, (var.Height) * var.winZoom, 54 * 2, 30 * var.winZoom ),
+				new ImageTemplate(var.file_loadPng, 192 * var.winZoom, (var.Height) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+				new ImageTemplate(var.file_savePng, 230 * var.winZoom, (var.Height) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+		};
+		var.imagesMenu = new ImageTemplate[]{
+				new ImageTemplate(var.javaPowderPng, 202 * var.winZoom, 21 * var.winZoom, 202 * var.winZoom, 171 * var.winZoom ),
+				new ImageTemplate(var.settingsPng, 252 * var.winZoom, 211 * var.winZoom, 102 * var.winZoom, 50 * var.winZoom ),
+				new ImageTemplate(var.braincleptPng, 252 * var.winZoom, 301 * var.winZoom, 101 * var.winZoom, 85 * var.winZoom ),
+		};
+		var.Map      = new byte  [var.Width]  [var.Height];
+		var.HMap     = new float [var.Width]  [var.Height];
+		var.VMap     = new int   [var.Width]  [var.Height];
+		var.PMap     = new byte  [var.Width]  [var.Height];
+		var.LMap     = new byte  [var.Width]  [var.Height];
+		var.PrMap    = new float [var.Width/4][var.Height/4];
+		var.VxMap    = new float [var.Width/4][var.Height/4];
+		var.VyMap    = new float [var.Width/4][var.Height/4];
+		var.OldPrMap = new float [var.Width/4][var.Height/4];
+		var.OldVxMap = new float [var.Width/4][var.Height/4];
+		var.OldVyMap = new float [var.Width/4][var.Height/4];
+		// Initialises empty particle maps
+
+
+		for(int i = 0; i < 50; i++)//For an good amount of times
+		{
+			if( i * (40 * var.winZoom) - 40 > var.Width)//If the total length is over the screen
+			{
+				iconNum = i - 1;//Set the maximum amount of icons
+				borders = (var.Width - 40 * iconNum) / 2;//Calculate the free borders
+			}
+		}
+		var.Map         = new byte  [var.Width][var.Height];// The Particle type map
+		var.HMap        = new float [var.Width][var.Height];// The Heat type map
+		var.VMap        = new int   [var.Width][var.Height];  // The Voltage type map
+		var.PMap        = new byte  [var.Width][var.Height];// The Particle Properties Map
+		var.LMap        = new byte  [var.Width][var.Height];// The Particle Life Map
+		var.PrMap       = new float [var.Width/4][var.Height/4];// The Pressure Map
+		var.VxMap       = new float [var.Width/4][var.Height/4];// The X Velocity Map
+		var.VyMap       = new float [var.Width/4][var.Height/4];// The Y Velocity Map
+		var.OldPrMap    = new float [var.Width/4][var.Height/4];// The Old Pressure Map
+		var.OldVxMap    = new float [var.Width/4][var.Height/4];// The Old X Velocity Map
+		var.OldVyMap    = new float [var.Width/4][var.Height/4];// The Old Y Velocity Map
+		
+		for (int x = 0; x < var.Width; x++) {
+			for (int y = 0; y < var.Height; y++) {
+				var.Map[x][y] = -127;
+				var.PMap[x][y] = 0;
+				var.VMap[x][y] = 0;
+				var.HMap[x][y] = 0;
+				var.LMap[x][y] = 0;
+			}
+		}
+		for (int x = 0; x < var.Width/4; x++)
+			for (int y = 0; y < var.Height/4; y++) {
+				var.PrMap[x][y] = 0;
+				var.VxMap[x][y] = 0;
+				var.VyMap[x][y] = 0;
+				var.OldPrMap[x][y] = 0;
+				var.OldVxMap[x][y] = 0;
+				var.OldVyMap[x][y] = 0;
+			}
+
+	}
 }
 

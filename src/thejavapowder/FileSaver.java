@@ -25,11 +25,11 @@ import org.xml.sax.SAXException;
 class FileSaver {
     static Variables var = thejavapowder.TheJavaPowder.var;
     static Console console = thejavapowder.TheJavaPowder.console;
-
+	static Methods meth = TheJavaPowder.meth;
 	boolean loaded = false;
 	int[] pref = new int[3];
 
-    public void savePref()
+    public void savePref(int w, int h, byte wz)
     {
         try {
 
@@ -42,13 +42,13 @@ class FileSaver {
 		settings.appendChild(rootElement);
 
 		Element width = settings.createElement("width");
-		width.appendChild(settings.createTextNode("" + var.Width));
+		width.appendChild(settings.createTextNode("" + w));
 
 		Element height = settings.createElement("height");
-		height.appendChild(settings.createTextNode("" + var.Height));
+		height.appendChild(settings.createTextNode("" + h));
 
         Element zoom = settings.createElement("zoom");
-		zoom.appendChild(settings.createTextNode("" + var.winZoom));
+		zoom.appendChild(settings.createTextNode("" + wz));
 
             rootElement.appendChild(width);
             rootElement.appendChild(height);
@@ -90,14 +90,9 @@ class FileSaver {
     {
 	    if(!hasPref())
 	    {
-		    savePref();
-		    var.Width = 600;
-		    var.Height = 400;
-		    var.winZoom = 2;
-	    }
-	    if(loaded)
-	    {
-		    return pref;
+		    savePref(600, 400, (byte)2);
+		    meth.resetItems();
+		    
 	    }
         try {
             File fXmlFile = new File("jpsettings.xml");
