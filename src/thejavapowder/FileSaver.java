@@ -91,8 +91,6 @@ class FileSaver {
 	    if(!hasPref())
 	    {
 		    savePref(600, 400, (byte)2);
-		    meth.resetItems();
-		    
 	    }
         try {
             File fXmlFile = new File("jpsettings.xml");
