@@ -157,12 +157,11 @@ public class Methods {
 	{
 		int iconNum = 1;
 		int borders = 0;
-
 		var.images = new ImageTemplate[]{
-				new ImageTemplate(var.elem_electricPng, 103 * var.winZoom, (var.Height)  * var.winZoom , 27 * 2, 30 * var.winZoom ),
-				new ImageTemplate(var.elem_setpropPng, 134 * var.winZoom, (var.Height) * var.winZoom, 54 * 2, 30 * var.winZoom ),
-				new ImageTemplate(var.file_loadPng, 192 * var.winZoom, (var.Height) * var.winZoom, 34 * 2, 30 * var.winZoom ),
-				new ImageTemplate(var.file_savePng, 230 * var.winZoom, (var.Height) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+				new ImageTemplate(var.elem_electricPng, 206, (var.Height)  * var.winZoom , 27 * var.winZoom, 30 * var.winZoom ),
+				new ImageTemplate(var.elem_setpropPng, 206 + 31 * var.winZoom, (var.Height) * var.winZoom, 54 * var.winZoom, 30 * var.winZoom ),
+				new ImageTemplate(var.file_loadPng, 206 + 89 * var.winZoom, (var.Height) * var.winZoom, 34 * var.winZoom, 30 * var.winZoom ),
+				new ImageTemplate(var.file_savePng, 206 + 127 * var.winZoom, (var.Height) * var.winZoom, 34 * var.winZoom, 30 * var.winZoom ),
 		};
 		var.imagesMenu = new ImageTemplate[]{
 				new ImageTemplate(var.javaPowderPng, 202 * var.winZoom, 21 * var.winZoom, 202 * var.winZoom, 171 * var.winZoom ),
