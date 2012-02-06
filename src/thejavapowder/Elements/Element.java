@@ -1,5 +1,5 @@
 package thejavapowder.Elements;
-   //
+   /* */
 public class Element {    /*
 	 * Java Powder element class
 	 * - Creates elements.
