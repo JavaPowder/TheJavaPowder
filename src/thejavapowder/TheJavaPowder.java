@@ -39,10 +39,12 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
     public static Console console = new Console();
 	public static Methods meth = new Methods();
 	public static FileSaver saver = new FileSaver();
+
+
     public void run() {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
-                //saver.savePref();
+                saver.savePref(var.Width, var.Height, var.winZoom);
                 System.exit(0);
             }
         });
@@ -87,10 +89,8 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 		    var.switchPng,
 		    var.firePng,
 		    var.woodPng,
-		    var.petrolPng};
-
-
-
+		    var.petrolPng,
+    };
 
     Graphics bufferGraphics;
     Image offscreen;
@@ -105,7 +105,6 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
     static JTextArea consolearea = new JTextArea("", 20, 40);
     //JScrollPane scrollPane = new JScrollPane(consolearea);
 
-    //FileSaver fileSaver = new FileSaver();
 
     // Endline constant
     final String end = System.getProperty("line.separator");
@@ -124,12 +123,22 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 	
 
     private void init() {
+	    try
+	    {
+		/*
 	    int wBuff = saver.getPref()[0];
 	    int hBuff = saver.getPref()[1];
 	    byte winBuff = (byte)saver.getPref()[2];
 	    var.Width = wBuff;
 	    var.Height = hBuff;
 	    var.winZoom = winBuff;
+        */
+	    }
+	    catch(Exception e)
+	    {
+
+	    }
+
 	    meth.resetItems();
 	    this.setIconImage(var.javaPowderPng);
         

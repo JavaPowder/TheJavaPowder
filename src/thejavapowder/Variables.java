@@ -20,13 +20,13 @@ public class Variables {
 
 
 	boolean electricity   = false;
-	boolean heat          = true;
-	boolean burn 		  = true;
+	boolean heat          = false;
+	boolean burn 		  = false;
 	boolean pressure      = false;
 	boolean debug         = false;
-	boolean reactions     = true;
+	boolean reactions     = false;
 	boolean physics       = true;
-	boolean stateChanges  = true;
+	boolean stateChanges  = false;
 	boolean life          = true;
 
     /*Transformated Variables:
@@ -85,7 +85,7 @@ public class Variables {
 	float[][] OldVxMap    = new float [Width/4][Height/4];// The Old X Velocity Map
 	float[][] OldVyMap    = new float [Width/4][Height/4];// The Old Y Velocity Map
 
-
+	public final int NUM_ELS = 19;
 
     //Elements Initialization
     //Order of creation:
@@ -113,7 +113,6 @@ public class Variables {
         };
 	// new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)
 
-        public final int NUM_ELS = 19;
 	Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/a-semiconductor.png"));
 	Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/b-semiconductor.png"));
 	Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/battery.png"));
