@@ -64,7 +64,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 	        if(System.nanoTime()-start != 0)
 	            var.PaintFPS = (int)(1000000000/(System.nanoTime()-start));
 	        else
-		        var.PaintFPS = 1337;
+		        var.PaintFPS = 1337;     /* */
 
         }
     }

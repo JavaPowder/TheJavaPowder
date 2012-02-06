@@ -113,7 +113,7 @@ public class Variables {
         new Powder( (byte) 0, (byte) 70,   true,  "Metal powder",       "A metalic powder, Conductive.",                    0x919191, new byte[]{},   20, (byte)1),
         new Gas(    (byte) 16, (byte) 5,   false, "Oxygen",             "Oxygen",                                           0x00D9D9, new byte[]{},   20, (byte)1),
         new Liquid( (byte) 0,  (byte) 150, true,  "Mercury",            "Mercury, heavy conductive powder",                 0x6B6B6B, new byte[]{},   20, (byte)1),
-        new Powder( (byte) 25, (byte) 15,  false, "Gunpowder",          "Gunpowder, it burns",                              0xC7C697, new byte[]{},   20, (byte)1), //TODO We need an "Explode" parameter.
+        new Powder( (byte) 25, (byte) 15,  false, "Gunpowder",          "Gunpowder, it burns",                              0xC7C697, new byte[]{},   20, (byte)1),
 
         };
 	// new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)
