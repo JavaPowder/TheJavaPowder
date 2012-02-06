@@ -110,10 +110,15 @@ public class Variables {
         new Solid(  (byte) 2,  (byte) 127, false, "Wood",               "Burns slowly",                                     0xC0A040, new byte[]{},   20, (byte)1),
         new Liquid( (byte) 30, (byte) 50,  false, "Petroleum",          "Oil, burns",                                       0x404010, new byte[]{},   20, (byte)1),
         new Powder( (byte) 16, (byte) 15,  false, "Sawdust",            "Sawdust",                                          0xFFE0A0, new byte[]{},   20, (byte)1),
+        new Powder( (byte) 0, (byte) 70,   true,  "Metal powder",       "A metalic powder, Conductive.",                    0x919191, new byte[]{},   20, (byte)1),
+        new Gas(    (byte) 16, (byte) 5,   false, "Oxygen",             "Oxygen",                                           0x00D9D9, new byte[]{},   20, (byte)1),
+        new Liquid( (byte) 0,  (byte) 150, true,  "Mercury",            "Mercury, heavy conductive powder",                 0x6B6B6B, new byte[]{},   20, (byte)1),
+        new Powder( (byte) 25, (byte) 15,  false, "Gunpowder",          "Gunpowder, it burns",                              0xC7C697, new byte[]{},   20, (byte)1), //TODO We need an "Explode" parameter.
+
         };
 	// new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)
 
-        public final int NUM_ELS = 19;
+        public final int NUM_ELS = 23;
 	Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/a-semiconductor.png"));
 	Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/b-semiconductor.png"));
 	Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/battery.png"));

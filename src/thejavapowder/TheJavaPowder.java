@@ -87,7 +87,12 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 		    var.switchPng,
 		    var.firePng,
 		    var.woodPng,
-		    var.petrolPng};
+		    var.petrolPng,
+            var.nonePng,
+            var.nonePng,
+            var.nonePng,
+            var.nonePng};
+
 
 
 
@@ -284,8 +289,8 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 				if (var.DrawX < var.Width-4 && var.DrawX >= 0 && var.DrawY < var.Height-4 && var.DrawY >= 0)
 					bufferGraphics.drawString("Y Velocity:" + var.VyMap[var.DrawX/4][var.DrawY/4], 10, 30 + 65 * var.winZoom);//Draw the Pressure
 				bufferGraphics.drawString("FPS:" + var.PaintFPS, 10, 30 + 75 * var.winZoom);//Draw the FPS
-				bufferGraphics.drawString("Mousex:" + var.DrawX, 10, 30 + 85 * var.winZoom);//Draw the Mouse X Coordinate
-				bufferGraphics.drawString("Mousey:" + var.DrawY, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
+				bufferGraphics.drawString("Mouse-x:" + var.DrawX, 10, 30 + 85 * var.winZoom);//Draw the Mouse X Coordinate
+				bufferGraphics.drawString("Mouse-y:" + var.DrawY, 10, 30 + 95 * var.winZoom);//Draw the Mouse Y Coordinate
             }
 
             if (var.state == 2)//If we are choosing an element
@@ -352,6 +357,10 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             bufferGraphics.fillRect((var.Width/2-80)*var.winZoom, (var.Height/2+80)*var.winZoom, 160, 20);
             bufferGraphics.setColor(new Color(0x000000));
             bufferGraphics.drawString("Switch the background colour", (var.Width/2-78)*var.winZoom, 12+(var.Height/2+80)*var.winZoom);
+
+
+
+
         }
 
         g.drawImage(offscreen, 0, 0, this);
@@ -620,6 +629,8 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             if (evt.getKeyChar() == 'x' && var.Zoom > 1) {
                 console.printtxt("X was pressed!");
                 console.printtxt("Zooming out!");
+                console.printtxt("");
+                console.printtxt("---");
                 console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
                 var.antiDouble = true;
                 var.ScrollX = var.ScrollX/var.Zoom*(var.Zoom-1);
@@ -634,6 +645,8 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             if (evt.getKeyChar() == 'z' && var.Zoom < 127) {
                 console.printtxt("Z was pressed!");
                 console.printtxt("Zooming in");
+                console.printtxt("");
+                console.printtxt("---");
                 console.printtxt("Current zoom: " + Byte.toString(var.Zoom));
                 var.ScrollX = var.CurrentX;
                 var.ScrollY = var.CurrentY;
