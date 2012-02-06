@@ -88,10 +88,11 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 		    var.firePng,
 		    var.woodPng,
 		    var.petrolPng,
-            var.nonePng,
-            var.nonePng,
-            var.nonePng,
-            var.nonePng};
+		    var.nonePng,
+		    var.nonePng,
+		    var.nonePng,
+		    var.nonePng,
+		    var.nonePng};
 
 
 
@@ -214,6 +215,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 	        {
 		        bufferGraphics.drawImage(var.images[i].image, var.images[i].x, var.images[i].y, var.images[i].Width, var.images[i].Height, this);
 	        }
+			bufferGraphics.setColor(Color.WHITE);
 	        bufferGraphics.drawString("Reset Scene", 5*2, (var.Height+8) * var.winZoom);
 	        bufferGraphics.drawString("Reset Average FPS", 46*2, (var.Height+8) * var.winZoom);
 
@@ -297,7 +299,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             {
                 bufferGraphics.setColor(new Color(0x777777));
                 for (int i = 0; i < var.Elements.length; i++) {
-	                if ( i >= thumbnails.length ||
+	                if ( i >= thumbnails.length || thumbnails[i] == var.nonePng ||
 		                !bufferGraphics.drawImage(
 				         thumbnails[i],//The next icon
 				        (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX,
