@@ -157,31 +157,17 @@ public class Methods {
 	{
 		int iconNum = 1;
 		int borders = 0;
-
 		var.images = new ImageTemplate[]{
-				new ImageTemplate(var.elem_electricPng, 103 * var.winZoom, (var.Height)  * var.winZoom , 27 * 2, 30 * var.winZoom ),
-				new ImageTemplate(var.elem_setpropPng, 134 * var.winZoom, (var.Height) * var.winZoom, 54 * 2, 30 * var.winZoom ),
-				new ImageTemplate(var.file_loadPng, 192 * var.winZoom, (var.Height) * var.winZoom, 34 * 2, 30 * var.winZoom ),
-				new ImageTemplate(var.file_savePng, 230 * var.winZoom, (var.Height) * var.winZoom, 34 * 2, 30 * var.winZoom ),
+				new ImageTemplate(var.elem_electricPng, 206, (var.Height)  * var.winZoom , 27 * var.winZoom, 30 * var.winZoom ),
+				new ImageTemplate(var.elem_setpropPng, 206 + 31 * var.winZoom, (var.Height) * var.winZoom, 54 * var.winZoom, 30 * var.winZoom ),
+				new ImageTemplate(var.file_loadPng, 206 + 89 * var.winZoom, (var.Height) * var.winZoom, 34 * var.winZoom, 30 * var.winZoom ),
+				new ImageTemplate(var.file_savePng, 206 + 127 * var.winZoom, (var.Height) * var.winZoom, 34 * var.winZoom, 30 * var.winZoom ),
 		};
 		var.imagesMenu = new ImageTemplate[]{
 				new ImageTemplate(var.javaPowderPng, 202 * var.winZoom, 21 * var.winZoom, 202 * var.winZoom, 171 * var.winZoom ),
 				new ImageTemplate(var.settingsPng, 252 * var.winZoom, 211 * var.winZoom, 102 * var.winZoom, 50 * var.winZoom ),
 				new ImageTemplate(var.braincleptPng, 252 * var.winZoom, 301 * var.winZoom, 101 * var.winZoom, 85 * var.winZoom ),
 		};
-		var.Map      = new byte  [var.Width]  [var.Height];
-		var.HMap     = new float [var.Width]  [var.Height];
-		var.VMap     = new int   [var.Width]  [var.Height];
-		var.PMap     = new byte  [var.Width]  [var.Height];
-		var.LMap     = new byte  [var.Width]  [var.Height];
-		var.PrMap    = new float [var.Width/4][var.Height/4];
-		var.VxMap    = new float [var.Width/4][var.Height/4];
-		var.VyMap    = new float [var.Width/4][var.Height/4];
-		var.OldPrMap = new float [var.Width/4][var.Height/4];
-		var.OldVxMap = new float [var.Width/4][var.Height/4];
-		var.OldVyMap = new float [var.Width/4][var.Height/4];
-		// Initialises empty particle maps
-
 
 		for(int i = 0; i < 50; i++)//For an good amount of times
 		{

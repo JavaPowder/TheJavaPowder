@@ -42,7 +42,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
     public void run() {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
-                //saver.savePref();
+                saver.savePref(var.Width, var.Height, var.winZoom);
                 System.exit(0);
             }
         });
@@ -88,10 +88,11 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 		    var.firePng,
 		    var.woodPng,
 		    var.petrolPng,
-            var.nonePng,
-            var.nonePng,
-            var.nonePng,
-            var.nonePng};
+		    var.nonePng,
+		    var.nonePng,
+		    var.nonePng,
+		    var.nonePng,
+		    var.nonePng};
 
 
 
@@ -214,6 +215,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 	        {
 		        bufferGraphics.drawImage(var.images[i].image, var.images[i].x, var.images[i].y, var.images[i].Width, var.images[i].Height, this);
 	        }
+			bufferGraphics.setColor(Color.WHITE);
 	        bufferGraphics.drawString("Reset Scene", 5*2, (var.Height+8) * var.winZoom);
 	        bufferGraphics.drawString("Reset Average FPS", 46*2, (var.Height+8) * var.winZoom);
 
@@ -270,8 +272,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
                 }
             }
 
-            if ((var.MouseX / var.winZoom) < var.Width && var.MouseX > 0 && (var.MouseY / var.winZoom) < var.Height && var.MouseY > 0) {
-
+            if (var.state == 0 && (var.MouseX / var.winZoom) < var.Width && var.MouseX > 0 && (var.MouseY / var.winZoom) < var.Height && var.MouseY > 0) {
 	            bufferGraphics.setColor(Color.WHITE);
 
                 if (var.Map[var.DrawX][var.DrawY] != -127)
@@ -297,7 +298,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             {
                 bufferGraphics.setColor(new Color(0x777777));
                 for (int i = 0; i < var.Elements.length; i++) {
-	                if ( i >= thumbnails.length ||
+	                if ( i >= thumbnails.length || thumbnails[i] == var.nonePng ||
 		                !bufferGraphics.drawImage(
 				         thumbnails[i],//The next icon
 				        (50 * var.winZoom + i * 40 * var.winZoom) - var.iconX,
@@ -404,10 +405,11 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 
     public void mousePressed(MouseEvent e) {
 
-        if (var.MouseY >= (var.Height-20)*var.winZoom && var.MouseY <= (var.Height+11)*var.winZoom)
+        if (var.MouseY >= var.Height*var.winZoom)
         {
             int xc = var.MouseX;
-            if (xc >= 8 && xc <= 82)
+			int yc = var.MouseY;
+            if (xc >= 8 && xc <= 82 && yc <= (var.Height+11)*var.winZoom)
             {
                 for (int x = var.Width - 1; x > 1; x--) {
                     for (int y = var.Height - 1; y > 1; y--)//For each Space
@@ -421,23 +423,23 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
                 console.printtxt("Scene Reset.");
                 var.Drawing = false; var.active = false;
             }
-            else if (xc >= 90 && xc <= 198)
+            else if (xc >= 90 && xc <= 198 && yc <= (var.Height+11)*var.winZoom)
             {
                 TotalFPS = 0;
                 TotalFrame = 0;
                 var.Drawing = false; var.active = false;
             }
-            else if (xc >= var.images[0].x && xc <= var.images[0].x + var.images[0].Width)
+            else if (xc >= var.images[0].x && xc <= var.images[0].x + var.images[0].Width && yc >= var.images[0].y && yc <= var.images[0].y + var.images[0].Height)
             {
                 var.Equipped = -126;
                 var.Drawing = false; var.active = false;
             }
-            else if (xc >= var.images[1].x && xc <= var.images[1].x + var.images[1].Width)
+            else if (xc >= var.images[1].x && xc <= var.images[1].x + var.images[1].Width && yc >= var.images[1].y && yc <= var.images[1].y + var.images[1].Height)
             {
                 var.Equipped = -125;
                 var.Drawing = false; var.active = false;
             }
-            else if (xc >= var.images[2].x && xc <= var.images[2].x + var.images[2].Width)
+            else if (xc >= var.images[2].x && xc <= var.images[2].x + var.images[2].Width && yc >= var.images[2].y && yc <= var.images[2].y + var.images[2].Height)
             {
 	            FileSaver.LoadFile(JOptionPane.showInputDialog(null,"Enter the Name of a Save to Open"));
 	            var.Drawing = false; var.active = false;
@@ -581,6 +583,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
                     javax.swing.JOptionPane.showMessageDialog(null,"Not a Hex Value ( 0xFFFFFF)");
                 }
             }
+            meth.resetItems();
         }
     }
 
