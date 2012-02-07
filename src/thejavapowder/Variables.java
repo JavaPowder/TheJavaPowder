@@ -90,7 +90,7 @@ public class Variables {
     //Elements Initialization
     //Order of creation:
     // new Element(  burn,      weight, conductive, Name,                       Description,                                colour,   reactives,     temp, life)
-    Element Elements[] = {
+	 Element Elements[] = {
         new Powder( (byte) 0,  (byte) 20,  false, "Coffee",             "First Element, Reference to Java",                 0x613F37, new byte[]{3},  20, (byte)1),
         new Solid(  (byte) 0,  (byte) 127, false, "Wall",               "Blocks Everything",                                0x808080, new byte[]{},   20, (byte)1),
         new Gas(    (byte) 10, (byte) 5,   false, "Methane",            "Highly Flammable Gas",                             0xDEDEDE, new byte[]{15}, 20, (byte)1),
@@ -118,7 +118,9 @@ public class Variables {
         };
 	// new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)
 
-        public final int NUM_ELS = 23;
+     public final int NUM_ELS = 23;
+
+
 	Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/a-semiconductor.png"));
 	Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/b-semiconductor.png"));
 	Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/battery.png"));

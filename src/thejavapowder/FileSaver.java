@@ -22,7 +22,8 @@ import org.w3c.dom.Attr;
 import org.xml.sax.SAXException;
 
 
-class FileSaver {
+public class FileSaver {
+
     static Variables var = thejavapowder.TheJavaPowder.var;
     static Console console = thejavapowder.TheJavaPowder.console;
 	static Methods meth = TheJavaPowder.meth;
