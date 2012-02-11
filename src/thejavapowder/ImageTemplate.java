@@ -13,12 +13,12 @@ public class ImageTemplate {
 		this.Height = height;
 	}
 
-	public Image image;
+	public final Image image;
 
-	public int x;
-	public int y;
+	public final int x;
+	public final int y;
 
-	public int Width;
-	public int Height;
+	public final int Width;
+	public final int Height;
 
 }

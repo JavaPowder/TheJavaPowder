@@ -2,8 +2,8 @@ package thejavapowder;
 
 public class draw
 {
-    Variables var = thejavapowder.TheJavaPowder.var;
-	Methods meth = new Methods();
+    private final Variables var = thejavapowder.TheJavaPowder.var;
+	private final Methods meth = new Methods();
 	
     public void drawPoint(int x, int y, byte id) {
         if ((var.active || !(var.Simulating || var.tempSimulating)) && x > 1 && y > 1 && x < var.Width && y < var.Height) {

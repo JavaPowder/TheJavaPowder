@@ -24,8 +24,8 @@ import org.xml.sax.SAXException;
 
 public class FileSaver {
 
-    static Variables var = thejavapowder.TheJavaPowder.var;
-    static Console console = thejavapowder.TheJavaPowder.console;
+    static final Variables var = thejavapowder.TheJavaPowder.var;
+    static final Console console = thejavapowder.TheJavaPowder.console;
 	static Methods meth = TheJavaPowder.meth;
 	boolean loaded = false;
 	int[] pref = new int[3];
@@ -77,7 +77,6 @@ public class FileSaver {
 					File fXmlFile = new File("jpsettings.xml");
 					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 					DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-					Document doc = dBuilder.parse(fXmlFile);
 					haspref = true;
 		        }
 		        catch(Exception e)
@@ -104,7 +103,6 @@ public class FileSaver {
 		    Node setN = set.item(0);
 
             Element eElement = (Element) setN;
-            Node nNode = set.item(0);
             if (setN.getNodeType() == Node.ELEMENT_NODE) {
 
              pref[0] = Integer.parseInt(getTagValue("width", eElement));
@@ -143,15 +141,15 @@ public class FileSaver {
 
 
     // File read and save code below
-        static FileOutputStream outp;
-        static FileInputStream inp;
-        static Random randomSaveName = new Random(1337);
-        static File file;
-        static Writer writer;
-        static String readFileName;
-        static byte[] databuffer2;
-        static byte[][] data;
-        static int sizex, sizey;
+        private static FileOutputStream outp;
+		private static FileInputStream inp;
+		private static Random randomSaveName = new Random(1337);
+		private static File file;
+		private static Writer writer;
+        private static String readFileName;
+		private static byte[] databuffer2;
+		private static byte[][] data;
+		private static int sizex, sizey;
 
         public static void SaveFile(String fileName) {
         try {
@@ -203,7 +201,7 @@ public class FileSaver {
 
 
     public static void LoadFile(String fileName) {
-        if (fileName.equals("") || fileName == null)
+        if (fileName.equals(""))
         {
             readFileName = "default";
         }
@@ -212,13 +210,12 @@ public class FileSaver {
             readFileName = fileName;
         }
 
-        File save = new File(readFileName + ".jps");
+        File file = new File(readFileName + ".jps");
 
         try {
-	  File file = new File("bob.jps");
-	  FileInputStream fis = null;
-	  BufferedInputStream bis = null;
-	  DataInputStream dis = null;
+	  FileInputStream fis;
+	  BufferedInputStream bis;
+	  DataInputStream dis;
 
 
 	      fis = new FileInputStream(file);
@@ -238,7 +235,7 @@ public class FileSaver {
             e.printStackTrace();
         } // Creates the input
         catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+
         }
 
         /*

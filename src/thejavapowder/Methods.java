@@ -2,7 +2,7 @@ package thejavapowder;
 
 public class Methods {
 
-    Variables var = thejavapowder.TheJavaPowder.var;
+	private final Variables var = thejavapowder.TheJavaPowder.var;
 
     public void createParticle(int x, int y, byte id) {
         for (int i = 0; i < var.reaction[7]; i++) {
@@ -155,8 +155,8 @@ public class Methods {
 
 	public void resetItems()
 	{
-		int iconNum = 1;
-		int borders = 0;
+		int iconNum;
+		int borders;
 		var.images = new ImageTemplate[]{
 				new ImageTemplate(var.elem_electricPng, 206, (var.Height)  * var.winZoom , 27 * var.winZoom, 30 * var.winZoom ),
 				new ImageTemplate(var.elem_setpropPng, 206 + 31 * var.winZoom, (var.Height) * var.winZoom, 54 * var.winZoom, 30 * var.winZoom ),
