@@ -417,7 +417,12 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
                         var.Map[x][y] = -127;
                         var.VMap[x][y] = 0;
                         var.PMap[x][y] = 0;
-	                    var.LMap[x][y] = 0;
+                        var.LMap[x][y] = 0;
+                    }
+                }
+                for (int x = (var.Width - 1)/4; x >= 0; x--) {
+                    for (int y = (var.Height - 1)/4; y >= 0; y--)//For each Space
+                    {
 	                    var.PrMap[x][y] = 0;
 	                    var.VxMap[x][y] = 0;
 	                    var.VyMap[x][y] = 0;
@@ -425,7 +430,6 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 	                    var.OldVxMap[x][y] = 0;
 	                    var.OldVyMap[x][y] = 0;
                     }
-
                 }
                 console.printtxt("Scene Reset.");
                 var.Drawing = false; var.active = false;
