@@ -109,28 +109,29 @@ public class Update {
 						var.PrMap[x][y] *= .9999; // Reduce pressure a little
 						var.PrMap[x][y] += airchange*.3;  // Transfer velocity to pressure
 					}
-				if (Math.abs(var.PrMap[x][y]) < .0000001) //If the pressure is really small
-					var.PrMap[x][y] = 0;        //Make it 0
-				if (Math.abs(var.VxMap[x][y]) < .0000001) //If the x velocity is really small
-					var.VxMap[x][y] = 0;        //Make it 0
-				if (Math.abs(var.VyMap[x][y]) < .0000001) //If the y velocity is really small
-					var.VyMap[x][y] = 0;        //Make it 0
-				if (var.PrMap[x][y] != 0 || var.VxMap[x][y] != 0 || var.VyMap[x][y] != 0)
-				{
-					float airChange = 0;
-					float airChangeX = 0;
-					float airChangeY = 0;
-					for (int i = -1; i <= 1; i++) //For every pressure space around this spot
-						for (int j = -1; j <= 1; j++)
-							if (meth.validAirSpace(x+i,y+j)) //If it's a valid spot
-							{
-								airChange -= (var.PrMap[x][y] - var.PrMap[x+i][y+j])/5; //calculate how much air to transfer to this spot
-								airChangeX -= (var.VxMap[x][y] - var.VxMap[x+i][y+j])/5*.7; //calculate how much x velocity to transfer to this spot
-								airChangeY -= (var.VyMap[x][y] - var.VyMap[x+i][y+j])/5*.7; //calculate how much y velocity to transfer to this spot
-							}
-					var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f); //Tranfer it
-					var.OldVxMap[x][y] = airChangeX + (var.VxMap[x][y]*.99f);
-					var.OldVyMap[x][y] = airChangeY + (var.VyMap[x][y]*.99f);
+					if (Math.abs(var.PrMap[x][y]) < .0000001) //If the pressure is really small
+						var.PrMap[x][y] = 0;        //Make it 0
+					if (Math.abs(var.VxMap[x][y]) < .0000001) //If the x velocity is really small
+						var.VxMap[x][y] = 0;        //Make it 0
+					if (Math.abs(var.VyMap[x][y]) < .0000001) //If the y velocity is really small
+						var.VyMap[x][y] = 0;        //Make it 0
+					if (var.PrMap[x][y] != 0 || var.VxMap[x][y] != 0 || var.VyMap[x][y] != 0)
+					{
+						float airChange = 0;
+						float airChangeX = 0;
+						float airChangeY = 0;
+						for (int i = -1; i <= 1; i++) //For every pressure space around this spot
+							for (int j = -1; j <= 1; j++)
+								if (meth.validAirSpace(x+i,y+j)) //If it's a valid spot
+								{
+									airChange -= (var.PrMap[x][y] - var.PrMap[x+i][y+j])/5; //calculate how much air to transfer to this spot
+									airChangeX -= (var.VxMap[x][y] - var.VxMap[x+i][y+j])/5*.7; //calculate how much x velocity to transfer to this spot
+									airChangeY -= (var.VyMap[x][y] - var.VyMap[x+i][y+j])/5*.7; //calculate how much y velocity to transfer to this spot
+								}
+						var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f); //Tranfer it
+						var.OldVxMap[x][y] = airChangeX + (var.VxMap[x][y]*.99f);
+						var.OldVyMap[x][y] = airChangeY + (var.VyMap[x][y]*.99f);
+					}
 				}
 					float airchangex = var.PrMap[x][y] - var.PrMap[x+1][y];  // Calculate how much pressure to transfer
 					float airchangey = var.PrMap[x][y] - var.PrMap[x][y+1];
@@ -138,7 +139,7 @@ public class Update {
 					var.VyMap[x][y] *= .999;
 					var.VxMap[x][y] += airchangex*.4; // Transfer pressure to velocity
 					var.VyMap[x][y] += airchangey*.4;
-				}
+
 			}
 
 		System.arraycopy(var.OldPrMap,0,var.PrMap,0,var.PrMap.length); //Copy the new pressure array into the real pressure array
