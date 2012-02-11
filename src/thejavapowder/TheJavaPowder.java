@@ -39,6 +39,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
     public static final Console console = new Console();
 	public static final Methods meth = new Methods();
 	private static final FileSaver saver = new FileSaver();
+	private final draw draw = new draw();
     public void run() {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
@@ -241,36 +242,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 
 
             bufferGraphics.setColor(new Color(0.5f, 0.5f, 0.5f, 0.5f));
-
-            if (var.Shape == 0) {
-                int size = var.Size * var.realZoom;
-                int x = var.MouseX;
-                int y = var.MouseY;
-                bufferGraphics.drawRect(x - size, y - size, size * 2, size *2);
-            } else if (var.Shape == 1) {
-                int x = var.MouseX, y = var.MouseY, rd = var.Size * var.realZoom;
-                int tempy = y, oldy;
-                for (int i = x - rd; i <= x; i++) {
-                    oldy = tempy;
-                    double distance = Math.sqrt(Math.pow((double) x - (double) i, (double) 2) + Math.pow((double) y - (double) tempy, (double) 2));
-                    while (distance <= rd) {
-                        tempy = tempy - 1;
-                        distance = Math.sqrt(Math.pow((double) x - (double) i, (double) 2) + Math.pow((double) y - (double) tempy, (double) 2));
-                    }
-                    tempy = tempy + 1;
-                    if (oldy != tempy) oldy = oldy - 1;
-                    for (int j = tempy; j <= oldy; j++) {
-                        if (i > 0 && j > 0 && i < var.Width * var.winZoom && j < var.Height * var.winZoom)
-                            bufferGraphics.drawRect(i, j, 1, 0);
-                        if (2 * x - i > 0 && j > 0 && 2 * x - i < var.Width * var.winZoom && j < var.Height * var.winZoom)
-                            bufferGraphics.drawRect(2 * x - i, j, 1, 0);
-                        if (i > 0 && 2 * y - j > 0 && i < var.Width * var.winZoom && 2 * y - j < var.Height * var.winZoom)
-                            bufferGraphics.drawRect(i, 2 * y - j, 1, 0);
-                        if (2 * x - i > 0 && 2 * y - j > 0 && 2 * x - i < var.Width * var.winZoom && 2 * y - j < var.Height * var.winZoom)
-                            bufferGraphics.drawRect(2 * x - i, 2 * y - j, 1, 0);
-                    }
-                }
-            }
+			draw.drawCursor(var.DrawX, var.DrawY, var.Size, bufferGraphics);
 
             if (var.state == 0 && (var.MouseX / var.winZoom) < var.Width && var.MouseX > 0 && (var.MouseY / var.winZoom) < var.Height && var.MouseY > 0) {
 	            bufferGraphics.setColor(Color.WHITE);
