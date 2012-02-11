@@ -417,6 +417,13 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
                         var.Map[x][y] = -127;
                         var.VMap[x][y] = 0;
                         var.PMap[x][y] = 0;
+	                    var.LMap[x][y] = 0;
+	                    var.PrMap[x][y] = 0;
+	                    var.VxMap[x][y] = 0;
+	                    var.VyMap[x][y] = 0;
+	                    var.OldPrMap[x][y] = 0;
+	                    var.OldVxMap[x][y] = 0;
+	                    var.OldVyMap[x][y] = 0;
                     }
 
                 }
