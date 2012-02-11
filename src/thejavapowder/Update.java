@@ -46,21 +46,27 @@ public class Update {
 								{										
 								UpdateLife(x, y);
 								}
-							if(var.Map[x][y] != -127)
-							{	
-								if(var.stateChanges)
+								if(var.Map[x][y] != -127)
 								{
-									CheckStateChanges(x,y);
+									if(var.stateChanges)
+									{
+										CheckStateChanges(x,y);
+									}
+									if(var.Map[x][y] != -127)
+									{
+										if (var.electricity)
+										{
+											UpdateVoltage(x, y);
+										}
+										if(var.Map[x][y] != -127)
+										{
+											if(var.burn || var.heat)
+											{
+												UpdateHeat(x, y);
+											}
+										}
+									}
 								}
-								if (var.electricity)
-								{
-									UpdateVoltage(x, y);
-								}
-								if(var.burn || var.heat)
-								{
-									UpdateHeat(x, y);
-								}
-							}								
 	                        }
 	                    }
 
@@ -91,27 +97,18 @@ public class Update {
 
 	private void UpdateAir()
 	{
-		for (int x = 1; x < var.Width/4; x++) //For every space on the pressure map
-			for (int y = 1; y < var.Height/4; y++)
+		for (int x = 1; x < var.Width/4 - 1; x++) //For every space on the pressure map
+			for (int y = 1; y < var.Height/4 - 1; y++)
 			{
-				float airchange = var.VxMap[x-1][y] - var.VxMap[x][y]; // Calculate how much x and y velocity to transfer
-				airchange -= var.VyMap[x][y-1] - var.VyMap[x][y];
-				var.PrMap[x][y] *= .9999; // Reduce pressure a little
-				var.PrMap[x][y] += airchange*.3;  // Transfer velocity to pressure
-			}
-		for (int x = 0; x < var.Width/4-1; x++) //For every space on the velocity maps
-			for (int y = 0; y < var.Height/4-1; y++)
-			{
-				float airchangex = var.PrMap[x][y] - var.PrMap[x+1][y];  // Calculate how much pressure to transfer
-				float airchangey = var.PrMap[x][y] - var.PrMap[x][y+1];
-				var.VxMap[x][y] *= .999; // Reduce velocity a little
-				var.VyMap[x][y] *= .999;
-				var.VxMap[x][y] += airchangex*.4; // Transfer pressure to velocity
-				var.VyMap[x][y] += airchangey*.4;
-			}
-		for (int x = 0; x < var.Width/4; x++) //For every space on the pressure map
-			for (int y = 0; y < var.Height/4; y++)
-			{
+				if(x > var.Width/4 - 1 && y > var.Height/4 - 1)
+				{
+					if(x != 0 && y != 0)
+					{
+						float airchange = var.VxMap[x-1][y] - var.VxMap[x][y]; // Calculate how much x and y velocity to transfer
+						airchange -= var.VyMap[x][y-1] - var.VyMap[x][y];
+						var.PrMap[x][y] *= .9999; // Reduce pressure a little
+						var.PrMap[x][y] += airchange*.3;  // Transfer velocity to pressure
+					}
 				if (Math.abs(var.PrMap[x][y]) < .0000001) //If the pressure is really small
 					var.PrMap[x][y] = 0;        //Make it 0
 				if (Math.abs(var.VxMap[x][y]) < .0000001) //If the x velocity is really small
@@ -135,7 +132,15 @@ public class Update {
 					var.OldVxMap[x][y] = airChangeX + (var.VxMap[x][y]*.99f);
 					var.OldVyMap[x][y] = airChangeY + (var.VyMap[x][y]*.99f);
 				}
+					float airchangex = var.PrMap[x][y] - var.PrMap[x+1][y];  // Calculate how much pressure to transfer
+					float airchangey = var.PrMap[x][y] - var.PrMap[x][y+1];
+					var.VxMap[x][y] *= .999; // Reduce velocity a little
+					var.VyMap[x][y] *= .999;
+					var.VxMap[x][y] += airchangex*.4; // Transfer pressure to velocity
+					var.VyMap[x][y] += airchangey*.4;
+				}
 			}
+
 		System.arraycopy(var.OldPrMap,0,var.PrMap,0,var.PrMap.length); //Copy the new pressure array into the real pressure array
 		System.arraycopy(var.OldVxMap,0,var.VxMap,0,var.VxMap.length); //Copy the new x velocity array into the real x velocity array
 		System.arraycopy(var.OldVyMap,0,var.VyMap,0,var.VyMap.length); //Copy the new y velocity array into the real y velocity array
