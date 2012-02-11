@@ -34,11 +34,11 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
         run();
     }
 
-    public static Variables var = new Variables();
-    public static Update update = new Update();
-    public static Console console = new Console();
-	public static Methods meth = new Methods();
-	public static FileSaver saver = new FileSaver();
+	public static final  Variables var = new Variables();
+    public static final Update update = new Update();
+    public static final Console console = new Console();
+	public static final Methods meth = new Methods();
+	private static final FileSaver saver = new FileSaver();
     public void run() {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
@@ -69,7 +69,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
         }
     }
 
-    Image[] thumbnails = new Image[]{
+	private final Image[] thumbnails = new Image[]{
             var.coffeePng,
 		    var.wallPng,
 		    var.methanePng,
@@ -98,23 +98,23 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 
 
 
-    Graphics bufferGraphics;
-    Image offscreen;
-    Dimension dim;
+	private Graphics bufferGraphics;
+	private Image offscreen;
+	private Dimension dim;
 
-    int TotalFrame  = 0;
-    long TotalFPS   = 0;
-    boolean quit    = false;
+	private int TotalFrame  = 0;
+	private long TotalFPS   = 0;
+	private boolean quit    = false;
 
 
     // The console area.
-    static JTextArea consolearea = new JTextArea("", 20, 40);
+    static final JTextArea consolearea = new JTextArea("", 20, 40);
     //JScrollPane scrollPane = new JScrollPane(consolearea);
 
     //FileSaver fileSaver = new FileSaver();
 
     // Endline constant
-    final String end = System.getProperty("line.separator");
+    private final String end = System.getProperty("line.separator");
 
 
     // a type value reminder, not all are gonna be variables you know
@@ -575,7 +575,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
                 String NBGC = JOptionPane.showInputDialog(null,"Enter the new Screen's background colour ( Hex )");
                 try
                 {
-                    //int newBG = Integer.parseInt(NBGC);
+                    int newBG = Integer.parseInt(NBGC);
                     this.setBackground(new Color(blah1));
                 }
                 catch(Exception blah)

@@ -1,5 +1,5 @@
 package thejavapowder;
-        /* */
+
 import thejavapowder.Elements.*;
 
 import java.awt.*;
@@ -7,7 +7,7 @@ import java.awt.*;
 public class Variables {
 
 	Graphics bufferGraphics;
-	FileSaver saver = new FileSaver();
+	final FileSaver saver = new FileSaver();
 
     boolean Drawing       = false;
     boolean antiDouble    = false;
@@ -90,7 +90,7 @@ public class Variables {
     //Elements Initialization
     //Order of creation:
     // new Element(  burn,      weight, conductive, Name,                       Description,                                colour,   reactives,     temp, life)
-	 Element Elements[] = {
+    final Element Elements[] = {
         new Powder( (byte) 0,  (byte) 20,  false, "Coffee",             "First Element, Reference to Java",                 0x613F37, new byte[]{3},  20, (byte)1),
         new Solid(  (byte) 0,  (byte) 127, false, "Wall",               "Blocks Everything",                                0x808080, new byte[]{},   20, (byte)1),
         new Gas(    (byte) 10, (byte) 5,   false, "Methane",            "Highly Flammable Gas",                             0xDEDEDE, new byte[]{15}, 20, (byte)1),
@@ -121,40 +121,40 @@ public class Variables {
      public final int NUM_ELS = 23;
 
 
-	Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/a-semiconductor.png"));
-	Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/b-semiconductor.png"));
-	Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/battery.png"));
-	Image coffeePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/coffee.png"));
-	Image copperPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/copper.png"));
-	Image ironPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/iron.png"));
-	//Image logicGatePng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
-	Image methanePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/methane.png"));
-	Image nonePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/none.png"));
-	Image powerDrainerPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/power-drainer.png"));
-	Image rechargableBatteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/rechargable-battery.png"));
-	Image resistorPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/resistor.png"));
-	Image screenPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/screen.png"));
-	Image switchPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/switch.png"));
-	Image wallPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wall.png"));
-	Image waterPng              = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/water.png"));
-	Image crossingPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wire-crossing.png"));
-	Image firePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/fire.png"));
-	Image woodPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wood.png"));
-	Image petrolPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/petrol.png"));
+	final Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/a-semiconductor.png"));
+	final Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/b-semiconductor.png"));
+	final Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/battery.png"));
+	final Image coffeePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/coffee.png"));
+	final Image copperPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/copper.png"));
+	final Image ironPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/iron.png"));
+	//final Image logicGatePng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
+	final Image methanePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/methane.png"));
+	final Image nonePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/none.png"));
+	final Image powerDrainerPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/power-drainer.png"));
+	final Image rechargableBatteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/rechargable-battery.png"));
+	final Image resistorPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/resistor.png"));
+	final Image screenPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/screen.png"));
+	final Image switchPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/switch.png"));
+	final Image wallPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wall.png"));
+	final Image waterPng              = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/water.png"));
+	final Image crossingPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wire-crossing.png"));
+	final Image firePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/fire.png"));
+	final Image woodPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wood.png"));
+	final Image petrolPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/petrol.png"));
 
 	//Image creditPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
 	//Image playPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
-	Image settingsPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
-	Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javapowder.png"));
-	Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/console.png"));
-	Image edit_heightPng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_height.png"));
-	Image edit_widthPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_width.png"));
-	Image elem_electricPng      = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_electric.png"));
-	Image elem_setpropPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_setprop.png"));
-	Image file_loadPng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));
-	Image file_savePng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_save.png"));
-	Image braincleptPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/Brainclept.png"));
-	
+	final Image settingsPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
+	final Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javapowder.png"));
+	final Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/console.png"));
+	final Image edit_heightPng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_height.png"));
+	final Image edit_widthPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_width.png"));
+	final Image elem_electricPng      = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_electric.png"));
+	final Image elem_setpropPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_setprop.png"));
+	final Image file_loadPng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));
+	final Image file_savePng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_save.png"));
+	final Image braincleptPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/Brainclept.png"));
+
 	ImageTemplate[] images = new ImageTemplate[]{
 			new ImageTemplate(elem_electricPng, 103 * winZoom, (Height)  * winZoom , 27 * 2, 30 * winZoom ),
 			new ImageTemplate(elem_setpropPng, 134 * winZoom, (Height) * winZoom, 54 * 2, 30 * winZoom ),

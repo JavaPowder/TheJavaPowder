@@ -17,10 +17,10 @@ public class Update {
       *
       */
 
-    Random rand = new Random();
-    Variables var = thejavapowder.TheJavaPowder.var;
-    Methods meth = new Methods();
-	draw draw = new draw();
+    private final Random rand = new Random();
+    private final Variables var = thejavapowder.TheJavaPowder.var;
+    private final Methods meth = new Methods();
+	private final draw draw = new draw();
 
     public void update() {
 
