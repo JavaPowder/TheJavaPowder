@@ -3,24 +3,29 @@ Started by MasterMind555 and Boxmein
 
 The source is an IntelliJ IDEA Project, use only the src folder for other IDEs
 
-Developpers :
-MasterMind555
-Boxmein
-Jacob1
+Developers :
+  MasterMind555 
+  Boxmein 
+  Jacob1 
 
 Controls:
-Z to Zoom in
-X to Zoom out
-Keyboard Arrows to scroll when Zoomed
-S to change the Shape of the Cursor
-F to simulate only one Frame
-P to Pause/Resume
-O to go to the Settings Menu
-Esc to go to the Main Menu
-Space to go to the Element Menu
-M to toggle the Electronic mode
-D to toggle the debug mode
-Copyright © 2011-2012 JavaPowder
+  Z to Zoom in
+  X to Zoom out
+  Keyboard Arrows to scroll when Zoomed
+  S to change the Shape of the Cursor
+  F to simulate only one Frame
+  P to Pause/Resume
+  O to go to the Settings Menu
+  Esc to go to the Main Menu
+  Space to go to the Element Menu
+  M to toggle the Electronic mode
+  D to toggle the debug mode
+Licensing: 
+  This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/.
 
-You may only use this source code if you give FULL CREDITS to the developpers and/or Brainclept(Trademark) for this code.
-By submitting a pull request, you allow the developper to take FULL OWNERSHIP of the submitted code, and concent to get nothing from it.
+  Please note that any and all developers whose work is in the official source will be mentioned.
+  
+  Also note that the program is open-source and free, you will not receive any revenue whatsoever by 
+  contributing to the source code.
+
