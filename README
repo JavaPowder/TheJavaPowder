@@ -3,11 +3,6 @@ Started by MasterMind555 and Boxmein
 
 The source is an IntelliJ IDEA Project, use only the src folder for other IDEs
 
-Developers :
-  MasterMind555 
-  Boxmein 
-  Jacob1 
-
 Controls:
   Z to Zoom in
   X to Zoom out
@@ -20,10 +15,4 @@ Controls:
   Space to go to the Element Menu
   M to toggle the Electronic mode
   D to toggle the debug mode
-Licensing: 
-  This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/.
-
-  Please note that any and all developers whose work is in the official source will be mentioned.
-  
-  Also note that the program is open-source and free, you will not receive any revenue whatsoever by contributing to the source code.
 
