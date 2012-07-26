@@ -131,12 +131,19 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 	
 
     private void init() {
-	    int wBuff = saver.getPref()[0];
-	    int hBuff = saver.getPref()[1];
-	    byte winBuff = (byte)saver.getPref()[2];
-	    var.Width = wBuff;
-	    var.Height = hBuff;
-	    var.winZoom = winBuff;
+        if(saver.hasPref())
+        {
+            var.Width = saver.getPref()[0];
+            var.Height = saver.getPref()[1];
+            var.winZoom = (byte)saver.getPref()[2];
+        }
+        else
+        {
+            var.Width = 600;
+            var.Height = 400;
+            var.winZoom = 2;
+        }
+
 	    meth.resetItems();
 	    this.setIconImage(var.javaPowderPng);
         
@@ -194,10 +201,11 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
         var.antiDouble = false;
         var.Brightness = 0;
 
-        var.CurrentX = (var.MouseX + var.ScrollX) / var.winZoom;
-        var.CurrentY = (var.MouseY + var.ScrollY) / var.winZoom;
 
+        var.CurrentX = (var.MouseX + var.ScrollX) / var.winZoom;
         var.DrawX = (var.MouseX + (var.ScrollX * var.winZoom)) / var.realZoom;
+
+        var.CurrentY = (var.MouseY + var.ScrollY) / var.winZoom;
         var.DrawY = (var.MouseY + (var.ScrollY * var.winZoom)) / var.realZoom;
 
         if (bufferGraphics == null) return;

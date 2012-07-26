@@ -9,69 +9,59 @@ Dev: <The Name of the Dev(s) that's working on it>
 Priority: <How fast it must be done> <Can other devs help>
 
 
+TheJavaPowder/FileSaver
+Create proper pref file is none exists
+
 
 Update
 Fix particle velocity and pressure to the method Update Element
-Dev: <Jacob> <Yes>
 Priority: Medium
 
 FileSave
 Make scene saving
-Dev: <MasterMind555> <Yes>
 Priority: Medium
 
 Update/TheJavaPowder
 Fix known bugs
-Dev: <all>
 Priority: Medium
 
 TheJavaPowder
 Make the menu centered and element icons fit even with winZoom
 Make the pointed tile properties text fit nicely even with low/high screen size
-Dev: <all>
 Priority: Medium
 
 All
 Documenting the code more
-Dev: <all>
 Priority: Medium
 
 TheJavaPowder : 45
 Fix the Saving bug
-Dev: <all>
 Priority: Medium
 
 All
 Optimize the Performances
-Dev: <all>
 Priority: Low ( For later )
 
 None
 Find new bugs and report them
-Dev: <Boxmein>
 Priority: Low
 
 None
 Implement the new menu texture pack system
-Dev: <MasterMind555> <No>
 Priority: Low
 
 TheJavaPowder
 Finish the Console
-Dev: <none>
 Priority: Low
 
 TheJavaPowder
 Make an Dev mode with console output and a FPS test ( May require finished console )
-Dev: <none>
 Priority : Low
 
 All
 Separate the code into more classes
-Dev: <none>
 Priority: Low
 
 TheJavaPowder
 Add a Menu for Offline Documentation on elements and commands
-Dev: <none>
 Priority: Low

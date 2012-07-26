@@ -72,26 +72,14 @@ public class FileSaver {
     }
 	public boolean hasPref()
 	{
-		boolean haspref = false;
-		        try {
-					File fXmlFile = new File("jpsettings.xml");
-					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-					DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-					haspref = true;
-		        }
-		        catch(Exception e)
-		        {
-			       haspref = false;
-		        }
-		return haspref;
+        File f = new File("jpsettings.xml");
+        if(f.exists())
+            return true;
+		return false;
 	}
 
     public int[] getPref()
     {
-	    if(!hasPref())
-	    {
-		    savePref(600, 400, (byte)2);
-	    }
         try {
             File fXmlFile = new File("jpsettings.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
