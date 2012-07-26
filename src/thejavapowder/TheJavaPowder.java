@@ -437,7 +437,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             }
             else if (xc >= var.images[3].x && xc <= var.images[3].x + var.images[3].Width)
             {
-                FileSaver.SaveFile(JOptionPane.showInputDialog(null,"Enter a Save Name"));
+                FileSaver.SaveFile(JOptionPane.showInputDialog(null,"Enter a Save Name"), var.Map);
                 var.Drawing = false; var.active = false;
             }
 

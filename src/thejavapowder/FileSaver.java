@@ -24,9 +24,6 @@ import org.xml.sax.SAXException;
 
 public class FileSaver {
 
-    static final Variables var = thejavapowder.TheJavaPowder.var;
-    static final Console console = thejavapowder.TheJavaPowder.console;
-	static Methods meth = TheJavaPowder.meth;
 	boolean loaded = false;
 	int[] pref = new int[3];
 
@@ -139,20 +136,18 @@ public class FileSaver {
 		private static byte[][] data;
 		private static int sizex, sizey;
 
-        public static void SaveFile(String fileName) {
+        public static void SaveFile(String fileName, byte[][] map) {
         try {
-            console.printtxt("Saving...");
 
             file = new File("" + fileName + ".jps");
-
 
             writer = new BufferedWriter(new FileWriter(file));
             writer.write("javapowder-save\n");
            // writer.write("version:" + var.versionID + "\n");
             writer.write("map:\n");
-            for (int x = 0; x < var.Height; x++) {
-                for (int y = 0; y < var.Width; y++) {
-                    writer.write((int) var.Map[x][y]);
+            for (int x = 0; x < map.length; x++) {
+                for (int y = 0; y < map[0].length; y++) {
+                    writer.write((int) map[x][y]);
                 }
             }
             /*
@@ -169,10 +164,9 @@ public class FileSaver {
                     }
             }*/
 
-                console.printtxt("Write ended successfully");
 
         } catch (IOException exception) {
-            console.printtxt("I/O Exception!" + exception.getMessage());
+            System.out.println("I/O Exception!" + exception.getMessage());
         } finally {
             try {
                 if(writer != null)
@@ -183,7 +177,7 @@ public class FileSaver {
 
                 e.printStackTrace();
             }
-            console.printtxt("Write operation ended.");
+            System.out.println("Write operation ended.");
         }
         }
 
@@ -213,8 +207,13 @@ public class FileSaver {
 
           int leX = 0;
           int leY = 0;
+
+          //TODO: Make save loading work
+
+          /*
           int leMaxX = var.Width;
           int leMaxY = var.Height;
+          */
 
 
             System.out.println(fis.read());
