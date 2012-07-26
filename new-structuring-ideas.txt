@@ -1,0 +1,12 @@
+1. Keep variables where they're used. If they're used in multiple places, have getter and setter functions. Variables.java must go.
+3. Element code could be structured like this:
+   elements/categories/ for master elements
+   elements/ for general elements
+   "public class Gunpowder extends Powder, Explosive"
+4. Keep some sort of iterating loop over element update functions.
+   "if Element in square then 
+       Element.update();
+	elseif Gunpowder in square then
+	   Gunpowder.update();
+	"
+Feel free to improve, add or remove. It's all for the greater good.
