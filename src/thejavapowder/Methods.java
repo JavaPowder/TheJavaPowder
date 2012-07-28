@@ -75,7 +75,7 @@ public class Methods {
             return p2 == -127; //Only move onto empty spaces
     }
 
-    public boolean tryMove(final int x, final int y, final int i, final boolean change)
+    public boolean tryMove(final int x, final int y, final int i, final boolean change, final boolean pressure)
         {
             int j, k, num = 7;
 			for (k = 1; k > -2; k--) //Go through all 8 spaces around a particle backwards
@@ -93,7 +93,7 @@ public class Methods {
 							x2 > 0&&
 							canMove(var.Map[x][y],var.Map[x2][y2],change)) //If it's the space you were trying to move to and you can move there
 						{
-							moveElement(x,y,x2,y2,change); //Move the particle
+							moveElement(x, y, x2, y2,change, pressure); //Move the particle
 							return true; //return that it moved
 						}
 						if (i == num) //If it's the space you were trying to move to but you didn't move
@@ -104,16 +104,16 @@ public class Methods {
             return false; //return that you didn't move
         }
 
-        public void moveElement(final int x1, final int y1, final int x2, final int y2, final boolean change)
+        public void moveElement(final int x1, final int y1, final int x2, final int y2, final boolean change, boolean pressure)
         {
             if(change)//If we are exchanging the values (Because the weight of the particle we are moving is bigger then the target)
             {
                  final byte element = var.Map [x2][y2];
                  final float temp   = var.HMap[x2][y2];
-	             final byte life     = var.LMap[x2][y2];
+	             final byte life    = var.LMap[x2][y2];
                  var.HMap[x2][y2]   = var.HMap[x1][y1];
                  var.Map [x2][y2]   = var.Map [x1][y1];
-	             var.LMap [x2][y2]   = var.LMap [x1][y1];
+	             var.LMap [x2][y2]  = var.LMap [x1][y1];
                  var.Map [x1][y1]   = element;
                  var.HMap[x1][y1]   = temp;
 	             var.LMap[x1][y1]   = life;
@@ -126,7 +126,7 @@ public class Methods {
                 var.Map [x1][y1] = -127;
                 var.HMap[x1][y1] = 0;
 	            var.LMap[x1][y1] = 0;
-	            if(var.pressure && validAirSpace(x1/4,y1/4)) //Just a test to see if pressure works
+	            if(pressure && validAirSpace(x1/4,y1/4)) //Just a test to see if pressure works
 	            {
 					int xchange = x2-x1;
 					xchange = Math.min(1,Math.max(-1,xchange));

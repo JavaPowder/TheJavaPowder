@@ -34,7 +34,18 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
         run();
     }
 
-	public static final  Variables var = new Variables();
+
+    boolean electricity   = false;
+    boolean heat          = true;
+    boolean burn 		  = true;
+    boolean pressure      = true;
+    boolean debug         = false;
+    boolean reactions     = true;
+    boolean physics       = true;
+    boolean stateChanges  = true;
+    boolean life          = true;
+
+    public static final  Variables var = new Variables();
     public static final Update update = new Update();
     public static final Console console = new Console();
 	public static final Methods meth = new Methods();
@@ -54,7 +65,7 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
 	    before = System.nanoTime();
         while (!quit) {
 	        start = System.nanoTime();
-	        update.update();
+	        update.update(reactions, physics, life, stateChanges, electricity, burn, heat, pressure);
 	        after = System.nanoTime();
 	        if(after - before > 40000000)
 	        {
@@ -691,12 +702,12 @@ public class TheJavaPowder extends JFrame implements Runnable, MouseListener, Mo
             }
             if (evt.getKeyChar() == 'd')
             {
-                var.debug = !var.debug;
+                debug = !debug;
                 var.antiDouble = true;
             }
             if (evt.getKeyChar() == 'm')
             {
-				var.electricity = !var.electricity;
+				electricity = !electricity;
                 var.antiDouble = true;
             }
         }

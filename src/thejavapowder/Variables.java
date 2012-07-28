@@ -7,7 +7,6 @@ import java.awt.*;
 public class Variables {
 
 	Graphics bufferGraphics;
-	final FileSaver saver = new FileSaver();
 
     boolean Drawing       = false;
     boolean antiDouble    = false;
@@ -19,15 +18,7 @@ public class Variables {
     boolean conductive    = false;
 
 
-	boolean electricity   = false;
-	boolean heat          = true;
-	boolean burn 		  = true;
-	boolean pressure      = true;
-	boolean debug         = false;
-	boolean reactions     = true;
-	boolean physics       = true;
-	boolean stateChanges  = true;
-	boolean life          = true;
+
 
     /*Transformated Variables:
      * Variables that represents a long calculation used often

@@ -22,7 +22,7 @@ public class Update {
     private final Methods meth = new Methods();
 	private final draw draw = new draw();
 
-    public void update() {
+    public void update(boolean reactions, boolean physics, boolean life, boolean stateChanges, boolean electricity, boolean burn, boolean heat, boolean pressure ) {
 
         if ((var.Simulating || var.tempSimulating) && var.state == 0) {
             for (int x = var.Width - 1; x > 1; x--) {
@@ -30,39 +30,39 @@ public class Update {
                 {
                     if (var.Map[x][y] != -127) {
 
-	                    if (var.reactions)//Reactive Engine
+	                    if (reactions)//Reactive Engine
                         {
 	                        UpdateReactions(x, y);
                         }
 	                    if(var.Map[x][y] != -127)
 	                    {
-		                    if(var.physics)
+		                    if(physics)
 							{
-								UpdateElement(x,y);
+								UpdateElement(x, y, pressure);
 							}
 							if(var.Map[x][y] != -127)
 							{
-								if(var.life)
+								if(life)
 								{										
 								UpdateLife(x, y);
 								}
 								if(var.Map[x][y] != -127)
 								{
-									if(var.stateChanges)
+									if(stateChanges)
 									{
 										CheckStateChanges(x,y);
 									}
 									if(var.Map[x][y] != -127)
 									{
-										if (var.electricity)
+										if (electricity)
 										{
 											UpdateVoltage(x, y);
 										}
 										if(var.Map[x][y] != -127)
 										{
-											if(var.burn || var.heat)
+											if(burn || heat)
 											{
-												UpdateHeat(x, y);
+												UpdateHeat(x, y, burn, heat, pressure);
 											}
 										}
 									}
@@ -73,7 +73,7 @@ public class Update {
                     }
                 }
             }
-			if(var.pressure)
+			if(pressure)
 			{
 				UpdateAir();
 			}
@@ -137,7 +137,7 @@ public class Update {
 								airChangeX -= (var.VxMap[x][y] - var.VxMap[x+i][y+j])/5*.7; //calculate how much x velocity to transfer to this spot
 								airChangeY -= (var.VyMap[x][y] - var.VyMap[x+i][y+j])/5*.7; //calculate how much y velocity to transfer to this spot
 							}
-					var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f); //Tranfer it
+					var.OldPrMap[x][y] = airChange + (var.PrMap[x][y]*.99f); //Transfer it
 					var.OldVxMap[x][y] = airChangeX + (var.VxMap[x][y]*.99f);
 					var.OldVyMap[x][y] = airChangeY + (var.VyMap[x][y]*.99f);
 				}
@@ -385,12 +385,12 @@ public class Update {
 	{
 	}
 	
-	private void UpdateHeat(int x, int y)
+	private void UpdateHeat(int x, int y, boolean burn, boolean heat, boolean pressure)
 	{
 		int i, j, num = 0;
 		if (var.Map[x][y] < 0 )
 			return;
-		if(var.burn)
+		if(burn)
 		{
 		for (j = -1; j < 2; j++) //Loop through each spot around the particle
 			for (i = -1; i < 2; i++)
@@ -406,7 +406,7 @@ public class Update {
 							var.HMap[x][y] += var.Elements[var.Map[x][y]].burn * 25; //Increase the heat
 						}
 					}
-					if (var.heat && var.Map[x+i][y+j] != -127) //If heat conduction is on and the space around the particle is not empty
+					if (heat && var.Map[x+i][y+j] != -127) //If heat conduction is on and the space around the particle is not empty
 					{
 						final float heatTransfer = (var.HMap[x][y] - var.HMap[x+i][y+j])/5; //Calculate how much heat to transfer
 						var.HMap[x][y] -= heatTransfer;     //Transfer heat
@@ -424,7 +424,7 @@ public class Update {
 		}
 	}
 
-    private void UpdateElement(final int x, final int y) {
+    private void UpdateElement(final int x, final int y, boolean pressure) {
         if (y <= 2 || y >= var.Height - 2 || x >= var.Width - 2 || x <= 2)//If it's out border
         {
             var.Map[x][y] = -127;//Destroy it
@@ -469,7 +469,7 @@ public class Update {
                     {
                         chances[i] = .125; //A random chance of moving in any direction
                     }
-					if (var.pressure && var.Map[x][y] == 15)
+					if (pressure && var.Map[x][y] == 15)
 					{
 						var.PrMap[x/4][y/4] += .01;
 						var.VyMap[x/4][y/4] -= .01;
@@ -492,7 +492,7 @@ public class Update {
                     if (total > randnum)     //If this spot was chosen
                     {
                         triedmove = true;    //Stop looping through each spot
-                        moved = meth.tryMove(x,y,j,false); //Try to move
+                        moved = meth.tryMove(x, y, j, false, pressure); //Try to move
                     }
                     j++;
                 }
@@ -510,7 +510,7 @@ public class Update {
 					if (total > randnum)
 					{
 						triedmove = true;
-						moved = meth.tryMove(x,y,j,true); //Move by moving onto particles with less weight
+						moved = meth.tryMove(x, y, j, true, pressure); //Move by moving onto particles with less weight
 					}
 					j++;
 				}
