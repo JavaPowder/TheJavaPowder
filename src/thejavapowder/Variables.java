@@ -1,7 +1,6 @@
 package thejavapowder;
 
 import thejavapowder.Elements.*;
-
 import java.awt.*;
 
 public class Variables {
@@ -18,18 +17,12 @@ public class Variables {
     boolean conductive    = false;
 
 
-
-
     /*Transformated Variables:
      * Variables that represents a long calculation used often
      */
-    int MouseX      = 100;
-    int MouseY      = 100;
-    int realZoom    = 2;//Zoom * winZoom
-    int DrawX       = 0;//Where to draw
-    int DrawY       = 0;
-    int LastDrawX   = 0;//Where to draw
-    int LastDrawY   = 0;
+
+
+
 	int PaintFPS    = 0;
     //End of Transformated Variables
 
@@ -41,22 +34,7 @@ public class Variables {
      * 4 = Documentation
      * 5 = Console
      */
-    int state           = 0;
-    int RandomNum       = 0;
-    int optionsHeight   = 30;
 
-    int wait            = 30;
-    int CurrentX        = 100;
-    int CurrentY        = 100;
-    int ScrollX         = 0;
-    int ScrollY         = 0;
-    int iconY           = 0;
-    int iconX           = 0;
-    byte Zoom           = 1;
-    byte Size           = 10;
-    byte Shape          = 0;
-    byte Equipped       = 3;
-    byte overEl         = -1;
 
     float Brightness    = 0.0f;
 

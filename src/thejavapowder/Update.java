@@ -20,9 +20,9 @@ public class Update {
       */
 
     boolean electricity   = false;
-    boolean heat          = true;
+    boolean heat          = false;
     boolean burn 		  = true;
-    boolean pressure      = true;
+    boolean pressure      = false;
     boolean debug         = false;
     boolean reactions     = true;
     boolean physics       = true;
@@ -47,9 +47,13 @@ public class Update {
     OldVxMap    = new float [Width/4][Height/4];// The Old X Velocity Map
     OldVyMap    = new float [Width/4][Height/4];// The Old Y Velocity Map  */
 
-    public void update(int Width, int Height, int winZoom, byte[][] Map, float[][] HMap, int[][] VMap, byte[][] PMap, byte[][] LMap, float[][] PrMap, float[][] VxMap, float[][] VyMap, float[][] OldPrMap, float[][] OldVxMap, float[][] OldVyMap) {
+    public void update(int Width, int Height, int winZoom, 
+                       byte[][] Map, float[][] HMap, int[][] VMap, byte[][] PMap, byte[][] LMap, 
+                       float[][] PrMap, float[][] VxMap, float[][] VyMap, float[][] OldPrMap, 
+                       float[][] OldVxMap, float[][] OldVyMap,
+                       int state) {
 
-        if ((var.Simulating || var.tempSimulating) && var.state == 0) {
+        if ((var.Simulating || var.tempSimulating) && state == 0) {
             for (int x = Width - 1; x > 1; x--) {
                 for (int y = Height - 1; y > 1; y--)//For each Space
                 {
@@ -103,20 +107,8 @@ public class Update {
 				UpdateAir(Width, Height, VxMap, VyMap, PrMap, OldVxMap, OldVyMap, OldPrMap);
 			}
         }//End of Updating maps
-        if (var.active && var.state == 0) {//If drawing is active and we are in the game screen
-                if (var.Drawing) {//If it should be drawing
-                    draw.create_line(var.DrawX, var.DrawY, var.LastDrawX, var.LastDrawY, var.Size, var.Equipped, Width, Height, winZoom, Map, VMap, PMap, HMap);//Draw
-                }
-            } else {
-                if (var.wait < 1) {//If the wait time to draw is over
-                    var.active = true;//Activate the drawing
-                    var.wait = 40;//Reset the timer
-                } else {//If it can't draw and the timer is not up
-                    var.wait -= 1;//Make the timer progress
-                }
-            }
-		var.LastDrawX = var.DrawX;//Update the drawing points
-		var.LastDrawY = var.DrawY;//Update the drawing points
+
+
 		var.tempSimulating = false;
     }
 
@@ -424,8 +416,8 @@ public class Update {
 				{
 					if (var.surArray[num] == 15) //If burning is active and this space has fire in it
 					{
-						var.RandomNum = rand.nextInt(50); //Get a random value
-						if (var.RandomNum < var.Elements[Map[x][y]].burn) //If that random value was less than the burn value of the element
+						int RandomNum = rand.nextInt(50); //Get a random value
+						if (RandomNum < var.Elements[Map[x][y]].burn) //If that random value was less than the burn value of the element
 						{
 							Map[x][y] = 15; //Change this particle to fire
 							HMap[x][y] += var.Elements[Map[x][y]].burn * 25; //Increase the heat
