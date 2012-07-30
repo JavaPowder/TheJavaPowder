@@ -43,9 +43,8 @@ public class Variables {
      */
     int state           = 0;
     int RandomNum       = 0;
-    int Height          = 400;
     int optionsHeight   = 30;
-    int Width           = 600;
+
     int wait            = 30;
     int CurrentX        = 100;
     int CurrentY        = 100;
@@ -58,23 +57,12 @@ public class Variables {
     byte Shape          = 0;
     byte Equipped       = 3;
     byte overEl         = -1;
-    byte winZoom        = 2;
+
     float Brightness    = 0.0f;
 
     int[]     surArray    = new int   [8];
     byte[]    reaction    = new byte  [16];
     byte[]    reactives   = new byte  []{};
-    byte[][]  Map         = new byte  [Width][Height];// The Particle type map
-    float[][] HMap        = new float [Width][Height];// The Heat type map
-    int[][]   VMap        = new int   [Width][Height];  // The Voltage type map
-    byte[][]  PMap        = new byte  [Width][Height];// The Particle Properties Map
-	byte[][]  LMap        = new byte  [Width][Height];// The Particle Life Map
-	float[][] PrMap       = new float [Width/4][Height/4];// The Pressure Map
-	float[][] VxMap       = new float [Width/4][Height/4];// The X Velocity Map
-	float[][] VyMap       = new float [Width/4][Height/4];// The Y Velocity Map
-	float[][] OldPrMap    = new float [Width/4][Height/4];// The Old Pressure Map
-	float[][] OldVxMap    = new float [Width/4][Height/4];// The Old X Velocity Map
-	float[][] OldVyMap    = new float [Width/4][Height/4];// The Old Y Velocity Map
 
 
 
@@ -110,51 +98,4 @@ public class Variables {
 	// new Element(  burn,      weight, conductive, Name,                       Description,                                  colour, reactives, default temp)
 
      public final int NUM_ELS = 23;
-
-
-	final Image scaPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/a-semiconductor.png"));
-	final Image scbPng                = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/b-semiconductor.png"));
-	final Image batteryPng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/battery.png"));
-	final Image coffeePng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/coffee.png"));
-	final Image copperPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/copper.png"));
-	final Image ironPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/iron.png"));
-	//final Image logicGatePng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logicgate.png"));
-	final Image methanePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/methane.png"));
-	final Image nonePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/none.png"));
-	final Image powerDrainerPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/power-drainer.png"));
-	final Image rechargableBatteryPng = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/rechargable-battery.png"));
-	final Image resistorPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/resistor.png"));
-	final Image screenPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/screen.png"));
-	final Image switchPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/switch.png"));
-	final Image wallPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wall.png"));
-	final Image waterPng              = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/water.png"));
-	final Image crossingPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wire-crossing.png"));
-	final Image firePng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/fire.png"));
-	final Image woodPng               = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/wood.png"));
-	final Image petrolPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/petrol.png"));
-
-	//Image creditPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/credit.png"));
-	//Image playPng             = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/play.png"));
-	final Image settingsPng           = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/settings.png"));
-	final Image javaPowderPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/javapowder.png"));
-	final Image consolePng            = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elements/console.png"));
-	final Image edit_heightPng        = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_height.png"));
-	final Image edit_widthPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/edit_width.png"));
-	final Image elem_electricPng      = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_electric.png"));
-	final Image elem_setpropPng       = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/elem_setprop.png"));
-	final Image file_loadPng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_load.png"));
-	final Image file_savePng          = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/file_save.png"));
-	final Image braincleptPng         = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/Brainclept.png"));
-
-	ImageTemplate[] images = new ImageTemplate[]{
-			new ImageTemplate(elem_electricPng, 103 * winZoom, (Height)  * winZoom , 27 * 2, 30 * winZoom ),
-			new ImageTemplate(elem_setpropPng, 134 * winZoom, (Height) * winZoom, 54 * 2, 30 * winZoom ),
-			new ImageTemplate(file_loadPng, 192 * winZoom, (Height) * winZoom, 34 * 2, 30 * winZoom ),
-			new ImageTemplate(file_savePng, 230 * winZoom, (Height) * winZoom, 34 * 2, 30 * winZoom ),
-	};
-	ImageTemplate[] imagesMenu = new ImageTemplate[]{
-			new ImageTemplate(javaPowderPng, 202 * winZoom, 21 * winZoom, 202 * winZoom, 171 * winZoom ),
-			new ImageTemplate(settingsPng, 252 * winZoom, 211 * winZoom, 102 * winZoom, 50 * winZoom ),
-			new ImageTemplate(braincleptPng, 252 * winZoom, 301 * winZoom, 101 * winZoom, 85 * winZoom ),
-	};
 }

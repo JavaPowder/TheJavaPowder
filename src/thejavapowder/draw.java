@@ -7,33 +7,33 @@ public class draw
 	private final Variables var = thejavapowder.TheJavaPowder.var;
 	private final Methods meth = new Methods();
 	
-	public void drawPoint(int x, int y, byte id) {
-		if ((var.active || !(var.Simulating || var.tempSimulating)) && x > 1 && y > 1 && x < var.Width && y < var.Height) {
+	public void drawPoint(int x, int y, byte id, int Width, int Height, byte[][] Map, int[][] VMap, byte[][] PMap, float[][] HMap) {
+		if ((var.active || !(var.Simulating || var.tempSimulating)) && x > 1 && y > 1 && x < Width && y < Height) {
 			var.wait = 30;
 			if(var.leftClick)
 			{
 				switch(id)
 				{
 					case -126:
-							if (var.Map[x][y] == 4 || var.Map[x][y] == 6) {
-								var.VMap[x][y] += 5;
-								if (var.VMap[x][y] > 1500)
-									var.VMap[x][y] = 1500;
+							if (Map[x][y] == 4 || Map[x][y] == 6) {
+								VMap[x][y] += 5;
+								if (VMap[x][y] > 1500)
+									VMap[x][y] = 1500;
 							}
 
 						break;
 					case -125:
-							if (var.PMap[x][y] < 50) {
-								if (var.Map[x][y] == 11 || var.Map[x][y] == 10 || var.Map[x][y] == 14) {
-									var.PMap[x][y] += 1;
+							if (PMap[x][y] < 50) {
+								if (Map[x][y] == 11 || Map[x][y] == 10 || Map[x][y] == 14) {
+									PMap[x][y] += 1;
 								}
 							}
 						break;
 
 					default:
-							if (var.Map[x][y] == -127)//If the target tile is free
+							if (Map[x][y] == -127)//If the target tile is free
 							{
-								meth.createElement(x, y, id);
+								meth.createElement(x, y, id, Map, HMap);
 							}
 						break;
 				}
@@ -43,22 +43,22 @@ public class draw
 				switch(id)
 				{
 					case -126:
-							if (var.Map[x][y] != 0) {
-								meth.clearTile(x, y);
+							if (Map[x][y] != 0) {
+								meth.clearTile(x, y, Map, PMap, VMap);
 							}
 						break;
 					case -125:
-							if (var.PMap[x][y] > 1) {
-								if (var.Map[x][y] == 11 || var.Map[x][y] == 10 || var.Map[x][y] == 14) {
-									var.PMap[x][y] -= 1;
+							if (PMap[x][y] > 1) {
+								if (Map[x][y] == 11 || Map[x][y] == 10 || Map[x][y] == 14) {
+									PMap[x][y] -= 1;
 								}
 							}
 						break;
 
 					default:
-							if (var.Map[x][y] != -127)//If the target tile is not free
+							if (Map[x][y] != -127)//If the target tile is not free
 							{
-								meth.clearTile(x, y);
+								meth.clearTile(x, y, Map, PMap, VMap);
 							}
 						break;
 				}
@@ -71,7 +71,7 @@ public class draw
 		}
 	}
 
-	public void drawCircle(int x, int y, byte rd, byte id) {
+	public void drawCircle(int x, int y, byte rd, byte id, int Width, int Height, int winZoom, byte[][] Map, int[][] VMap, byte[][] PMap, float[][] HMap) {
 		int tempy = y;
 		for (int i = x - rd; i <= x; i++) {
 			double distance = Math.sqrt(Math.pow((double) x - (double) i, (double) 2) + Math.pow((double) y - (double) tempy, (double) 2));
@@ -81,32 +81,32 @@ public class draw
 			}
 			tempy = tempy + 1;
 			for (int j = tempy; j <= 2 * y - tempy; j++) {
-				if (i > 0 && j > 0 && i < var.Width * var.winZoom && j < var.Height * var.winZoom)
-					drawPoint(i, j, id);
-				if (2 * x - i > 0 && j > 0 && 2 * x - i < var.Width * var.winZoom && j < var.Height * var.winZoom)
-					drawPoint(2 * x - i, j, id);
+				if (i > 0 && j > 0 && i < Width * winZoom && j < Height * winZoom)
+					drawPoint(i, j, id, Width, Height, Map, VMap, PMap, HMap);
+				if (2 * x - i > 0 && j > 0 && 2 * x - i < Width * winZoom && j < Height * winZoom)
+					drawPoint(2 * x - i, j, id, Width, Height, Map, VMap, PMap, HMap);
 			}
 		}
 	}
 
-	public void drawSquare(int xc, int yc, byte size, byte id) {
+	public void drawSquare(int xc, int yc, byte size, byte id, int Width, int Height, byte[][] Map, int[][] VMap, byte[][] PMap, float[][] HMap) {
 		for (int x = xc; x < xc + size; x++) {
 			for (int y = yc; y < yc + size; y++) {
-				drawPoint(x, y, id);
+				drawPoint(x, y, id, Width, Height, Map, VMap, PMap, HMap);
 			}
 		}
 		if (size == 0)
-			drawPoint(xc, yc, id);
+			drawPoint(xc, yc, id, Width, Height, Map, VMap, PMap, HMap);
 	}
 
-	public void drawstuff(int x, int y, byte s, byte i) {
+	public void drawstuff(int x, int y, byte s, byte i, int Width, int Height, int winZoom, byte[][] Map, int[][] VMap, byte[][] PMap, float[][] HMap) {
 		if (var.Shape == 0)
-			drawSquare(x - s, y - s, (byte) (s * 2), i);
+			drawSquare(x - s, y - s, (byte) (s * 2), i, Width, Height, Map, VMap, PMap, HMap);
 		else
-			drawCircle(x, y, s, i);
+			drawCircle(x, y, s, i, Width, Height, winZoom, Map, VMap, PMap, HMap);
 	}
 
-	public void create_line(int x1, int y1, int x2, int y2, byte rd, byte id) // From old autorun.lua
+	public void create_line(int x1, int y1, int x2, int y2, byte rd, byte id, int Width, int Height, int winZoom, byte[][] Map, int[][] VMap, byte[][] PMap, float[][] HMap) // From old autorun.lua
 	{
 		if (x1 > x2) {
 			int xc2 = x1;
@@ -116,13 +116,13 @@ public class draw
 			y1 = y2;
 			y2 = yc2;
 		}
-		drawstuff(x1, y1, rd, id);
+		drawstuff(x1, y1, rd, id, Width, Height, winZoom, Map, VMap, PMap, HMap);
 		if (x1 == x2) {
 			if (y1 != y2) {
 				int yc1 = Math.min(y1, y2);
 				int yc2 = Math.max(y1, y2);
 				for (int i = yc1; i < yc2; i++)
-					drawstuff(x1, i, rd, id);
+					drawstuff(x1, i, rd, id, Width, Height, winZoom, Map, VMap, PMap, HMap);
 			}
 			return;
 		}
@@ -134,17 +134,17 @@ public class draw
 			int right = (int) Math.ceil(Math.max(yc1, yc2));
 			if (i == x2) right = left;
 			for (int j = left; j <= right; j++)
-				drawstuff(i, j, rd, id);
+				drawstuff(i, j, rd, id, Width, Height, winZoom, Map, VMap, PMap, HMap);
 		}
 	}
 
-	public void drawCursorPoint(int x, int y, Graphics bufferGraphics) {
+	public void drawCursorPoint(int x, int y, Graphics bufferGraphics, int winZoom) {
 		int size = var.realZoom-1;//The - 1 makes the pixes looked zoomed in
 		if (var.Zoom == 1) size++;
-		bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * var.winZoom, (y * var.Zoom - var.ScrollY) * var.winZoom, size, size);
+		bufferGraphics.fillRect((x * var.Zoom - var.ScrollX) * winZoom, (y * var.Zoom - var.ScrollY) * winZoom, size, size);
 	}
 
-	public void drawCircleCursor(int x, int y, byte rd, Graphics bufferGraphics) {
+	public void drawCircleCursor(int x, int y, byte rd, Graphics bufferGraphics, int Width, int Height, int winZoom) {
 		int tempy = y, oldy;
 		for (int i = x - rd; i <= x; i++) {
 			oldy = tempy;
@@ -158,40 +158,40 @@ public class draw
 				oldy--;
 			for (int j = tempy; j <= oldy; j++) {
 				int i2 = 2*x-i, j2 = 2*y-j;
-				if (i2 != i && i > 0 && j > 0 && i < var.Width * var.winZoom && j < var.Height * var.winZoom)
-					drawCursorPoint(i, j, bufferGraphics);
-				if (i2 > 0 && j > 0 && i2 < var.Width * var.winZoom && j < var.Height * var.winZoom)
-					drawCursorPoint(i2, j, bufferGraphics);
-				if (j2 != j && i > 0 && j2 > 0 && i < var.Width * var.winZoom && j2 < var.Height * var.winZoom)
-					drawCursorPoint(i, j2, bufferGraphics);
-				if (i2 != i && j2 != j && i2 > 0 && j2 > 0 && i2 < var.Width * var.winZoom && j2 < var.Height * var.winZoom)
-					drawCursorPoint(i2, j2, bufferGraphics);
+				if (i2 != i && i > 0 && j > 0 && i < Width * winZoom && j < Height * winZoom)
+					drawCursorPoint(i, j, bufferGraphics, winZoom);
+				if (i2 > 0 && j > 0 && i2 < Width * winZoom && j < Height * winZoom)
+					drawCursorPoint(i2, j, bufferGraphics, winZoom);
+				if (j2 != j && i > 0 && j2 > 0 && i < Width * winZoom && j2 < Height * winZoom)
+					drawCursorPoint(i, j2, bufferGraphics, winZoom);
+				if (i2 != i && j2 != j && i2 > 0 && j2 > 0 && i2 < Width * winZoom && j2 < Height * winZoom)
+					drawCursorPoint(i2, j2, bufferGraphics, winZoom);
 			}
 		}
 	}
 
-	public void drawSquareCursor(int xc, int yc, byte size, Graphics bufferGraphics) {
+	public void drawSquareCursor(int xc, int yc, byte size, Graphics bufferGraphics, int winZoom) {
 		for (int x = xc; x < xc + size; x++) {
 			if (x == xc || x == xc + size - 1)
 			{
 				for (int y = yc; y < yc + size; y++) {
-					drawCursorPoint(x, y, bufferGraphics);
+					drawCursorPoint(x, y, bufferGraphics, winZoom);
 				}
 			}
 			else
 			{
-				drawCursorPoint(x, yc, bufferGraphics);
-				drawCursorPoint(x, yc + size - 1, bufferGraphics);
+				drawCursorPoint(x, yc, bufferGraphics, winZoom);
+				drawCursorPoint(x, yc + size - 1, bufferGraphics, winZoom);
 			}
 		}
 		if (size == 0)
-			drawCursorPoint(xc, yc, bufferGraphics);
+			drawCursorPoint(xc, yc, bufferGraphics, winZoom);
 	}
 
-	public void drawCursor(int x, int y, byte s, Graphics bufferGraphics) {
+	public void drawCursor(int x, int y, byte s, Graphics bufferGraphics, int Width, int Height, int winZoom) {
 		if (var.Shape == 0)
-			drawSquareCursor(x - s, y - s, (byte) (s * 2), bufferGraphics);
+			drawSquareCursor(x - s, y - s, (byte) (s * 2), bufferGraphics, winZoom);
 		else
-			drawCircleCursor(x, y, s, bufferGraphics);
+			drawCircleCursor(x, y, s, bufferGraphics, Width, Height, winZoom);
 	}
 }
