@@ -1,5 +1,6 @@
 package thejavapowder;
 
+import thejavapowder.Elements.categories.*;
 import thejavapowder.Elements.*;
 
 import java.awt.*;

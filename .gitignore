@@ -3,3 +3,4 @@
 jpsettings.xml
 *.iml
 *.iws
+binaries/*
